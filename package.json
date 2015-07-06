@@ -1,0 +1,36 @@
+{
+  "name": "d3-shape",
+  "version": "0.0.1",
+  "description": "Graphical primitives for visualization, such as lines and areas.",
+  "keywords": [
+    "d3",
+    "graphics",
+    "visualization",
+    "canvas",
+    "svg"
+  ],
+  "homepage": "https://github.com/d3/d3-shape",
+  "license": "BSD-3-Clause",
+  "author": {
+    "name": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike"
+  },
+  "main": "build/shape",
+  "jsnext:main": "index",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/d3/d3-shape.git"
+  },
+  "scripts": {
+    "pretest": "mkdir -p build && d3-bundler --polyfill-map --format=umd --name=shape -- index.js > build/shape.js",
+    "test": "faucet `find test -name '*-test.js'`",
+    "prepublish": "npm run test && uglifyjs build/shape.js -c -m -o build/shape.min.js && rm -f build/shape.zip && zip -j build/shape.zip -- LICENSE README.md build/shape.js build/shape.min.js"
+  },
+  "devDependencies": {
+    "d3-bundler": "~0.2.5",
+    "d3-path": "~0.0.1",
+    "faucet": "0.0",
+    "tape": "4",
+    "uglify-js": "2"
+  }
+}
