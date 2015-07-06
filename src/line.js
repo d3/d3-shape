@@ -1,5 +1,9 @@
+import interpolateLinear from "./interpolate/linear";
+import interpolateLinearClosed from "./interpolate/linearClosed";
+import interpolateStep from "./interpolate/step";
+import interpolateStepAfter from "./interpolate/stepAfter";
+import interpolateStepBefore from "./interpolate/stepBefore";
 import {path} from "d3-path";
-import {interpolateLinear, interpolateLinearClosed} from "./interpolateLinear";
 
 function pointX(p) {
   return p[0];
@@ -22,9 +26,9 @@ function _true() {
 var interpolates = (new Map)
     .set("linear", interpolateLinear)
     .set("linear-closed", interpolateLinearClosed)
-    // .set("step", interpolateStep)
-    // .set("step-before", interpolateStepBefore)
-    // .set("step-after", interpolateStepAfter)
+    .set("step", interpolateStep)
+    .set("step-before", interpolateStepBefore)
+    .set("step-after", interpolateStepAfter)
     // .set("basis", interpolateBasis)
     // .set("basis-open", interpolateBasisOpen)
     // .set("basis-closed", interpolateBasisClosed)
@@ -38,7 +42,7 @@ export default function() {
   var x = pointX, _x = x,
       y = pointY, _y = y,
       defined = true, _defined = _true,
-      interpolate = "linear", _interpolate = interpolateLinear,
+      interpolate = interpolateLinear,
       context = null,
       stream = null;
 
@@ -49,7 +53,7 @@ export default function() {
         defined = false,
         result;
 
-    if (context == null) stream = _interpolate(result = path());
+    if (context == null) stream = new interpolate(result = path());
 
     while (++i < n) {
       if (!_defined.call(this, d = data[i], i) === defined) {
@@ -81,19 +85,17 @@ export default function() {
     return line;
   };
 
-  // TODO allow custom interpolators
-  // TODO pass tension to interpolate constructor
-  line.interpolate = function(_) {
+  line.interpolate = function(_, tension) {
     if (!arguments.length) return interpolate;
-    if (!(_interpolate = interpolates.get(interpolate = _ + ""))) interpolate = "linear", _interpolate = interpolateLinear;
-    if (context != null) stream = _interpolate(context);
+    if (!(interpolate = interpolates.get(_ + ""))) interpolate = interpolateLinear;
+    if (context != null) stream = new interpolate(context);
     return line;
   };
 
   line.context = function(_) {
     if (!arguments.length) return context;
     if (_ == null) context = stream = null;
-    else stream = _interpolate(context = _);
+    else stream = new interpolate(context = _);
     return line;
   };
 
