@@ -1,8 +1,6 @@
-import interpolateLinear from "./interpolate/linear";
-import interpolateLinearClosed from "./interpolate/linearClosed";
-import interpolateStep from "./interpolate/step";
-import interpolateStepAfter from "./interpolate/stepAfter";
-import interpolateStepBefore from "./interpolate/stepBefore";
+import {Basis} from "./interpolate/basis";
+import {Linear, LinearClosed} from "./interpolate/linear";
+import {Step, StepBefore, StepAfter} from "./interpolate/step";
 import {path} from "d3-path";
 
 function pointX(p) {
@@ -24,25 +22,25 @@ function _true() {
 }
 
 var interpolates = (new Map)
-    .set("linear", interpolateLinear)
-    .set("linear-closed", interpolateLinearClosed)
-    .set("step", interpolateStep)
-    .set("step-before", interpolateStepBefore)
-    .set("step-after", interpolateStepAfter)
-    // .set("basis", interpolateBasis)
-    // .set("basis-open", interpolateBasisOpen)
-    // .set("basis-closed", interpolateBasisClosed)
-    // .set("bundle", interpolateBundle)
-    // .set("cardinal", interpolateCardinal)
-    // .set("cardinal-open", interpolateCardinalOpen)
-    // .set("cardinal-closed", interpolateCardinalClosed)
-    // .set("monotone", interpolateMonotone);
+    .set("linear", Linear)
+    .set("linear-closed", LinearClosed)
+    .set("step", Step)
+    .set("step-before", StepBefore)
+    .set("step-after", StepAfter)
+    .set("basis", Basis)
+    // .set("basis-open", BasisOpen)
+    // .set("basis-closed", BasisClosed)
+    // .set("bundle", Bundle)
+    // .set("cardinal", Cardinal)
+    // .set("cardinal-open", CardinalOpen)
+    // .set("cardinal-closed", CardinalClosed)
+    // .set("monotone", Monotone);
 
 export default function() {
   var x = pointX, _x = x,
       y = pointY, _y = y,
       defined = true, _defined = _true,
-      interpolate = interpolateLinear,
+      interpolate = Linear,
       context = null,
       stream = null;
 
@@ -53,7 +51,7 @@ export default function() {
         defined = false,
         result;
 
-    if (context == null) stream = new interpolate(result = path());
+    if (context == null) stream = new interpolate(result = path()); // TODO tension?
 
     while (++i < n) {
       if (!_defined.call(this, d = data[i], i) === defined) {
@@ -87,15 +85,15 @@ export default function() {
 
   line.interpolate = function(_, tension) {
     if (!arguments.length) return interpolate;
-    if (!(interpolate = interpolates.get(_ + ""))) interpolate = interpolateLinear;
-    if (context != null) stream = new interpolate(context);
+    if (!(interpolate = interpolates.get(_ + ""))) interpolate = Linear;
+    if (context != null) stream = new interpolate(context); // TODO tension?
     return line;
   };
 
   line.context = function(_) {
     if (!arguments.length) return context;
     if (_ == null) context = stream = null;
-    else stream = new interpolate(context = _);
+    else stream = new interpolate(context = _); // TODO tension?
     return line;
   };
 

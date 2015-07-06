@@ -38,6 +38,8 @@ tape("line.y(y)(data) observes the specified constant", function(test) {
 
 tape("line.step(\"linear\")(data) generates the expected path", function(test) {
   var l = shape.line().interpolate("linear");
+  test.equal(l([[0, 1]]), "M0,1");
+  test.equal(l([[0, 1], [2, 3]]), "M0,1L2,3");
   test.equal(l([[0, 1], [2, 3], [4, 5]]), "M0,1L2,3L4,5");
   test.end();
 });
@@ -63,5 +65,13 @@ tape("line.step(\"step-before\")(data) generates the expected path", function(te
 tape("line.step(\"step-after\")(data) generates the expected path", function(test) {
   var l = shape.line().interpolate("step-after");
   test.equal(l([[0, 1], [2, 3], [4, 5]]), "M0,1L2,1L2,3L4,3L4,5");
+  test.end();
+});
+
+tape("line.step(\"basis\")(data) generates the expected path", function(test) {
+  var l = shape.line().interpolate("basis");
+  test.equal(l([[0, 1]]), "M0,1L0,1");
+  test.equal(l([[0, 1], [1, 3]]), "M0,1L0.16666666666666666,1.3333333333333333C0.3333333333333333,1.6666666666666667,0.6666666666666666,2.3333333333333335,0.8333333333333334,2.6666666666666665L1,3");
+  test.equal(l([[0, 1], [1, 3], [2, 1]]), "M0,1L0.16666666666666666,1.3333333333333333C0.3333333333333333,1.6666666666666667,0.6666666666666666,2.3333333333333335,1,2.3333333333333335C1.3333333333333333,2.3333333333333335,1.6666666666666667,1.6666666666666667,1.8333333333333333,1.3333333333333333L2,1");
   test.end();
 });
