@@ -1,4 +1,4 @@
-import {Basis, BasisOpen} from "./interpolate/basis";
+import {Basis, BasisOpen, BasisClosed} from "./interpolate/basis";
 import {Linear, LinearClosed} from "./interpolate/linear";
 import {Step, StepBefore, StepAfter} from "./interpolate/step";
 import {path} from "d3-path";
@@ -29,7 +29,7 @@ var interpolates = (new Map)
     .set("step-after", StepAfter)
     .set("basis", Basis)
     .set("basis-open", BasisOpen)
-    // .set("basis-closed", BasisClosed)
+    .set("basis-closed", BasisClosed)
     // .set("bundle", Bundle)
     // .set("cardinal", Cardinal)
     // .set("cardinal-open", CardinalOpen)
