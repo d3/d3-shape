@@ -16,6 +16,8 @@ Cardinal.prototype.lineEnd = function() {
       this._x2,
       this._y2
     );
+  } else if (this._x1 != null) {
+    this._context.lineTo(this._x2, this._y2);
   }
 };
 
@@ -67,7 +69,7 @@ CardinalOpen.prototype.point = function(x, y) {
       this._x2,
       this._y2
     );
-  } else if (this._x1 == null) {
+  } else if (this._x1 == null && this._x2 != null) {
     this._context.moveTo(x, y);
   }
   this._x0 = this._x1, this._x1 = this._x2, this._x2 = x;
