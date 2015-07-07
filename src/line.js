@@ -45,24 +45,21 @@ export default function() {
       stream = null;
 
   function line(data) {
-    var i = -1,
-        n = data.length,
-        d,
-        defined = false,
+    var defined = false,
         result;
 
-    if (context == null) stream = new interpolate(result = path()); // TODO tension?
+    if (!stream) stream = new interpolate(result = path()); // TODO tension?
 
-    while (++i < n) {
+    for (var i = 0, n = data.length, d; i < n; ++i) {
       if (!_defined.call(this, d = data[i], i) === defined) {
         if (defined = !defined) stream.lineStart();
         else stream.lineEnd();
       }
       if (defined) stream.point(+_x.call(this, d, i), +_y.call(this, d, i));
     }
-    if (defined) stream.lineEnd();
 
-    if (context == null) return stream = null, result += "";
+    if (defined) stream.lineEnd();
+    if (result) return stream = null, result += "";
   }
 
   line.x = function(_) {
