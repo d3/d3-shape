@@ -1,5 +1,1 @@
-import line from "./src/line";
-
-export {
-  line
-};
+export {default as line} from "./src/line";
