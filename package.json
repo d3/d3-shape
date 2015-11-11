@@ -15,23 +15,23 @@
     "name": "Mike Bostock",
     "url": "http://bost.ocks.org/mike"
   },
-  "main": "build/shape.cjs",
+  "main": "build/d3-shape.js",
   "jsnext:main": "index",
   "repository": {
     "type": "git",
     "url": "https://github.com/d3/d3-shape.git"
   },
   "scripts": {
-    "pretest": "mkdir -p build && d3-bundler -x -f cjs -o build/shape.cjs.js",
+    "pretest": "mkdir -p build && node -e 'process.stdout.write(\"var version = \\\"\" + require(\"./package.json\").version + \"\\\"; export * from \\\"../index\\\"; export {version};\");' > build/bundle.js && rollup -f umd -g d3-path:d3_path -u d3-shape -n d3_shape -o build/d3-shape.js -- build/bundle.js",
     "test": "faucet `find test -name '*-test.js'`",
-    "prepublish": "npm run test && d3-bundler -n shape -o build/shape.js && uglifyjs build/shape.js -c -m -o build/shape.min.js && rm -f build/shape.zip && zip -j build/shape.zip -- LICENSE README.md build/shape.js build/shape.min.js"
+    "prepublish": "npm run test && uglifyjs build/d3-shape.js -c -m -o build/d3-shape.min.js && rm -f build/d3-shape.zip && zip -j build/d3-shape.zip -- LICENSE README.md build/d3-shape.js build/d3-shape.min.js"
   },
   "dependencies": {
     "d3-path": "~0.0.1"
   },
   "devDependencies": {
-    "d3-bundler": "~0.4.0",
     "faucet": "0.0",
+    "rollup": "0.20.5",
     "tape": "4",
     "uglify-js": "2"
   }
