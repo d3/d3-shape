@@ -1,6 +1,6 @@
 function cardinal(context, tension) {
   this._context = context;
-  this._k = (1 - (tension == null ? .7 : tension)) / 2; // TODO
+  this._k = (1 - (tension == null ? 2 / 3 : tension)) / 2;
 }
 
 cardinal.prototype = {

@@ -46,8 +46,8 @@ export default function() {
   var x = pointX, _x = x,
       y = pointY, _y = y,
       defined = true, _defined = _true,
-      interpolate = linear,
-      interpolateTension = null,
+      interpolate = "linear", _interpolate = linear,
+      tension = null,
       context = null,
       stream = null;
 
@@ -55,7 +55,7 @@ export default function() {
     var defined = false,
         buffer;
 
-    if (!context) stream = new interpolate(buffer = path(), interpolateTension);
+    if (!context) stream = new _interpolate(buffer = path(), tension);
 
     for (var i = 0, n = data.length, d; i < n; ++i) {
       if (!_defined(d = data[i], i) === defined) {
@@ -87,18 +87,24 @@ export default function() {
     return line;
   };
 
-  line.interpolate = function(_, tension) {
+  line.interpolate = function(_) {
     if (!arguments.length) return interpolate;
-    interpolate = interpolates.hasOwnProperty(_ += "") ? interpolates[_] : linear;
-    interpolateTension = tension == null ? null : +tension;
-    if (context != null) stream = new interpolate(context, interpolateTension);
+    _interpolate = interpolates[interpolate = interpolates.hasOwnProperty(_ += "") ? _ : "linear"];
+    if (context != null) stream = new _interpolate(context, tension);
+    return line;
+  };
+
+  line.tension = function(_) {
+    if (!arguments.length) return tension;
+    tension = _ == null ? _ : +_;
+    if (context != null) stream = new _interpolate(context, tension);
     return line;
   };
 
   line.context = function(_) {
     if (!arguments.length) return context;
     if (_ == null) context = stream = null;
-    else stream = new interpolate(context = _, interpolateTension);
+    else stream = new _interpolate(context = _, tension);
     return line;
   };
 
