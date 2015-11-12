@@ -1,14 +1,14 @@
-function linear(context) {
+function linearClosed(context) {
   this._context = context;
 }
 
-linear.prototype = {
+linearClosed.prototype = {
   lineStart: function() { this._move = true; },
-  lineEnd: function() {},
+  lineEnd: function() { this._context.closePath(); },
   point: function(x, y) {
     if (this._move) this._move = false, this._context.moveTo(x, y);
     else this._context.lineTo(x, y);
   }
 };
 
-export default linear;
+export default linearClosed;

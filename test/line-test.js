@@ -6,7 +6,7 @@ tape("line() returns a default line shape", function(test) {
   test.equal(l.x()([42, 34]), 42);
   test.equal(l.y()([42, 34]), 34);
   test.equal(l.defined(), true);
-  test.equal(l.interpolate().name, "Linear");
+  test.equal(l.interpolate().name, "linear");
   test.equal(l.context(), null);
   test.equal(l([[0, 1], [2, 3], [4, 5]]), "M0,1L2,3L4,5");
   test.end();
