@@ -12,6 +12,6 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 ## Changes from D3 3.x:
 
-* The behavior of the cardinal interpolation tension parameter has been standardized. The default tension is now 0, not 0.7.
+* The behavior of Cardinal interpolation tension has been fixed. The default tension is now 0 (corresponding to a uniform Catmull–Rom spline), not 0.7; the new value of 0 is equivalent to an old value of 2 / 3, so the default behavior is only slightly changed.
 
-* To specify cardinal interpolation tension *t*, use `line.interpolate("cardinal", t)` instead of `line.interpolate("cardinal").tension(t)`.
+* To specify a Cardinal interpolation tension of *t*, use `line.interpolate("cardinal", t)` instead of `line.interpolate("cardinal").tension(t)`.
