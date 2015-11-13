@@ -52,8 +52,8 @@ tape("line.tension(value) sets the interpolation tension", function(test) {
   test.equal(l([]), null);
   test.equal(l([[0, 1]]), "M0,1Z");
   test.equal(l([[0, 1], [1, 3]]), "M0,1L1,3");
-  test.equal(l([[0, 1], [1, 3], [2, 1]]), "M0,1Q0.4,3,1,3Q1.6,3,2,1");
-  test.equal(l([[0, 1], [1, 3], [2, 1], [3, 3]]), "M0,1Q0.4,3,1,3C1.9,3,1.1,1,2,1Q2.6,1,3,3");
+  test.equal(l([[0, 1], [1, 3], [2, 1]]), "M0,1Q0.55,3,1,3Q1.45,3,2,1");
+  test.equal(l([[0, 1], [1, 3], [2, 1], [3, 3]]), "M0,1Q0.55,3,1,3C1.3,3,1.7,1,2,1Q2.45,1,3,3");
   test.end();
 });
 
@@ -63,16 +63,16 @@ tape("line.tension(value) defaults to null", function(test) {
   test.end();
 });
 
-tape("line.tension(null) is equivalent to 2/3 for cardinal interpolation", function(test) {
+tape("line.tension(null) is equivalent to 0 for cardinal interpolation", function(test) {
   var l0 = shape.line().interpolate("cardinal").tension(null),
-      l1 = shape.line().interpolate("cardinal").tension(2 / 3);
+      l1 = shape.line().interpolate("cardinal").tension(0);
   test.equal(l1([[0, 1], [1, 3], [2, 1], [3, 3]]), l0([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.end();
 });
 
-tape("line.tension(null) is equivalent to 2/3 for cardinal-open interpolation", function(test) {
+tape("line.tension(null) is equivalent to 0 for cardinal-open interpolation", function(test) {
   var l0 = shape.line().interpolate("cardinal-open").tension(null),
-      l1 = shape.line().interpolate("cardinal-open").tension(2 / 3);
+      l1 = shape.line().interpolate("cardinal-open").tension(0);
   test.equal(l1([[0, 1], [1, 3], [2, 1], [3, 3]]), l0([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.end();
 });
@@ -164,8 +164,8 @@ tape("line.interpolate(\"cardinal\")(data) generates the expected path", functio
   test.equal(l([]), null);
   test.equal(l([[0, 1]]), "M0,1Z");
   test.equal(l([[0, 1], [1, 3]]), "M0,1L1,3");
-  test.equal(l([[0, 1], [1, 3], [2, 1]]), "M0,1Q0.7777777777777778,3,1,3Q1.2222222222222223,3,2,1");
-  test.equal(l([[0, 1], [1, 3], [2, 1], [3, 3]]), "M0,1Q0.7777777777777778,3,1,3C1.3333333333333335,3,1.6666666666666665,1,2,1Q2.2222222222222223,1,3,3");
+  test.equal(l([[0, 1], [1, 3], [2, 1]]), "M0,1Q0.5,3,1,3Q1.5,3,2,1");
+  test.equal(l([[0, 1], [1, 3], [2, 1], [3, 3]]), "M0,1Q0.5,3,1,3C1.3333333333333333,3,1.6666666666666667,1,2,1Q2.5,1,3,3");
   test.end();
 });
 
@@ -173,8 +173,8 @@ tape("line.interpolate(\"cardinal-open\")(data) generates the expected path", fu
   var l = shape.line().interpolate("cardinal-open");
   test.equal(l([]), null);
   test.equal(l([[0, 1]]), null);
-  test.equal(l([[0, 1], [1, 3]]), "M1,3");
-  test.equal(l([[0, 1], [1, 3], [2, 1]]), "M1,3");
-  test.equal(l([[0, 1], [1, 3], [2, 1], [3, 3]]), "M1,3C1.3333333333333335,3,1.6666666666666665,1,2,1");
+  test.equal(l([[0, 1], [1, 3]]), "M1,3Z");
+  test.equal(l([[0, 1], [1, 3], [2, 1]]), "M1,3Z");
+  test.equal(l([[0, 1], [1, 3], [2, 1], [3, 3]]), "M1,3C1.3333333333333333,3,1.6666666666666667,1,2,1");
   test.end();
 });

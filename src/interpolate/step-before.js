@@ -4,7 +4,7 @@ function stepBefore(context) {
 
 stepBefore.prototype = {
   lineStart: function() {
-    this._x = null;
+    this._x = NaN;
     this._state = 0;
   },
   lineEnd: function() {

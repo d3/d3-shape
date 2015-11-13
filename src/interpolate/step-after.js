@@ -4,7 +4,7 @@ function stepAfter(context) {
 
 stepAfter.prototype = {
   lineStart: function() {
-    this._y = null;
+    this._y = NaN;
     this._state = 0;
   },
   lineEnd: function() {
