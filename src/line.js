@@ -4,6 +4,7 @@ import basisOpen from "./interpolate/basis-open";
 import cardinal from "./interpolate/cardinal";
 import cardinalClosed from "./interpolate/cardinal-closed";
 import cardinalOpen from "./interpolate/cardinal-open";
+import cubic from "./interpolate/cubic";
 import linear from "./interpolate/linear";
 import linearClosed from "./interpolate/linear-closed";
 import step from "./interpolate/step";
@@ -88,6 +89,7 @@ export default function() {
       case "cardinal": interpolate = cardinal(tension); break;
       case "cardinal-open": interpolate = cardinalOpen(tension); break;
       case "cardinal-closed": interpolate = cardinalClosed(tension); break;
+      case "cubic": interpolate = cubic; break;
       default: interpolate = linear; break;
     }
     if (context != null) stream = interpolate(context);
