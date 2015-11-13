@@ -74,7 +74,7 @@ export default function() {
     return line;
   };
 
-  line.interpolate = function(_, tension) {
+  line.interpolate = function(_, a) {
     if (!arguments.length) return interpolate;
     if (typeof _ === "function") interpolate = _;
     else switch (_ + "") {
@@ -85,9 +85,9 @@ export default function() {
       case "basis": interpolate = basis; break;
       case "basis-open": interpolate = basisOpen; break;
       case "basis-closed": interpolate = basisClosed; break;
-      case "cardinal": interpolate = cardinal(tension); break;
-      case "cardinal-open": interpolate = cardinalOpen(tension); break;
-      case "cardinal-closed": interpolate = cardinalClosed(tension); break;
+      case "cardinal": interpolate = cardinal(a); break;
+      case "cardinal-open": interpolate = cardinalOpen(a); break;
+      case "cardinal-closed": interpolate = cardinalClosed(a); break;
       case "cubic": interpolate = cubic; break;
       default: interpolate = linear; break;
     }

@@ -39,7 +39,7 @@ CardinalClosed.prototype = {
     x = +x, y = +y;
     switch (this._state) {
       case 0: this._state = 1; this._x3 = x, this._y3 = y; break;
-      case 1: this._state = 2; this._x4 = x, this._y4 = y; this._context.moveTo(x, y); break;
+      case 1: this._state = 2; this._context.moveTo(this._x4 = x, this._y4 = y); break;
       case 2: this._state = 3; this._x5 = x, this._y5 = y; break;
       default: {
         this._context.bezierCurveTo(
