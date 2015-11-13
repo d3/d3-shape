@@ -2,6 +2,7 @@ import basis from "./interpolate/basis";
 import basisClosed from "./interpolate/basis-closed";
 import basisOpen from "./interpolate/basis-open";
 import cardinal from "./interpolate/cardinal";
+import cardinalClosed from "./interpolate/cardinal-closed";
 import cardinalOpen from "./interpolate/cardinal-open";
 import linear from "./interpolate/linear";
 import linearClosed from "./interpolate/linear-closed";
@@ -86,6 +87,7 @@ export default function() {
       case "basis-closed": interpolate = basisClosed; break;
       case "cardinal": interpolate = cardinal(tension); break;
       case "cardinal-open": interpolate = cardinalOpen(tension); break;
+      case "cardinal-closed": interpolate = cardinalClosed(tension); break;
       default: interpolate = linear; break;
     }
     if (context != null) stream = interpolate(context);
