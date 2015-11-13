@@ -20,19 +20,24 @@ function Basis(context) {
 Basis.prototype = {
   lineStart: function() {
     this._x0 = this._x1 =
-    this._y0 = this._y1 = null;
+    this._y0 = this._y1 = NaN;
+    this._state = 0;
   },
   lineEnd: function() {
-    if (this._x0 != null) {
-      point(this, this._x1, this._y1);
-      this._context.lineTo(this._x1, this._y1);
+    switch (this._state) {
+      case 1: this._context.closePath(); break;
+      case 3: point(this, this._x1, this._y1); // proceed
+      case 2: this._context.lineTo(this._x1, this._y1); break;
     }
   },
   point: function(x, y) {
     x = +x, y = +y;
-    if (this._x0 != null) point(this, x, y);
-    else if (this._x1 != null) this._context.lineTo((5 * this._x1 + x) / 6, (5 * this._y1 + y) / 6);
-    else this._context.moveTo(x, y);
+    switch (this._state) {
+      case 0: this._state = 1; this._context.moveTo(x, y); break;
+      case 1: this._state = 2; this._context.lineTo((5 * this._x1 + x) / 6, (5 * this._y1 + y) / 6); break;
+      case 2: this._state = 3; // proceed
+      default: point(this, x, y); break;
+    }
     this._x0 = this._x1, this._x1 = x;
     this._y0 = this._y1, this._y1 = y;
   }
