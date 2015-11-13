@@ -35,7 +35,6 @@ export default function() {
       y = pointY, _y = y,
       defined = true, _defined = _true,
       interpolate = linear,
-      tension = null,
       context = null,
       stream = null;
 
@@ -92,13 +91,6 @@ export default function() {
       case "cubic": interpolate = cubic; break;
       default: interpolate = linear; break;
     }
-    if (context != null) stream = interpolate(context);
-    return line;
-  };
-
-  line.tension = function(_) {
-    if (!arguments.length) return tension;
-    tension = _ == null ? _ : +_;
     if (context != null) stream = interpolate(context);
     return line;
   };
