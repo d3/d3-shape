@@ -3,11 +3,16 @@ function linearClosed(context) {
 }
 
 linearClosed.prototype = {
-  lineStart: function() { this._move = true; },
-  lineEnd: function() { this._context.closePath(); },
+  lineStart: function() {
+    this._state = 0;
+  },
+  lineEnd: function() {
+    this._context.closePath();
+  },
   point: function(x, y) {
-    if (this._move) this._move = false, this._context.moveTo(x, y);
-    else this._context.lineTo(x, y);
+    x = +x, y = +y;
+    if (this._state) this._context.lineTo(x, y);
+    else this._state = 1, this._context.moveTo(x, y);
   }
 };
 

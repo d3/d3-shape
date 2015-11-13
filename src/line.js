@@ -28,7 +28,7 @@ function _true() {
   return true;
 }
 
-// TODO bundle, cardinal-closed, monotone
+// TODO bundle, cardinal-closed, monotone, cubic
 var interpolates = {
   "linear": linear,
   "linear-closed": linearClosed,
@@ -66,7 +66,7 @@ export default function() {
     }
 
     if (defined) stream.lineEnd();
-    if (!context) return stream = null, buffer += "";
+    if (!context) return stream = null, buffer + "" || null;
   }
 
   line.x = function(_) {
