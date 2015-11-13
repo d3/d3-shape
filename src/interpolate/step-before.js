@@ -1,8 +1,12 @@
 function stepBefore(context) {
+  return new StepBefore(context);
+}
+
+function StepBefore(context) {
   this._context = context;
 }
 
-stepBefore.prototype = {
+StepBefore.prototype = {
   lineStart: function() {
     this._x = NaN;
     this._state = 0;

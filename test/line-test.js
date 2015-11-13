@@ -6,7 +6,6 @@ tape("line() returns a default line shape", function(test) {
   test.equal(l.x()([42, 34]), 42);
   test.equal(l.y()([42, 34]), 34);
   test.equal(l.defined(), true);
-  test.equal(l.interpolate(), "linear");
   test.equal(l.tension(), null);
   test.equal(l.context(), null);
   test.equal(l([[0, 1], [2, 3], [4, 5]]), "M0,1L2,3L4,5");
@@ -39,16 +38,13 @@ tape("line.y(y)(data) observes the specified constant", function(test) {
 
 tape("line.interpolate(name) sets the interpolation method", function(test) {
   var l = shape.line().interpolate("linear-closed");
-  test.equal(l.interpolate(), "linear-closed");
   test.equal(l([]), null);
   test.equal(l([[0, 1], [2, 3]]), "M0,1L2,3Z");
   test.end();
 });
 
-tape("line.tension(value) sets the interpolation tension", function(test) {
-  var l = shape.line().interpolate("cardinal").tension(0.1);
-  test.equal(l.interpolate(), "cardinal");
-  test.equal(l.tension(), 0.1);
+tape("line.interpolate(\"cardinal\", tension) sets the cardinal interpolation tension", function(test) {
+  var l = shape.line().interpolate("cardinal", 0.1);
   test.equal(l([]), null);
   test.equal(l([[0, 1]]), "M0,1Z");
   test.equal(l([[0, 1], [1, 3]]), "M0,1L1,3");
@@ -57,29 +53,55 @@ tape("line.tension(value) sets the interpolation tension", function(test) {
   test.end();
 });
 
-tape("line.tension(value) defaults to null", function(test) {
-  var l = shape.line().interpolate("cardinal");
-  test.equal(l.tension(), null);
+tape("line.interpolate(\"cardinal\", tension) coerces the specified tension to a number", function(test) {
+  var l = shape.line().interpolate("cardinal", "0.1");
+  test.equal(l([]), null);
+  test.equal(l([[0, 1]]), "M0,1Z");
+  test.equal(l([[0, 1], [1, 3]]), "M0,1L1,3");
+  test.equal(l([[0, 1], [1, 3], [2, 1]]), "M0,1Q0.55,3,1,3Q1.45,3,2,1");
+  test.equal(l([[0, 1], [1, 3], [2, 1], [3, 3]]), "M0,1Q0.55,3,1,3C1.3,3,1.7,1,2,1Q2.45,1,3,3");
   test.end();
 });
 
-tape("line.tension(null) is equivalent to 0 for cardinal interpolation", function(test) {
-  var l0 = shape.line().interpolate("cardinal").tension(null),
-      l1 = shape.line().interpolate("cardinal").tension(0);
+tape("line.interpolate(\"cardinal\") implicitly uses a tension of zero", function(test) {
+  var l0 = shape.line().interpolate("cardinal"),
+      l1 = shape.line().interpolate("cardinal", 0);
   test.equal(l1([[0, 1], [1, 3], [2, 1], [3, 3]]), l0([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.end();
 });
 
-tape("line.tension(null) is equivalent to 0 for cardinal-open interpolation", function(test) {
-  var l0 = shape.line().interpolate("cardinal-open").tension(null),
-      l1 = shape.line().interpolate("cardinal-open").tension(0);
+tape("line.interpolate(\"cardinal\", null) implicitly uses a tension of zero", function(test) {
+  var l0 = shape.line().interpolate("cardinal"),
+      l1 = shape.line().interpolate("cardinal", null);
   test.equal(l1([[0, 1], [1, 3], [2, 1], [3, 3]]), l0([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.end();
 });
 
-tape("line.tension(value) coerces the specified value to a number", function(test) {
-  var l = shape.line().interpolate("cardinal").tension("0.1");
-  test.equal(l.tension(), 0.1);
+tape("line.interpolate(\"cardinal\", undefined) implicitly uses a tension of zero", function(test) {
+  var l0 = shape.line().interpolate("cardinal"),
+      l1 = shape.line().interpolate("cardinal", undefined);
+  test.equal(l1([[0, 1], [1, 3], [2, 1], [3, 3]]), l0([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.end();
+});
+
+tape("line.interpolate(\"cardinal-open\") implicitly uses a tension of zero", function(test) {
+  var l0 = shape.line().interpolate("cardinal-open"),
+      l1 = shape.line().interpolate("cardinal-open", 0);
+  test.equal(l1([[0, 1], [1, 3], [2, 1], [3, 3]]), l0([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.end();
+});
+
+tape("line.interpolate(\"cardinal-open\", null) implicitly uses a tension of zero", function(test) {
+  var l0 = shape.line().interpolate("cardinal-open"),
+      l1 = shape.line().interpolate("cardinal-open", null);
+  test.equal(l1([[0, 1], [1, 3], [2, 1], [3, 3]]), l0([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.end();
+});
+
+tape("line.interpolate(\"cardinal-open\", undefined) implicitly uses a tension of zero", function(test) {
+  var l0 = shape.line().interpolate("cardinal-open"),
+      l1 = shape.line().interpolate("cardinal-open", undefined);
+  test.equal(l1([[0, 1], [1, 3], [2, 1], [3, 3]]), l0([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.end();
 });
 

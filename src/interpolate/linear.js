@@ -1,8 +1,12 @@
 function linear(context) {
+  return new Linear(context);
+}
+
+function Linear(context) {
   this._context = context;
 }
 
-linear.prototype = {
+Linear.prototype = {
   lineStart: function() {
     this._state = 0;
   },

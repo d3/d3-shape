@@ -10,10 +10,14 @@ export function point(basis, x, y) {
 };
 
 function basis(context) {
-  this._context = context;
-};
+  return new Basis(context);
+}
 
-basis.prototype = {
+function Basis(context) {
+  this._context = context;
+}
+
+Basis.prototype = {
   lineStart: function() {
     this._x0 = this._x1 =
     this._y0 = this._y1 = null;

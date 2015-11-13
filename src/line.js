@@ -28,25 +28,11 @@ function _true() {
   return true;
 }
 
-// TODO bundle, cardinal-closed, monotone, cubic
-var interpolates = {
-  "linear": linear,
-  "linear-closed": linearClosed,
-  "step": step,
-  "step-before": stepBefore,
-  "step-after": stepAfter,
-  "basis": basis,
-  "basis-open": basisOpen,
-  "basis-closed": basisClosed,
-  "cardinal": cardinal,
-  "cardinal-open": cardinalOpen
-};
-
 export default function() {
   var x = pointX, _x = x,
       y = pointY, _y = y,
       defined = true, _defined = _true,
-      interpolate = "linear", _interpolate = linear,
+      interpolate = linear,
       tension = null,
       context = null,
       stream = null;
@@ -55,7 +41,7 @@ export default function() {
     var defined = false,
         buffer;
 
-    if (!context) stream = new _interpolate(buffer = path(), tension);
+    if (!context) stream = interpolate(buffer = path());
 
     for (var i = 0, n = data.length, d; i < n; ++i) {
       if (!_defined(d = data[i], i) === defined) {
@@ -87,24 +73,36 @@ export default function() {
     return line;
   };
 
-  line.interpolate = function(_) {
+  line.interpolate = function(_, tension) {
     if (!arguments.length) return interpolate;
-    _interpolate = interpolates[interpolate = interpolates.hasOwnProperty(_ += "") ? _ : "linear"];
-    if (context != null) stream = new _interpolate(context, tension);
+    if (typeof _ === "function") interpolate = _;
+    else switch (_ + "") {
+      case "linear-closed": interpolate = linearClosed; break;
+      case "step": interpolate = step; break;
+      case "step-before": interpolate = stepBefore; break;
+      case "step-after": interpolate = stepAfter; break;
+      case "basis": interpolate = basis; break;
+      case "basis-open": interpolate = basisOpen; break;
+      case "basis-closed": interpolate = basisClosed; break;
+      case "cardinal": interpolate = cardinal(tension); break;
+      case "cardinal-open": interpolate = cardinalOpen(tension); break;
+      default: interpolate = linear; break;
+    }
+    if (context != null) stream = interpolate(context);
     return line;
   };
 
   line.tension = function(_) {
     if (!arguments.length) return tension;
     tension = _ == null ? _ : +_;
-    if (context != null) stream = new _interpolate(context, tension);
+    if (context != null) stream = interpolate(context);
     return line;
   };
 
   line.context = function(_) {
     if (!arguments.length) return context;
     if (_ == null) context = stream = null;
-    else stream = new _interpolate(context = _, tension);
+    else stream = interpolate(context = _);
     return line;
   };
 

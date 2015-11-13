@@ -1,10 +1,14 @@
 import {point} from "./basis";
 
 function basisClosed(context) {
-  this._context = context;
-};
+  return new BasisClosed(context);
+}
 
-basisClosed.prototype = {
+function BasisClosed(context) {
+  this._context = context;
+}
+
+BasisClosed.prototype = {
   lineStart: function() {
     this._x0 = this._x1 = this._x2 = this._x3 = this._x4 =
     this._y0 = this._y1 = this._y2 = this._y3 = this._y4 = null;

@@ -1,10 +1,14 @@
 import {point} from "./basis";
 
 function basisOpen(context) {
-  this._context = context;
-};
+  return new BasisOpen(context);
+}
 
-basisOpen.prototype = {
+function BasisOpen(context) {
+  this._context = context;
+}
+
+BasisOpen.prototype = {
   lineStart: function() {
     this._x0 = this._x1 =
     this._y0 = this._y1 = null;

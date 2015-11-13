@@ -12,6 +12,6 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 ## Changes from D3 3.x:
 
-* The default tension for cardinal interpolation is now 2 / 3, not 0.7.
+* The behavior of the cardinal interpolation tension parameter has been standardized. The default tension is now 0, not 0.7.
 
 …

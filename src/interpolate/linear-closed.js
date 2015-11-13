@@ -1,8 +1,12 @@
 function linearClosed(context) {
+  return new LinearClosed(context);
+}
+
+function LinearClosed(context) {
   this._context = context;
 }
 
-linearClosed.prototype = {
+LinearClosed.prototype = {
   lineStart: function() {
     this._state = 0;
   },

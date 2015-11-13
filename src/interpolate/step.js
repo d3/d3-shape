@@ -1,8 +1,12 @@
 function step(context) {
-  this._context = context;
-};
+  return new Step(context);
+}
 
-step.prototype = {
+function Step(context) {
+  this._context = context;
+}
+
+Step.prototype = {
   lineStart: function() {
     this._x = this._y = NaN;
     this._state = 0;

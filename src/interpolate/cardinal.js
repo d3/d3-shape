@@ -1,9 +1,15 @@
-function cardinal(context, tension) {
+function cardinal(tension) {
+  return function(context) {
+    return new Cardinal(context, tension);
+  };
+}
+
+function Cardinal(context, tension) {
   this._context = context;
   this._k = (tension == null ? 1 : 1 - tension) / 6;
 }
 
-cardinal.prototype = {
+Cardinal.prototype = {
   lineStart: function() {
     this._x0 = this._x1 = this._x2 =
     this._y0 = this._y1 = this._y2 = NaN;
