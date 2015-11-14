@@ -1,6 +1,7 @@
 import basis from "./interpolate/basis";
 import basisClosed from "./interpolate/basis-closed";
 import basisOpen from "./interpolate/basis-open";
+import bundle from "./interpolate/bundle";
 import cardinal from "./interpolate/cardinal";
 import cardinalClosed from "./interpolate/cardinal-closed";
 import cardinalOpen from "./interpolate/cardinal-open";
@@ -86,6 +87,7 @@ export default function() {
       case "basis": interpolate = basis; break;
       case "basis-open": interpolate = basisOpen; break;
       case "basis-closed": interpolate = basisClosed; break;
+      case "bundle": interpolate = bundle(a); break;
       case "cardinal": interpolate = cardinal(a); break;
       case "cardinal-open": interpolate = cardinalOpen(a); break;
       case "cardinal-closed": interpolate = cardinalClosed(a); break;
