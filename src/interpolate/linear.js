@@ -18,7 +18,7 @@ Linear.prototype = {
   },
   lineEnd: function() {
     if (this._point === 1) this._context.closePath();
-    this._line = 1 - this._line;
+    this._line ^= 1;
   },
   point: function(x, y) {
     x = +x, y = +y;
