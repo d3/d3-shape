@@ -38,8 +38,8 @@ Cardinal.prototype = {
     x = +x, y = +y;
     switch (this._state) {
       case 0: this._state = 1; this._context.moveTo(x, y); break;
-      case 1: this._state = 2; break;
-      case 2: this._state = 3; this._x0 = this._x2, this._y0 = this._y2; // proceed
+      case 1: this._state = 2; this._x1 = x, this._y1 = y; break;
+      case 2: this._state = 3; // proceed
       default: point(this, x, y); break;
     }
     this._x0 = this._x1, this._x1 = this._x2, this._x2 = x;
