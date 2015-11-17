@@ -2,21 +2,21 @@
 // n is zero if (x0,y0) and (x1,y1) are coincident.
 // m is zero if (x2,y2) and (x3,y3) are coincident.
 
-import cardinal from "./cardinal";
+import cardinalOpen from "./cardinal-open";
 
-function catmullRom(alpha) {
-  return alpha == null || !(alpha = +alpha) ? cardinal(0) : function(context) {
-    return new CatmullRom(context, alpha);
+function catmullRomOpen(alpha) {
+  return alpha == null || !(alpha = +alpha) ? cardinalOpen(0) : function(context) {
+    return new CatmullRomOpen(context, alpha);
   };
 }
 
-function CatmullRom(context, alpha) {
+function CatmullRomOpen(context, alpha) {
   this._context = context;
   this._alpha = alpha;
   this._alpha2 = alpha / 2;
 }
 
-CatmullRom.prototype = {
+CatmullRomOpen.prototype = {
   lineStart: function() {
     this._x0 = this._x1 = this._x2 =
     this._y0 = this._y1 = this._y2 =
@@ -26,21 +26,8 @@ CatmullRom.prototype = {
   },
   lineEnd: function() {
     switch (this._state) {
-      case 1: this._context.closePath(); break;
-      case 2: this._context.lineTo(this._x2, this._y2); break;
-      case 3: {
-        var a = 2 * this._l01_2a + 3 * this._l01_a * this._l12_a + this._l12_2a,
-            n = 3 * this._l01_a * (this._l01_a + this._l12_a);
-        this._context.bezierCurveTo(
-          (this._x1 * a - this._x0 * this._l12_2a + this._x2 * this._l01_2a) / n,
-          (this._y1 * a - this._y0 * this._l12_2a + this._y2 * this._l01_2a) / n,
-          this._x2,
-          this._y2,
-          this._x2,
-          this._y2
-        );
-        break;
-      }
+      case 2:
+      case 3: this._context.closePath(); break;
     }
   },
   point: function(x, y) {
@@ -55,22 +42,10 @@ CatmullRom.prototype = {
     }
 
     switch (this._state) {
-      case 0: this._state = 1; this._context.moveTo(x, y); break;
-      case 1: this._state = 2; break;
-      case 2: {
-        var b = 2 * this._l23_2a + 3 * this._l23_a * this._l12_a + this._l12_2a,
-            m = 3 * this._l23_a * (this._l23_a + this._l12_a);
-        this._state = 3;
-        this._context.bezierCurveTo(
-          this._x1,
-          this._y1,
-          (this._x2 * b + this._x1 * this._l23_2a - x * this._l12_2a) / m,
-          (this._y2 * b + this._y1 * this._l23_2a - y * this._l12_2a) / m,
-          this._x2,
-          this._y2
-        );
-        break;
-      }
+      case 0: this._state = 1; break;
+      case 1: this._state = 2; this._context.moveTo(x, y); break;
+      case 2: this._state = 3; break;
+      case 3: this._state = 4; // proceed
       default: {
         var a = 2 * this._l01_2a + 3 * this._l01_a * this._l12_a + this._l12_2a,
             b = 2 * this._l23_2a + 3 * this._l23_a * this._l12_a + this._l12_2a,
@@ -95,4 +70,4 @@ CatmullRom.prototype = {
   }
 };
 
-export default catmullRom;
+export default catmullRomOpen;

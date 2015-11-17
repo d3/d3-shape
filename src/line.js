@@ -6,6 +6,8 @@ import cardinal from "./interpolate/cardinal";
 import cardinalClosed from "./interpolate/cardinal-closed";
 import cardinalOpen from "./interpolate/cardinal-open";
 import catmullRom from "./interpolate/catmull-rom";
+import catmullRomOpen from "./interpolate/catmull-rom-open";
+import catmullRomClosed from "./interpolate/catmull-rom-closed";
 import cubic from "./interpolate/cubic";
 import linear from "./interpolate/linear";
 import linearClosed from "./interpolate/linear-closed";
@@ -92,6 +94,8 @@ export default function() {
       case "cardinal-open": interpolate = cardinalOpen(a); break;
       case "cardinal-closed": interpolate = cardinalClosed(a); break;
       case "catmull-rom": interpolate = catmullRom(a); break;
+      case "catmull-rom-open": interpolate = catmullRomOpen(a); break;
+      case "catmull-rom-closed": interpolate = catmullRomClosed(a); break;
       case "cubic": interpolate = cubic; break;
       default: interpolate = linear; break;
     }
