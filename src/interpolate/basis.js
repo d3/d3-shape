@@ -1,11 +1,11 @@
-export function point(basis, x, y) {
-  basis._context.bezierCurveTo(
-    (2 * basis._x0 + basis._x1) / 3,
-    (2 * basis._y0 + basis._y1) / 3,
-    (basis._x0 + 2 * basis._x1) / 3,
-    (basis._y0 + 2 * basis._y1) / 3,
-    (basis._x0 + 4 * basis._x1 + x) / 6,
-    (basis._y0 + 4 * basis._y1 + y) / 6
+export function point(that, x, y) {
+  that._context.bezierCurveTo(
+    (2 * that._x0 + that._x1) / 3,
+    (2 * that._y0 + that._y1) / 3,
+    (that._x0 + 2 * that._x1) / 3,
+    (that._y0 + 2 * that._y1) / 3,
+    (that._x0 + 4 * that._x1 + x) / 6,
+    (that._y0 + 4 * that._y1 + y) / 6
   );
 };
 
