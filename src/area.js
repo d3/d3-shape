@@ -61,7 +61,7 @@ export default function() {
         } else {
           output.lineEnd();
           output.lineStart();
-          for (k = i - 1; k >= j; --k) {
+          for (k = i - 1; k >= j; --k) { // TODO this is ccw; we want cw
             output.point(x1z[k], y1z[k]);
           }
           output.lineEnd();
