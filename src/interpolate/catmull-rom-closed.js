@@ -15,9 +15,9 @@ function CatmullRomClosed(context, alpha) {
 CatmullRomClosed.prototype = {
   lineStart: function() {
     this._x0 = this._x1 = this._x2 = this._x3 = this._x4 = this._x5 =
-    this._y0 = this._y1 = this._y2 = this._y3 = this._y4 = this._y5 =
+    this._y0 = this._y1 = this._y2 = this._y3 = this._y4 = this._y5 = NaN;
     this._l01_a = this._l12_a = this._l23_a =
-    this._l01_2a = this._l12_2a = this._l23_2a = NaN;
+    this._l01_2a = this._l12_2a = this._l23_2a =
     this._state = 0;
   },
   lineEnd: function() {

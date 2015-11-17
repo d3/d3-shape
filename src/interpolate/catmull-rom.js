@@ -1,18 +1,28 @@
 import cardinal from "./cardinal";
 
+var epsilon = 1e-6;
+
 export function point(that, x, y) {
-  var a = 2 * that._l01_2a + 3 * that._l01_a * that._l12_a + that._l12_2a,
-      b = 2 * that._l23_2a + 3 * that._l23_a * that._l12_a + that._l12_2a,
-      n = 3 * that._l01_a * (that._l01_a + that._l12_a),
-      m = 3 * that._l23_a * (that._l23_a + that._l12_a);
-  that._context.bezierCurveTo(
-    (that._x1 * a - that._x0 * that._l12_2a + that._x2 * that._l01_2a) / n,
-    (that._y1 * a - that._y0 * that._l12_2a + that._y2 * that._l01_2a) / n,
-    (that._x2 * b + that._x1 * that._l23_2a - x * that._l12_2a) / m,
-    (that._y2 * b + that._y1 * that._l23_2a - y * that._l12_2a) / m,
-    that._x2,
-    that._y2
-  );
+  var x1 = that._x1,
+      y1 = that._y1,
+      x2 = that._x2,
+      y2 = that._y2;
+
+  if (that._l01_a > epsilon) {
+    var a = 2 * that._l01_2a + 3 * that._l01_a * that._l12_a + that._l12_2a,
+        n = 3 * that._l01_a * (that._l01_a + that._l12_a);
+    x1 = (x1 * a - that._x0 * that._l12_2a + that._x2 * that._l01_2a) / n;
+    y1 = (y1 * a - that._y0 * that._l12_2a + that._y2 * that._l01_2a) / n;
+  }
+
+  if (that._l23_a > epsilon) {
+    var b = 2 * that._l23_2a + 3 * that._l23_a * that._l12_a + that._l12_2a,
+        m = 3 * that._l23_a * (that._l23_a + that._l12_a);
+    x2 = (x2 * b + that._x1 * that._l23_2a - x * that._l12_2a) / m;
+    y2 = (y2 * b + that._y1 * that._l23_2a - y * that._l12_2a) / m;
+  }
+
+  that._context.bezierCurveTo(x1, y1, x2, y2, that._x2, that._y2);
 };
 
 function catmullRom(alpha) {
@@ -29,28 +39,16 @@ function CatmullRom(context, alpha) {
 CatmullRom.prototype = {
   lineStart: function() {
     this._x0 = this._x1 = this._x2 =
-    this._y0 = this._y1 = this._y2 =
+    this._y0 = this._y1 = this._y2 = NaN;
     this._l01_a = this._l12_a = this._l23_a =
-    this._l01_2a = this._l12_2a = this._l23_2a = NaN;
+    this._l01_2a = this._l12_2a = this._l23_2a =
     this._state = 0;
   },
   lineEnd: function() {
     switch (this._state) {
       case 1: this._context.closePath(); break;
       case 2: this._context.lineTo(this._x2, this._y2); break;
-      case 3: {
-        var a = 2 * this._l01_2a + 3 * this._l01_a * this._l12_a + this._l12_2a,
-            n = 3 * this._l01_a * (this._l01_a + this._l12_a);
-        this._context.bezierCurveTo(
-          (this._x1 * a - this._x0 * this._l12_2a + this._x2 * this._l01_2a) / n,
-          (this._y1 * a - this._y0 * this._l12_2a + this._y2 * this._l01_2a) / n,
-          this._x2,
-          this._y2,
-          this._x2,
-          this._y2
-        );
-        break;
-      }
+      case 3: this.point(this, this._x2, this._y2); break;
     }
   },
   point: function(x, y) {
@@ -65,20 +63,7 @@ CatmullRom.prototype = {
     switch (this._state) {
       case 0: this._state = 1; this._context.moveTo(x, y); break;
       case 1: this._state = 2; break;
-      case 2: {
-        var b = 2 * this._l23_2a + 3 * this._l23_a * this._l12_a + this._l12_2a,
-            m = 3 * this._l23_a * (this._l23_a + this._l12_a);
-        this._state = 3;
-        this._context.bezierCurveTo(
-          this._x1,
-          this._y1,
-          (this._x2 * b + this._x1 * this._l23_2a - x * this._l12_2a) / m,
-          (this._y2 * b + this._y1 * this._l23_2a - y * this._l12_2a) / m,
-          this._x2,
-          this._y2
-        );
-        break;
-      }
+      case 2: this._state = 3; // proceed
       default: point(this, x, y); break;
     }
 
