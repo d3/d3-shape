@@ -6,76 +6,59 @@ import cardinal from "./interpolate/cardinal";
 import cardinalClosed from "./interpolate/cardinal-closed";
 import cardinalOpen from "./interpolate/cardinal-open";
 import catmullRom from "./interpolate/catmull-rom";
-import catmullRomOpen from "./interpolate/catmull-rom-open";
 import catmullRomClosed from "./interpolate/catmull-rom-closed";
-import natural from "./interpolate/natural";
+import catmullRomOpen from "./interpolate/catmull-rom-open";
+import constant, {constantTrue} from "./constant";
 import linear from "./interpolate/linear";
 import linearClosed from "./interpolate/linear-closed";
+import natural from "./interpolate/natural";
 import step from "./interpolate/step";
 import stepAfter from "./interpolate/step-after";
 import stepBefore from "./interpolate/step-before";
 import {path} from "d3-path";
-
-function pointX(p) {
-  return p[0];
-}
-
-function pointY(p) {
-  return p[1];
-}
-
-function constant(x) {
-  return function() {
-    return x;
-  };
-}
-
-function _true() {
-  return true;
-}
+import {x as pointX, y as pointY} from "./point";
 
 export default function() {
-  var x = pointX, _x = x,
-      y = pointY, _y = y,
-      defined = true, _defined = _true,
+  var x = pointX,
+      y = pointY,
+      defined = true,
+      getX = pointX,
+      getY = pointY,
+      getDefined = constantTrue,
       interpolate = linear,
       context = null,
-      stream = null;
+      output = null;
 
   function line(data) {
-    var defined = false,
+    var i,
+        n = data.length,
+        d,
+        isDefined = false,
         buffer;
 
-    if (!context) stream = interpolate(buffer = path());
+    if (!context) output = interpolate(buffer = path());
 
-    for (var i = 0, n = data.length, d; i < n; ++i) {
-      if (!_defined(d = data[i], i) === defined) {
-        if (defined = !defined) stream.lineStart();
-        else stream.lineEnd();
+    for (i = 0; i <= n; ++i) {
+      if (!(i < n && getDefined(d = data[i], i)) === isDefined) {
+        if (isDefined = !isDefined) output.lineStart();
+        else output.lineEnd();
       }
-      if (defined) stream.point(+_x(d, i), +_y(d, i));
+      if (isDefined) output.point(+getX(d, i), +getY(d, i));
     }
 
-    if (defined) stream.lineEnd();
-    if (!context) return stream = null, buffer + "" || null;
+    if (!context) return output = null, buffer + "" || null;
   }
 
   line.x = function(_) {
-    if (!arguments.length) return x;
-    x = _, _x = typeof _ === "function" ? x : constant(x);
-    return line;
+    return arguments.length ? (x = _, getX = typeof _ === "function" ? x : constant(x), line) : x;
   };
 
   line.y = function(_) {
-    if (!arguments.length) return y;
-    y = _, _y = typeof _ === "function" ? y : constant(y);
-    return line;
+    return arguments.length ? (y = _, getY = typeof _ === "function" ? y : constant(y), line) : y;
   };
 
   line.defined = function(_) {
-    if (!arguments.length) return defined;
-    defined = _, _defined = typeof _ === "function" ? defined : constant(defined);
-    return line;
+    return arguments.length ? (defined = _, getDefined = typeof _ === "function" ? defined : constant(defined), line) : defined;
   };
 
   line.interpolate = function(_, a) {
@@ -99,15 +82,12 @@ export default function() {
       case "natural": interpolate = natural; break;
       default: interpolate = linear; break;
     }
-    if (context != null) stream = interpolate(context);
+    if (context != null) output = interpolate(context);
     return line;
   };
 
   line.context = function(_) {
-    if (!arguments.length) return context;
-    if (_ == null) context = stream = null;
-    else stream = interpolate(context = _);
-    return line;
+    return arguments.length ? (_ == null ? context = output = null : output = interpolate(context = _), line) : context;
   };
 
   return line;
