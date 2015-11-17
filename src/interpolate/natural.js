@@ -1,12 +1,12 @@
-function cubic(context) {
-  return new Cubic(context);
+function natural(context) {
+  return new Natural(context);
 }
 
-function Cubic(context) {
+function Natural(context) {
   this._context = context;
 }
 
-Cubic.prototype = {
+Natural.prototype = {
   lineStart: function() {
     this._x = [];
     this._y = [];
@@ -56,4 +56,4 @@ function controlPoints(x) {
   return [a, b];
 }
 
-export default cubic;
+export default natural;

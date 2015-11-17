@@ -8,7 +8,7 @@ import cardinalOpen from "./interpolate/cardinal-open";
 import catmullRom from "./interpolate/catmull-rom";
 import catmullRomOpen from "./interpolate/catmull-rom-open";
 import catmullRomClosed from "./interpolate/catmull-rom-closed";
-import cubic from "./interpolate/cubic";
+import natural from "./interpolate/natural";
 import linear from "./interpolate/linear";
 import linearClosed from "./interpolate/linear-closed";
 import step from "./interpolate/step";
@@ -96,7 +96,7 @@ export default function() {
       case "catmull-rom": interpolate = catmullRom(a); break;
       case "catmull-rom-open": interpolate = catmullRomOpen(a); break;
       case "catmull-rom-closed": interpolate = catmullRomClosed(a); break;
-      case "cubic": interpolate = cubic; break;
+      case "natural": interpolate = natural; break;
       default: interpolate = linear; break;
     }
     if (context != null) stream = interpolate(context);
