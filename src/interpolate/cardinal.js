@@ -31,17 +31,7 @@ Cardinal.prototype = {
     switch (this._state) {
       case 1: this._context.closePath(); break;
       case 2: this._context.lineTo(this._x2, this._y2); break;
-      case 3: {
-        this._context.bezierCurveTo(
-          this._x1 + this._k * (this._x2 - this._x0),
-          this._y1 + this._k * (this._y2 - this._y0),
-          this._x2,
-          this._y2,
-          this._x2,
-          this._y2
-        );
-        break;
-      }
+      case 3: point(this, this._x1, this._y1); break;
     }
   },
   point: function(x, y) {
@@ -49,18 +39,7 @@ Cardinal.prototype = {
     switch (this._state) {
       case 0: this._state = 1; this._context.moveTo(x, y); break;
       case 1: this._state = 2; break;
-      case 2: {
-        this._state = 3;
-        this._context.bezierCurveTo(
-          this._x1,
-          this._y1,
-          this._x2 + this._k * (this._x1 - x),
-          this._y2 + this._k * (this._y1 - y),
-          this._x2,
-          this._y2
-        );
-        break;
-      }
+      case 2: this._state = 3; this._x0 = this._x2, this._y0 = this._y2; // proceed
       default: point(this, x, y); break;
     }
     this._x0 = this._x1, this._x1 = this._x2, this._x2 = x;
