@@ -4,6 +4,7 @@ import cross from "./symbol/cross";
 import diamond from "./symbol/diamond";
 import square from "./symbol/square";
 import {triangleDown, triangleUp} from "./symbol/triangle";
+import constant from "./constant";
 
 function constantSixtyFour() {
   return 64;

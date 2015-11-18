@@ -1,6 +1,6 @@
 var sqrt3 = Math.sqrt(3);
 
-export function triangleDown(size) {
+export function triangleDown(context, size) {
   var x = Math.sqrt(size / sqrt3),
       y = x * sqrt3 / 2;
   context.moveTo(0, y);
@@ -9,7 +9,7 @@ export function triangleDown(size) {
   context.closePath();
 };
 
-export function triangleUp(size) {
+export function triangleUp(context, size) {
   var x = Math.sqrt(size / sqrt3),
       y = x * sqrt3 / 2;
   context.moveTo(0, -y);
