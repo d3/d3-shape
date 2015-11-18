@@ -22,6 +22,15 @@ tape("area.interpolate(\"linear\")(data) generates the expected path", function(
   test.end();
 });
 
+tape("area.interpolate(\"basis\")(data) generates the expected path", function(test) {
+  var a = shape.area().interpolate("basis");
+  test.equal(a([]), null);
+  test.equal(a([[0, 1]]), "M0,1L0,0Z");
+  test.equal(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");
+  test.equal(a([[0, 1], [1, 3], [2, 1]]), "M0,1L0.16666666666666666,1.3333333333333333C0.3333333333333333,1.6666666666666667,0.6666666666666666,2.3333333333333335,1,2.3333333333333335C1.3333333333333333,2.3333333333333335,1.6666666666666667,1.6666666666666667,1.8333333333333333,1.3333333333333333L2,1L2,0L1.8333333333333333,0C1.6666666666666667,0,1.3333333333333333,0,1,0C0.6666666666666666,0,0.3333333333333333,0,0.16666666666666666,0L0,0Z");
+  test.end();
+});
+
 tape("area.interpolate(\"cardinal\")(data) generates the expected path", function(test) {
   var a = shape.area().interpolate("cardinal");
   test.equal(a([]), null);
