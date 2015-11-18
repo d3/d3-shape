@@ -130,6 +130,6 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 * Added “catmull-rom” spline interpolation, parameterized by alpha. If α = 0, produces a uniform Catmull–Rom spline equivalent to a Cardinal spline with zero tension; if α = 0.5, produces a centripetal spline; if α = 1.0, produces a chordal spline.
 
-* By setting [*area*.x0](#area_x0) or [*area*.y0](#area_y0) to null, you can reuse the [*area*.x1](#area_x1) or [*area*.y1](#area_y1) value, rather than computing it twice. This is useful for nondeterministic values (e.g., jitter).
+* By setting [*area*.x1](#area_x1) or [*area*.y1](#area_y1) to null, you can reuse the [*area*.x0](#area_x0) or [*area*.y0](#area_y0) value, rather than computing it twice. This is useful for nondeterministic values (e.g., jitter).
 
 * Accessor functions now always return functions, even if the value was set to a constant.
