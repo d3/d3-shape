@@ -52,6 +52,16 @@ tape("area.interpolate(\"cardinal\")(data) generates the expected path", functio
   test.end();
 });
 
+tape("area.interpolate(\"cardinal-open\")(data) generates the expected path", function(test) {
+  var a = shape.area().interpolate("cardinal-open");
+  test.equal(a([]), null);
+  test.equal(a([[0, 1]]), null);
+  test.equal(a([[0, 1], [1, 3]]), null);
+  test.equal(a([[0, 1], [1, 3], [2, 1]]), "M1,3L1,0Z");
+  test.equal(a([[0, 1], [1, 3], [2, 1], [3, 3]]), "M1,3C1.3333333333333333,3,1.6666666666666667,1,2,1L2,0C1.6666666666666667,0,1.3333333333333333,0,1,0Z");
+  test.end();
+});
+
 tape("area.interpolate(\"step\")(data) generates the expected path", function(test) {
   var a = shape.area().interpolate("step");
   test.equal(a([]), null);

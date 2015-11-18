@@ -194,7 +194,7 @@ tape("line.interpolate(\"cardinal-open\")(data) generates the expected path", fu
   var l = shape.line().interpolate("cardinal-open");
   test.equal(l([]), null);
   test.equal(l([[0, 1]]), null);
-  test.equal(l([[0, 1], [1, 3]]), "M1,3Z");
+  test.equal(l([[0, 1], [1, 3]]), null);
   test.equal(l([[0, 1], [1, 3], [2, 1]]), "M1,3Z");
   test.equal(l([[0, 1], [1, 3], [2, 1], [3, 3]]), "M1,3C1.3333333333333333,3,1.6666666666666667,1,2,1");
   test.end();
@@ -224,7 +224,7 @@ tape("line.interpolate(\"catmull-rom-open\")(data) generates the expected path",
   var l = shape.line().interpolate("catmull-rom-open");
   test.equal(l([]), null);
   test.equal(l([[0, 1]]), null);
-  test.equal(l([[0, 1], [1, 3]]), "M1,3Z");
+  test.equal(l([[0, 1], [1, 3]]), null);
   test.equal(l([[0, 1], [1, 3], [2, 1]]), "M1,3Z");
   test.equal(l([[0, 1], [1, 3], [2, 1], [3, 3]]), "M1,3C1.3333333333333333,3,1.6666666666666667,1,2,1");
   test.end();
@@ -254,7 +254,7 @@ tape("line.interpolate(\"catmull-rom-open\", 1)(data) generates the expected pat
   var l = shape.line().interpolate("catmull-rom-open", 1);
   test.equal(l([]), null);
   test.equal(l([[0, 1]]), null);
-  test.equal(l([[0, 1], [1, 3]]), "M1,3Z");
+  test.equal(l([[0, 1], [1, 3]]), null);
   test.equal(l([[0, 1], [1, 3], [2, 1]]), "M1,3Z");
   test.equal(l([[0, 1], [1, 3], [2, 1], [3, 3]]), "M1,3C1.3333333333333333,2.9999999999999996,1.6666666666666665,0.9999999999999999,2,1");
   test.end();
