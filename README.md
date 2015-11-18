@@ -16,6 +16,10 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 …
 
+<a name="_line" href="#_line">#</a> <i>line</i>(<i>data</i>)
+
+…
+
 <a name="line_x" href="#line_x">#</a> <i>line</i>.<b>x</b>(<i>x</i>)
 
 …
@@ -41,6 +45,10 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 …
 
 <a name="area" href="#area">#</a> <b>area</b>()
+
+…
+
+<a name="_area" href="#_area">#</a> <i>area</i>(<i>data</i>)
 
 …
 
