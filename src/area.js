@@ -47,8 +47,8 @@ export default function() {
         d,
         isDefined = false,
         buffer,
-        x1z = new Array(n),
-        y1z = new Array(n);
+        x0z = new Array(n),
+        y0z = new Array(n);
 
     if (!context) output = interpolate(buffer = path());
 
@@ -61,8 +61,8 @@ export default function() {
         } else {
           output.lineEnd();
           output.lineStart();
-          for (k = i - 1; k >= j; --k) { // TODO this is ccw; we want cw
-            output.point(x1z[k], y1z[k]);
+          for (k = i - 1; k >= j; --k) {
+            output.point(x0z[k], y0z[k]);
           }
           output.lineEnd();
           output.areaEnd();
@@ -70,8 +70,8 @@ export default function() {
         }
       }
       if (isDefined) {
-        output.point(x0i = +getX0(d, i), y0i = +getY0(d, i));
-        x1z[i] = +getX1(d, i), y1z[i] = +getY1(d, i);
+        x0z[i] = x0i = +getX0(d, i), y0z[i] = y0i = +getY0(d, i);
+        output.point(+getX1(d, i), +getY1(d, i));
       }
     }
 
