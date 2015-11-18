@@ -21,10 +21,7 @@ import {x as pointX, y as pointY} from "./point";
 export default function() {
   var x = pointX,
       y = pointY,
-      defined = true,
-      getX = pointX,
-      getY = pointY,
-      getDefined = constantTrue,
+      defined = constantTrue,
       interpolate = linear,
       context = null,
       output = null;
@@ -33,32 +30,32 @@ export default function() {
     var i,
         n = data.length,
         d,
-        isDefined = false,
+        defined0 = false,
         buffer;
 
     if (!context) output = interpolate(buffer = path());
 
     for (i = 0; i <= n; ++i) {
-      if (!(i < n && getDefined(d = data[i], i)) === isDefined) {
-        if (isDefined = !isDefined) output.lineStart();
+      if (!(i < n && defined(d = data[i], i)) === defined0) {
+        if (defined0 = !defined0) output.lineStart();
         else output.lineEnd();
       }
-      if (isDefined) output.point(+getX(d, i), +getY(d, i));
+      if (defined0) output.point(+x(d, i), +y(d, i));
     }
 
     if (!context) return output = null, buffer + "" || null;
   }
 
   line.x = function(_) {
-    return arguments.length ? (x = _, getX = typeof _ === "function" ? x : constant(x), line) : x;
+    return arguments.length ? (x = typeof _ === "function" ? _ : constant(_), line) : x;
   };
 
   line.y = function(_) {
-    return arguments.length ? (y = _, getY = typeof _ === "function" ? y : constant(y), line) : y;
+    return arguments.length ? (y = typeof _ === "function" ? _ : constant(_), line) : y;
   };
 
   line.defined = function(_) {
-    return arguments.length ? (defined = _, getDefined = typeof _ === "function" ? defined : constant(defined), line) : defined;
+    return arguments.length ? (defined = typeof _ === "function" ? _ : constant(_), line) : defined;
   };
 
   line.interpolate = function(_, a) {
