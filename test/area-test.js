@@ -62,6 +62,26 @@ tape("area.interpolate(\"cardinal-open\")(data) generates the expected path", fu
   test.end();
 });
 
+tape("area.interpolate(\"catmull-rom\", 0.5)(data) generates the expected path", function(test) {
+  var a = shape.area().interpolate("catmull-rom", 0.5);
+  test.equal(a([]), null);
+  test.equal(a([[0, 1]]), "M0,1L0,0Z");
+  test.equal(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");
+  test.equal(a([[0, 1], [1, 3], [2, 1]]), "M0,1C0,1,0.6666666666666667,3.0000000000000004,1,3C1.3333333333333337,3.0000000000000004,2,1,2,1L2,0C2,0,1.3333333333333333,0,1,0C0.6666666666666666,0,0,0,0,0Z");
+  test.equal(a([[0, 1], [1, 3], [2, 1], [3, 3]]), "M0,1C0,1,0.6666666666666667,3.0000000000000004,1,3C1.3333333333333337,3.0000000000000004,1.6666666666666667,1,2,1C2.3333333333333335,1.0000000000000002,3,3,3,3L3,0C3,0,2.3333333333333335,0,2,0C1.6666666666666667,0,1.3333333333333333,0,1,0C0.6666666666666666,0,0,0,0,0Z");
+  test.end();
+});
+
+tape("area.interpolate(\"catmull-rom-open\", 0.5)(data) generates the expected path", function(test) {
+  var a = shape.area().interpolate("catmull-rom-open", 0.5);
+  test.equal(a([]), null);
+  test.equal(a([[0, 1]]), null);
+  test.equal(a([[0, 1], [1, 3]]), null);
+  test.equal(a([[0, 1], [1, 3], [2, 1]]), "M1,3L1,0Z");
+  test.equal(a([[0, 1], [1, 3], [2, 1], [3, 3]]), "M1,3C1.3333333333333337,3.0000000000000004,1.6666666666666667,1,2,1L2,0C1.6666666666666667,0,1.3333333333333333,0,1,0Z");
+  test.end();
+});
+
 tape("area.interpolate(\"step\")(data) generates the expected path", function(test) {
   var a = shape.area().interpolate("step");
   test.equal(a([]), null);
