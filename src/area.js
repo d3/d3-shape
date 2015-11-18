@@ -1,6 +1,5 @@
 import basis from "./interpolate/basis";
 import basisOpen from "./interpolate/basis-open";
-import bundle from "./interpolate/bundle";
 import cardinal from "./interpolate/cardinal";
 import cardinalOpen from "./interpolate/cardinal-open";
 import catmullRom from "./interpolate/catmull-rom";
@@ -52,11 +51,11 @@ export default function() {
 
     if (!context) output = interpolate(buffer = path());
 
+    output.areaStart();
     for (i = 0; i <= n; ++i) {
       if (!(i < n && getDefined(d = data[i], i)) === isDefined) {
         if (isDefined = !isDefined) {
           j = i;
-          output.areaStart();
           output.lineStart();
         } else {
           output.lineEnd();
@@ -65,8 +64,6 @@ export default function() {
             output.point(x0z[k], y0z[k]);
           }
           output.lineEnd();
-          output.areaEnd();
-          output.areaStart();
         }
       }
       if (isDefined) {
@@ -74,6 +71,7 @@ export default function() {
         output.point(+getX1(d, i), +getY1(d, i));
       }
     }
+    output.areaEnd();
 
     if (!context) return output = null, buffer + "" || null;
   }
@@ -115,7 +113,6 @@ export default function() {
       case "step-after": interpolate = stepAfter; break;
       case "basis": interpolate = basis; break;
       case "basis-open": interpolate = basisOpen; break;
-      case "bundle": interpolate = bundle(a); break;
       case "cardinal": interpolate = cardinal(a); break;
       case "cardinal-open": interpolate = cardinalOpen(a); break;
       case "catmull-rom": interpolate = catmullRom(a); break;

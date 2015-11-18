@@ -7,6 +7,12 @@ function Natural(context) {
 }
 
 Natural.prototype = {
+  areaStart: function() {
+    this._line = 0;
+  },
+  areaEnd: function() {
+    this._line = NaN;
+  },
   lineStart: function() {
     this._x = [];
     this._y = [];
@@ -15,20 +21,26 @@ Natural.prototype = {
     var x = this._x,
         y = this._y,
         n = x.length;
-    switch (n) {
-      case 0: break;
-      case 1: this._context.moveTo(x[0], y[0]); this._context.closePath(); break;
-      case 2: this._context.moveTo(x[0], y[0]); this._context.lineTo(x[1], y[1]); break;
-      default: {
+
+    if (n) {
+      this._line ? this._context.lineTo(x[0], y[0]) : this._context.moveTo(x[0], y[0]);
+      if (n === 2) {
+        this._context.lineTo(x[1], y[1]);
+      } else {
         var px = controlPoints(x),
             py = controlPoints(y);
-        this._context.moveTo(x[0], y[0]);
-        for (var i = 0, n = x.length; i < n - 1; ++i) {
+        for (var i = 0; i < n - 1; ++i) {
           this._context.bezierCurveTo(px[0][i], py[0][i], px[1][i], py[1][i], x[i + 1], y[i + 1]);
         }
-        break;
+      }
+      if (this._line >= 0) {
+        if (this._line) this._context.closePath();
+        this._line ^= 1;
+      } else if (n === 1) {
+        this._context.closePath();
       }
     }
+
     this._x = this._y = null;
   },
   point: function(x, y) {

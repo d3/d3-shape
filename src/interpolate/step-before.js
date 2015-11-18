@@ -7,18 +7,29 @@ function StepBefore(context) {
 }
 
 StepBefore.prototype = {
+  areaStart: function() {
+    this._line = 0;
+  },
+  areaEnd: function() {
+    this._line = NaN;
+  },
   lineStart: function() {
     this._x = NaN;
-    this._state = 0;
+    this._point = 0;
   },
   lineEnd: function() {
-    if (this._state === 1) this._context.closePath();
+    if (this._line >= 0) {
+      if (this._line && this._point) this._context.closePath();
+      this._line ^= 1;
+    } else {
+      if (this._point === 1) this._context.closePath();
+    }
   },
   point: function(x, y) {
     x = +x, y = +y;
-    switch (this._state) {
-      case 0: this._state = 1; this._context.moveTo(x, y); break;
-      case 1: this._state = 2; // proceed
+    switch (this._point) {
+      case 0: this._point = 1; this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y); break;
+      case 1: this._point = 2; // proceed
       default: {
         this._context.lineTo(this._x, y);
         this._context.lineTo(x, y);
