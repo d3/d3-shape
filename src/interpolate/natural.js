@@ -29,18 +29,14 @@ Natural.prototype = {
       } else {
         var px = controlPoints(x),
             py = controlPoints(y);
-        for (var i = 0; i < n - 1; ++i) {
-          this._context.bezierCurveTo(px[0][i], py[0][i], px[1][i], py[1][i], x[i + 1], y[i + 1]);
+        for (var i0 = 0, i1 = 1; i1 < n; ++i0, ++i1) {
+          this._context.bezierCurveTo(px[0][i0], py[0][i0], px[1][i0], py[1][i0], x[i1], y[i1]);
         }
-      }
-      if (this._line >= 0) {
-        if (this._line) this._context.closePath();
-        this._line ^= 1;
-      } else if (n === 1) {
-        this._context.closePath();
       }
     }
 
+    if (this._line || (this._line !== 0 && n === 1)) this._context.closePath();
+    this._line = 1 - this._line;
     this._x = this._y = null;
   },
   point: function(x, y) {

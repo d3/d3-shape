@@ -18,12 +18,8 @@ StepBefore.prototype = {
     this._point = 0;
   },
   lineEnd: function() {
-    if (this._line >= 0) {
-      if (this._line && this._point) this._context.closePath();
-      this._line ^= 1;
-    } else {
-      if (this._point === 1) this._context.closePath();
-    }
+    if (this._line || (this._line !== 0 && this._point === 1)) this._context.closePath();
+    this._line = 1 - this._line;
   },
   point: function(x, y) {
     x = +x, y = +y;

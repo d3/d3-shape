@@ -18,16 +18,9 @@ Step.prototype = {
     this._point = 0;
   },
   lineEnd: function() {
-    if (this._line >= 0) {
-      if (this._point === 2) this._context.lineTo(this._x, this._y);
-      if (this._line && this._point) this._context.closePath();
-      this._line ^= 1;
-    } else {
-      switch (this._point) {
-        case 1: this._context.closePath(); break;
-        case 2: this._context.lineTo(this._x, this._y); break;
-      }
-    }
+    if (this._point === 2) this._context.lineTo(this._x, this._y);
+    if (this._line || (this._line !== 0 && this._point === 1)) this._context.closePath();
+    this._line = 1 - this._line;
   },
   point: function(x, y) {
     x = +x, y = +y;
