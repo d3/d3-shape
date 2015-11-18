@@ -110,8 +110,18 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 ## Changes from D3 3.x:
 
-* The interpretation of Cardinal interpolation tension has been corrected. The default tension is now 0 (corresponding to a uniform Catmull–Rom spline), not 0.7. In 3.x, the tension parameter was only valid in the range [2/3, 1]; this corresponds to the new range of [0, 1]. Thus, the new default value of 0 is equivalent to the old value of 2 / 3, and so the default behavior is only slightly changed.
+* You can now render shapes to Canvas by specifying a context (e.g., [*line*.context](#line_context))!
+
+* The interpretation of the Cardinal spline tension parameter has been fixed. The default tension is now 0 (corresponding to a uniform Catmull–Rom spline), not 0.7. Due to a bug in 3.x, the tension parameter was previously only valid in the range [2/3, 1]; this corresponds to the new corrected range of [0, 1]. Thus, the new default value of 0 is equivalent to the old value of 2/3, and the default behavior is only slightly changed.
 
 * To specify a Cardinal interpolation tension of *t*, use `line.interpolate("cardinal", t)` instead of `line.interpolate("cardinal").tension(t)`.
 
 * The custom interpolator API has changed.
+
+* Added “natural” cubic spline interpolation.
+
+* Added “catmull-rom” spline interpolation, parameterized by alpha. If α = 0, produces a uniform Catmull–Rom spline equivalent to a Cardinal spline with zero tension; if α = 0.5, produces a centripetal spline; if α = 1.0, produces a chordal spline.
+
+* By setting [*area*.x0](#area_x0) or [*area*.y0](#area_y0) to null, you can reuse the [*area*.x1](#area_x1) or [*area*.y1](#area_y1) value, rather than computing it twice. This is useful for nondeterministic values (e.g., jitter).
+
+* Accessor functions now always return functions, even if the value was set to a constant.
