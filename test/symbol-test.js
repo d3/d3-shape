@@ -48,8 +48,8 @@ tape("symbol.type(\"diamond\") generates the expected path", function(test) {
 tape("symbol.type(\"square\") generates the expected path", function(test) {
   var s = shape.symbol().type("square").size(function(d) { return d; });
   test.equal(s(0), "M0,0h0v0h0Z");
-  test.equal(s(4), "M1,1h2v2h-2Z");
-  test.equal(s(16), "M2,2h4v4h-4Z");
+  test.equal(s(4), "M-1,-1h2v2h-2Z");
+  test.equal(s(16), "M-2,-2h4v4h-4Z");
   test.end();
 });
 
