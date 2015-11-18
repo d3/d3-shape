@@ -8,15 +8,15 @@ function LinearClosed(context) {
 
 LinearClosed.prototype = {
   lineStart: function() {
-    this._state = 0;
+    this._point = 0;
   },
   lineEnd: function() {
-    this._context.closePath();
+    if (this._point) this._context.closePath();
   },
   point: function(x, y) {
     x = +x, y = +y;
-    if (this._state) this._context.lineTo(x, y);
-    else this._state = 1, this._context.moveTo(x, y);
+    if (this._point) this._context.lineTo(x, y);
+    else this._point = 1, this._context.moveTo(x, y);
   }
 };
 
