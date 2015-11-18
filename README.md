@@ -20,23 +20,23 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 …
 
-<a name="line_x" href="#line_x">#</a> <i>line</i>.<b>x</b>(<i>x</i>)
+<a name="line_x" href="#line_x">#</a> <i>line</i>.<b>x</b>([<i>x</i>])
 
 …
 
-<a name="line_y" href="#line_y">#</a> <i>line</i>.<b>y</b>(<i>y</i>)
+<a name="line_y" href="#line_y">#</a> <i>line</i>.<b>y</b>([<i>y</i>])
 
 …
 
-<a name="line_defined" href="#line_defined">#</a> <i>line</i>.<b>defined</b>(<i>defined</i>)
+<a name="line_defined" href="#line_defined">#</a> <i>line</i>.<b>defined</b>([<i>defined</i>])
 
 …
 
-<a name="line_interpolate" href="#line_interpolate">#</a> <i>line</i>.<b>interpolate</b>(<i>interpolate</i>[, <i>t</i>])
+<a name="line_interpolate" href="#line_interpolate">#</a> <i>line</i>.<b>interpolate</b>([<i>interpolate</i>[, <i>t</i>]])
 
 …
 
-<a name="line_context" href="#line_context">#</a> <i>line</i>.<b>context</b>(<i>context</i>)
+<a name="line_context" href="#line_context">#</a> <i>line</i>.<b>context</b>([<i>context</i>])
 
 …
 
@@ -52,39 +52,39 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 …
 
-<a name="area_x" href="#area_x">#</a> <i>area</i>.<b>x</b>(<i>x</i>)
+<a name="area_x" href="#area_x">#</a> <i>area</i>.<b>x</b>([<i>x</i>])
 
 …
 
-<a name="area_x0" href="#area_x0">#</a> <i>area</i>.<b>x0</b>(<i>x0</i>)
+<a name="area_x0" href="#area_x0">#</a> <i>area</i>.<b>x0</b>([<i>x0</i>])
 
 …
 
-<a name="area_x1" href="#area_x1">#</a> <i>area</i>.<b>x1</b>(<i>x1</i>)
+<a name="area_x1" href="#area_x1">#</a> <i>area</i>.<b>x1</b>([<i>x1</i>])
 
 …
 
-<a name="area_y" href="#area_y">#</a> <i>area</i>.<b>y</b>(<i>y</i>)
+<a name="area_y" href="#area_y">#</a> <i>area</i>.<b>y</b>([<i>y</i>])
 
 …
 
-<a name="area_y0" href="#area_y0">#</a> <i>area</i>.<b>y0</b>(<i>y0</i>)
+<a name="area_y0" href="#area_y0">#</a> <i>area</i>.<b>y0</b>([<i>y0</i>])
 
 …
 
-<a name="area_y1" href="#area_y1">#</a> <i>area</i>.<b>y1</b>(<i>y1</i>)
+<a name="area_y1" href="#area_y1">#</a> <i>area</i>.<b>y1</b>([<i>y1</i>])
 
 …
 
-<a name="area_defined" href="#area_defined">#</a> <i>area</i>.<b>defined</b>(<i>defined</i>)
+<a name="area_defined" href="#area_defined">#</a> <i>area</i>.<b>defined</b>([<i>defined</i>])
 
 …
 
-<a name="area_interpolate" href="#area_interpolate">#</a> <i>area</i>.<b>interpolate</b>(<i>interpolate</i>[, <i>t</i>])
+<a name="area_interpolate" href="#area_interpolate">#</a> <i>area</i>.<b>interpolate</b>([<i>interpolate</i>[, <i>t</i>]])
 
 …
 
-<a name="area_context" href="#area_context">#</a> <i>area</i>.<b>context</b>(<i>context</i>)
+<a name="area_context" href="#area_context">#</a> <i>area</i>.<b>context</b>([<i>context</i>])
 
 …
 
@@ -115,6 +115,37 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 <a name="interpolator_point" href="#interpolator_point">#</a> <i>interpolator</i>.<b>point</b>(<i>x</i>, <i>y</i>)
 
 …
+
+### Symbols
+
+…
+
+<a name="symbol" href="#symbol">#</a> <b>symbol</b>()
+
+…
+
+<a name="symbol_type" href="#symbol_type">#</a> <i>symbol</i>.<b>type</b>([<i>type</i>])
+
+…
+
+<a name="symbol_size" href="#symbol_size">#</a> <i>symbol</i>.<b>size</b>([<i>size</i>])
+
+…
+
+<a name="symbol_context" href="#symbol_context">#</a> <i>symbol</i>.<b>context</b>([<i>context</i>])
+
+…
+
+<a name="symbolTypes" href="#symbolTypes">#</a> <b>symbolTypes</b>
+
+An array containing the set of supported [symbol types](#symbol_type):
+
+* `circle`
+* `cross`
+* `diamond`
+* `square`
+* `triangle-down`
+* `triangle-up`
 
 ## Changes from D3 3.x:
 

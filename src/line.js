@@ -1,3 +1,4 @@
+import {path} from "d3-path";
 import basis from "./interpolate/basis";
 import basisClosed from "./interpolate/basis-closed";
 import basisOpen from "./interpolate/basis-open";
@@ -15,16 +16,15 @@ import natural from "./interpolate/natural";
 import step from "./interpolate/step";
 import stepAfter from "./interpolate/step-after";
 import stepBefore from "./interpolate/step-before";
-import {path} from "d3-path";
 import {x as pointX, y as pointY} from "./point";
 
 export default function() {
   var x = pointX,
       y = pointY,
       defined = constantTrue,
-      interpolate = linear,
       context = null,
-      output = null;
+      interpolate = linear,
+      interpolator = null;
 
   function line(data) {
     var i,
@@ -33,29 +33,29 @@ export default function() {
         defined0 = false,
         buffer;
 
-    if (!context) output = interpolate(buffer = path());
+    if (!context) interpolator = interpolate(buffer = path());
 
     for (i = 0; i <= n; ++i) {
       if (!(i < n && defined(d = data[i], i)) === defined0) {
-        if (defined0 = !defined0) output.lineStart();
-        else output.lineEnd();
+        if (defined0 = !defined0) interpolator.lineStart();
+        else interpolator.lineEnd();
       }
-      if (defined0) output.point(+x(d, i), +y(d, i));
+      if (defined0) interpolator.point(+x(d, i), +y(d, i));
     }
 
-    if (!context) return output = null, buffer + "" || null;
+    if (buffer) return interpolator = null, buffer + "" || null;
   }
 
   line.x = function(_) {
-    return arguments.length ? (x = typeof _ === "function" ? _ : constant(_), line) : x;
+    return arguments.length ? (x = typeof _ === "function" ? _ : constant(+_), line) : x;
   };
 
   line.y = function(_) {
-    return arguments.length ? (y = typeof _ === "function" ? _ : constant(_), line) : y;
+    return arguments.length ? (y = typeof _ === "function" ? _ : constant(+_), line) : y;
   };
 
   line.defined = function(_) {
-    return arguments.length ? (defined = typeof _ === "function" ? _ : constant(_), line) : defined;
+    return arguments.length ? (defined = typeof _ === "function" ? _ : constant(!!_), line) : defined;
   };
 
   line.interpolate = function(_, a) {
@@ -79,12 +79,12 @@ export default function() {
       case "natural": interpolate = natural; break;
       default: interpolate = linear; break;
     }
-    if (context != null) output = interpolate(context);
+    if (context != null) interpolator = interpolate(context);
     return line;
   };
 
   line.context = function(_) {
-    return arguments.length ? (_ == null ? context = output = null : output = interpolate(context = _), line) : context;
+    return arguments.length ? (_ == null ? context = interpolator = null : interpolator = interpolate(context = _), line) : context;
   };
 
   return line;

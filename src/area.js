@@ -1,3 +1,4 @@
+import {path} from "d3-path";
 import basis from "./interpolate/basis";
 import basisOpen from "./interpolate/basis-open";
 import cardinal from "./interpolate/cardinal";
@@ -10,7 +11,6 @@ import natural from "./interpolate/natural";
 import step from "./interpolate/step";
 import stepAfter from "./interpolate/step-after";
 import stepBefore from "./interpolate/step-before";
-import {path} from "d3-path";
 import {x as pointX, y as pointY} from "./point";
 
 export default function() {
@@ -19,9 +19,9 @@ export default function() {
       y0 = constantZero,
       y1 = pointY,
       defined = constantTrue,
-      interpolate = linear,
       context = null,
-      output = null;
+      interpolate = linear,
+      interpolator = null;
 
   function area(data) {
     var i,
@@ -34,31 +34,31 @@ export default function() {
         x0z = new Array(n),
         y0z = new Array(n);
 
-    if (!context) output = interpolate(buffer = path());
+    if (!context) interpolator = interpolate(buffer = path());
 
     for (i = 0; i <= n; ++i) {
       if (!(i < n && defined(d = data[i], i)) === defined0) {
         if (defined0 = !defined0) {
           j = i;
-          output.areaStart();
-          output.lineStart();
+          interpolator.areaStart();
+          interpolator.lineStart();
         } else {
-          output.lineEnd();
-          output.lineStart();
+          interpolator.lineEnd();
+          interpolator.lineStart();
           for (k = i - 1; k >= j; --k) {
-            output.point(x0z[k], y0z[k]);
+            interpolator.point(x0z[k], y0z[k]);
           }
-          output.lineEnd();
-          output.areaEnd();
+          interpolator.lineEnd();
+          interpolator.areaEnd();
         }
       }
       if (defined0) {
         x0z[i] = +x0(d, i), y0z[i] = +y0(d, i);
-        output.point(x1 ? +x1(d, i) : x0z[i], y1 ? +y1(d, i) : y0z[i]);
+        interpolator.point(x1 ? +x1(d, i) : x0z[i], y1 ? +y1(d, i) : y0z[i]);
       }
     }
 
-    if (!context) return output = null, buffer + "" || null;
+    if (buffer) return interpolator = null, buffer + "" || null;
   }
 
   area.x = function(_) {
@@ -66,11 +66,11 @@ export default function() {
   };
 
   area.x0 = function(_) {
-    return arguments.length ? (x0 = typeof _ === "function" ? _ : constant(_), area) : x0;
+    return arguments.length ? (x0 = typeof _ === "function" ? _ : constant(+_), area) : x0;
   };
 
   area.x1 = function(_) {
-    return arguments.length ? (x1 = _ == null ? null : typeof _ === "function" ? _ : constant(_), area) : x1;
+    return arguments.length ? (x1 = _ == null ? null : typeof _ === "function" ? _ : constant(+_), area) : x1;
   };
 
   area.y = function(_) {
@@ -78,15 +78,15 @@ export default function() {
   };
 
   area.y0 = function(_) {
-    return arguments.length ? (y0 = typeof _ === "function" ? _ : constant(_), area) : y0;
+    return arguments.length ? (y0 = typeof _ === "function" ? _ : constant(+_), area) : y0;
   };
 
   area.y1 = function(_) {
-    return arguments.length ? (y1 = _ == null ? null : typeof _ === "function" ? _ : constant(_), area) : y1;
+    return arguments.length ? (y1 = _ == null ? null : typeof _ === "function" ? _ : constant(+_), area) : y1;
   };
 
   area.defined = function(_) {
-    return arguments.length ? (defined = typeof _ === "function" ? _ : constant(_), area) : defined;
+    return arguments.length ? (defined = typeof _ === "function" ? _ : constant(!!_), area) : defined;
   };
 
   area.interpolate = function(_, a) {
@@ -105,12 +105,12 @@ export default function() {
       case "natural": interpolate = natural; break;
       default: interpolate = linear; break;
     }
-    if (context != null) output = interpolate(context);
+    if (context != null) interpolator = interpolate(context);
     return area;
   };
 
   area.context = function(_) {
-    return arguments.length ? (_ == null ? context = output = null : output = interpolate(context = _), area) : context;
+    return arguments.length ? (_ == null ? context = interpolator = null : interpolator = interpolate(context = _), area) : context;
   };
 
   return area;
