@@ -232,6 +232,10 @@ An array containing the set of supported [symbol types](#symbol_type): [circle](
 
 …
 
+<a name="symbolType_draw" href="#symbolType_draw">#</a> <i>symbolType</i>.<b>draw</b>(<i>context</i>, <i>size</i>)
+
+…
+
 ## Changes from D3 3.x:
 
 * You can now render shapes to Canvas by specifying a context (e.g., [*line*.context](#line_context))!
