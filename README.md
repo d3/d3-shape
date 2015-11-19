@@ -246,7 +246,7 @@ An array containing the set of all built-in symbol types: [circle](#circle), [cr
 
 * The interpretation of the [Cardinal](#cardinal) spline tension parameter has been fixed. The default tension is now 0 (corresponding to a uniform Catmull–Rom spline), not 0.7. Due to a bug in 3.x, the tension parameter was previously only valid in the range [2/3, 1]; this corresponds to the new corrected range of [0, 1]. Thus, the new default value of 0 is equivalent to the old value of 2/3, and the default behavior is only slightly changed.
 
-* To specify a [Cardinal](#cardinal) interpolation tension of *t*, use `line.interpolate(cardinal(t))` instead of `line.interpolate("cardinal").tension(t)`.
+* To specify a [Cardinal](#cardinal) interpolation tension of *t*, use `line.interpolate(cardinal, t)` instead of `line.interpolate("cardinal").tension(t)`.
 
 * The custom [interpolator API](#interpolators) has changed.
 
