@@ -90,7 +90,7 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 ### Curves
 
-Curves are typically not used directly, instead implementing paths for [lines](#lines) and [areas](#areas). See [*line*.curve](#line_curve) and [*area*.curve](#area_curve).
+Curves are typically not used directly, instead implementing paths for [lines](#lines) and [areas](#areas); they are passed to [*line*.curve](#line_curve) and [*area*.curve](#area_curve).
 
 …
 
@@ -204,7 +204,7 @@ Note: not implemented by closed curves, such as <a href="#curveLinearClosed">cur
 
 ### Symbol Types
 
-Symbol types are typically not used directly, instead implementing paths for [symbols](#symbols). See [*symbol*.type](#symbol_type).
+Symbol types are typically not used directly, instead implementing paths for [symbols](#symbols); they are passed to [*symbol*.type](#symbol_type).
 
 …
 
