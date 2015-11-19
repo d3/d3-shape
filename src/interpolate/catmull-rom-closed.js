@@ -2,6 +2,7 @@ import cardinalClosed from "./cardinal-closed";
 import {point} from "./catmull-rom";
 
 function catmullRomClosed(alpha) {
+  if (alpha && alpha.moveTo) return cardinalClosed(alpha);
   return alpha == null || !(alpha = +alpha) ? cardinalClosed(0) : function(context) {
     return new CatmullRomClosed(context, alpha);
   };

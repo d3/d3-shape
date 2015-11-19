@@ -63,22 +63,6 @@ tape("line.interpolate(cardinal(tension)) coerces the specified tension to a num
   test.end();
 });
 
-tape("line.interpolate(cardinal()) implicitly uses a tension of zero", function(test) {
-  var l = shape.line().interpolate(shape.cardinal(0));
-  test.equal(shape.line().interpolate(shape.cardinal())([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]])); // TODO no empty invocation?
-  test.equal(shape.line().interpolate(shape.cardinal(null))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.line().interpolate(shape.cardinal(undefined))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.end();
-});
-
-tape("line.interpolate(cardinalOpen()) implicitly uses a tension of zero", function(test) {
-  var l = shape.line().interpolate(shape.cardinalOpen(0));
-  test.equal(shape.line().interpolate(shape.cardinalOpen())([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]])); // TODO no empty invocation?
-  test.equal(shape.line().interpolate(shape.cardinalOpen(null))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.line().interpolate(shape.cardinalOpen(undefined))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.end();
-});
-
 tape("line.interpolate(linear)(data) generates the expected path", function(test) {
   var l = shape.line().interpolate(shape.linear);
   test.equal(l([]), null);
@@ -88,7 +72,7 @@ tape("line.interpolate(linear)(data) generates the expected path", function(test
   test.end();
 });
 
-tape("line.interpolate(linear-closed)(data) generates the expected path", function(test) {
+tape("line.interpolate(linearClosed)(data) generates the expected path", function(test) {
   var l = shape.line().interpolate(shape.linearClosed);
   test.equal(l([]), null);
   test.equal(l([[0, 1]]), "M0,1Z");
@@ -106,7 +90,7 @@ tape("line.interpolate(step)(data) generates the expected path", function(test) 
   test.end();
 });
 
-tape("line.interpolate(step-before)(data) generates the expected path", function(test) {
+tape("line.interpolate(stepBefore)(data) generates the expected path", function(test) {
   var l = shape.line().interpolate(shape.stepBefore);
   test.equal(l([]), null);
   test.equal(l([[0, 1]]), "M0,1Z");
@@ -115,7 +99,7 @@ tape("line.interpolate(step-before)(data) generates the expected path", function
   test.end();
 });
 
-tape("line.interpolate(step-after)(data) generates the expected path", function(test) {
+tape("line.interpolate(stepAfter)(data) generates the expected path", function(test) {
   var l = shape.line().interpolate(shape.stepAfter);
   test.equal(l([]), null);
   test.equal(l([[0, 1]]), "M0,1Z");
@@ -133,7 +117,7 @@ tape("line.interpolate(basis)(data) generates the expected path", function(test)
   test.end();
 });
 
-tape("line.interpolate(basis-open)(data) generates the expected path", function(test) {
+tape("line.interpolate(basisOpen)(data) generates the expected path", function(test) {
   var l = shape.line().interpolate(shape.basisOpen);
   test.equal(l([]), null);
   test.equal(l([[0, 0]]), null);
@@ -144,7 +128,7 @@ tape("line.interpolate(basis-open)(data) generates the expected path", function(
   test.end();
 });
 
-tape("line.interpolate(basis-closed)(data) generates the expected path", function(test) {
+tape("line.interpolate(basisClosed)(data) generates the expected path", function(test) {
   var l = shape.line().interpolate(shape.basisClosed);
   test.equal(l([]), null);
   test.equal(l([[0, 0]]), "M0,0Z");
@@ -156,7 +140,7 @@ tape("line.interpolate(basis-closed)(data) generates the expected path", functio
 });
 
 tape("line.interpolate(cardinal)(data) generates the expected path", function(test) {
-  var l = shape.line().interpolate(shape.cardinal()); // TODO no empty invocation?
+  var l = shape.line().interpolate(shape.cardinal);
   test.equal(l([]), null);
   test.equal(l([[0, 1]]), "M0,1Z");
   test.equal(l([[0, 1], [1, 3]]), "M0,1L1,3");
@@ -165,8 +149,8 @@ tape("line.interpolate(cardinal)(data) generates the expected path", function(te
   test.end();
 });
 
-tape("line.interpolate(cardinal-open)(data) generates the expected path", function(test) {
-  var l = shape.line().interpolate(shape.cardinalOpen()); // TODO no empty invocation?
+tape("line.interpolate(cardinalOpen)(data) generates the expected path", function(test) {
+  var l = shape.line().interpolate(shape.cardinalOpen);
   test.equal(l([]), null);
   test.equal(l([[0, 1]]), null);
   test.equal(l([[0, 1], [1, 3]]), null);
@@ -175,8 +159,8 @@ tape("line.interpolate(cardinal-open)(data) generates the expected path", functi
   test.end();
 });
 
-tape("line.interpolate(cardinal-closed)(data) generates the expected path", function(test) {
-  var l = shape.line().interpolate(shape.cardinalClosed()); // TODO no empty invocation?
+tape("line.interpolate(cardinalClosed)(data) generates the expected path", function(test) {
+  var l = shape.line().interpolate(shape.cardinalClosed);
   test.equal(l([]), null);
   test.equal(l([[0, 1]]), "M0,1Z");
   test.equal(l([[0, 1], [1, 3]]), "M1,3L0,1Z");
@@ -185,8 +169,8 @@ tape("line.interpolate(cardinal-closed)(data) generates the expected path", func
   test.end();
 });
 
-tape("line.interpolate(catmull-rom)(data) generates the expected path", function(test) {
-  var l = shape.line().interpolate(shape.catmullRom()); // TODO no empty invocation?
+tape("line.interpolate(catmullRom)(data) generates the expected path", function(test) {
+  var l = shape.line().interpolate(shape.catmullRom);
   test.equal(l([]), null);
   test.equal(l([[0, 1]]), "M0,1Z");
   test.equal(l([[0, 1], [1, 3]]), "M0,1L1,3");
@@ -195,8 +179,8 @@ tape("line.interpolate(catmull-rom)(data) generates the expected path", function
   test.end();
 });
 
-tape("line.interpolate(catmull-rom-open)(data) generates the expected path", function(test) {
-  var l = shape.line().interpolate(shape.catmullRomOpen()); // TODO no empty invocation?
+tape("line.interpolate(catmullRomOpen)(data) generates the expected path", function(test) {
+  var l = shape.line().interpolate(shape.catmullRomOpen);
   test.equal(l([]), null);
   test.equal(l([[0, 1]]), null);
   test.equal(l([[0, 1], [1, 3]]), null);
@@ -205,8 +189,8 @@ tape("line.interpolate(catmull-rom-open)(data) generates the expected path", fun
   test.end();
 });
 
-tape("line.interpolate(catmull-rom-closed)(data) generates the expected path", function(test) {
-  var l = shape.line().interpolate(shape.catmullRomClosed()); // TODO no empty invocation?
+tape("line.interpolate(catmullRomClosed)(data) generates the expected path", function(test) {
+  var l = shape.line().interpolate(shape.catmullRomClosed);
   test.equal(l([]), null);
   test.equal(l([[0, 1]]), "M0,1Z");
   test.equal(l([[0, 1], [1, 3]]), "M1,3L0,1Z");
@@ -215,7 +199,7 @@ tape("line.interpolate(catmull-rom-closed)(data) generates the expected path", f
   test.end();
 });
 
-tape("line.interpolate(catmull-rom, 1)(data) generates the expected path", function(test) {
+tape("line.interpolate(catmullRom(1))(data) generates the expected path", function(test) {
   var l = shape.line().interpolate(shape.catmullRom(1));
   test.equal(l([]), null);
   test.equal(l([[0, 1]]), "M0,1Z");
@@ -225,7 +209,7 @@ tape("line.interpolate(catmull-rom, 1)(data) generates the expected path", funct
   test.end();
 });
 
-tape("line.interpolate(catmull-rom-open, 1)(data) generates the expected path", function(test) {
+tape("line.interpolate(catmullRomOpen(1))(data) generates the expected path", function(test) {
   var l = shape.line().interpolate(shape.catmullRomOpen(1));
   test.equal(l([]), null);
   test.equal(l([[0, 1]]), null);
@@ -235,7 +219,7 @@ tape("line.interpolate(catmull-rom-open, 1)(data) generates the expected path", 
   test.end();
 });
 
-tape("line.interpolate(catmull-rom-closed, 1)(data) generates the expected path", function(test) {
+tape("line.interpolate(catmullRomClosed(1))(data) generates the expected path", function(test) {
   var l = shape.line().interpolate(shape.catmullRomClosed(1));
   test.equal(l([]), null);
   test.equal(l([[0, 1]]), "M0,1Z");
@@ -252,5 +236,68 @@ tape("line.interpolate(natural)(data) generates the expected path", function(tes
   test.equal(l([[0, 1], [1, 3]]), "M0,1L1,3");
   test.equal(l([[0, 1], [1, 3], [2, 1]]), "M0,1C0.33333333333333337,2,0.6666666666666667,3,1,3C1.3333333333333333,3,1.6666666666666665,2,2,1");
   test.equal(l([[0, 1], [1, 3], [2, 1], [3, 3]]), "M0,1C0.33333333333333326,2.111111111111111,0.6666666666666665,3.2222222222222223,1,3C1.3333333333333335,2.7777777777777777,1.666666666666667,1.2222222222222223,2,1C2.333333333333333,0.7777777777777778,2.6666666666666665,1.8888888888888888,3,3");
+  test.end();
+});
+
+tape("line.interpolate(cardinal) uses a default tension of zero", function(test) {
+  var l = shape.line().interpolate(shape.cardinal(0));
+  test.equal(shape.line().interpolate(shape.cardinal)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.cardinal())([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.cardinal(null))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.cardinal(undefined))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.end();
+});
+
+tape("line.interpolate(cardinalOpen) uses a default tension of zero", function(test) {
+  var l = shape.line().interpolate(shape.cardinalOpen(0));
+  test.equal(shape.line().interpolate(shape.cardinalOpen)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.cardinalOpen())([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.cardinalOpen(null))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.cardinalOpen(undefined))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.end();
+});
+
+tape("line.interpolate(cardinalClosed) uses a default tension of zero", function(test) {
+  var l = shape.line().interpolate(shape.cardinalClosed(0));
+  test.equal(shape.line().interpolate(shape.cardinalClosed)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.cardinalClosed())([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.cardinalClosed(null))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.cardinalClosed(undefined))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.end();
+});
+
+tape("line.interpolate(catmullRom) uses a default alpha of zero", function(test) {
+  var l = shape.line().interpolate(shape.catmullRom(0));
+  test.equal(shape.line().interpolate(shape.catmullRom)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.catmullRom())([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.catmullRom(null))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.catmullRom(undefined))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.end();
+});
+
+tape("line.interpolate(catmullRomOpen) uses a default alpha of zero", function(test) {
+  var l = shape.line().interpolate(shape.catmullRomOpen(0));
+  test.equal(shape.line().interpolate(shape.catmullRomOpen)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.catmullRomOpen())([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.catmullRomOpen(null))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.catmullRomOpen(undefined))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.end();
+});
+
+tape("line.interpolate(catmullRomClosed) uses a default alpha of zero", function(test) {
+  var l = shape.line().interpolate(shape.catmullRomClosed(0));
+  test.equal(shape.line().interpolate(shape.catmullRomClosed)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.catmullRomClosed())([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.catmullRomClosed(null))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.catmullRomClosed(undefined))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.end();
+});
+
+tape("line.interpolate(bundle) uses a default beta of one", function(test) {
+  var l = shape.line().interpolate(shape.bundle(1));
+  test.equal(shape.line().interpolate(shape.bundle)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.bundle())([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.bundle(null))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().interpolate(shape.bundle(undefined))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.end();
 });

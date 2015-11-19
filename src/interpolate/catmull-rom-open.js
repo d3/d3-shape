@@ -2,6 +2,7 @@ import cardinalOpen from "./cardinal-open";
 import {point} from "./catmull-rom";
 
 function catmullRomOpen(alpha) {
+  if (alpha && alpha.moveTo) return cardinalOpen(alpha);
   return alpha == null || !(alpha = +alpha) ? cardinalOpen(0) : function(context) {
     return new CatmullRomOpen(context, alpha);
   };
