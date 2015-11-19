@@ -32,7 +32,7 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 …
 
-<a name="line_interpolate" href="#line_interpolate">#</a> <i>line</i>.<b>interpolate</b>([<i>interpolate</i>])
+<a name="line_interpolate" href="#line_interpolate">#</a> <i>line</i>.<b>interpolate</b>([<i>interpolate</i>[, <i>parameters…</i>]])
 
 …
 
@@ -80,7 +80,7 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 …
 
-<a name="area_interpolate" href="#area_interpolate">#</a> <i>area</i>.<b>interpolate</b>([<i>interpolate</i>])
+<a name="area_interpolate" href="#area_interpolate">#</a> <i>area</i>.<b>interpolate</b>([<i>interpolate</i>[, <i>parameters…</i>]])
 
 …
 
