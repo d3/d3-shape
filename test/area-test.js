@@ -8,7 +8,7 @@ tape("area() returns a default area shape", function(test) {
   test.equal(a.y0()([42, 34]), 0);
   test.equal(a.y1()([42, 34]), 34);
   test.equal(a.defined()([42, 34]), true);
-  test.equal(a.interpolate(), shape.linear);
+  test.equal(a.curve(), shape.curveLinear);
   test.equal(a.context(), null);
   test.equal(a([[0, 1], [2, 3], [4, 5]]), "M0,1L2,3L4,5L4,0L2,0L0,0Z");
   test.end();
@@ -53,8 +53,8 @@ tape("area.y(y)(data) observes the specified constant", function(test) {
   test.end();
 });
 
-tape("area.interpolate(linear)(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate(shape.linear);
+tape("area.curve(curveLinear)(data) generates the expected path", function(test) {
+  var a = shape.area().curve(shape.curveLinear);
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), "M0,1L0,0Z");
   test.equal(a([[0, 1], [2, 3]]), "M0,1L2,3L2,0L0,0Z");
@@ -62,8 +62,8 @@ tape("area.interpolate(linear)(data) generates the expected path", function(test
   test.end();
 });
 
-tape("area.interpolate(basis)(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate(shape.basis);
+tape("area.curve(curveBasis)(data) generates the expected path", function(test) {
+  var a = shape.area().curve(shape.curveBasis);
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), "M0,1L0,0Z");
   test.equal(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");
@@ -71,8 +71,8 @@ tape("area.interpolate(basis)(data) generates the expected path", function(test)
   test.end();
 });
 
-tape("area.interpolate(basisOpen)(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate(shape.basisOpen);
+tape("area.curve(curveBasisOpen)(data) generates the expected path", function(test) {
+  var a = shape.area().curve(shape.curveBasisOpen);
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), null);
   test.equal(a([[0, 1], [1, 3]]), null);
@@ -82,8 +82,8 @@ tape("area.interpolate(basisOpen)(data) generates the expected path", function(t
   test.end();
 });
 
-tape("area.interpolate(cardinal)(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate(shape.cardinal);
+tape("area.curve(curveCardinal)(data) generates the expected path", function(test) {
+  var a = shape.area().curve(shape.curveCardinal);
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), "M0,1L0,0Z");
   test.equal(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");
@@ -92,8 +92,8 @@ tape("area.interpolate(cardinal)(data) generates the expected path", function(te
   test.end();
 });
 
-tape("area.interpolate(cardinalOpen)(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate(shape.cardinalOpen);
+tape("area.curve(curveCardinalOpen)(data) generates the expected path", function(test) {
+  var a = shape.area().curve(shape.curveCardinalOpen);
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), null);
   test.equal(a([[0, 1], [1, 3]]), null);
@@ -102,8 +102,8 @@ tape("area.interpolate(cardinalOpen)(data) generates the expected path", functio
   test.end();
 });
 
-tape("area.interpolate(catmullRom, 0.5)(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate(shape.catmullRom, 0.5);
+tape("area.curve(curveCatmullRom, 0.5)(data) generates the expected path", function(test) {
+  var a = shape.area().curve(shape.curveCatmullRom, 0.5);
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), "M0,1L0,0Z");
   test.equal(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");
@@ -112,8 +112,8 @@ tape("area.interpolate(catmullRom, 0.5)(data) generates the expected path", func
   test.end();
 });
 
-tape("area.interpolate(catmullRomOpen, 0.5)(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate(shape.catmullRomOpen, 0.5);
+tape("area.curve(curveCatmullRomOpen, 0.5)(data) generates the expected path", function(test) {
+  var a = shape.area().curve(shape.curveCatmullRomOpen, 0.5);
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), null);
   test.equal(a([[0, 1], [1, 3]]), null);
@@ -122,8 +122,8 @@ tape("area.interpolate(catmullRomOpen, 0.5)(data) generates the expected path", 
   test.end();
 });
 
-tape("area.interpolate(step)(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate(shape.step);
+tape("area.curve(curveStep)(data) generates the expected path", function(test) {
+  var a = shape.area().curve(shape.curveStep);
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), "M0,1L0,0Z");
   test.equal(a([[0, 1], [2, 3]]), "M0,1L1,1L1,3L2,3L2,0L1,0L1,0L0,0Z");
@@ -131,8 +131,8 @@ tape("area.interpolate(step)(data) generates the expected path", function(test) 
   test.end();
 });
 
-tape("area.interpolate(stepBefore)(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate(shape.stepBefore);
+tape("area.curve(curveStepBefore)(data) generates the expected path", function(test) {
+  var a = shape.area().curve(shape.curveStepBefore);
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), "M0,1L0,0Z");
   test.equal(a([[0, 1], [2, 3]]), "M0,1L0,3L2,3L2,0L2,0L0,0Z");
@@ -140,8 +140,8 @@ tape("area.interpolate(stepBefore)(data) generates the expected path", function(
   test.end();
 });
 
-tape("area.interpolate(stepAfter)(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate(shape.stepAfter);
+tape("area.curve(curveStepAfter)(data) generates the expected path", function(test) {
+  var a = shape.area().curve(shape.curveStepAfter);
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), "M0,1L0,0Z");
   test.equal(a([[0, 1], [2, 3]]), "M0,1L2,1L2,3L2,0L0,0L0,0Z");
@@ -149,8 +149,8 @@ tape("area.interpolate(stepAfter)(data) generates the expected path", function(t
   test.end();
 });
 
-tape("area.interpolate(natural)(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate(shape.natural);
+tape("area.curve(curveNatural)(data) generates the expected path", function(test) {
+  var a = shape.area().curve(shape.curveNatural);
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), "M0,1L0,0Z");
   test.equal(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");
@@ -159,34 +159,34 @@ tape("area.interpolate(natural)(data) generates the expected path", function(tes
   test.end();
 });
 
-tape("area.interpolate(cardinal) uses a default tension of zero", function(test) {
-  var a = shape.area().interpolate(shape.cardinal, 0);
-  test.equal(shape.area().interpolate(shape.cardinal)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().interpolate(shape.cardinal, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().interpolate(shape.cardinal, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+tape("area.curve(curveCardinal) uses a default tension of zero", function(test) {
+  var a = shape.area().curve(shape.curveCardinal, 0);
+  test.equal(shape.area().curve(shape.curveCardinal)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.area().curve(shape.curveCardinal, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.area().curve(shape.curveCardinal, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.end();
 });
 
-tape("area.interpolate(cardinalOpen) uses a default tension of zero", function(test) {
-  var a = shape.area().interpolate(shape.cardinalOpen, 0);
-  test.equal(shape.area().interpolate(shape.cardinalOpen)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().interpolate(shape.cardinalOpen, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().interpolate(shape.cardinalOpen, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+tape("area.curve(curveCardinalOpen) uses a default tension of zero", function(test) {
+  var a = shape.area().curve(shape.curveCardinalOpen, 0);
+  test.equal(shape.area().curve(shape.curveCardinalOpen)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.area().curve(shape.curveCardinalOpen, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.area().curve(shape.curveCardinalOpen, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.end();
 });
 
-tape("area.interpolate(catmullRom) uses a default alpha of zero", function(test) {
-  var a = shape.area().interpolate(shape.catmullRom, 0);
-  test.equal(shape.area().interpolate(shape.catmullRom)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().interpolate(shape.catmullRom, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().interpolate(shape.catmullRom, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+tape("area.curve(curveCatmullRom) uses a default alpha of zero", function(test) {
+  var a = shape.area().curve(shape.curveCatmullRom, 0);
+  test.equal(shape.area().curve(shape.curveCatmullRom)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.area().curve(shape.curveCatmullRom, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.area().curve(shape.curveCatmullRom, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.end();
 });
 
-tape("area.interpolate(catmullRomOpen) uses a default alpha of zero", function(test) {
-  var a = shape.area().interpolate(shape.catmullRomOpen, 0);
-  test.equal(shape.area().interpolate(shape.catmullRomOpen)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().interpolate(shape.catmullRomOpen, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().interpolate(shape.catmullRomOpen, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+tape("area.curve(curveCatmullRomOpen) uses a default alpha of zero", function(test) {
+  var a = shape.area().curve(shape.curveCatmullRomOpen, 0);
+  test.equal(shape.area().curve(shape.curveCatmullRomOpen)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.area().curve(shape.curveCatmullRomOpen, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.area().curve(shape.curveCatmullRomOpen, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.end();
 });

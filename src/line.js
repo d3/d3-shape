@@ -1,7 +1,7 @@
 import {path} from "d3-path";
 import constant from "./constant";
-import linear from "./interpolate/linear";
-import curry from "./interpolate/curry";
+import curveLinear from "./curve/linear";
+import curveCurry from "./curve/curry";
 import {x as pointX, y as pointY} from "./point";
 
 export default function() {
@@ -9,8 +9,8 @@ export default function() {
       y = pointY,
       defined = constant(true),
       context = null,
-      interpolate = linear,
-      interpolator = null;
+      curve = curveLinear,
+      output = null;
 
   function line(data) {
     var i,
@@ -19,17 +19,17 @@ export default function() {
         defined0 = false,
         buffer;
 
-    if (!context) interpolator = interpolate(buffer = path());
+    if (!context) output = curve(buffer = path());
 
     for (i = 0; i <= n; ++i) {
       if (!(i < n && defined(d = data[i], i)) === defined0) {
-        if (defined0 = !defined0) interpolator.lineStart();
-        else interpolator.lineEnd();
+        if (defined0 = !defined0) output.lineStart();
+        else output.lineEnd();
       }
-      if (defined0) interpolator.point(+x(d, i), +y(d, i));
+      if (defined0) output.point(+x(d, i), +y(d, i));
     }
 
-    if (buffer) return interpolator = null, buffer + "" || null;
+    if (buffer) return output = null, buffer + "" || null;
   }
 
   line.x = function(_) {
@@ -44,13 +44,13 @@ export default function() {
     return arguments.length ? (defined = typeof _ === "function" ? _ : constant(!!_), line) : defined;
   };
 
-  line.interpolate = function(_) {
+  line.curve = function(_) {
     var n = arguments.length;
-    return n ? (interpolate = n > 1 ? curry(_, arguments) : _, context != null && (interpolator = interpolate(context)), line) : interpolate;
+    return n ? (curve = n > 1 ? curveCurry(_, arguments) : _, context != null && (output = curve(context)), line) : curve;
   };
 
   line.context = function(_) {
-    return arguments.length ? (_ == null ? context = interpolator = null : interpolator = interpolate(context = _), line) : context;
+    return arguments.length ? (_ == null ? context = output = null : output = curve(context = _), line) : context;
   };
 
   return line;

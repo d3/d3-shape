@@ -32,7 +32,7 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 …
 
-<a name="line_interpolate" href="#line_interpolate">#</a> <i>line</i>.<b>interpolate</b>([<i>interpolate</i>[, <i>parameters…</i>]])
+<a name="line_curve" href="#line_curve">#</a> <i>line</i>.<b>curve</b>([<i>curve</i>[, <i>parameters…</i>]])
 
 …
 
@@ -80,7 +80,7 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 …
 
-<a name="area_interpolate" href="#area_interpolate">#</a> <i>area</i>.<b>interpolate</b>([<i>interpolate</i>[, <i>parameters…</i>]])
+<a name="area_curve" href="#area_curve">#</a> <i>area</i>.<b>curve</b>([<i>curve</i>[, <i>parameters…</i>]])
 
 …
 
@@ -88,97 +88,97 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 …
 
-### Interpolators
+### Curves
 
-Interpolators are typically not used directly, instead implementing splines for [lines](#lines) and [areas](#areas).
-
-…
-
-<a name="basis" href="#basis">#</a> <b>basis</b>(<i>context</i>)
+Curves are typically not used directly, instead implementing paths for [lines](#lines) and [areas](#areas). See [*line*.curve](#line_curve) and [*area*.curve](#area_curve).
 
 …
 
-<a name="basisClosed" href="#basisClosed">#</a> <b>basisClosed</b>(<i>context</i>)
+<a name="curveBasis" href="#curveBasis">#</a> <b>curveBasis</b>(<i>context</i>)
 
 …
 
-<a name="basisOpen" href="#basisOpen">#</a> <b>basisOpen</b>(<i>context</i>)
+<a name="curveBasisClosed" href="#curveBasisClosed">#</a> <b>curveBasisClosed</b>(<i>context</i>)
 
 …
 
-<a name="bundle" href="#bundle">#</a> <b>bundle</b>(<i>context</i>[, <i>beta</i>])
+<a name="curveBasisOpen" href="#curveBasisOpen">#</a> <b>curveBasisOpen</b>(<i>context</i>)
 
 …
 
-<a name="cardinal" href="#cardinal">#</a> <b>cardinal</b>(<i>context</i>[, <i>tension</i>])
+<a name="curveBundle" href="#curveBundle">#</a> <b>curveBundle</b>(<i>context</i>[, <i>beta</i>])
 
 …
 
-<a name="cardinalClosed" href="#cardinalClosed">#</a> <b>cardinalClosed</b>(<i>context</i>[, <i>tension</i>])
+<a name="curveCardinal" href="#curveCardinal">#</a> <b>curveCardinal</b>(<i>context</i>[, <i>tension</i>])
 
 …
 
-<a name="cardinalOpen" href="#cardinalOpen">#</a> <b>cardinalOpen</b>(<i>context</i>[, <i>tension</i>])
+<a name="curveCardinalClosed" href="#curveCardinalClosed">#</a> <b>curveCardinalClosed</b>(<i>context</i>[, <i>tension</i>])
 
 …
 
-<a name="catmullRom" href="#catmullRom">#</a> <b>catmullRom</b>(<i>context</i>[, <i>alpha</i>])
+<a name="curveCardinalOpen" href="#curveCardinalOpen">#</a> <b>curveCardinalOpen</b>(<i>context</i>[, <i>tension</i>])
 
 …
 
-<a name="catmullRomClosed" href="#catmullRomClosed">#</a> <b>catmullRomClosed</b>(<i>context</i>[, <i>alpha</i>])
+<a name="curveCatmullRom" href="#curveCatmullRom">#</a> <b>curveCatmullRom</b>(<i>context</i>[, <i>alpha</i>])
 
 …
 
-<a name="catmullRomOpen" href="#catmullRomOpen">#</a> <b>catmullRomOpen</b>(<i>context</i>[, <i>alpha</i>])
+<a name="curveCatmullRomClosed" href="#curveCatmullRomClosed">#</a> <b>curveCatmullRomClosed</b>(<i>context</i>[, <i>alpha</i>])
 
 …
 
-<a name="linear" href="#linear">#</a> <b>linear</b>(<i>context</i>)
+<a name="curveCatmullRomOpen" href="#curveCatmullRomOpen">#</a> <b>curveCatmullRomOpen</b>(<i>context</i>[, <i>alpha</i>])
 
 …
 
-<a name="linearClosed" href="#linearClosed">#</a> <b>linearClosed</b>(<i>context</i>)
+<a name="curveLinear" href="#curveLinear">#</a> <b>curveLinear</b>(<i>context</i>)
 
 …
 
-<a name="natural" href="#natural">#</a> <b>natural</b>(<i>context</i>)
+<a name="curveLinearClosed" href="#curveLinearClosed">#</a> <b>curveLinearClosed</b>(<i>context</i>)
 
 …
 
-<a name="step" href="#step">#</a> <b>step</b>(<i>context</i>)
+<a name="curveNatural" href="#curveNatural">#</a> <b>curveNatural</b>(<i>context</i>)
 
 …
 
-<a name="stepAfter" href="#stepAfter">#</a> <b>stepAfter</b>(<i>context</i>)
+<a name="curveStep" href="#curveStep">#</a> <b>curveStep</b>(<i>context</i>)
 
 …
 
-<a name="stepBefore" href="#stepBefore">#</a> <b>stepBefore</b>(<i>context</i>)
+<a name="curveStepAfter" href="#curveStepAfter">#</a> <b>curveStepAfter</b>(<i>context</i>)
 
 …
 
-<a name="interpolator_areaStart" href="#interpolator_areaStart">#</a> <i>interpolator</i>.<b>areaStart</b>()
+<a name="curveStepBefore" href="#curveStepBefore">#</a> <b>curveStepBefore</b>(<i>context</i>)
 
 …
 
-Note: not implemented by closed interpolators, such as <a href="#linearClosed">linearClosed</a>.
-
-<a name="interpolator_areaEnd" href="#interpolator_areaEnd">#</a> <i>interpolator</i>.<b>areaEnd</b>()
+<a name="curve_areaStart" href="#curve_areaStart">#</a> <i>curve</i>.<b>areaStart</b>()
 
 …
 
-Note: not implemented by closed interpolators, such as <a href="#linearClosed">linearClosed</a>.
+Note: not implemented by closed curves, such as <a href="#curveLinearClosed">curveLinearClosed</a>.
 
-<a name="interpolator_lineStart" href="#interpolator_lineStart">#</a> <i>interpolator</i>.<b>lineStart</b>()
-
-…
-
-<a name="interpolator_lineEnd" href="#interpolator_lineEnd">#</a> <i>interpolator</i>.<b>lineEnd</b>()
+<a name="curve_areaEnd" href="#curve_areaEnd">#</a> <i>curve</i>.<b>areaEnd</b>()
 
 …
 
-<a name="interpolator_point" href="#interpolator_point">#</a> <i>interpolator</i>.<b>point</b>(<i>x</i>, <i>y</i>)
+Note: not implemented by closed curves, such as <a href="#curveLinearClosed">curveLinearClosed</a>.
+
+<a name="curve_lineStart" href="#curve_lineStart">#</a> <i>curve</i>.<b>lineStart</b>()
+
+…
+
+<a name="curve_lineEnd" href="#curve_lineEnd">#</a> <i>curve</i>.<b>lineEnd</b>()
+
+…
+
+<a name="curve_point" href="#curve_point">#</a> <i>curve</i>.<b>point</b>(<i>x</i>, <i>y</i>)
 
 …
 
@@ -204,35 +204,35 @@ Note: not implemented by closed interpolators, such as <a href="#linearClosed">l
 
 ### Symbol Types
 
-Symbol types are typically not used directly, instead implementing paths for [symbols](#symbols).
+Symbol types are typically not used directly, instead implementing paths for [symbols](#symbols). See [*symbol*.type](#symbol_type).
 
 …
 
 <a name="symbolTypes" href="#symbolTypes">#</a> <b>symbolTypes</b>
 
-An array containing the set of all built-in symbol types: [circle](#circle), [cross](#cross), [diamond](#diamond), [square](#square), [triangleDown](#triangleDown), and [triangleUp](#triangleUp). Useful for constructing the range of an [ordinal scale](https://github.com/d3/d3-scale#ordinal-scales) should you wish to use a shape encoding for categorical data.
+An array containing the set of all built-in symbol types: [circle](#symbolCircle), [cross](#symbolCross), [diamond](#symbolDiamond), [square](#symbolSquare), [downwards triangle](#symbolTriangleDown), and [upwards triangle](#symbolTriangleUp). Useful for constructing the range of an [ordinal scale](https://github.com/d3/d3-scale#ordinal-scales) should you wish to use a shape encoding for categorical data.
 
-<a name="circle" href="#circle">#</a> <b>circle</b>
-
-…
-
-<a name="cross" href="#cross">#</a> <b>cross</b>
+<a name="symbolCircle" href="#symbolCircle">#</a> <b>symbolCircle</b>
 
 …
 
-<a name="diamond" href="#diamond">#</a> <b>diamond</b>
+<a name="symbolCross" href="#symbolCross">#</a> <b>symbolCross</b>
 
 …
 
-<a name="square" href="#square">#</a> <b>square</b>
+<a name="symbolDiamond" href="#symbolDiamond">#</a> <b>symbolDiamond</b>
 
 …
 
-<a name="triangleDown" href="#triangleDown">#</a> <b>triangleDown</b>
+<a name="symbolSquare" href="#symbolSquare">#</a> <b>symbolSquare</b>
 
 …
 
-<a name="triangleUp" href="#triangleUp">#</a> <b>triangleUp</b>
+<a name="symbolTriangleDown" href="#symbolTriangleDown">#</a> <b>symbolTriangleDown</b>
+
+…
+
+<a name="symbolTriangleUp" href="#symbolTriangleUp">#</a> <b>symbolTriangleUp</b>
 
 …
 
@@ -242,17 +242,17 @@ An array containing the set of all built-in symbol types: [circle](#circle), [cr
 
 ## Changes from D3 3.x:
 
-* You can now render shapes to Canvas by specifying a context (e.g., [*line*.context](#line_context))!
+* You can now render shapes to Canvas by specifying a context (e.g., [*line*.context](#line_context))! See [d3-path](https://github.com/d3/d3-path) for how it works.
 
-* The interpretation of the [Cardinal](#cardinal) spline tension parameter has been fixed. The default tension is now 0 (corresponding to a uniform Catmull–Rom spline), not 0.7. Due to a bug in 3.x, the tension parameter was previously only valid in the range [2/3, 1]; this corresponds to the new corrected range of [0, 1]. Thus, the new default value of 0 is equivalent to the old value of 2/3, and the default behavior is only slightly changed.
+* The interpretation of the [cardinal](#cardinal) spline tension parameter has been fixed. The default tension is now 0 (corresponding to a uniform Catmull–Rom spline), not 0.7. Due to a bug in 3.x, the tension parameter was previously only valid in the range [2/3, 1]; this corresponds to the new corrected range of [0, 1]. Thus, the new default value of 0 is equivalent to the old value of 2/3, and the default behavior is only slightly changed.
 
-* To specify a [Cardinal](#cardinal) interpolation tension of *t*, use `line.interpolate(cardinal, t)` instead of `line.interpolate("cardinal").tension(t)`.
+* To specify a [cardinal](#curveCardinal) spline tension of *t*, use `line.curve(curveCardinal, t)` instead of `line.interpolate("cardinal").tension(t)`.
 
-* The custom [interpolator API](#interpolators) has changed.
+* To specify a custom line or area interpolator, implement a [curve](#curves).
 
-* Added [natural](#natural) cubic spline interpolation.
+* Added [natural](#curveNatural) cubic splines.
 
-* Added [Catmull–Rom](#catmullRom) spline interpolation, parameterized by alpha. If α = 0, produces a uniform Catmull–Rom spline equivalent to a Cardinal spline with zero tension; if α = 0.5, produces a centripetal spline; if α = 1.0, produces a chordal spline.
+* Added [Catmull–Rom](#curveCatmullRom) splines, parameterized by alpha. If α = 0, produces a uniform Catmull–Rom spline equivalent to a Cardinal spline with zero tension; if α = 0.5, produces a centripetal spline; if α = 1.0, produces a chordal spline.
 
 * By setting [*area*.x1](#area_x1) or [*area*.y1](#area_y1) to null, you can reuse the [*area*.x0](#area_x0) or [*area*.y0](#area_y0) value, rather than computing it twice. This is useful for nondeterministic values (e.g., jitter).
 

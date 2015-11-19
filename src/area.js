@@ -1,7 +1,7 @@
 import {path} from "d3-path";
 import constant from "./constant";
-import linear from "./interpolate/linear";
-import curry from "./interpolate/curry";
+import curveLinear from "./curve/linear";
+import curveCurry from "./curve/curry";
 import {x as pointX, y as pointY} from "./point";
 
 export default function() {
@@ -11,8 +11,8 @@ export default function() {
       y1 = pointY,
       defined = constant(true),
       context = null,
-      interpolate = linear,
-      interpolator = null;
+      curve = curveLinear,
+      output = null;
 
   function area(data) {
     var i,
@@ -25,31 +25,31 @@ export default function() {
         x0z = new Array(n),
         y0z = new Array(n);
 
-    if (!context) interpolator = interpolate(buffer = path());
+    if (!context) output = curve(buffer = path());
 
     for (i = 0; i <= n; ++i) {
       if (!(i < n && defined(d = data[i], i)) === defined0) {
         if (defined0 = !defined0) {
           j = i;
-          interpolator.areaStart();
-          interpolator.lineStart();
+          output.areaStart();
+          output.lineStart();
         } else {
-          interpolator.lineEnd();
-          interpolator.lineStart();
+          output.lineEnd();
+          output.lineStart();
           for (k = i - 1; k >= j; --k) {
-            interpolator.point(x0z[k], y0z[k]);
+            output.point(x0z[k], y0z[k]);
           }
-          interpolator.lineEnd();
-          interpolator.areaEnd();
+          output.lineEnd();
+          output.areaEnd();
         }
       }
       if (defined0) {
         x0z[i] = +x0(d, i), y0z[i] = +y0(d, i);
-        interpolator.point(x1 ? +x1(d, i) : x0z[i], y1 ? +y1(d, i) : y0z[i]);
+        output.point(x1 ? +x1(d, i) : x0z[i], y1 ? +y1(d, i) : y0z[i]);
       }
     }
 
-    if (buffer) return interpolator = null, buffer + "" || null;
+    if (buffer) return output = null, buffer + "" || null;
   }
 
   area.x = function(_) {
@@ -80,13 +80,13 @@ export default function() {
     return arguments.length ? (defined = typeof _ === "function" ? _ : constant(!!_), area) : defined;
   };
 
-  area.interpolate = function(_) {
+  area.curve = function(_) {
     var n = arguments.length;
-    return n ? (interpolate = n > 1 ? curry(_, arguments) : _, context != null && (interpolator = interpolate(context)), area) : interpolate;
+    return n ? (curve = n > 1 ? curveCurry(_, arguments) : _, context != null && (output = curve(context)), area) : curve;
   };
 
   area.context = function(_) {
-    return arguments.length ? (_ == null ? context = interpolator = null : interpolator = interpolate(context = _), area) : context;
+    return arguments.length ? (_ == null ? context = output = null : output = curve(context = _), area) : context;
   };
 
   return area;
