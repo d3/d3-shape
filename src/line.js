@@ -9,7 +9,7 @@ import cardinalOpen from "./interpolate/cardinal-open";
 import catmullRom from "./interpolate/catmull-rom";
 import catmullRomClosed from "./interpolate/catmull-rom-closed";
 import catmullRomOpen from "./interpolate/catmull-rom-open";
-import constant, {constantTrue} from "./constant";
+import constant from "./constant";
 import linear from "./interpolate/linear";
 import linearClosed from "./interpolate/linear-closed";
 import natural from "./interpolate/natural";
@@ -21,7 +21,7 @@ import {x as pointX, y as pointY} from "./point";
 export default function() {
   var x = pointX,
       y = pointY,
-      defined = constantTrue,
+      defined = constant(true),
       context = null,
       interpolate = linear,
       interpolator = null;

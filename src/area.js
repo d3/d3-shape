@@ -5,7 +5,7 @@ import cardinal from "./interpolate/cardinal";
 import cardinalOpen from "./interpolate/cardinal-open";
 import catmullRom from "./interpolate/catmull-rom";
 import catmullRomOpen from "./interpolate/catmull-rom-open";
-import constant, {constantTrue, constantZero} from "./constant";
+import constant from "./constant";
 import linear from "./interpolate/linear";
 import natural from "./interpolate/natural";
 import step from "./interpolate/step";
@@ -16,9 +16,9 @@ import {x as pointX, y as pointY} from "./point";
 export default function() {
   var x0 = pointX,
       x1 = null,
-      y0 = constantZero,
+      y0 = constant(0),
       y1 = pointY,
-      defined = constantTrue,
+      defined = constant(true),
       context = null,
       interpolate = linear,
       interpolator = null;

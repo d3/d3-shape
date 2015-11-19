@@ -3,11 +3,3 @@ export default function(x) {
     return x;
   };
 };
-
-export function constantTrue() {
-  return true;
-};
-
-export function constantZero() {
-  return 0;
-};
