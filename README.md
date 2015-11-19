@@ -32,7 +32,7 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 …
 
-<a name="line_interpolate" href="#line_interpolate">#</a> <i>line</i>.<b>interpolate</b>([<i>interpolate</i>[, <i>t</i>]])
+<a name="line_interpolate" href="#line_interpolate">#</a> <i>line</i>.<b>interpolate</b>([<i>interpolate</i>])
 
 …
 
@@ -80,7 +80,7 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 …
 
-<a name="area_interpolate" href="#area_interpolate">#</a> <i>area</i>.<b>interpolate</b>([<i>interpolate</i>[, <i>t</i>]])
+<a name="area_interpolate" href="#area_interpolate">#</a> <i>area</i>.<b>interpolate</b>([<i>interpolate</i>])
 
 …
 
@@ -206,28 +206,45 @@ Note: not implemented by closed interpolators, such as <a href="#linearClosed">l
 
 <a name="symbolTypes" href="#symbolTypes">#</a> <b>symbolTypes</b>
 
-An array containing the set of supported [symbol types](#symbol_type):
+An array containing the set of supported [symbol types](#symbol_type): [circle](#circle), [cross](#cross), [diamond](#diamond), [square](#square), [triangleDown](#triangleDown), and [triangleUp](#triangleUp).
 
-* `circle`
-* `cross`
-* `diamond`
-* `square`
-* `triangle-down`
-* `triangle-up`
+<a name="circle" href="#circle">#</a> <b>circle</b>
+
+…
+
+<a name="cross" href="#cross">#</a> <b>cross</b>
+
+…
+
+<a name="diamond" href="#diamond">#</a> <b>diamond</b>
+
+…
+
+<a name="square" href="#square">#</a> <b>square</b>
+
+…
+
+<a name="triangleDown" href="#triangleDown">#</a> <b>triangleDown</b>
+
+…
+
+<a name="triangleUp" href="#triangleUp">#</a> <b>triangleUp</b>
+
+…
 
 ## Changes from D3 3.x:
 
 * You can now render shapes to Canvas by specifying a context (e.g., [*line*.context](#line_context))!
 
-* The interpretation of the Cardinal spline tension parameter has been fixed. The default tension is now 0 (corresponding to a uniform Catmull–Rom spline), not 0.7. Due to a bug in 3.x, the tension parameter was previously only valid in the range [2/3, 1]; this corresponds to the new corrected range of [0, 1]. Thus, the new default value of 0 is equivalent to the old value of 2/3, and the default behavior is only slightly changed.
+* The interpretation of the [Cardinal](#cardinal) spline tension parameter has been fixed. The default tension is now 0 (corresponding to a uniform Catmull–Rom spline), not 0.7. Due to a bug in 3.x, the tension parameter was previously only valid in the range [2/3, 1]; this corresponds to the new corrected range of [0, 1]. Thus, the new default value of 0 is equivalent to the old value of 2/3, and the default behavior is only slightly changed.
 
-* To specify a Cardinal interpolation tension of *t*, use `line.interpolate("cardinal", t)` instead of `line.interpolate("cardinal").tension(t)`.
+* To specify a [Cardinal](#cardinal) interpolation tension of *t*, use `line.interpolate(cardinal(t))` instead of `line.interpolate("cardinal").tension(t)`.
 
-* The custom interpolator API has changed.
+* The custom [interpolator API](#interpolators) has changed.
 
-* Added “natural” cubic spline interpolation.
+* Added [natural](#natural) cubic spline interpolation.
 
-* Added “catmull-rom” spline interpolation, parameterized by alpha. If α = 0, produces a uniform Catmull–Rom spline equivalent to a Cardinal spline with zero tension; if α = 0.5, produces a centripetal spline; if α = 1.0, produces a chordal spline.
+* Added [Catmull–Rom](#catmullRom) spline interpolation, parameterized by alpha. If α = 0, produces a uniform Catmull–Rom spline equivalent to a Cardinal spline with zero tension; if α = 0.5, produces a centripetal spline; if α = 1.0, produces a chordal spline.
 
 * By setting [*area*.x1](#area_x1) or [*area*.y1](#area_y1) to null, you can reuse the [*area*.x0](#area_x0) or [*area*.y0](#area_y0) value, rather than computing it twice. This is useful for nondeterministic values (e.g., jitter).
 
