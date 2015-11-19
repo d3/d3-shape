@@ -202,9 +202,15 @@ Note: not implemented by closed interpolators, such as <a href="#linearClosed">l
 
 …
 
+### Symbol Types
+
+Symbol types are typically not used directly, instead implementing paths for [symbols](#symbols).
+
+…
+
 <a name="symbolTypes" href="#symbolTypes">#</a> <b>symbolTypes</b>
 
-An array containing the set of supported [symbol types](#symbol_type): [circle](#circle), [cross](#cross), [diamond](#diamond), [square](#square), [triangleDown](#triangleDown), and [triangleUp](#triangleUp).
+An array containing the set of all built-in symbol types: [circle](#circle), [cross](#cross), [diamond](#diamond), [square](#square), [triangleDown](#triangleDown), and [triangleUp](#triangleUp). Useful for constructing the range of an [ordinal scale](https://github.com/d3/d3-scale#ordinal-scales) should you wish to use a shape encoding for categorical data.
 
 <a name="circle" href="#circle">#</a> <b>circle</b>
 
