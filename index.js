@@ -1,5 +1,22 @@
 export {default as area} from "./src/area";
 export {default as line} from "./src/line";
+export {default as basisClosed} from "./src/interpolate/basis-closed";
+export {default as basisOpen} from "./src/interpolate/basis-open";
+export {default as basis} from "./src/interpolate/basis";
+export {default as bundle} from "./src/interpolate/bundle";
+export {default as cardinalClosed} from "./src/interpolate/cardinal-closed";
+export {default as cardinalOpen} from "./src/interpolate/cardinal-open";
+export {default as cardinal} from "./src/interpolate/cardinal";
+export {default as catmullRomClosed} from "./src/interpolate/catmull-rom-closed";
+export {default as catmullRomOpen} from "./src/interpolate/catmull-rom-open";
+export {default as catmullRom} from "./src/interpolate/catmull-rom";
+export {default as linearClosed} from "./src/interpolate/linear-closed";
+export {default as linear} from "./src/interpolate/linear";
+export {default as natural} from "./src/interpolate/natural";
+export {default as stepAfter} from "./src/interpolate/step-after";
+export {default as stepBefore} from "./src/interpolate/step-before";
+export {default as step} from "./src/interpolate/step";
+
 export {default as symbol, symbolTypes} from "./src/symbol";
 export {default as circle} from "./src/symbol/circle";
 export {default as cross} from "./src/symbol/cross";

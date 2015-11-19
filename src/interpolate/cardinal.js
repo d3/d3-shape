@@ -9,6 +9,8 @@ export function point(that, x, y) {
   );
 };
 
+
+// TODO cardinal(context) returns new Cardinal(context, 0)?
 function cardinal(tension) {
   var k = (tension == null ? 1 : 1 - tension) / 6;
   return function(context) {

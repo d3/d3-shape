@@ -1,16 +1,6 @@
 import {path} from "d3-path";
-import basis from "./interpolate/basis";
-import basisOpen from "./interpolate/basis-open";
-import cardinal from "./interpolate/cardinal";
-import cardinalOpen from "./interpolate/cardinal-open";
-import catmullRom from "./interpolate/catmull-rom";
-import catmullRomOpen from "./interpolate/catmull-rom-open";
 import constant from "./constant";
 import linear from "./interpolate/linear";
-import natural from "./interpolate/natural";
-import step from "./interpolate/step";
-import stepAfter from "./interpolate/step-after";
-import stepBefore from "./interpolate/step-before";
 import {x as pointX, y as pointY} from "./point";
 
 export default function() {
@@ -90,23 +80,7 @@ export default function() {
   };
 
   area.interpolate = function(_, a) {
-    if (!arguments.length) return interpolate;
-    if (typeof _ === "function") interpolate = _;
-    else switch (_ + "") {
-      case "step": interpolate = step; break;
-      case "step-before": interpolate = stepBefore; break;
-      case "step-after": interpolate = stepAfter; break;
-      case "basis": interpolate = basis; break;
-      case "basis-open": interpolate = basisOpen; break;
-      case "cardinal": interpolate = cardinal(a); break;
-      case "cardinal-open": interpolate = cardinalOpen(a); break;
-      case "catmull-rom": interpolate = catmullRom(a); break;
-      case "catmull-rom-open": interpolate = catmullRomOpen(a); break;
-      case "natural": interpolate = natural; break;
-      default: interpolate = linear; break;
-    }
-    if (context != null) interpolator = interpolate(context);
-    return area;
+    return arguments.length ? (interpolate = _, context != null && (interpolator = _(context)), area) : interpolate;
   };
 
   area.context = function(_) {

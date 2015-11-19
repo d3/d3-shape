@@ -92,6 +92,70 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 …
 
+<a name="basis" href="#basis">#</a> <b>basis</b>
+
+…
+
+<a name="basisClosed" href="#basisClosed">#</a> <b>basisClosed</b>
+
+…
+
+<a name="basisOpen" href="#basisOpen">#</a> <b>basisOpen</b>
+
+…
+
+<a name="bundle" href="#bundle">#</a> <b>bundle</b>(<i>beta</i>)
+
+…
+
+<a name="cardinal" href="#cardinal">#</a> <b>cardinal</b>(<i>tension</i>)
+
+…
+
+<a name="cardinalClosed" href="#cardinalClosed">#</a> <b>cardinalClosed</b>(<i>tension</i>)
+
+…
+
+<a name="cardinalOpen" href="#cardinalOpen">#</a> <b>cardinalOpen</b>(<i>tension</i>)
+
+…
+
+<a name="catmullRom" href="#catmullRom">#</a> <b>catmullRom</b>(<i>alpha</i>)
+
+…
+
+<a name="catmullRomClosed" href="#catmullRomClosed">#</a> <b>catmullRomClosed</b>(<i>alpha</i>)
+
+…
+
+<a name="catmullRomOpen" href="#catmullRomOpen">#</a> <b>catmullRomOpen</b>(<i>alpha</i>)
+
+…
+
+<a name="linear" href="#linear">#</a> <b>linear</b>
+
+…
+
+<a name="linearClosed" href="#linearClosed">#</a> <b>linearClosed</b>
+
+…
+
+<a name="natural" href="#natural">#</a> <b>natural</b>
+
+…
+
+<a name="step" href="#step">#</a> <b>step</b>
+
+…
+
+<a name="stepAfter" href="#stepAfter">#</a> <b>stepAfter</b>
+
+…
+
+<a name="stepBefore" href="#stepBefore">#</a> <b>stepBefore</b>
+
+…
+
 <a name="interpolate" href="#interpolate">#</a> <i>interpolate</i>(<i>context</i>)
 
 …
@@ -100,9 +164,13 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 …
 
+Note: not implemented by closed interpolators, such as <a href="#linearClosed">linearClosed</a>.
+
 <a name="interpolator_areaEnd" href="#interpolator_areaEnd">#</a> <i>interpolator</i>.<b>areaEnd</b>()
 
 …
+
+Note: not implemented by closed interpolators, such as <a href="#linearClosed">linearClosed</a>.
 
 <a name="interpolator_lineStart" href="#interpolator_lineStart">#</a> <i>interpolator</i>.<b>lineStart</b>()
 

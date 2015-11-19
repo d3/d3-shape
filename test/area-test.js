@@ -8,6 +8,7 @@ tape("area() returns a default area shape", function(test) {
   test.equal(a.y0()([42, 34]), 0);
   test.equal(a.y1()([42, 34]), 34);
   test.equal(a.defined()([42, 34]), true);
+  test.equal(a.interpolate(), shape.linear);
   test.equal(a.context(), null);
   test.equal(a([[0, 1], [2, 3], [4, 5]]), "M0,1L2,3L4,5L4,0L2,0L0,0Z");
   test.end();
@@ -52,8 +53,8 @@ tape("area.y(y)(data) observes the specified constant", function(test) {
   test.end();
 });
 
-tape("area.interpolate(\"linear\")(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate("linear");
+tape("area.interpolate(linear)(data) generates the expected path", function(test) {
+  var a = shape.area().interpolate(shape.linear);
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), "M0,1L0,0Z");
   test.equal(a([[0, 1], [2, 3]]), "M0,1L2,3L2,0L0,0Z");
@@ -61,8 +62,8 @@ tape("area.interpolate(\"linear\")(data) generates the expected path", function(
   test.end();
 });
 
-tape("area.interpolate(\"basis\")(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate("basis");
+tape("area.interpolate(basis)(data) generates the expected path", function(test) {
+  var a = shape.area().interpolate(shape.basis);
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), "M0,1L0,0Z");
   test.equal(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");
@@ -70,8 +71,8 @@ tape("area.interpolate(\"basis\")(data) generates the expected path", function(t
   test.end();
 });
 
-tape("area.interpolate(\"basis-open\")(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate("basis-open");
+tape("area.interpolate(basisOpen)(data) generates the expected path", function(test) {
+  var a = shape.area().interpolate(shape.basisOpen);
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), null);
   test.equal(a([[0, 1], [1, 3]]), null);
@@ -81,8 +82,8 @@ tape("area.interpolate(\"basis-open\")(data) generates the expected path", funct
   test.end();
 });
 
-tape("area.interpolate(\"cardinal\")(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate("cardinal");
+tape("area.interpolate(cardinal)(data) generates the expected path", function(test) {
+  var a = shape.area().interpolate(shape.cardinal()); // TODO no empty invocation?
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), "M0,1L0,0Z");
   test.equal(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");
@@ -91,8 +92,8 @@ tape("area.interpolate(\"cardinal\")(data) generates the expected path", functio
   test.end();
 });
 
-tape("area.interpolate(\"cardinal-open\")(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate("cardinal-open");
+tape("area.interpolate(cardinalOpen)(data) generates the expected path", function(test) {
+  var a = shape.area().interpolate(shape.cardinalOpen()); // TODO no empty invocation?
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), null);
   test.equal(a([[0, 1], [1, 3]]), null);
@@ -101,8 +102,8 @@ tape("area.interpolate(\"cardinal-open\")(data) generates the expected path", fu
   test.end();
 });
 
-tape("area.interpolate(\"catmull-rom\", 0.5)(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate("catmull-rom", 0.5);
+tape("area.interpolate(catmullRom, 0.5)(data) generates the expected path", function(test) {
+  var a = shape.area().interpolate(shape.catmullRom(0.5));
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), "M0,1L0,0Z");
   test.equal(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");
@@ -111,8 +112,8 @@ tape("area.interpolate(\"catmull-rom\", 0.5)(data) generates the expected path",
   test.end();
 });
 
-tape("area.interpolate(\"catmull-rom-open\", 0.5)(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate("catmull-rom-open", 0.5);
+tape("area.interpolate(catmullRomOpen, 0.5)(data) generates the expected path", function(test) {
+  var a = shape.area().interpolate(shape.catmullRomOpen(0.5));
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), null);
   test.equal(a([[0, 1], [1, 3]]), null);
@@ -121,8 +122,8 @@ tape("area.interpolate(\"catmull-rom-open\", 0.5)(data) generates the expected p
   test.end();
 });
 
-tape("area.interpolate(\"step\")(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate("step");
+tape("area.interpolate(step)(data) generates the expected path", function(test) {
+  var a = shape.area().interpolate(shape.step);
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), "M0,1L0,0Z");
   test.equal(a([[0, 1], [2, 3]]), "M0,1L1,1L1,3L2,3L2,0L1,0L1,0L0,0Z");
@@ -130,8 +131,8 @@ tape("area.interpolate(\"step\")(data) generates the expected path", function(te
   test.end();
 });
 
-tape("area.interpolate(\"step-before\")(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate("step-before");
+tape("area.interpolate(stepBefore)(data) generates the expected path", function(test) {
+  var a = shape.area().interpolate(shape.stepBefore);
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), "M0,1L0,0Z");
   test.equal(a([[0, 1], [2, 3]]), "M0,1L0,3L2,3L2,0L2,0L0,0Z");
@@ -139,8 +140,8 @@ tape("area.interpolate(\"step-before\")(data) generates the expected path", func
   test.end();
 });
 
-tape("area.interpolate(\"step-after\")(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate("step-after");
+tape("area.interpolate(stepAfter)(data) generates the expected path", function(test) {
+  var a = shape.area().interpolate(shape.stepAfter);
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), "M0,1L0,0Z");
   test.equal(a([[0, 1], [2, 3]]), "M0,1L2,1L2,3L2,0L0,0L0,0Z");
@@ -148,8 +149,8 @@ tape("area.interpolate(\"step-after\")(data) generates the expected path", funct
   test.end();
 });
 
-tape("area.interpolate(\"natural\")(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate("natural");
+tape("area.interpolate(natural)(data) generates the expected path", function(test) {
+  var a = shape.area().interpolate(shape.natural);
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), "M0,1L0,0Z");
   test.equal(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");
