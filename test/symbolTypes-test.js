@@ -3,12 +3,12 @@ var tape = require("tape"),
 
 tape("symbolTypes is the array of symbol types", function(test) {
   test.deepEqual(shape.symbolTypes, [
-    "circle",
-    "cross",
-    "diamond",
-    "square",
-    "triangle-down",
-    "triangle-up"
+    shape.circle,
+    shape.cross,
+    shape.diamond,
+    shape.square,
+    shape.triangleDown,
+    shape.triangleUp
   ]);
   test.end();
 });

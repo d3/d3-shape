@@ -11,16 +11,16 @@ function constantSixtyFour() {
 }
 
 function constantCircle() {
-  return "circle";
+  return circle;
 }
 
 export var symbolTypes = [
-  "circle",
-  "cross",
-  "diamond",
-  "square",
-  "triangle-down",
-  "triangle-up"
+  circle,
+  cross,
+  diamond,
+  square,
+  triangleDown,
+  triangleUp
 ];
 
 export default function() {
@@ -31,21 +31,12 @@ export default function() {
   function symbol(d, i) {
     var buffer;
     if (!context) context = buffer = path();
-    var t;
-    switch (type(d, i) + "") {
-      case "cross": t = cross; break;
-      case "diamond": t = diamond; break;
-      case "square": t = square; break;
-      case "triangle-down": t = triangleDown; break;
-      case "triangle-up": t = triangleUp; break;
-      default: t = circle; break;
-    }
-    t(context, +size(d, i));
+    type(d, i).draw(context, +size(d, i));
     if (buffer) return context = null, buffer + "" || null;
   }
 
   symbol.type = function(_) {
-    return arguments.length ? (type = typeof _ === "function" ? _ : constant(_ + ""), symbol) : type;
+    return arguments.length ? (type = typeof _ === "function" ? _ : constant(_), symbol) : type;
   };
 
   symbol.size = function(_) {
