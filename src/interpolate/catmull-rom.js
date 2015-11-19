@@ -25,10 +25,10 @@ export function point(that, x, y) {
   that._context.bezierCurveTo(x1, y1, x2, y2, that._x2, that._y2);
 };
 
-function catmullRom(alpha) {
-  return alpha && alpha.moveTo ? cardinal(alpha)
-      : alpha == null || !(alpha = +alpha) ? cardinal(0)
-      : function(context) { return new CatmullRom(context, alpha); };
+function catmullRom(context, alpha) {
+  return alpha == null || !(alpha = +alpha)
+      ? cardinal(context, 0)
+      : new CatmullRom(context, alpha);
 }
 
 function CatmullRom(context, alpha) {

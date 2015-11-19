@@ -103,7 +103,7 @@ tape("area.interpolate(cardinalOpen)(data) generates the expected path", functio
 });
 
 tape("area.interpolate(catmullRom, 0.5)(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate(shape.catmullRom(0.5));
+  var a = shape.area().interpolate(shape.catmullRom, 0.5);
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), "M0,1L0,0Z");
   test.equal(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");
@@ -113,7 +113,7 @@ tape("area.interpolate(catmullRom, 0.5)(data) generates the expected path", func
 });
 
 tape("area.interpolate(catmullRomOpen, 0.5)(data) generates the expected path", function(test) {
-  var a = shape.area().interpolate(shape.catmullRomOpen(0.5));
+  var a = shape.area().interpolate(shape.catmullRomOpen, 0.5);
   test.equal(a([]), null);
   test.equal(a([[0, 1]]), null);
   test.equal(a([[0, 1], [1, 3]]), null);
@@ -160,37 +160,33 @@ tape("area.interpolate(natural)(data) generates the expected path", function(tes
 });
 
 tape("area.interpolate(cardinal) uses a default tension of zero", function(test) {
-  var a = shape.area().interpolate(shape.cardinal(0));
+  var a = shape.area().interpolate(shape.cardinal, 0);
   test.equal(shape.area().interpolate(shape.cardinal)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().interpolate(shape.cardinal())([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().interpolate(shape.cardinal(null))([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().interpolate(shape.cardinal(undefined))([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.area().interpolate(shape.cardinal, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.area().interpolate(shape.cardinal, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.end();
 });
 
 tape("area.interpolate(cardinalOpen) uses a default tension of zero", function(test) {
-  var a = shape.area().interpolate(shape.cardinalOpen(0));
+  var a = shape.area().interpolate(shape.cardinalOpen, 0);
   test.equal(shape.area().interpolate(shape.cardinalOpen)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().interpolate(shape.cardinalOpen())([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().interpolate(shape.cardinalOpen(null))([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().interpolate(shape.cardinalOpen(undefined))([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.area().interpolate(shape.cardinalOpen, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.area().interpolate(shape.cardinalOpen, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.end();
 });
 
 tape("area.interpolate(catmullRom) uses a default alpha of zero", function(test) {
-  var a = shape.area().interpolate(shape.catmullRom(0));
+  var a = shape.area().interpolate(shape.catmullRom, 0);
   test.equal(shape.area().interpolate(shape.catmullRom)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().interpolate(shape.catmullRom())([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().interpolate(shape.catmullRom(null))([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().interpolate(shape.catmullRom(undefined))([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.area().interpolate(shape.catmullRom, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.area().interpolate(shape.catmullRom, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.end();
 });
 
 tape("area.interpolate(catmullRomOpen) uses a default alpha of zero", function(test) {
-  var a = shape.area().interpolate(shape.catmullRomOpen(0));
+  var a = shape.area().interpolate(shape.catmullRomOpen, 0);
   test.equal(shape.area().interpolate(shape.catmullRomOpen)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().interpolate(shape.catmullRomOpen())([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().interpolate(shape.catmullRomOpen(null))([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().interpolate(shape.catmullRomOpen(undefined))([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.area().interpolate(shape.catmullRomOpen, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.area().interpolate(shape.catmullRomOpen, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.end();
 });

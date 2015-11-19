@@ -1,6 +1,7 @@
 import {path} from "d3-path";
 import constant from "./constant";
 import linear from "./interpolate/linear";
+import curry from "./interpolate/curry";
 import {x as pointX, y as pointY} from "./point";
 
 export default function() {
@@ -79,8 +80,9 @@ export default function() {
     return arguments.length ? (defined = typeof _ === "function" ? _ : constant(!!_), area) : defined;
   };
 
-  area.interpolate = function(_, a) {
-    return arguments.length ? (interpolate = _, context != null && (interpolator = _(context)), area) : interpolate;
+  area.interpolate = function(_) {
+    var n = arguments.length;
+    return n ? (interpolate = n > 1 ? curry(_, arguments) : _, context != null && (interpolator = interpolate(context)), area) : interpolate;
   };
 
   area.context = function(_) {

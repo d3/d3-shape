@@ -1,8 +1,7 @@
 import {point} from "./cardinal";
 
-function cardinalOpen(tension) {
-  return tension && tension.moveTo ? new CardinalOpen(tension, 1 / 6)
-      : (tension = (tension == null ? 1 : 1 - tension) / 6, function(context) { return new CardinalOpen(context, tension); });
+function cardinalOpen(context, tension) {
+  return new CardinalOpen(context, (tension == null ? 1 : 1 - tension) / 6);
 }
 
 function CardinalOpen(context, k) {

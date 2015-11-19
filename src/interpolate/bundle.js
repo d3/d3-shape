@@ -1,9 +1,9 @@
 import basis from "./basis";
 
-function bundle(beta) {
-  return beta && beta.moveTo ? basis(beta)
-      : beta == null || (beta = +beta) === 1 ? basis
-      : function(context) { return new Bundle(context, beta); };
+function bundle(context, beta) {
+  return beta == null || (beta = +beta) === 1
+      ? basis(context)
+      : new Bundle(context, beta);
 }
 
 function Bundle(context, beta) {

@@ -9,9 +9,8 @@ export function point(that, x, y) {
   );
 };
 
-function cardinal(tension) {
-  return tension && tension.moveTo ? new Cardinal(tension, 1 / 6)
-      : (tension = (tension == null ? 1 : 1 - tension) / 6, function(context) { return new Cardinal(context, tension); });
+function cardinal(context, tension) {
+  return new Cardinal(context, (tension == null ? 1 : 1 - tension) / 6);
 }
 
 function Cardinal(context, k) {

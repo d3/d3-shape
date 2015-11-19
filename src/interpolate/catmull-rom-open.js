@@ -1,10 +1,10 @@
 import cardinalOpen from "./cardinal-open";
 import {point} from "./catmull-rom";
 
-function catmullRomOpen(alpha) {
-  return alpha && alpha.moveTo ? cardinalOpen(alpha)
-      : alpha == null || !(alpha = +alpha) ? cardinalOpen(0)
-      : function(context) { return new CatmullRomOpen(context, alpha); };
+function catmullRomOpen(context, alpha) {
+  return alpha == null || !(alpha = +alpha)
+      ? cardinalOpen(context, 0)
+      : new CatmullRomOpen(context, alpha);
 }
 
 function CatmullRomOpen(context, alpha) {
