@@ -90,6 +90,8 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 ### Interpolators
 
+Interpolators are typically not used directly, instead implementing splines for [lines](#lines) and [areas](#areas).
+
 …
 
 <a name="basis" href="#basis">#</a> <b>basis</b>(<i>context</i>)
