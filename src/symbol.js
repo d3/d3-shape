@@ -6,14 +6,6 @@ import square from "./symbol/square";
 import {triangleDown, triangleUp} from "./symbol/triangle";
 import constant from "./constant";
 
-function constantSixtyFour() {
-  return 64;
-}
-
-function constantCircle() {
-  return circle;
-}
-
 export var symbolTypes = [
   circle,
   cross,
@@ -24,8 +16,8 @@ export var symbolTypes = [
 ];
 
 export default function() {
-  var type = constantCircle,
-      size = constantSixtyFour,
+  var type = constant(circle),
+      size = constant(64),
       context = null;
 
   function symbol(d, i) {
