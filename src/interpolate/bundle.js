@@ -1,9 +1,8 @@
 import basis from "./basis";
-import linear from "./linear";
 
 function bundle(beta) {
-  if (beta && beta.moveTo) return basis(beta);
-  return beta == null || (beta = +beta) === 1 ? basis
+  return beta && beta.moveTo ? basis(beta)
+      : beta == null || (beta = +beta) === 1 ? basis
       : function(context) { return new Bundle(context, beta); };
 }
 

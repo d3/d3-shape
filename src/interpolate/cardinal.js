@@ -10,11 +10,8 @@ export function point(that, x, y) {
 };
 
 function cardinal(tension) {
-  if (tension && tension.moveTo) return new Cardinal(tension, 1 / 6);
-  var k = (tension == null ? 1 : 1 - tension) / 6;
-  return function(context) {
-    return new Cardinal(context, k);
-  };
+  return tension && tension.moveTo ? new Cardinal(tension, 1 / 6)
+      : (tension = (tension == null ? 1 : 1 - tension) / 6, function(context) { return new Cardinal(context, tension); });
 }
 
 function Cardinal(context, k) {
