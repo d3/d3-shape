@@ -175,93 +175,51 @@ export default function() {
 
       // Does the sector’s outer ring have rounded corners?
       else if (rc1 > 0) {
-        var t30 = cornerTangents(x00, y00, x01, y01, r1, rc1, cw),
-            t12 = cornerTangents(x11, y11, x10, y10, r1, rc1, cw);
+        var t0 = cornerTangents(x00, y00, x01, y01, r1, rc1, cw),
+            t1 = cornerTangents(x11, y11, x10, y10, r1, rc1, cw);
 
-        context.moveTo(t30.cx + t30.x01, t30.cy + t30.y01);
+        context.moveTo(t0.cx + t0.x01, t0.cy + t0.y01);
 
-        // Have the outer corners merged?
-        if (rc1 < rc) context.arc(t30.cx, t30.cy, rc1, Math.atan2(t30.y01, t30.x01), Math.atan2(t12.y01, t12.x01), !cw);
+        // Have the corners merged?
+        if (rc1 < rc) context.arc(t0.cx, t0.cy, rc1, Math.atan2(t0.y01, t0.x01), Math.atan2(t1.y01, t1.x01), !cw);
 
-        // Otherwise, draw the two corners and the outer ring.
+        // Otherwise, draw the two corners and the ring.
         else {
-          context.arc(t30.cx, t30.cy, rc1, Math.atan2(t30.y01, t30.x01), Math.atan2(t30.y11, t30.x11), !cw);
-          context.arc(0, 0, r1, Math.atan2(t30.cy + t30.y11, t30.cx + t30.x11), Math.atan2(t12.cy + t12.y11, t12.cx + t12.x11), !cw);
-          context.arc(t12.cx, t12.cy, rc1, Math.atan2(t12.y11, t12.x11), Math.atan2(t12.y01, t12.x01), !cw);
+          context.arc(t0.cx, t0.cy, rc1, Math.atan2(t0.y01, t0.x01), Math.atan2(t0.y11, t0.x11), !cw);
+          context.arc(0, 0, r1, Math.atan2(t0.cy + t0.y11, t0.cx + t0.x11), Math.atan2(t1.cy + t1.y11, t1.cx + t1.x11), !cw); // TODO ccw flag?
+          context.arc(t1.cx, t1.cy, rc1, Math.atan2(t1.y11, t1.x11), Math.atan2(t1.y01, t1.x01), !cw);
         }
       }
 
       // Or is the outer ring just a circular arc?
       else context.arc(0, 0, r1, a01, a11, !cw);
 
-      // Is it an annular sector?
-      if (r0 > 0) context.arc(0, 0, r0, a10, a00, cw);
+      // Does the sector’s inner ring (or point) have rounded corners?
+      if (rc0 > 0) {
+        var t0 = cornerTangents(x10, y10, x11, y11, r0, -rc0, cw),
+            t1 = cornerTangents(x01, y01, x00, y00, r0, -rc0, cw);
 
-      // Or is it a circular sector?
+        context.lineTo(t0.cx + t0.x01, t0.cy + t0.y01);
+
+        // Have the corners merged?
+        if (rc0 < rc) context.arc(t0.cx, t0.cy, rc0, Math.atan2(t0.y01, t0.x01), Math.atan2(t1.y01, t1.x01), !cw);
+
+        // Otherwise, draw the two corners and the ring.
+        else {
+          context.arc(t0.cx, t0.cy, rc0, Math.atan2(t0.y01, t0.x01), Math.atan2(t0.y11, t0.x11), !cw);
+          context.arc(0, 0, r0, Math.atan2(t0.cy + t0.y11, t0.cx + t0.x11), Math.atan2(t1.cy + t1.y11, t1.cx + t1.x11), cw); // TODO ccw flag?
+          context.arc(t1.cx, t1.cy, rc0, Math.atan2(t1.y11, t1.x11), Math.atan2(t1.y01, t1.x01), !cw);
+        }
+      }
+
+      // Or is the inner ring just a circular arc?
+      else if (r0 > 0) context.arc(0, 0, r0, a10, a00, cw);
+
+      // Or is there no inner ring, and it’s a circular sector?
       else context.lineTo(0, 0);
     }
 
     context.closePath();
-
-    //   // Compute the rounded corners.
-    //   if (da > epsilon && ()) > epsilon) { // TODO epsilon = 1e-3?
-    //     cr = r0 < r1 ^ cw ? 0 : 1;
-    //     var rc1 = rc,
-    //         rc0 = rc;
-    //
-    //     // Compute the angle of the sector formed by the two sides of the arc.
-    //     if (da < pi) {
-    //       var oc = x00 == null ? [x10, y10] : x11 == null ? [x01, y01] : intersect([x01, y01], [x00, y00], [x11, y11], [x10, y10]),
-    //           ax = x01 - oc[0],
-    //           ay = y01 - oc[1],
-    //           bx = x11 - oc[0],
-    //           by = y11 - oc[1],
-    //           kc = 1 / Math.sin(Math.acos((ax * bx + ay * by) / (Math.sqrt(ax * ax + ay * ay) * Math.sqrt(bx * bx + by * by))) / 2),
-    //           lc = Math.sqrt(oc[0] * oc[0] + oc[1] * oc[1]);
-    //       rc0 = Math.min(rc, (r0 - lc) / (kc - 1));
-    //       rc1 = Math.min(rc, (r1 - lc) / (kc + 1));
-    //     }
-    //
-    //     // Compute the outer corners.
-    //     if (x11 != null) {
-    //       var t30 = cornerTangents(x00 == null ? [x10, y10] : [x00, y00], [x01, y01], r1, rc1, cw),
-    //           t12 = cornerTangents([x11, y11], [x10, y10], r1, rc1, cw);
-    //
-    //       // Detect whether the outer edge is fully circular.
-    //       context.moveTo(t30[0][0], t30[0][1]);
-    //       if (rc === rc1) {
-    //         path.push(
-    //           "A", rc1, ",", rc1, " 0 0,", cr, " ", t30[1],
-    //           "A", r1, ",", r1, " 0 ", (1 - cw) ^ sweep(t30[1][0], t30[1][1], t12[1][0], t12[1][1]), ",", cw, " ", t12[1],
-    //           "A", rc1, ",", rc1, " 0 0,", cr, " ", t12[0]);
-    //       } else {
-    //         path.push(
-    //           "A", rc1, ",", rc1, " 0 1,", cr, " ", t12[0]);
-    //       }
-    //     } else {
-    //       context.moveTo(x01, y01);
-    //     }
-    //
-    //     // Compute the inner corners.
-    //     if (x00 != null) {
-    //       var t03 = cornerTangents([x01, y01], [x00, y00], r0, -rc0, cw),
-    //           t21 = cornerTangents([x10, y10], x11 == null ? [x01, y01] : [x11, y11], r0, -rc0, cw);
-    //
-    //       // Detect whether the inner edge is fully circular.
-    //       context.lineTo(t21[0][0], t21[0][1]);
-    //       if (rc === rc0) {
-    //         path.push(
-    //           "A", rc0, ",", rc0, " 0 0,", cr, " ", t21[1],
-    //           "A", r0, ",", r0, " 0 ", cw ^ sweep(t21[1][0], t21[1][1], t03[1][0], t03[1][1]), ",", 1 - cw, " ", t03[1],
-    //           "A", rc0, ",", rc0, " 0 0,", cr, " ", t03[0]);
-    //       } else {
-    //         path.push(
-    //           "A", rc0, ",", rc0, " 0 0,", cr, " ", t03[0]);
-    //       }
-    //     } else {
-    //       context.lineTo(x10, y10);
-    //     }
-    //   }
 
     if (buffer) return context = null, buffer + "" || null;
   }
