@@ -113,7 +113,9 @@ export default function() {
       context.moveTo(r1 * Math.cos(a0), r1 * Math.sin(a0));
       context.arc(0, 0, r1, a0, a1, !cw);
       if (r0 > 0) {
-        context.moveTo(r0 * Math.cos(a1), r0 * Math.sin(a1));
+        if (Math.abs(a1 - a0) > tauEpsilon) {
+          context.moveTo(r0 * Math.cos(a1), r0 * Math.sin(a1));
+        }
         context.arc(0, 0, r0, a1, a0, cw);
       } else {
         context.lineTo(0, 0);
