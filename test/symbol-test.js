@@ -3,7 +3,7 @@ var tape = require("tape"),
 
 tape("symbol() returns a default symbol shape", function(test) {
   var s = shape.symbol();
-  test.equal(s.type()(), shape.symbolCircle);
+  test.equal(s.type()(), shape.circle);
   test.equal(s.size()(), 64);
   test.equal(s.context(), null);
   test.equal(s(), "M4.51351666838205,0A4.51351666838205,4.51351666838205,0,1,1,-4.51351666838205,0A4.51351666838205,4.51351666838205,0,1,1,4.51351666838205,0");
@@ -31,37 +31,37 @@ tape("symbol.size(size) observes the specified size constant", function(test) {
   test.end();
 });
 
-tape("symbol.type(symbolCross) generates the expected path", function(test) {
-  var s = shape.symbol().type(shape.symbolCross).size(function(d) { return d; });
+tape("symbol.type(cross) generates the expected path", function(test) {
+  var s = shape.symbol().type(shape.cross).size(function(d) { return d; });
   test.equal(s(0), "M0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0Z");
   test.equal(s(20), "M-3,-1L-1,-1L-1,-3L1,-3L1,-1L3,-1L3,1L1,1L1,3L-1,3L-1,1L-3,1Z");
   test.end();
 });
 
-tape("symbol.type(symbolDiamond) generates the expected path", function(test) {
-  var s = shape.symbol().type(shape.symbolDiamond).size(function(d) { return d; });
+tape("symbol.type(diamond) generates the expected path", function(test) {
+  var s = shape.symbol().type(shape.diamond).size(function(d) { return d; });
   test.equal(s(0), "M0,0L0,0L0,0L0,0Z");
   test.equal(s(10), "M0,-2.942830956382712L1.6990442448471226,0L0,2.942830956382712L-1.6990442448471226,0Z");
   test.end();
 });
 
-tape("symbol.type(symbolSquare) generates the expected path", function(test) {
-  var s = shape.symbol().type(shape.symbolSquare).size(function(d) { return d; });
+tape("symbol.type(square) generates the expected path", function(test) {
+  var s = shape.symbol().type(shape.square).size(function(d) { return d; });
   test.equal(s(0), "M0,0h0v0h0Z");
   test.equal(s(4), "M-1,-1h2v2h-2Z");
   test.equal(s(16), "M-2,-2h4v4h-4Z");
   test.end();
 });
 
-tape("symbol.type(symbolTriangleUp) generates the expected path", function(test) {
-  var s = shape.symbol().type(shape.symbolTriangleDown).size(function(d) { return d; });
+tape("symbol.type(triangleUp) generates the expected path", function(test) {
+  var s = shape.symbol().type(shape.triangleDown).size(function(d) { return d; });
   test.equal(s(0), "M0,0L0,0L0,0Z");
   test.equal(s(10), "M0,2.0808957251439084L2.4028114141347543,-2.0808957251439084L-2.4028114141347543,-2.0808957251439084Z");
   test.end();
 });
 
-tape("symbol.type(symbolTriangleDown) generates the expected path", function(test) {
-  var s = shape.symbol().type(shape.symbolTriangleUp).size(function(d) { return d; });
+tape("symbol.type(triangleDown) generates the expected path", function(test) {
+  var s = shape.symbol().type(shape.triangleUp).size(function(d) { return d; });
   test.equal(s(0), "M0,0L0,0L0,0Z");
   test.equal(s(10), "M0,-2.0808957251439084L2.4028114141347543,2.0808957251439084L-2.4028114141347543,2.0808957251439084Z");
   test.end();

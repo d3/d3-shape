@@ -6,7 +6,7 @@ import square from "./symbol/square";
 import {triangleDown, triangleUp} from "./symbol/triangle";
 import constant from "./constant";
 
-export var symbolTypes = [
+export var symbols = [
   circle,
   cross,
   diamond,
