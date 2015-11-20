@@ -27,7 +27,7 @@
     "prepublish": "npm run test && uglifyjs build/d3-shape.js -c -m -o build/d3-shape.min.js && rm -f build/d3-shape.zip && zip -j build/d3-shape.zip -- LICENSE README.md build/d3-shape.js build/d3-shape.min.js"
   },
   "dependencies": {
-    "d3-path": "~0.0.2"
+    "d3-path": "~0.1.1"
   },
   "devDependencies": {
     "faucet": "0.0",
