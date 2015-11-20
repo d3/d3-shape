@@ -31,10 +31,6 @@ function asin(x) {
   return x > 1 ? piHalf : x < -1 ? -piHalf : Math.asin(x);
 }
 
-// function sweep(x0, y0, x1, y1) {
-//   return (x0 - x1) * y0 > (y0 - y1) * x0 ? 0 : 1;
-// }
-
 function intersect(x0, y0, x1, y1, x2, y2, x3, y3) {
   var x10 = x1 - x0, y10 = y1 - y0,
       x32 = x3 - x2, y32 = y3 - y2,
@@ -42,7 +38,6 @@ function intersect(x0, y0, x1, y1, x2, y2, x3, y3) {
   return [x0 + t * x10, y0 + t * y10];
 }
 
-// TODO Optimize signature?
 // Compute perpendicular offset line of length rc.
 // http://mathworld.wolfram.com/Circle-LineIntersection.html
 function cornerTangents(x0, y0, x1, y1, r1, rc, cw) {
@@ -84,12 +79,6 @@ function cornerTangents(x0, y0, x1, y1, r1, rc, cw) {
     x11: cx0 * (r1 / r - 1),
     y11: cy0 * (r1 / r - 1)
   };
-
-  // return [
-  //   [cx0 - ox, cy0 - oy],
-  //   [cx0 * r1 / r, cy0 * r1 / r],
-  //   [cx0, cy0]
-  // ];
 }
 
 export default function() {
@@ -169,7 +158,7 @@ export default function() {
 
         // Restrict the corner radius according to the sector angle.
         if (da < pi) {
-          var oc = da0 > 0 ? intersect(x01, y01, x00, y00, x11, y11, x10, y10) : [x10, y10], // TODO Safe to ignore the da0 = da1 = 0 case?
+          var oc = da0 > 0 ? intersect(x01, y01, x00, y00, x11, y11, x10, y10) : [x10, y10],
               ax = x01 - oc[0],
               ay = y01 - oc[1],
               bx = x11 - oc[0],
