@@ -24,18 +24,17 @@ function arcEndAngle(d) {
 }
 
 function arcPadAngle(d) {
-  return d.padAngle; // TODO d && ?
+  return d && d.padAngle; // Note: optional!
 }
 
-// function asin(x) {
-//   return x > 1 ? piHalf : x < -1 ? -piHalf : Math.asin(x);
-// }
-//
-// // Note: similar to d3_cross2d, d3_geom_polygonInside
-// function sweep(x0, y0, x1, y1) {
-//   return (x0 - x1) * y0 - (y0 - y1) * x0 > 0 ? 0 : 1;
-// }
-//
+function asin(x) {
+  return x > 1 ? piHalf : x < -1 ? -piHalf : Math.asin(x);
+}
+
+function sweep(x0, y0, x1, y1) {
+  return (x0 - x1) * y0 - (y0 - y1) * x0 > 0 ? 0 : 1;
+}
+
 // // TODO Optimize signature?
 // function intersect(c, d, a, b) {
 //   var x1 = c[0], x3 = a[0], x21 = d[0] - x1, x43 = b[0] - x3,
@@ -102,6 +101,7 @@ export default function() {
         rc,
         a0 = startAngle(d, i) - piHalf,
         a1 = endAngle(d, i) - piHalf,
+        da = Math.abs(a1 - a0),
         cw = a1 > a0;
 
     if (!context) context = buffer = path();
@@ -109,18 +109,53 @@ export default function() {
     // Ensure that the outer radius is always larger than the inner radius.
     if (r1 < r0) rc = r1, r1 = r0, r0 = rc;
 
-    if (r1 > 0) {
-      var closed = Math.abs(a1 - a0) > tauEpsilon;
+    // Is it a point?
+    if (!(r1 > 0)) context.moveTo(0, 0);
+
+    // Or is it a circle or annulus?
+    else if (da > tauEpsilon) {
       context.moveTo(r1 * Math.cos(a0), r1 * Math.sin(a0));
       context.arc(0, 0, r1, a0, a1, !cw);
       if (r0 > 0) {
-        if (closed) context.moveTo(r0 * Math.cos(a1), r0 * Math.sin(a1));
+        context.moveTo(r0 * Math.cos(a1), r0 * Math.sin(a1));
         context.arc(0, 0, r0, a1, a0, cw);
-      } else if (!closed) {
-        context.lineTo(0, 0);
       }
-    } else {
-      context.moveTo(0, 0);
+    }
+
+    // Or is it a circular or annular sector?
+    else {
+      var a01 = a0,
+          a11 = a1,
+          ap = padAngle(d, i) / 2,
+          rp = ap && (padRadius ? +padRadius(d, i) : Math.sqrt(r0 * r0 + r1 * r1));
+
+      // Apply outer padding.
+      if (rp) {
+        var p1 = asin(rp / r1 * Math.sin(ap));
+        if (p1 * 2 >= da) a01 = a11 = (a0 + a1) / 2;
+        else p1 *= (cw ? 1 : -1), a01 += p1, a11 -= p1;
+      }
+
+      context.moveTo(r1 * Math.cos(a01), r1 * Math.sin(a01));
+      context.arc(0, 0, r1, a01, a11, !cw);
+
+      // Is it an annular sector?
+      if (r0 > 0) {
+        var a00 = a0,
+            a10 = a1;
+
+        // Apply inner padding.
+        if (rp) {
+          var p0 = asin(rp / r0 * Math.sin(ap));
+          if (p0 * 2 >= da) a00 = a10 = (a0 + a1) / 2;
+          else p0 *= (cw ? 1 : -1), a00 += p0, a10 -= p0;
+        }
+
+        context.arc(0, 0, r0, a10, a00, cw);
+      }
+
+      // Or is it a circular sector?
+      else context.lineTo(0, 0);
     }
 
     context.closePath();

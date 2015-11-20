@@ -16,7 +16,7 @@ tape("symbol.size(size) observes the specified size function", function(test) {
   var size = function(d, i) { return d.z * 2 + i; },
       s = shape.symbol().size(size);
   test.equal(s.size(), size);
-  test.pathEqual(s({z: 0}, 0), "M0,0A0,0,0,1,1,0,0A0,0,0,1,1,0,0");
+  test.pathEqual(s({z: 0}, 0), "M0,0");
   test.pathEqual(s({z: Math.PI / 2}, 0), "M1,0A1,1,0,1,1,-1,0A1,1,0,1,1,1,0");
   test.pathEqual(s({z: 2 * Math.PI}, 0), "M2,0A2,2,0,1,1,-2,0A2,2,0,1,1,2,0");
   test.pathEqual(s({z: Math.PI}, 1), "M1.522600,0A1.522600,1.522600,0,1,1,-1.522600,0A1.522600,1.522600,0,1,1,1.522600,0");
@@ -27,7 +27,7 @@ tape("symbol.size(size) observes the specified size function", function(test) {
 tape("symbol.size(size) observes the specified size constant", function(test) {
   var s = shape.symbol();
   test.equal(s.size(42).size()(), 42);
-  test.pathEqual(s.size(0)(), "M0,0A0,0,0,1,1,0,0A0,0,0,1,1,0,0");
+  test.pathEqual(s.size(0)(), "M0,0");
   test.pathEqual(s.size(Math.PI)(), "M1,0A1,1,0,1,1,-1,0A1,1,0,1,1,1,0");
   test.pathEqual(s.size(4 * Math.PI)(), "M2,0A2,2,0,1,1,-2,0A2,2,0,1,1,2,0");
   test.end();
