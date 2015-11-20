@@ -149,10 +149,10 @@ export default function() {
       if (rp > 0) {
         var p0 = asin(rp / r0 * Math.sin(ap)),
             p1 = asin(rp / r1 * Math.sin(ap));
-        if (p0 * 2 >= da) da0 = 0, a00 = a10 = (a0 + a1) / 2;
-        else da0 -= p0 * 2, p0 *= (cw ? 1 : -1), a00 += p0, a10 -= p0;
-        if (p1 * 2 >= da) da1 = 0, a01 = a11 = (a0 + a1) / 2;
-        else da1 -= p1 * 2, p1 *= (cw ? 1 : -1), a01 += p1, a11 -= p1;
+        if ((da0 -= p0 * 2) > 0) p0 *= (cw ? 1 : -1), a00 += p0, a10 -= p0;
+        else da0 = 0, a00 = a10 = (a0 + a1) / 2;
+        if ((da1 -= p1 * 2) > 0) p1 *= (cw ? 1 : -1), a01 += p1, a11 -= p1;
+        else da1 = 0, a01 = a11 = (a0 + a1) / 2;
       }
 
       var x01 = r1 * Math.cos(a01),
