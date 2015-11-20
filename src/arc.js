@@ -110,14 +110,13 @@ export default function() {
     if (r1 < r0) rc = r1, r1 = r0, r0 = rc;
 
     if (r1 > 0) {
+      var closed = Math.abs(a1 - a0) > tauEpsilon;
       context.moveTo(r1 * Math.cos(a0), r1 * Math.sin(a0));
       context.arc(0, 0, r1, a0, a1, !cw);
       if (r0 > 0) {
-        if (Math.abs(a1 - a0) > tauEpsilon) {
-          context.moveTo(r0 * Math.cos(a1), r0 * Math.sin(a1));
-        }
+        if (closed) context.moveTo(r0 * Math.cos(a1), r0 * Math.sin(a1));
         context.arc(0, 0, r0, a1, a0, cw);
-      } else {
+      } else if (!closed) {
         context.lineTo(0, 0);
       }
     } else {
