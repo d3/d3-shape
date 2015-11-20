@@ -125,16 +125,6 @@ export default function() {
 
     context.closePath();
 
-    // // Special case for an arc that spans the full circle.
-    // if (da > tauEpsilon) {
-    //   context.moveTo(r1, 0);
-    //   context.arc(0, 0, r1, 0, tau);
-    //   if (r0) {
-    //     context.moveTo(r0, 0);
-    //     context.arc(0, 0, r0, tau, 0); // TODO ccw flag?
-    //   }
-    // }
-    //
     // else {
     //   var rc,
     //       cr,
@@ -150,12 +140,6 @@ export default function() {
     //       y2,
     //       x3,
     //       y3;
-    //
-    //   // The recommended minimum inner radius when using padding is outerRadius
-    //   // * padAngle / sin(θ), where θ is the angle of the smallest arc (without
-    //   // padding). For example, if the outerRadius is 200 pixels and the
-    //   // padAngle is 0.02 radians, a reasonable θ is 0.04 radians, and a
-    //   // reasonable innerRadius is 100 pixels.
     //
     //   if (ap = (+padAngle(d, i) || 0) / 2) {
     //     rp = padRadius ? +padRadius(d, i) : Math.sqrt(r0 * r0 + r1 * r1);
@@ -276,6 +260,12 @@ export default function() {
     if (buffer) return context = null, buffer + "" || null;
   }
 
+  arc.centroid = function(d, i) {
+    var r = (+innerRadius(d, i) + +outerRadius(d, i)) / 2,
+        a = (+startAngle(d, i) + +endAngle(d, i)) / 2 - Math.PI / 2;
+    return [Math.cos(a) * r, Math.sin(a) * r];
+  };
+
   arc.innerRadius = function(_) {
     return arguments.length ? (innerRadius = typeof _ === "function" ? _ : constant(+_), arc) : innerRadius;
   };
@@ -302,12 +292,6 @@ export default function() {
 
   arc.padAngle = function(_) {
     return arguments.length ? (padAngle = typeof _ === "function" ? _ : constant(+_), arc) : padAngle;
-  };
-
-  arc.centroid = function(d, i) {
-    var r = (+innerRadius(d, i) + +outerRadius(d, i)) / 2,
-        a = (+startAngle(d, i) + +endAngle(d, i)) / 2 - Math.PI / 2;
-    return [Math.cos(a) * r, Math.sin(a) * r];
   };
 
   arc.context = function(_) {

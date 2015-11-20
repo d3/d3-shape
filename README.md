@@ -8,6 +8,63 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 ## API Reference
 
+### Arcs
+
+…
+
+<a name="arc" href="#arc">#</a> <b>arc</b>()
+
+…
+
+<a name="_arc" href="#_arc">#</a> <i>arc</i>(<i>d</i>, <i>i</i>)
+
+…
+
+<a name="arc_centroid" href="#arc_centroid">#</a> <i>arc</i>.<b>centroid</b>(<i>d</i>, <i>i</i>)
+
+…
+
+Note: to be consistent with [*arc*](#_arc), the arc’s associated accessors must be deterministic.
+
+<a name="arc_innerRadius" href="#arc_innerRadius">#</a> <i>arc</i>.<b>innerRadius</b>([<i>innerRadius</i>])
+
+…
+
+<a name="arc_outerRadius" href="#arc_outerRadius">#</a> <i>arc</i>.<b>outerRadius</b>([<i>outerRadius</i>])
+
+…
+
+<a name="arc_cornerRadius" href="#arc_cornerRadius">#</a> <i>arc</i>.<b>cornerRadius</b>([<i>cornerRadius</i>])
+
+…
+
+<a name="arc_padRadius" href="#arc_padRadius">#</a> <i>arc</i>.<b>padRadius</b>([<i>padRadius</i>])
+
+…
+
+<a name="arc_startAngle" href="#arc_startAngle">#</a> <i>arc</i>.<b>startAngle</b>([<i>startAngle</i>])
+
+…
+
+<a name="arc_endAngle" href="#arc_endAngle">#</a> <i>arc</i>.<b>endAngle</b>([<i>endAngle</i>])
+
+…
+
+<a name="arc_padAngle" href="#arc_padAngle">#</a> <i>arc</i>.<b>padAngle</b>([<i>padAngle</i>])
+
+…
+
+The recommended minimum inner radius when using padding is outerRadius *
+padAngle / sin(θ), where θ is the angle of the smallest arc (without padding).
+For example, if the outerRadius is 200 pixels and the padAngle is 0.02 radians,
+a reasonable θ is 0.04 radians, and a reasonable innerRadius is 100 pixels.
+
+See also *pie*.padAngle. (From which module?)
+
+<a name="arc_context" href="#arc_context">#</a> <i>arc</i>.<b>context</b>([<i>context</i>])
+
+…
+
 ### Lines
 
 …
