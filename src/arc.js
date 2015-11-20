@@ -174,7 +174,7 @@ export default function() {
       if (!(da1 > 0)) context.moveTo(x01, y01);
 
       // Does the sector’s outer ring have rounded corners?
-      else if (rc1 > 0) {
+      else if (rc1 > epsilon) {
         var t0 = cornerTangents(x00, y00, x01, y01, r1, rc1, cw),
             t1 = cornerTangents(x11, y11, x10, y10, r1, rc1, cw);
 
@@ -198,7 +198,7 @@ export default function() {
       }
 
       // Does the sector’s inner ring (or point) have rounded corners?
-      if (rc0 > 0) {
+      if (rc0 > epsilon) {
         var t0 = cornerTangents(x10, y10, x11, y11, r0, -rc0, cw),
             t1 = cornerTangents(x01, y01, x00, y00, r0, -rc0, cw);
 
