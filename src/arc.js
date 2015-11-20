@@ -99,18 +99,21 @@ export default function() {
     var buffer,
         r0 = Math.max(0, +innerRadius(d, i)),
         r1 = Math.max(0, +outerRadius(d, i)),
+        rc,
         a0 = startAngle(d, i) - piHalf,
         a1 = endAngle(d, i) - piHalf,
-        // da = Math.abs(a1 - a0);
         cw = a1 > a0;
 
     if (!context) context = buffer = path();
 
     // Ensure that the outer radius is always larger than the inner radius.
-    // if (r1 < r0) rc = r1, r1 = r0, r0 = rc;
+    if (r1 < r0) rc = r1, r1 = r0, r0 = rc;
 
+    context.moveTo(r1 * Math.cos(a0), r1 * Math.sin(a0));
     context.arc(0, 0, r1, a0, a1, !cw);
     if (r0) context.arc(0, 0, r0, a1, a0, cw);
+    else context.lineTo(0, 0);
+    context.closePath();
 
     // // Special case for an arc that spans the full circle.
     // if (da > tauEpsilon) {
