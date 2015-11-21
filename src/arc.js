@@ -28,7 +28,7 @@ function arcPadAngle(d) {
 }
 
 function asin(x) {
-  return x > 1 ? piHalf : x < -1 ? -piHalf : Math.asin(x);
+  return x >= 1 ? piHalf : x <= -1 ? -piHalf : Math.asin(x);
 }
 
 function intersect(x0, y0, x1, y1, x2, y2, x3, y3) {
@@ -174,7 +174,7 @@ export default function() {
       if (!(da1 > 0)) context.moveTo(x01, y01);
 
       // Does the sector’s outer ring have rounded corners?
-      else if (rc1 > epsilon) {
+      else if (rc1 > 0) {
         var t0 = cornerTangents(x00, y00, x01, y01, r1, rc1, cw),
             t1 = cornerTangents(x11, y11, x10, y10, r1, rc1, cw);
 
@@ -186,7 +186,7 @@ export default function() {
         // Otherwise, draw the two corners and the ring.
         else {
           context.arc(t0.cx, t0.cy, rc1, Math.atan2(t0.y01, t0.x01), Math.atan2(t0.y11, t0.x11), !cw);
-          context.arc(0, 0, r1, Math.atan2(t0.cy + t0.y11, t0.cx + t0.x11), Math.atan2(t1.cy + t1.y11, t1.cx + t1.x11), !cw); // TODO ccw flag?
+          context.arc(0, 0, r1, Math.atan2(t0.cy + t0.y11, t0.cx + t0.x11), Math.atan2(t1.cy + t1.y11, t1.cx + t1.x11), !cw);
           context.arc(t1.cx, t1.cy, rc1, Math.atan2(t1.y11, t1.x11), Math.atan2(t1.y01, t1.x01), !cw);
         }
       }
@@ -198,7 +198,7 @@ export default function() {
       }
 
       // Does the sector’s inner ring (or point) have rounded corners?
-      if (rc0 > epsilon) {
+      if (rc0 > 0) {
         var t0 = cornerTangents(x10, y10, x11, y11, r0, -rc0, cw),
             t1 = cornerTangents(x01, y01, x00, y00, r0, -rc0, cw);
 
@@ -210,7 +210,7 @@ export default function() {
         // Otherwise, draw the two corners and the ring.
         else {
           context.arc(t0.cx, t0.cy, rc0, Math.atan2(t0.y01, t0.x01), Math.atan2(t0.y11, t0.x11), !cw);
-          context.arc(0, 0, r0, Math.atan2(t0.cy + t0.y11, t0.cx + t0.x11), Math.atan2(t1.cy + t1.y11, t1.cx + t1.x11), cw); // TODO ccw flag?
+          context.arc(0, 0, r0, Math.atan2(t0.cy + t0.y11, t0.cx + t0.x11), Math.atan2(t1.cy + t1.y11, t1.cx + t1.x11), cw);
           context.arc(t1.cx, t1.cy, rc0, Math.atan2(t1.y11, t1.x11), Math.atan2(t1.y01, t1.x01), !cw);
         }
       }
