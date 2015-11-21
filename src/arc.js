@@ -192,10 +192,7 @@ export default function() {
       }
 
       // Or is the outer ring just a circular arc?
-      else {
-        context.moveTo(x01, y01);
-        context.arc(0, 0, r1, a01, a11, !cw);
-      }
+      else context.moveTo(x01, y01), context.arc(0, 0, r1, a01, a11, !cw);
 
       // Does the sector’s inner ring (or point) have rounded corners?
       if (rc0 > 0) {
