@@ -1,80 +1,87 @@
-// Computes the slope from points p0 to p1.
-function slope(p0, p1) {
-  return (p1[1] - p0[1]) / (p1[0] - p0[0]);
+function monotone(context) {
+    return new Monotone(context);
 }
 
-// Compute three-point differences for the given points.
-// http://en.wikipedia.org/wiki/Cubic_Hermite_spline#Finite_difference
-function finiteDifferences(points) {
-  var i = 0,
-      j = points.length - 1,
-      m = [],
-      p0 = points[0],
-      p1 = points[1],
-      d = m[0] = slope(p0, p1);
-  while (++i < j) {
-    m[i] = (d + (d = slope(p0 = p1, p1 = points[i + 1]))) / 2;
-  }
-  m[i] = d;
-  return m;
+function Monotone(context) {
+    this._context = context;
 }
 
-// Interpolates the given points using Fritsch-Carlson Monotone cubic Hermite
-// interpolation. Returns an array of tangent vectors. For details, see
-// http://en.wikipedia.org/wiki/Monotone_cubic_interpolation
-function monotoneTangents(points) {
-  var tangents = [],
-      d,
-      a,
-      b,
-      s,
-      m = finiteDifferences(points),
-      i = -1,
-      j = points.length - 1;
+Monotone.prototype = {
+  areaStart: function() {
+    this._line = 0;
+  },
+  areaEnd: function() {
+    this._line = NaN;
+  },
+  lineStart: function() {
+    this._x = [];
+    this._y = [];
+  },
+  lineEnd: function() {
+    var x = this._x,
+        y = this._y,
+        n = x.length;
 
-  // The first two steps are done by computing finite-differences:
-  // 1. Compute the slopes of the secant lines between successive points.
-  // 2. Initialize the tangents at every point as the average of the secants.
+    if (n) {
+      this._line ? this._context.lineTo(x[0], y[0]) : this._context.moveTo(x[0], y[0]);
+      if (n === 2) {
+        this._context.lineTo(x[1], y[1]);
+      } else {
+        var dx,
+            s = slopes(x, y);
 
-  // Then, for each segment…
-  while (++i < j) {
-    d = slope(points[i], points[i + 1]);
-
-    // 3. If two successive yk = y{k + 1} are equal (i.e., d is zero), then set
-    // mk = m{k + 1} = 0 as the spline connecting these points must be flat to
-    // preserve monotonicity. Ignore step 4 and 5 for those k.
-
-    if (abs(d) < ε) {
-      m[i] = m[i + 1] = 0;
-    } else {
-      // 4. Let ak = mk / dk and bk = m{k + 1} / dk.
-      a = m[i] / d;
-      b = m[i + 1] / d;
-
-      // 5. Prevent overshoot and ensure monotonicity by restricting the
-      // magnitude of vector <ak, bk> to a circle of radius 3.
-      s = a * a + b * b;
-      if (s > 9) {
-        s = d * 3 / Math.sqrt(s);
-        m[i] = s * a;
-        m[i + 1] = s * b;
+        for (var i0 = 0, i1 = 1; i1 < n; ++i0, ++i1) {
+          // According to https://en.wikipedia.org/wiki/Cubic_Hermite_spline#Representations
+          // "you can express cubic Hermite interpolation in terms of cubic
+          // Bézier curves with respect to the four values p0, p0 + m0 / 3, p1 -
+          // m1 / 3, p1".
+          dx = (x[i1] - x[i0]) / 3.0;
+          this._context.bezierCurveTo(x[i0] + dx, y[i0] + dx * s[i0], x[i1] - dx, y[i1] - dx * s[i1], x[i1], y[i1]);
+        }
       }
     }
-  }
 
-  // Compute the normalized tangent vector from the slopes. Note that if x is
-  // not monotonic, it's possible that the slope will be infinite, so we protect
-  // against NaN by setting the coordinate to zero.
-  i = -1; while (++i <= j) {
-    s = (points[Math.min(j, i + 1)][0] - points[Math.max(0, i - 1)][0]) / (6 * (1 + m[i] * m[i]));
-    tangents.push([s || 0, m[i] * s || 0]);
+    if (this._line || (this._line !== 0 && n === 1)) this._context.closePath();
+    this._line = 1 - this._line;
+    this._x = this._y = null;
+  },
+  point: function(x, y) {
+    this._x.push(+x);
+    this._y.push(+y);
   }
-
-  return tangents;
 }
 
-export function interpolateMonotone(points) {
-  return points.length < 3
-      ? interpolateLinear(points)
-      : points[0] + interpolateHermite(points, monotoneTangents(points));
-};
+function sign(x) {
+  return x < 0 ? -1 : 1;
+}
+
+// Calculate the slopes of the tangents (Hermite-type interpolation) based on
+// the following paper: Steffen, M. 1990. A Simple Method for Monotonic
+// Interpolation in One Dimension. Astronomy and Astrophysics, Vol. 239, NO.
+// NOV(II), P. 443, 1990.
+function slopes(x, y) {
+  var h0,
+      h1,
+      s0,
+      s1,
+      p,
+      l = x.length,
+      t = new Array(l);
+
+  for (var i = 1; i < l - 1; i++) {
+    h0 = x[i] - x[i - 1];
+    h1 = x[i + 1] - x[i];
+    s0 = h0 === 0 ? 0 : (y[i] - y[i - 1]) / h0;
+    s1 = h1 === 0 ? 0 : (y[i + 1] - y[i]) / h1;
+    p = h0 + h1 === 0 ? 0 : (s0 * h1 + s1 * h0) / (h0 + h1);
+    t[i] = (sign(s0) + sign(s1)) * Math.min(Math.abs(s0), Math.abs(s1), 0.5 * Math.abs(p));
+  }
+
+  // Easiest option for handling boundary points: just choose to set the slope to 0.
+  t[0] = 0;
+  t[l - 1] = 0;
+
+  return t;
+}
+
+export default monotone;
