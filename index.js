@@ -16,6 +16,7 @@ export {default as diamond} from "./src/symbol/diamond";
 export {default as linearClosed} from "./src/curve/linear-closed";
 export {default as linear} from "./src/curve/linear";
 export {default as line} from "./src/line";
+export {default as monotone} from "./src/curve/monotone";
 export {default as natural} from "./src/curve/natural";
 export {default as square} from "./src/symbol/square";
 export {default as stepAfter} from "./src/curve/step-after";
