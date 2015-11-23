@@ -194,8 +194,11 @@ export default function() {
       // Or is the outer ring just a circular arc?
       else context.moveTo(x01, y01), context.arc(0, 0, r1, a01, a11, !cw);
 
+      // Is there no inner ring, and it’s a circular sector?
+      if (!(r0 > 0)) context.lineTo(0, 0);
+
       // Does the sector’s inner ring (or point) have rounded corners?
-      if (rc0 > 0) {
+      else if (rc0 > 0) {
         var t0 = cornerTangents(x10, y10, x11, y11, r0, -rc0, cw),
             t1 = cornerTangents(x01, y01, x00, y00, r0, -rc0, cw);
 
@@ -213,10 +216,7 @@ export default function() {
       }
 
       // Or is the inner ring just a circular arc?
-      else if (r0 > 0) context.arc(0, 0, r0, a10, a00, cw);
-
-      // Or is there no inner ring, and it’s a circular sector?
-      else context.lineTo(0, 0);
+      else context.arc(0, 0, r0, a10, a00, cw);
     }
 
     context.closePath();
