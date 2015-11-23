@@ -3,9 +3,7 @@ import constant from "./constant";
 
 var pi = Math.PI,
     piHalf = pi / 2,
-    tau = 2 * pi,
-    epsilon = 1e-6,
-    tauEpsilon = tau - epsilon;
+    tau = 2 * pi;
 
 function arcInnerRadius(d) {
   return d.innerRadius;
@@ -111,7 +109,7 @@ export default function() {
     if (!(r1 > 0)) context.moveTo(0, 0);
 
     // Or is it a circle or annulus?
-    else if (da >= tau) { // TODO > tauEpsilon?
+    else if (da >= tau) {
       context.moveTo(r1 * Math.cos(a0), r1 * Math.sin(a0));
       context.arc(0, 0, r1, a0, a1, !cw);
       if (r0 > 0) {
@@ -145,14 +143,14 @@ export default function() {
       }
 
       var x01 = r1 * Math.cos(a01),
-          y01 = r1 * Math.sin(a01);
+          y01 = r1 * Math.sin(a01),
+          x10 = r0 * Math.cos(a10),
+          y10 = r0 * Math.sin(a10);
 
       // Apply rounded corners?
       if (rc > 0) {
         var x11 = r1 * Math.cos(a11),
             y11 = r1 * Math.sin(a11),
-            x10 = r0 * Math.cos(a10),
-            y10 = r0 * Math.sin(a10),
             x00 = r0 * Math.cos(a00),
             y00 = r0 * Math.sin(a00);
 
@@ -195,7 +193,8 @@ export default function() {
       else context.moveTo(x01, y01), context.arc(0, 0, r1, a01, a11, !cw);
 
       // Is there no inner ring, and it’s a circular sector?
-      if (!(r0 > 0)) context.lineTo(0, 0);
+      // Or perhaps it’s an annular sector collapsed due to padding?
+      if (!(r0 > 0) || !(da0 > 0)) context.lineTo(x10, y10);
 
       // Does the sector’s inner ring (or point) have rounded corners?
       else if (rc0 > 0) {
