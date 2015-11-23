@@ -241,6 +241,16 @@ tape("arc().innerRadius(r₀).outerRadius(r₁).startAngle(θ₀).endAngle(θ₁
   test.end();
 });
 
-// TODO cornerRadius restricted by (r₁ - r₀) / 2
-// TODO cornerRadius restricted by outer angle for small arc
-// TODO cornerRadius restricted by inner angle for small arc
+tape("arc().innerRadius(r₀).outerRadius(r₁).cornerRadius(rᵧ) restricts rᵧ to |r₁ - r₀| / 2", function(test) {
+  var a = shape.arc().cornerRadius(Infinity).startAngle(0).endAngle(Math.PI / 2);
+  test.pathEqual(a.innerRadius(90).outerRadius(100)(), "M0,-94.868330A5,5,0,0,1,5.263158,-99.861400A100,100,0,0,1,99.861400,-5.263158A5,5,0,0,1,94.868330,0L94.868330,0A5,5,0,0,1,89.875260,-4.736842A90,90,0,0,0,4.736842,-89.875260A5,5,0,0,1,0,-94.868330Z");
+  test.pathEqual(a.innerRadius(100).outerRadius(90)(), "M0,-94.868330A5,5,0,0,1,5.263158,-99.861400A100,100,0,0,1,99.861400,-5.263158A5,5,0,0,1,94.868330,0L94.868330,0A5,5,0,0,1,89.875260,-4.736842A90,90,0,0,0,4.736842,-89.875260A5,5,0,0,1,0,-94.868330Z");
+  test.end();
+});
+
+tape("arc().innerRadius(r₀).outerRadius(r₁).cornerRadius(rᵧ) merges adjacent corners when rᵧ is relatively large", function(test) {
+  var a = shape.arc().cornerRadius(Infinity).startAngle(0).endAngle(Math.PI / 2);
+  test.pathEqual(a.innerRadius(10).outerRadius(100)(), "M0,-41.421356A41.421356,41.421356,0,1,1,41.421356,0L24.142136,0A24.142136,24.142136,0,0,1,0,-24.142136Z");
+  test.pathEqual(a.innerRadius(100).outerRadius(10)(), "M0,-41.421356A41.421356,41.421356,0,1,1,41.421356,0L24.142136,0A24.142136,24.142136,0,0,1,0,-24.142136Z");
+  test.end();
+});
