@@ -1,5 +1,5 @@
-import cardinalClosed from "./cardinal-closed";
-import {point} from "./catmull-rom";
+import cardinalClosed from "./cardinalClosed";
+import {point} from "./catmullRom";
 
 function catmullRomClosed(context, alpha) {
   return alpha == null || !(alpha = +alpha)
