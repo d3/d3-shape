@@ -16,11 +16,11 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 …
 
-<a name="_arc" href="#_arc">#</a> <i>arc</i>(<i>d</i>, <i>i</i>)
+<a name="_arc" href="#_arc">#</a> <i>arc</i>(…)
 
 …
 
-<a name="arc_centroid" href="#arc_centroid">#</a> <i>arc</i>.<b>centroid</b>(<i>d</i>, <i>i</i>)
+<a name="arc_centroid" href="#arc_centroid">#</a> <i>arc</i>.<b>centroid</b>(…)
 
 …
 
@@ -54,14 +54,47 @@ Note: to be consistent with [*arc*](#_arc), the arc’s associated accessors mus
 
 …
 
-The recommended minimum inner radius when using padding is outerRadius *
-padAngle / sin(θ), where θ is the angle of the smallest arc (without padding).
-For example, if the outerRadius is 200 pixels and the padAngle is 0.02 radians,
-a reasonable θ is 0.04 radians, and a reasonable innerRadius is 100 pixels.
+The recommended minimum *innerRadius* when using padding is *outerRadius* \* *padAngle* / sin(θ), where θ is the angle of the smallest arc (without padding). For example, if the *outerRadius* is 200 pixels and the *padAngle* is 0.02 radians, a reasonable θ is 0.04 radians, and a reasonable *innerRadius* is 100 pixels.
 
-See also *pie*.padAngle. (From which module?)
+See also [*pie*.padAngle](#pie_padAngle).
 
 <a name="arc_context" href="#arc_context">#</a> <i>arc</i>.<b>context</b>([<i>context</i>])
+
+…
+
+### Pies
+
+…
+
+<a name="pie" href="#pie">#</a> <b>pie</b>()
+
+…
+
+<a name="_pie" href="#_pie">#</a> <i>pie</i>(…)
+
+…
+
+<a name="pie_value" href="#pie_value">#</a> <i>pie</i>.<b>value</b>([<i>value</i>])
+
+…
+
+<a name="pie_sort" href="#pie_sort">#</a> <i>pie</i>.<b>sort</b>([<i>compare</i>])
+
+…
+
+<a name="pie_sortValues" href="#pie_sortValues">#</a> <i>pie</i>.<b>sortValues</b>([<i>compare</i>])
+
+…
+
+<a name="pie_startAngle" href="#pie_startAngle">#</a> <i>pie</i>.<b>startAngle</b>([<i>angle</i>])
+
+…
+
+<a name="pie_endAngle" href="#pie_endAngle">#</a> <i>pie</i>.<b>endAngle</b>([<i>angle</i>])
+
+…
+
+<a name="pie_padAngle" href="#pie_padAngle">#</a> <i>pie</i>.<b>padAngle</b>([<i>angle</i>])
 
 …
 
@@ -244,6 +277,10 @@ Note: not implemented by closed curves, such as <a href="#linearClosed">linearCl
 …
 
 <a name="symbol" href="#symbol">#</a> <b>symbol</b>()
+
+…
+
+<a name="_symbol" href="#_symbol">#</a> <i>symbol</i>(…)
 
 …
 
