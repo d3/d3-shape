@@ -13,7 +13,7 @@ function descending(a, b) {
 export default function() {
   var value = identity,
       sortValues = descending,
-      sortData = null,
+      sort = null,
       startAngle = constant(0),
       endAngle = constant(tau),
       padAngle = constant(0);
