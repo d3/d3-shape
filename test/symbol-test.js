@@ -12,6 +12,20 @@ tape("symbol() returns a default symbol shape", function(test) {
   test.end();
 });
 
+tape("symbol().size(f)(…) propagates the context and arguments to the specified function", function(test) {
+  var expected = {that: {}, args: [42]}, actual;
+  shape.symbol().size(function() { actual = {that: this, args: [].slice.call(arguments)}; return 64; }).apply(expected.that, expected.args);
+  test.deepEqual(actual, expected);
+  test.end();
+});
+
+tape("symbol().type(f)(…) propagates the context and arguments to the specified function", function(test) {
+  var expected = {that: {}, args: [42]}, actual;
+  shape.symbol().type(function() { actual = {that: this, args: [].slice.call(arguments)}; return shape.circle; }).apply(expected.that, expected.args);
+  test.deepEqual(actual, expected);
+  test.end();
+});
+
 tape("symbol.size(size) observes the specified size function", function(test) {
   var size = function(d, i) { return d.z * 2 + i; },
       s = shape.symbol().size(size);

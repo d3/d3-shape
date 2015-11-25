@@ -20,10 +20,10 @@ export default function() {
       size = constant(64),
       context = null;
 
-  function symbol(d, i) {
+  function symbol() {
     var buffer;
     if (!context) context = buffer = path();
-    type(d, i).draw(context, +size(d, i));
+    type.apply(this, arguments).draw(context, +size.apply(this, arguments));
     if (buffer) return context = null, buffer + "" || null;
   }
 

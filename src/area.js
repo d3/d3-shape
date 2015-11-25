@@ -28,7 +28,7 @@ export default function() {
     if (!context) output = curve(buffer = path());
 
     for (i = 0; i <= n; ++i) {
-      if (!(i < n && defined(d = data[i], i)) === defined0) {
+      if (!(i < n && defined(d = data[i], i, data)) === defined0) {
         if (defined0 = !defined0) {
           j = i;
           output.areaStart();
@@ -44,8 +44,8 @@ export default function() {
         }
       }
       if (defined0) {
-        x0z[i] = +x0(d, i), y0z[i] = +y0(d, i);
-        output.point(x1 ? +x1(d, i) : x0z[i], y1 ? +y1(d, i) : y0z[i]);
+        x0z[i] = +x0(d, i, data), y0z[i] = +y0(d, i, data);
+        output.point(x1 ? +x1(d, i, data) : x0z[i], y1 ? +y1(d, i, data) : y0z[i]);
       }
     }
 

@@ -90,13 +90,13 @@ export default function() {
       context = null,
       output = null;
 
-  function arc(d, i) {
+  function arc() {
     var buffer,
         r,
-        r0 = +innerRadius(d, i),
-        r1 = +outerRadius(d, i),
-        a0 = startAngle(d, i) - piHalf,
-        a1 = endAngle(d, i) - piHalf,
+        r0 = +innerRadius.apply(this, arguments),
+        r1 = +outerRadius.apply(this, arguments),
+        a0 = startAngle.apply(this, arguments) - piHalf,
+        a1 = endAngle.apply(this, arguments) - piHalf,
         da = Math.abs(a1 - a0),
         cw = a1 > a0;
 
@@ -126,9 +126,9 @@ export default function() {
           a10 = a1,
           da0 = da,
           da1 = da,
-          ap = padAngle(d, i) / 2,
-          rp = (ap > 0) && (padRadius ? +padRadius(d, i) : Math.sqrt(r0 * r0 + r1 * r1)),
-          rc = Math.min(Math.abs(r1 - r0) / 2, +cornerRadius(d, i)),
+          ap = padAngle.apply(this, arguments) / 2,
+          rp = (ap > 0) && (padRadius ? +padRadius.apply(this, arguments) : Math.sqrt(r0 * r0 + r1 * r1)),
+          rc = Math.min(Math.abs(r1 - r0) / 2, +cornerRadius.apply(this, arguments)),
           rc0 = rc,
           rc1 = rc;
 
@@ -223,9 +223,9 @@ export default function() {
     if (buffer) return context = null, buffer + "" || null;
   }
 
-  arc.centroid = function(d, i) {
-    var r = (+innerRadius(d, i) + +outerRadius(d, i)) / 2,
-        a = (+startAngle(d, i) + +endAngle(d, i)) / 2 - Math.PI / 2;
+  arc.centroid = function() {
+    var r = (+innerRadius.apply(this, arguments) + +outerRadius.apply(this, arguments)) / 2,
+        a = (+startAngle.apply(this, arguments) + +endAngle.apply(this, arguments)) / 2 - pi / 2;
     return [Math.cos(a) * r, Math.sin(a) * r];
   };
 

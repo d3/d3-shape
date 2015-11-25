@@ -22,11 +22,11 @@ export default function() {
     if (!context) output = curve(buffer = path());
 
     for (i = 0; i <= n; ++i) {
-      if (!(i < n && defined(d = data[i], i)) === defined0) {
+      if (!(i < n && defined(d = data[i], i, data)) === defined0) {
         if (defined0 = !defined0) output.lineStart();
         else output.lineEnd();
       }
-      if (defined0) output.point(+x(d, i), +y(d, i));
+      if (defined0) output.point(+x(d, i, data), +y(d, i, data));
     }
 
     if (buffer) return output = null, buffer + "" || null;

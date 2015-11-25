@@ -3,6 +3,83 @@ var tape = require("tape"),
 
 require("./pathEqual");
 
+tape("arc().innerRadius(f)(…) propagates the context and arguments to the specified function", function(test) {
+  var expected = {that: {}, args: [42]}, actual;
+  shape.arc().innerRadius(function() { actual = {that: this, args: [].slice.call(arguments)}; }).apply(expected.that, expected.args);
+  test.deepEqual(actual, expected);
+  test.end();
+});
+
+tape("arc().outerRadius(f)(…) propagates the context and arguments to the specified function", function(test) {
+  var expected = {that: {}, args: [42]}, actual;
+  shape.arc().outerRadius(function() { actual = {that: this, args: [].slice.call(arguments)}; }).apply(expected.that, expected.args);
+  test.deepEqual(actual, expected);
+  test.end();
+});
+
+tape("arc().cornerRadius(f)(…) propagates the context and arguments to the specified function", function(test) {
+  var expected = {that: {}, args: [42]}, actual;
+  shape.arc().outerRadius(100).cornerRadius(function() { actual = {that: this, args: [].slice.call(arguments)}; }).apply(expected.that, expected.args);
+  test.deepEqual(actual, expected);
+  test.end();
+});
+
+tape("arc().startAngle(f)(…) propagates the context and arguments to the specified function", function(test) {
+  var expected = {that: {}, args: [42]}, actual;
+  shape.arc().startAngle(function() { actual = {that: this, args: [].slice.call(arguments)}; }).apply(expected.that, expected.args);
+  test.deepEqual(actual, expected);
+  test.end();
+});
+
+tape("arc().endAngle(f)(…) propagates the context and arguments to the specified function", function(test) {
+  var expected = {that: {}, args: [42]}, actual;
+  shape.arc().endAngle(function() { actual = {that: this, args: [].slice.call(arguments)}; }).apply(expected.that, expected.args);
+  test.deepEqual(actual, expected);
+  test.end();
+});
+
+tape("arc().padAngle(f)(…) propagates the context and arguments to the specified function", function(test) {
+  var expected = {that: {}, args: [42]}, actual;
+  shape.arc().outerRadius(100).startAngle(Math.PI / 2).padAngle(function() { actual = {that: this, args: [].slice.call(arguments)}; }).apply(expected.that, expected.args);
+  test.deepEqual(actual, expected);
+  test.end();
+});
+
+tape("arc().padRadius(f)(…) propagates the context and arguments to the specified function", function(test) {
+  var expected = {that: {}, args: [42]}, actual;
+  shape.arc().outerRadius(100).startAngle(Math.PI / 2).padAngle(0.1).padRadius(function() { actual = {that: this, args: [].slice.call(arguments)}; }).apply(expected.that, expected.args);
+  test.deepEqual(actual, expected);
+  test.end();
+});
+
+tape("arc().innerRadius(f).centroid(…) propagates the context and arguments to the specified function", function(test) {
+  var expected = {that: {}, args: [42]}, actual;
+  shape.arc().innerRadius(function() { actual = {that: this, args: [].slice.call(arguments)}; }).centroid.apply(expected.that, expected.args);
+  test.deepEqual(actual, expected);
+  test.end();
+});
+
+tape("arc().outerRadius(f).centroid(…) propagates the context and arguments to the specified function", function(test) {
+  var expected = {that: {}, args: [42]}, actual;
+  shape.arc().outerRadius(function() { actual = {that: this, args: [].slice.call(arguments)}; }).centroid.apply(expected.that, expected.args);
+  test.deepEqual(actual, expected);
+  test.end();
+});
+
+tape("arc().startAngle(f).centroid(…) propagates the context and arguments to the specified function", function(test) {
+  var expected = {that: {}, args: [42]}, actual;
+  shape.arc().startAngle(function() { actual = {that: this, args: [].slice.call(arguments)}; }).centroid.apply(expected.that, expected.args);
+  test.deepEqual(actual, expected);
+  test.end();
+});
+
+tape("arc().endAngle(f).centroid(…) propagates the context and arguments to the specified function", function(test) {
+  var expected = {that: {}, args: [42]}, actual;
+  shape.arc().endAngle(function() { actual = {that: this, args: [].slice.call(arguments)}; }).centroid.apply(expected.that, expected.args);
+  test.deepEqual(actual, expected);
+  test.end();
+});
+
 tape("arc().innerRadius(0).outerRadius(0) renders a point", function(test) {
   var a = shape.arc().innerRadius(0).outerRadius(0);
   test.pathEqual(a.startAngle(0).endAngle(2 * Math.PI)(), "M0,0Z");

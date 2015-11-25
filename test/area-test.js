@@ -16,6 +16,55 @@ tape("area() returns a default area shape", function(test) {
   test.end();
 });
 
+tape("area.x(f)(data) passes d, i and data to the specified function", function(test) {
+  var data = ["a", "b"], actual = [];
+  shape.area().x(function() { actual.push([].slice.call(arguments)); })(data);
+  test.deepEqual(actual, [["a", 0, data], ["b", 1, data]]);
+  test.end();
+});
+
+tape("area.x0(f)(data) passes d, i and data to the specified function", function(test) {
+  var data = ["a", "b"], actual = [];
+  shape.area().x0(function() { actual.push([].slice.call(arguments)); })(data);
+  test.deepEqual(actual, [["a", 0, data], ["b", 1, data]]);
+  test.end();
+});
+
+tape("area.x1(f)(data) passes d, i and data to the specified function", function(test) {
+  var data = ["a", "b"], actual = [];
+  shape.area().x1(function() { actual.push([].slice.call(arguments)); })(data);
+  test.deepEqual(actual, [["a", 0, data], ["b", 1, data]]);
+  test.end();
+});
+
+tape("area.y(f)(data) passes d, i and data to the specified function", function(test) {
+  var data = ["a", "b"], actual = [];
+  shape.area().y(function() { actual.push([].slice.call(arguments)); })(data);
+  test.deepEqual(actual, [["a", 0, data], ["b", 1, data]]);
+  test.end();
+});
+
+tape("area.y0(f)(data) passes d, i and data to the specified function", function(test) {
+  var data = ["a", "b"], actual = [];
+  shape.area().y0(function() { actual.push([].slice.call(arguments)); })(data);
+  test.deepEqual(actual, [["a", 0, data], ["b", 1, data]]);
+  test.end();
+});
+
+tape("area.y1(f)(data) passes d, i and data to the specified function", function(test) {
+  var data = ["a", "b"], actual = [];
+  shape.area().y1(function() { actual.push([].slice.call(arguments)); })(data);
+  test.deepEqual(actual, [["a", 0, data], ["b", 1, data]]);
+  test.end();
+});
+
+tape("area.defined(f)(data) passes d, i and data to the specified function", function(test) {
+  var data = ["a", "b"], actual = [];
+  shape.area().defined(function() { actual.push([].slice.call(arguments)); })(data);
+  test.deepEqual(actual, [["a", 0, data], ["b", 1, data]]);
+  test.end();
+});
+
 tape("area.x(x)(data) observes the specified function", function(test) {
   var x = function(d) { return d.x; },
       a = shape.area().x(x);

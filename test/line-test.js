@@ -14,6 +14,27 @@ tape("line() returns a default line shape", function(test) {
   test.end();
 });
 
+tape("line.x(f)(data) passes d, i and data to the specified function", function(test) {
+  var data = ["a", "b"], actual = [];
+  shape.line().x(function() { actual.push([].slice.call(arguments)); })(data);
+  test.deepEqual(actual, [["a", 0, data], ["b", 1, data]]);
+  test.end();
+});
+
+tape("line.y(f)(data) passes d, i and data to the specified function", function(test) {
+  var data = ["a", "b"], actual = [];
+  shape.line().y(function() { actual.push([].slice.call(arguments)); })(data);
+  test.deepEqual(actual, [["a", 0, data], ["b", 1, data]]);
+  test.end();
+});
+
+tape("line.defined(f)(data) passes d, i and data to the specified function", function(test) {
+  var data = ["a", "b"], actual = [];
+  shape.line().defined(function() { actual.push([].slice.call(arguments)); })(data);
+  test.deepEqual(actual, [["a", 0, data], ["b", 1, data]]);
+  test.end();
+});
+
 tape("line.x(x)(data) observes the specified function", function(test) {
   var l = shape.line().x(function(d) { return d.x; });
   test.pathEqual(l([{x: 0, 1: 1}, {x: 2, 1: 3}, {x: 4, 1: 5}]), "M0,1L2,3L4,5");
