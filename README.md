@@ -70,7 +70,7 @@ See also [*pie*.padAngle](#pie_padAngle).
 
 …
 
-<a name="_pie" href="#_pie">#</a> <i>pie</i>(…)
+<a name="_pie" href="#_pie">#</a> <i>pie</i>(<i>data</i>)
 
 …
 
