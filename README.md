@@ -91,7 +91,7 @@ function cornerRadius() {
 }
 ```
 
-The corner radius may not be larger than ([outerRadius](#arc_outerRadius) - [innerRadius](#arc_innerRadius)) / 2. In addition, for arcs whose angular span is less than π, the corner radius may be reduced as two adjacent rounded corners intersect; see the [arc corners animation](http://bl.ocks.org/mbostock/b7671cb38efdfa5da3af) for a visual demonstration.
+The corner radius may not be larger than ([outerRadius](#arc_outerRadius) - [innerRadius](#arc_innerRadius)) / 2. In addition, for arcs whose angular span is less than π, the corner radius may be reduced as two adjacent rounded corners intersect. See the [arc corners animation](http://bl.ocks.org/mbostock/b7671cb38efdfa5da3af) for a visual demonstration.
 
 <a name="arc_startAngle" href="#arc_startAngle">#</a> <i>arc</i>.<b>startAngle</b>([<i>angle</i>])
 
@@ -111,7 +111,7 @@ function padAngle() {
 }
 ```
 
-If the [innerRadius](#arc_innerRadius) is small relative to the pad angle, it may not be possible to maintain parallel edges between adjacent arcs. In this case, the inner edge of the arc may collapse to a point, similar to a circular sector. The recommended minimum innerRadius when using padding is outerRadius \* padAngle / sin(θ), where θ is the angular span of the smallest arc before padding. For example, if the outerRadius is 200 pixels and the padAngle is 0.02 radians, a reasonable θ is 0.04 radians, and a reasonable innerRadius is 100 pixels.
+If the [innerRadius](#arc_innerRadius) is small relative to the pad angle, it may not be possible to maintain parallel edges between adjacent arcs. In this case, the inner edge of the arc may collapse to a point, similar to a circular sector. The recommended minimum innerRadius when using padding is outerRadius \* padAngle / sin(θ), where θ is the angular span of the smallest arc before padding. For example, if the outerRadius is 200 pixels and the padAngle is 0.02 radians, a reasonable θ is 0.04 radians, and a reasonable innerRadius is 100 pixels. See the [arc padding animation](http://bl.ocks.org/mbostock/31ec1817b2be2660c453) for a visual demonstration.
 
 Often, the pad angle is not set directly on the arc shape, but is instead computed by the [pie shape](#pies) so as to ensure that the relative area of padded arcs is preserved; see [*pie*.padAngle](#pie_padAngle).
 
