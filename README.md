@@ -87,7 +87,7 @@ Note: to be consistent with [*arc*](#_arc), the arc’s associated accessors mus
 
 …
 
-The recommended minimum *innerRadius* when using padding is *outerRadius* \* *padAngle* / sin(θ), where θ is the angle of the smallest arc (without padding). For example, if the *outerRadius* is 200 pixels and the *padAngle* is 0.02 radians, a reasonable θ is 0.04 radians, and a reasonable *innerRadius* is 100 pixels.
+The recommended minimum innerRadius when using padding is outerRadius \* padAngle / sin(θ), where θ is the angle of the smallest arc (without padding). For example, if the outerRadius is 200 pixels and the padAngle is 0.02 radians, a reasonable θ is 0.04 radians, and a reasonable innerRadius is 100 pixels.
 
 See also [*pie*.padAngle](#pie_padAngle).
 
