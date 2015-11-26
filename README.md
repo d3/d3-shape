@@ -43,7 +43,20 @@ Constructs a new arc generator with the default settings.
 
 <a name="_arc" href="#_arc">#</a> <i>arc</i>(<i>arguments…</i>)
 
-Generates an arc for the given *arguments*. The *arguments* are arbitrary; they are simply propagated to the associated accessor functions along with the `this` object. For example, if the radii and angles are defined as constants, you can generate an arc without any arguments:
+Generates an arc for the given *arguments*. The *arguments* are arbitrary; they are simply propagated to the associated accessor functions along with the `this` object. For example, with the default settings:
+
+```js
+var a = arc();
+
+a({
+  innerRadius: 0,
+  outerRadius: 100,
+  startAngle: 0,
+  endAngle: Math.PI / 2
+}); // "M0,-100A100,100,0,0,1,100,0L0,0Z"
+```
+
+Or, if the radii and angles are defined as constants, you can generate an arc without any arguments:
 
 ```js
 var a = arc()
