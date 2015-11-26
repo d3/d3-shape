@@ -54,12 +54,13 @@ Constructs a new arc generator with the default settings.
 Generates an arc for the given *arguments*. The *arguments* are arbitrary; they are simply propagated to the associated accessor functions along with the `this` object. For example, if the radii and angles are defined as constants, you can generate an arc without any arguments:
 
 ```js
-arc()
+var a = arc()
     .innerRadius(0)
     .outerRadius(100)
     .startAngle(0)
-    .endAngle(Math.PI / 2)
-    (); // "M0,-100A100,100,0,0,1,100,0L0,0Z"
+    .endAngle(Math.PI / 2);
+
+a(); // "M0,-100A100,100,0,0,1,100,0L0,0Z"
 ```
 
 If there is a [context](#arc_context), then the arc is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls and this function returns undefined. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated arc is returned.
