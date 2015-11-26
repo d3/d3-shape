@@ -55,7 +55,7 @@ Generates an arc for the given *arguments*. The *arguments* are arbitrary; they 
 
 <a name="arc_centroid" href="#arc_centroid">#</a> <i>arc</i>.<b>centroid</b>(<i>arguments…</i>)
 
-Computes the midpoint of the center line of the arc that would be [generated](#_arc) by the given *arguments*. The *arguments* are arbitrary; they are simply propagated to the associated accessor functions along with the `this` object. To be consistent, the accessors must be deterministic (*i.e.*, return the same value given the same arguments). The midpoint is defined as ([startAngle](#arc_startAngle) + [endAngle](#arc_endAngle)) / 2 and ([innerRadius](#arc_innerRadius) + [outerRadius](#arc_outerRadius)) / 2. This is **not the true centroid** (geometric center) of the arc, which may be outside the arc. This method is merely a convenience for positioning a text label for the arc.
+Computes the midpoint of the center line of the arc that would be [generated](#_arc) by the given *arguments*. The *arguments* are arbitrary; they are simply propagated to the associated accessor functions along with the `this` object. To be consistent, the accessors must be deterministic (*i.e.*, return the same value given the same arguments). The midpoint is defined as ([startAngle](#arc_startAngle) + [endAngle](#arc_endAngle)) / 2 and ([innerRadius](#arc_innerRadius) + [outerRadius](#arc_outerRadius)) / 2. This is **not the true geometric center** of the arc, which may be outside the arc. This method is merely a convenience for positioning a text label for the arc.
 
 <a name="arc_innerRadius" href="#arc_innerRadius">#</a> <i>arc</i>.<b>innerRadius</b>([<i>radius</i>])
 
