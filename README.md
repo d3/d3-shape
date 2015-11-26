@@ -1,8 +1,8 @@
 # d3-shape
 
-Visualizations typically consist of multiple graphical *marks*, such as arcs, lines and areas. While some of these marks are simple enough to generate manually using [SVG path data](http://www.w3.org/TR/SVG/paths.html#PathData) or [Canvas path methods](http://www.w3.org/TR/2dcontext/#canvaspathmethods), such as the rectangles that comprise a bar chart, other shapes are complex, such as rounded annular sectors and centripetal Catmull–Rom splines. The d3-shape module provides a variety of shape generators for your convenience.
+Visualizations typically consist of many graphical marks, such as [arcs](#arcs), [lines](#lines) and [areas](#areas). While some marks are easy enough to generate using [SVG path data](http://www.w3.org/TR/SVG/paths.html#PathData) or [Canvas path methods](http://www.w3.org/TR/2dcontext/#canvaspathmethods) directly, such as the rectangles of a bar chart, other shapes are complex, such as rounded annular sectors and centripetal Catmull–Rom splines. The d3-shape module provides a variety of shape generators for your convenience.
 
-As with other aspects of D3, shapes are driven by data: each shape generator has customizable accessors that control how input data is transformed into a visual encoding. For example, you might define a line shape by [scaling](https://github.com/d3/d3-scale) the `time` and `value` fields of your data to fit the chart dimensions:
+As with other aspects of D3, these shapes are driven by data: each shape generator exposes accessors that control how input data is transformed into a visual encoding. For example, you might define a line shape by [scaling](https://github.com/d3/d3-scale) the `time` and `value` fields of your data to fit the chart dimensions:
 
 ```javascript
 var x = scale.time()
@@ -19,7 +19,7 @@ var l = shape.line()
     .curve(shape.catmullRom, 0.5);
 ```
 
-The line shape can then be used to create an SVG path element:
+The line shape `l` can then be used to create an SVG path element:
 
 ```js
 path.datum(data).attr("d", l);
