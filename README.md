@@ -150,11 +150,11 @@ Often, the pad angle is not set directly on the arc generator, but is instead co
 
 <a name="arc_padRadius" href="#arc_padRadius">#</a> <i>arc</i>.<b>padRadius</b>([<i>radius</i>])
 
-If *radius* is specified, sets the pad radius to the specified function or constant and returns this arc generator. If *radius* is not specified, returns the current pad radius accessor, which defaults to `null`, indicating that the pad radius should be automatically computed as sqrt([innerRadius](#arc_innerRadius) * innerRadius + [outerRadius](#arc_outerRadius) * outerRadius). The pad radius affects the fixed linear distance separating adjacent arcs, defined as padRadius * [padAngle](#arc_padAngle).
+If *radius* is specified, sets the pad radius to the specified function or constant and returns this arc generator. If *radius* is not specified, returns the current pad radius accessor, which defaults to null, indicating that the pad radius should be automatically computed as sqrt([innerRadius](#arc_innerRadius) * innerRadius + [outerRadius](#arc_outerRadius) * outerRadius). The pad radius affects the fixed linear distance separating adjacent arcs, defined as padRadius * [padAngle](#arc_padAngle).
 
 <a name="arc_context" href="#arc_context">#</a> <i>arc</i>.<b>context</b>([<i>context</i>])
 
-…
+If *context* is specified, sets the context and returns this arc generator. If *context* is not specified, returns the current context, which defaults to null. If the context is not null, then the [generated](#_arc) arc is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated arc is returned.
 
 ### Pies
 
