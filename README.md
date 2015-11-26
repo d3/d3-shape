@@ -111,7 +111,7 @@ function padAngle() {
 }
 ```
 
-If the [innerRadius](#arc_innerRadius) is small relative to the pad angle, it may not be possible to maintain parallel edges between adjacent arcs. In this case, the inner edge of the arc may collapse to a point, similar to a circular sector. The recommended minimum innerRadius when using padding is outerRadius \* padAngle / sin(θ), where θ is the angular span of the smallest arc before padding. For example, if the outerRadius is 200 pixels and the padAngle is 0.02 radians, a reasonable θ is 0.04 radians, and a reasonable innerRadius is 100 pixels. See the [arc padding animation](http://bl.ocks.org/mbostock/31ec1817b2be2660c453) for a visual demonstration.
+If the [innerRadius](#arc_innerRadius) or angular span is small relative to the pad angle, it may not be possible to maintain parallel edges between adjacent arcs. In this case, the inner edge of the arc may collapse to a point, similar to a circular sector. The recommended minimum innerRadius when using padding is outerRadius \* padAngle / sin(θ), where θ is the angular span of the smallest arc before padding. For example, if the outerRadius is 200 pixels and the padAngle is 0.02 radians, a reasonable θ is 0.04 radians, and a reasonable innerRadius is 100 pixels. See the [arc padding animation](http://bl.ocks.org/mbostock/31ec1817b2be2660c453) for a visual demonstration.
 
 Often, the pad angle is not set directly on the arc shape, but is instead computed by the [pie shape](#pies) so as to ensure that the relative area of padded arcs is preserved; see [*pie*.padAngle](#pie_padAngle).
 
