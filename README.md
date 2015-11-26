@@ -39,7 +39,9 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 ### Arcs
 
-…
+The arc shape generates a circular or annular sector for the input datum, as is common in pie or donut charts. (If the difference between the [start](#arc_startAngle) and [end](#arc_endAngle) is greater than τ, the arc shape will generate a complete circle or annulus.) Arcs may be optionally have [rounded corners](#arc_cornerRadius) and [angular padding](#arc_padAngle).
+
+See also the [pie shape](#pies), which computes the appropriate angles to represent an array of data as a pie or donut chart; these angles are then passed to the arc shape.
 
 <a name="arc" href="#arc">#</a> <b>arc</b>()
 
