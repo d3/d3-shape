@@ -326,6 +326,10 @@ Curves are typically not used directly, instead implementing paths for [lines](#
 
 …
 
+<a name="monotone" href="#monotone">#</a> <b>monotone</b>(<i>context</i>)
+
+…
+
 <a name="natural" href="#natural">#</a> <b>natural</b>(<i>context</i>)
 
 …
