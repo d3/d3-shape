@@ -1,6 +1,35 @@
 # d3-shape
 
-…
+Visualizations typically consist of multiple graphical *marks*, such as arcs, lines and areas. While some of these marks are simple enough to generate manually using [SVG path data](http://www.w3.org/TR/SVG/paths.html#PathData) or [Canvas path methods](http://www.w3.org/TR/2dcontext/#canvaspathmethods), such as the rectangles that comprise a bar chart, other shapes are complex, such as rounded annular sectors and centripetal Catmull–Rom splines. The d3-shape module provides a variety of shape generators for your convenience.
+
+As with other aspects of D3, shapes are driven by data: each shape generator has customizable accessors that control how input data is transformed into a visual encoding. For example, you might define a line shape by [scaling](https://github.com/d3/d3-scale) the `time` and `value` fields of your data to fit the chart dimensions:
+
+```javascript
+var x = scale.time()
+    .domain([new Date(2015, 0, 1), new Date(2016, 0, 1)])
+    .range([0, width]);
+
+var y = scale.linear()
+    .domain([0, 100])
+    .range([height, 0]);
+
+var l = shape.line()
+    .x(function(d) { return x(d.time); })
+    .y(function(d) { return y(d.value); })
+    .curve(shape.catmullRom, 0.5);
+```
+
+The line shape can then be used to create an SVG path element:
+
+```js
+path.datum(data).attr("d", l);
+```
+
+You can also use it to render to a Canvas 2D context:
+
+```js
+l.context(context)(data);
+```
 
 ## Installing
 
