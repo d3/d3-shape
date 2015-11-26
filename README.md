@@ -93,10 +93,6 @@ function cornerRadius() {
 
 The corner radius may not be larger than ([outerRadius](#arc_outerRadius) - [innerRadius](#arc_innerRadius)) / 2. In addition, for arcs whose angular span is less than π, the corner radius may be reduced as two adjacent rounded corners intersect; see the [arc corners animation](http://bl.ocks.org/mbostock/b7671cb38efdfa5da3af) for a visual demonstration.
 
-<a name="arc_padRadius" href="#arc_padRadius">#</a> <i>arc</i>.<b>padRadius</b>([<i>radius</i>])
-
-…
-
 <a name="arc_startAngle" href="#arc_startAngle">#</a> <i>arc</i>.<b>startAngle</b>([<i>angle</i>])
 
 …
@@ -107,11 +103,21 @@ The corner radius may not be larger than ([outerRadius](#arc_outerRadius) - [inn
 
 <a name="arc_padAngle" href="#arc_padAngle">#</a> <i>arc</i>.<b>padAngle</b>([<i>angle</i>])
 
-…
+If *angle* is specified, sets the pad angle to the specified function or constant. If *angle* is not specified, returns the current pad angle accessor, which defaults to:
 
-The recommended minimum innerRadius when using padding is outerRadius \* padAngle / sin(θ), where θ is the angle of the smallest arc (without padding). For example, if the outerRadius is 200 pixels and the padAngle is 0.02 radians, a reasonable θ is 0.04 radians, and a reasonable innerRadius is 100 pixels.
+```js
+function padAngle() {
+  return d && d.padAngle;
+}
+```
 
-See also [*pie*.padAngle](#pie_padAngle).
+If the [innerRadius](#arc_innerRadius) is small relative to the pad angle, it may not be possible to maintain parallel edges between adjacent arcs. In this case, the inner edge of the arc may collapse to a point, similar to a circular sector. The recommended minimum innerRadius when using padding is outerRadius \* padAngle / sin(θ), where θ is the angular span of the smallest arc before padding. For example, if the outerRadius is 200 pixels and the padAngle is 0.02 radians, a reasonable θ is 0.04 radians, and a reasonable innerRadius is 100 pixels.
+
+Often, the pad angle is not set directly on the arc shape, but is instead computed by the [pie shape](#pies) so as to ensure that the relative area of padded arcs is preserved; see [*pie*.padAngle](#pie_padAngle).
+
+<a name="arc_padRadius" href="#arc_padRadius">#</a> <i>arc</i>.<b>padRadius</b>([<i>radius</i>])
+
+If *radius* is specified, sets the pad radius to the specified function or constant. If *radius* is not specified, returns the current pad radius accessor, which defaults to `null`, indicating that the pad radius should be automatically computed as sqrt([innerRadius](#arc_innerRadius) * innerRadius + [outerRadius](#arc_outerRadius) * outerRadius). The pad radius affects the fixed linear distance separating adjacent arcs, defined as padRadius * [padAngle](#arc_padAngle).
 
 <a name="arc_context" href="#arc_context">#</a> <i>arc</i>.<b>context</b>([<i>context</i>])
 
