@@ -41,9 +41,9 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 [<img src="https://cloud.githubusercontent.com/assets/230541/11412848/bb915934-9396-11e5-8a87-44ce0ab4a157.png" width="250" height="250">](http://bl.ocks.org/mbostock/3887235)[<img src="https://cloud.githubusercontent.com/assets/230541/11412847/bb89bcec-9396-11e5-85a0-ee4dfa4aa021.png" width="250" height="250">](http://bl.ocks.org/mbostock/3887193)[<img src="https://cloud.githubusercontent.com/assets/230541/11412846/bb760f4e-9396-11e5-8252-1b8f74bc09f9.png" width="250" height="250">](http://bl.ocks.org/mbostock/aff9e559c5c9968b7ac6)
 
-The arc shape generates a [circular](https://en.wikipedia.org/wiki/Circular_sector) or [annular](https://en.wikipedia.org/wiki/Annulus_\(mathematics\)) sector, as in a pie or donut chart. If the difference between the [start](#arc_startAngle) and [end](#arc_endAngle) angles (the *angular span*) is greater than [τ](https://en.wikipedia.org/wiki/Turn_\(geometry\)#Tau_proposal), the arc shape will generate a complete circle or annulus. Arcs may be optionally have [rounded corners](#arc_cornerRadius) and [angular padding](#arc_padAngle).
+The arc shape generates a [circular](https://en.wikipedia.org/wiki/Circular_sector) or [annular](https://en.wikipedia.org/wiki/Annulus_\(mathematics\)) sector, as in a pie or donut chart. If the difference between the [start](#arc_startAngle) and [end](#arc_endAngle) angles (the *angular span*) is greater than [τ](https://en.wikipedia.org/wiki/Turn_\(geometry\)#Tau_proposal), the arc shape will generate a complete circle or annulus. Arcs may optionally have [rounded corners](#arc_cornerRadius) and [angular padding](#arc_padAngle).
 
-See also the [pie shape](#pies), which computes the appropriate angles to represent an array of data as a pie or donut chart; these angles are then passed to the arc shape.
+See also the [pie shape](#pies), which computes the appropriate angles to represent an array of data as a pie or donut chart; these angles can then be passed to the arc shape.
 
 <a name="arc" href="#arc">#</a> <b>arc</b>()
 
@@ -55,7 +55,7 @@ Generates an arc for the given *arguments*. The *arguments* are arbitrary; they 
 
 <a name="arc_centroid" href="#arc_centroid">#</a> <i>arc</i>.<b>centroid</b>(<i>arguments…</i>)
 
-Computes the midpoint of the center line of the arc that would be [generated](#_arc) by the given *arguments*. The *arguments* are arbitrary; they are simply propagated to the associated accessor functions along with the `this` object. To be consistent, the accessors must be deterministic (*i.e.*, return the same value given the same arguments). The midpoint is defined as ([startAngle](#arc_startAngle) + [endAngle](#arc_endAngle)) / 2 and ([innerRadius](#arc_innerRadius) + [outerRadius](#arc_outerRadius)) / 2. This is **not the true geometric center** of the arc, which may be outside the arc; this method is intended as a convenience for positioning a text label.
+Computes the midpoint of the center line of the arc that would be [generated](#_arc) by the given *arguments*. The *arguments* are arbitrary; they are simply propagated to the associated accessor functions along with the `this` object. To be consistent, the accessors must be deterministic, *i.e.*, return the same value given the same arguments. The midpoint is defined as ([startAngle](#arc_startAngle) + [endAngle](#arc_endAngle)) / 2 and ([innerRadius](#arc_innerRadius) + [outerRadius](#arc_outerRadius)) / 2. This is **not the geometric center** of the arc, which may be outside the arc; this method is merely a convenience for positioning labels.
 
 <a name="arc_innerRadius" href="#arc_innerRadius">#</a> <i>arc</i>.<b>innerRadius</b>([<i>radius</i>])
 
@@ -95,9 +95,13 @@ The corner radius may not be larger than ([outerRadius](#arc_outerRadius) - [inn
 
 <a name="arc_startAngle" href="#arc_startAngle">#</a> <i>arc</i>.<b>startAngle</b>([<i>angle</i>])
 
+The *angle* is specified in radians, with 0 at -*y* (12 o’clock).
+
 …
 
 <a name="arc_endAngle" href="#arc_endAngle">#</a> <i>arc</i>.<b>endAngle</b>([<i>angle</i>])
+
+The *angle* is specified in radians, with 0 at -*y* (12 o’clock).
 
 …
 
