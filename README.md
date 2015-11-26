@@ -1,6 +1,6 @@
 # d3-shape
 
-Visualizations typically consist of many graphical marks, such as [symbols](#symbols), [arcs](#arcs), [pies](#pies), [lines](#lines) and [areas](#areas). While some marks are easy enough to generate using [SVG path data](http://www.w3.org/TR/SVG/paths.html#PathData) or [Canvas path methods](http://www.w3.org/TR/2dcontext/#canvaspathmethods) directly, such as the rectangles of a bar chart, other shapes are complex, such as rounded annular sectors and centripetal Catmull–Rom splines. This module provides a variety of shape generators for your convenience.
+Visualizations typically consist of many graphical marks, such as [symbols](#symbols), [arcs](#arcs), [pies](#pies), [lines](#lines) and [areas](#areas). While the rectangles of a bar chart may be easy enough to generate directly using [SVG path data](http://www.w3.org/TR/SVG/paths.html#PathData) or [Canvas path methods](http://www.w3.org/TR/2dcontext/#canvaspathmethods), other shapes are complex, such as rounded annular sectors and centripetal Catmull–Rom splines. This module provides a variety of shape generators for your convenience.
 
 As with other aspects of D3, these shapes are driven by data: each shape generator exposes accessors that control how input data is transformed into a visual representation. For example, you might define a line shape by [linearly scaling](https://github.com/d3/d3-scale) the `time` and `value` fields of your data to fit the chart:
 
