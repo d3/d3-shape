@@ -95,15 +95,27 @@ The corner radius may not be larger than ([outerRadius](#arc_outerRadius) - [inn
 
 <a name="arc_startAngle" href="#arc_startAngle">#</a> <i>arc</i>.<b>startAngle</b>([<i>angle</i>])
 
-The *angle* is specified in radians, with 0 at -*y* (12 o’clock).
+If *angle* is specified, sets the start angle to the specified function or constant. If *angle* is not specified, returns the current start angle accessor, which defaults to:
 
-…
+```js
+function startAngle(d) {
+  return d.startAngle;
+}
+```
+
+The *angle* is specified in radians, with 0 at -*y* (12 o’clock) and positive angles proceeding clockwise. If |endAngle - startAngle| ≥ τ, a complete circle or annulus is generated rather than a sector.
 
 <a name="arc_endAngle" href="#arc_endAngle">#</a> <i>arc</i>.<b>endAngle</b>([<i>angle</i>])
 
-The *angle* is specified in radians, with 0 at -*y* (12 o’clock).
+If *angle* is specified, sets the end angle to the specified function or constant. If *angle* is not specified, returns the current end angle accessor, which defaults to:
 
-…
+```js
+function endAngle(d) {
+  return d.endAngle;
+}
+```
+
+The *angle* is specified in radians, with 0 at -*y* (12 o’clock) and positive angles proceeding clockwise. If |endAngle - startAngle| ≥ τ, a complete circle or annulus is generated rather than a sector.
 
 <a name="arc_padAngle" href="#arc_padAngle">#</a> <i>arc</i>.<b>padAngle</b>([<i>angle</i>])
 
