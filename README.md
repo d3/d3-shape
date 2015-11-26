@@ -4,16 +4,8 @@ Visualizations typically consist of many graphical marks, such as [symbols](#sym
 
 As with other aspects of D3, these shapes are driven by data: each shape generator exposes accessors that control how input data is transformed into a visual representation. For example, you might define a line shape by [linearly scaling](https://github.com/d3/d3-scale) the `time` and `value` fields of your data to fit the chart:
 
-```javascript
-var x = d3_scale.time()
-    .domain([new Date(2015, 0, 1), new Date(2016, 0, 1)])
-    .range([0, width]);
-
-var y = d3_scale.linear()
-    .domain([0, 100])
-    .range([height, 0]);
-
-var l = d3_shape.line()
+```js
+var l = line()
     .x(function(d) { return x(d.time); })
     .y(function(d) { return y(d.value); })
     .curve(shape.catmullRom, 0.5);
