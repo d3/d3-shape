@@ -51,7 +51,7 @@ Constructs a new arc generator with the default settings.
 
 <a name="_arc" href="#_arc">#</a> <i>arc</i>(<i>arguments…</i>)
 
-Generates an arc for the given *arguments*. The *arguments* are arbitrary and optional; they are simply passed through to the associated accessor functions. The `this` object is similarly propagated to accessors.
+Generates an arc for the given *arguments*. The *arguments* are arbitrary and optional; they are simply propagated to the associated accessor functions along with the `this` object.
 
 If there is a [context](#arc_context), then the arc is rendered to the context as a sequence of [path methods](http://www.w3.org/TR/2dcontext/#canvaspathmethods) and this functions returns undefined. If there is no context, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated arc is returned.
 
