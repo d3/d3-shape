@@ -56,7 +56,7 @@ a({
 }); // "M0,-100A100,100,0,0,1,100,0L0,0Z"
 ```
 
-Or, if the radii and angles are defined as constants, you can generate an arc without any arguments:
+If the radii and angles are defined as constants, you can generate an arc without any arguments:
 
 ```js
 var a = arc()
@@ -76,7 +76,7 @@ Computes the midpoint of the center line of the arc that would be [generated](#_
 
 <a name="arc_innerRadius" href="#arc_innerRadius">#</a> <i>arc</i>.<b>innerRadius</b>([<i>radius</i>])
 
-If *radius* is specified, sets the inner radius to the specified function or constant. If *radius* is not specified, returns the current inner radius accessor, which defaults to:
+If *radius* is specified, sets the inner radius to the specified function or constant and returns this arc shape. If *radius* is not specified, returns the current inner radius accessor, which defaults to:
 
 ```js
 function innerRadius(d) {
@@ -88,7 +88,7 @@ Specifying the inner radius as a function is useful for constructing a stacked p
 
 <a name="arc_outerRadius" href="#arc_outerRadius">#</a> <i>arc</i>.<b>outerRadius</b>([<i>radius</i>])
 
-If *radius* is specified, sets the outer radius to the specified function or constant. If *radius* is not specified, returns the current outer radius accessor, which defaults to:
+If *radius* is specified, sets the outer radius to the specified function or constant and returns this arc shape. If *radius* is not specified, returns the current outer radius accessor, which defaults to:
 
 ```js
 function outerRadius(d) {
@@ -100,7 +100,7 @@ Specifying the outer radius as a function is useful for constructing a coxcomb o
 
 <a name="arc_cornerRadius" href="#arc_cornerRadius">#</a> <i>arc</i>.<b>cornerRadius</b>([<i>radius</i>])
 
-If *radius* is specified, sets the corner radius to the specified function or constant. If *radius* is not specified, returns the current corner radius accessor, which defaults to:
+If *radius* is specified, sets the corner radius to the specified function or constant and returns this arc shape. If *radius* is not specified, returns the current corner radius accessor, which defaults to:
 
 ```js
 function cornerRadius() {
@@ -112,7 +112,7 @@ The corner radius may not be larger than ([outerRadius](#arc_outerRadius) - [inn
 
 <a name="arc_startAngle" href="#arc_startAngle">#</a> <i>arc</i>.<b>startAngle</b>([<i>angle</i>])
 
-If *angle* is specified, sets the start angle to the specified function or constant. If *angle* is not specified, returns the current start angle accessor, which defaults to:
+If *angle* is specified, sets the start angle to the specified function or constant and returns this arc shape. If *angle* is not specified, returns the current start angle accessor, which defaults to:
 
 ```js
 function startAngle(d) {
@@ -124,7 +124,7 @@ The *angle* is specified in radians, with 0 at -*y* (12 o’clock) and positive 
 
 <a name="arc_endAngle" href="#arc_endAngle">#</a> <i>arc</i>.<b>endAngle</b>([<i>angle</i>])
 
-If *angle* is specified, sets the end angle to the specified function or constant. If *angle* is not specified, returns the current end angle accessor, which defaults to:
+If *angle* is specified, sets the end angle to the specified function or constant and returns this arc shape. If *angle* is not specified, returns the current end angle accessor, which defaults to:
 
 ```js
 function endAngle(d) {
@@ -136,7 +136,7 @@ The *angle* is specified in radians, with 0 at -*y* (12 o’clock) and positive 
 
 <a name="arc_padAngle" href="#arc_padAngle">#</a> <i>arc</i>.<b>padAngle</b>([<i>angle</i>])
 
-If *angle* is specified, sets the pad angle to the specified function or constant. If *angle* is not specified, returns the current pad angle accessor, which defaults to:
+If *angle* is specified, sets the pad angle to the specified function or constant and returns this arc shape. If *angle* is not specified, returns the current pad angle accessor, which defaults to:
 
 ```js
 function padAngle() {
@@ -150,7 +150,7 @@ Often, the pad angle is not set directly on the arc shape, but is instead comput
 
 <a name="arc_padRadius" href="#arc_padRadius">#</a> <i>arc</i>.<b>padRadius</b>([<i>radius</i>])
 
-If *radius* is specified, sets the pad radius to the specified function or constant. If *radius* is not specified, returns the current pad radius accessor, which defaults to `null`, indicating that the pad radius should be automatically computed as sqrt([innerRadius](#arc_innerRadius) * innerRadius + [outerRadius](#arc_outerRadius) * outerRadius). The pad radius affects the fixed linear distance separating adjacent arcs, defined as padRadius * [padAngle](#arc_padAngle).
+If *radius* is specified, sets the pad radius to the specified function or constant and returns this arc shape. If *radius* is not specified, returns the current pad radius accessor, which defaults to `null`, indicating that the pad radius should be automatically computed as sqrt([innerRadius](#arc_innerRadius) * innerRadius + [outerRadius](#arc_outerRadius) * outerRadius). The pad radius affects the fixed linear distance separating adjacent arcs, defined as padRadius * [padAngle](#arc_padAngle).
 
 <a name="arc_context" href="#arc_context">#</a> <i>arc</i>.<b>context</b>([<i>context</i>])
 
