@@ -67,15 +67,31 @@ function innerRadius(d) {
 }
 ```
 
-Any arguments (typically `d` and `i`) and context (`this`) are passed from the arc generator through to the accessor function. Specifying the inner radius as a function is useful for constructing a coxcomb or polar bar chart, particularly in conjunction with a [sqrt scale](https://github.com/d3/d3-scale#sqrt). More commonly, a constant inner radius is used for a donut chart, or a constant zero for a pie chart.
+Specifying the inner radius as a function is useful for constructing a stacked polar bar chart, particularly in conjunction with a [sqrt scale](https://github.com/d3/d3-scale#sqrt). More commonly, a constant inner radius is used for a donut chart, or a constant zero for a pie chart. If the outer radius is smaller than the inner radius, the inner and outer radii are swapped.
 
 <a name="arc_outerRadius" href="#arc_outerRadius">#</a> <i>arc</i>.<b>outerRadius</b>([<i>radius</i>])
 
-…
+If *radius* is specified, sets the outer radius to the specified function or constant. If *radius* is not specified, returns the current outer radius accessor, which defaults to:
+
+```js
+function outerRadius(d) {
+  return d.outerRadius;
+}
+```
+
+Specifying the outer radius as a function is useful for constructing a coxcomb or polar bar chart, particularly in conjunction with a [sqrt scale](https://github.com/d3/d3-scale#sqrt). More commonly, a constant outer radius is used for a pie or donut chart. If the outer radius is smaller than the inner radius, the inner and outer radii are swapped.
 
 <a name="arc_cornerRadius" href="#arc_cornerRadius">#</a> <i>arc</i>.<b>cornerRadius</b>([<i>radius</i>])
 
-…
+If *radius* is specified, sets the corner radius to the specified function or constant. If *radius* is not specified, returns the current corner radius accessor, which defaults to:
+
+```js
+function cornerRadius() {
+  return 0;
+}
+```
+
+The corner radius may not be larger than ([outerRadius](#arc_outerRadius) - [innerRadius](#arc_innerRadius)) / 2. In addition, for arcs whose angular span is less than π, the corner radius may be reduced as two adjacent rounded corners intersect; see the [arc corners animation](http://bl.ocks.org/mbostock/b7671cb38efdfa5da3af) for a visual demonstration.
 
 <a name="arc_padRadius" href="#arc_padRadius">#</a> <i>arc</i>.<b>padRadius</b>([<i>radius</i>])
 
