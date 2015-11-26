@@ -52,6 +52,15 @@ tape("arc().padRadius(f)(…) propagates the context and arguments to the specif
   test.end();
 });
 
+tape("arc().centroid(…) computes the midpoint of the center line of the arc", function(test) {
+  var a = shape.arc(), round = function(x) { return Math.round(x * 1e6) / 1e6; };
+  test.deepEqual(a.centroid({innerRadius: 0, outerRadius: 100, startAngle: 0, endAngle: Math.PI}).map(round), [50, 0]);
+  test.deepEqual(a.centroid({innerRadius: 0, outerRadius: 100, startAngle: 0, endAngle: Math.PI / 2}).map(round), [35.355339, -35.355339]);
+  test.deepEqual(a.centroid({innerRadius: 50, outerRadius: 100, startAngle: 0, endAngle: -Math.PI}).map(round), [-75, 0]);
+  test.deepEqual(a.centroid({innerRadius: 50, outerRadius: 100, startAngle: 0, endAngle: -Math.PI / 2}).map(round), [-53.033009, -53.033009]);
+  test.end();
+});
+
 tape("arc().innerRadius(f).centroid(…) propagates the context and arguments to the specified function f", function(test) {
   var expected = {that: {}, args: [42]}, actual;
   shape.arc().innerRadius(function() { actual = {that: this, args: [].slice.call(arguments)}; }).centroid.apply(expected.that, expected.args);
