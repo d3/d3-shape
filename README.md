@@ -47,7 +47,7 @@ See also the [pie shape](#pies), which computes the appropriate angles to repres
 
 <a name="arc" href="#arc">#</a> <b>arc</b>()
 
-…
+Constructs a new arc generator with the default settings.
 
 <a name="_arc" href="#_arc">#</a> <i>arc</i>(…)
 
@@ -61,7 +61,15 @@ Note: to be consistent with [*arc*](#_arc), the arc’s associated accessors mus
 
 <a name="arc_innerRadius" href="#arc_innerRadius">#</a> <i>arc</i>.<b>innerRadius</b>([<i>radius</i>])
 
-…
+If *radius* is specified, sets the inner radius to the specified function or constant. If *radius* is not specified, returns the current inner radius accessor, which defaults to:
+
+```js
+function innerRadius(d) {
+  return d.innerRadius;
+}
+```
+
+Any arguments (typically `d` and `i`) and context (`this`) are passed from the arc generator through to the accessor function. Specifying the inner radius as a function is useful for constructing a coxcomb or polar bar chart, particularly in conjunction with a [sqrt scale](https://github.com/d3/d3-scale#sqrt). More commonly, a constant inner radius is used for a donut chart, or a constant zero for a pie chart.
 
 <a name="arc_outerRadius" href="#arc_outerRadius">#</a> <i>arc</i>.<b>outerRadius</b>([<i>radius</i>])
 
