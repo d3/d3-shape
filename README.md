@@ -35,7 +35,7 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 The arc generator produces a [circular](https://en.wikipedia.org/wiki/Circular_sector) or [annular](https://en.wikipedia.org/wiki/Annulus_\(mathematics\)) sector as in a pie or donut chart. If the difference between the [start](#arc_startAngle) and [end](#arc_endAngle) angles (the *angular span*) is greater than [τ](https://en.wikipedia.org/wiki/Turn_\(geometry\)#Tau_proposal), the arc generator will produce a complete circle or annulus. Arcs may have [rounded corners](#arc_cornerRadius) and [angular padding](#arc_padAngle). Arcs are always centered at ⟨0,0⟩; use a transform (see: [SVG](http://www.w3.org/TR/SVG/coords.html#TransformAttribute), [Canvas](http://www.w3.org/TR/2dcontext/#transformations)) to move the arc to a different position.
 
-See also the [pie generator](#pies), which computes the appropriate angles to represent an array of data as a pie or donut chart; these angles can then be passed to an arc generator.
+See also the [pie generator](#pies), which computes the necessary angles to represent an array of data as a pie or donut chart; these angles can then be passed to an arc generator.
 
 <a name="arc" href="#arc">#</a> <b>arc</b>()
 
@@ -158,7 +158,7 @@ If *context* is specified, sets the context and returns this arc generator. If *
 
 ### Pies
 
-The pie generator does not produce a shape directly, but instead computes the appropriate angles to represent a tabular dataset as a pie or donut chart; these angles can then be passed to the [arc generator](#arcs).
+The pie generator does not produce a shape directly, but instead computes the necessary angles to represent a tabular dataset as a pie or donut chart; these angles can then be passed to an [arc generator](#arcs).
 
 <a name="pie" href="#pie">#</a> <b>pie</b>()
 
@@ -166,24 +166,24 @@ Constructs a new pie generator with the default settings.
 
 <a name="_pie" href="#_pie">#</a> <i>pie</i>(<i>data</i>[, <i>arguments…</i>])
 
-Generates a pie for the given array of *data*, returning an array of objects specifying each datum’s angles. Any additional *arguments* are arbitrary; they are simply propagated to the pie generator’s accessor functions along with the `this` object. The length of the returned array is the same as *data*, and each element *i* in the returned array corresponds to the element *i* in the input data. Each object in the returned array has the following properties:
+Generates a pie for the given array of *data*, returning an array of objects representing each datum’s arc angles. Any additional *arguments* are arbitrary; they are simply propagated to the pie generator’s accessor functions along with the `this` object. The length of the returned array is the same as *data*, and each element *i* in the returned array corresponds to the element *i* in the input data. Each object in the returned array has the following properties:
 
 * `data` - the input datum; the *i*th element in the input data array.
 * `value` - the numeric [value](#pie_value) of the arc.
-* `startAngle` - the start angle of the arc.
-* `endAngle` - the end angle of the arc.
-* `padAngle` - the pad angle of the arc.
+* `startAngle` - the [start angle](#pie_startAngle) of the arc.
+* `endAngle` - the [end angle](#pie_endAngle) of the arc.
+* `padAngle` - the [pad angle](#pie_padAngle) of the arc.
 
 All angles are in radians, with 0 at -*y* (12 o’clock) and positive angles proceeding clockwise. This representation is designed to work with the arc generator’s default [startAngle](#arc_startAngle), [endAngle](#arc_endAngle) and [padAngle](#arc_padAngle) accessors.
 
-Given a small dataset of numbers, here is how to compute the angles to render this data as a pie chart:
+Given a small dataset of numbers, here is how to compute the arc angles to render this data as a pie chart:
 
 ```js
 var data = [1, 1, 2, 3, 5, 8, 13, 21];
 var arcs = pie()(data);
 ```
 
-The first pair of parens, `pie()`, [constructs](#pie) a default pie generator. The second, `pie()(data)`, [invokes](#_pie) this generator on the dataset, returning an array of objects describing each datum’s corresponding arc:
+The first pair of parens, `pie()`, [constructs](#pie) a default pie generator. The second, `pie()(data)`, [invokes](#_pie) this generator on the dataset, returning an array of objects representing each datum’s arc angles:
 
 ```json
 [
@@ -227,8 +227,13 @@ var arcs = pie()
     (data);
 ```
 
-Specifying the inner radius as a function is useful for constructing a stacked polar bar chart, often in conjunction with a [sqrt scale](https://github.com/d3/d3-scale#sqrt). More commonly, a constant inner radius is used for a donut or pie chart. If the outer radius is smaller than the inner radius, the inner and outer radii are swapped.
+You can also [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) your data to values before invoking the pie generator:
 
+```js
+var arcs = pie()(data.map(function(d) { return d.number; }));
+```
+
+The benefit of a value accessor is that the input data remains associated with the returned objects, thereby making it easier to access other fields of the data, for example to set the color of each arc or to add text labels.
 
 <a name="pie_sort" href="#pie_sort">#</a> <i>pie</i>.<b>sort</b>([<i>compare</i>])
 
@@ -246,13 +251,19 @@ Sorting does *not* affect the order of the [returned arcs](#_pie); it merely aff
 
 …
 
+The overall start angle.
+
 <a name="pie_endAngle" href="#pie_endAngle">#</a> <i>pie</i>.<b>endAngle</b>([<i>angle</i>])
 
 …
 
+The overall end angle.
+
 <a name="pie_padAngle" href="#pie_padAngle">#</a> <i>pie</i>.<b>padAngle</b>([<i>angle</i>])
 
 …
+
+The pad angle, to be subtracted from each arc while maintaining relative area.
 
 ### Lines
 
