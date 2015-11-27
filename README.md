@@ -158,29 +158,29 @@ If *context* is specified, sets the context and returns this arc generator. If *
 
 ### Pies
 
-The pie generator does not produce a shape directly, but instead computes the appropriate angles to represent an array of data as a pie or donut chart; these angles can then be passed to the [arc generator](#arcs). For example:
+The pie generator does not produce a shape directly, but instead computes the appropriate angles to represent a tabular dataset as a pie or donut chart; these angles can then be passed to the [arc generator](#arcs). For example:
 
 ```js
 var data = [1, 1, 2, 3, 5, 8, 13, 21];
 var arcs = pie()(data);
 ```
 
-This returns an array of objects:
+Now `arcs` is an array of objects describing each datum’s corresponding arc:
 
 ```json
 [
-  {"data":  1, "value":  1, "startAngle": 6.0504747402470080, "endAngle": 6.1668300237132960, "padAngle": 0},
-  {"data":  1, "value":  1, "startAngle": 6.1668300237132960, "endAngle": 6.2831853071795845, "padAngle": 0},
-  {"data":  2, "value":  2, "startAngle": 5.8177641733144310, "endAngle": 6.0504747402470080, "padAngle": 0},
-  {"data":  3, "value":  3, "startAngle": 5.4686983229155650, "endAngle": 5.8177641733144310, "padAngle": 0},
-  {"data":  5, "value":  5, "startAngle": 4.8869219055841220, "endAngle": 5.4686983229155650, "padAngle": 0},
-  {"data":  8, "value":  8, "startAngle": 3.9560796378538132, "endAngle": 4.8869219055841220, "padAngle": 0},
-  {"data": 13, "value": 13, "startAngle": 2.4434609527920610, "endAngle": 3.9560796378538132, "padAngle": 0},
-  {"data": 21, "value": 21, "startAngle": 0.0000000000000000, "endAngle": 2.4434609527920610, "padAngle": 0}
+  {"data":  1, "value":  1, "startAngle": 6.050474740247008, "endAngle": 6.166830023713296, "padAngle": 0},
+  {"data":  1, "value":  1, "startAngle": 6.166830023713296, "endAngle": 6.283185307179584, "padAngle": 0},
+  {"data":  2, "value":  2, "startAngle": 5.817764173314431, "endAngle": 6.050474740247008, "padAngle": 0},
+  {"data":  3, "value":  3, "startAngle": 5.468698322915565, "endAngle": 5.817764173314431, "padAngle": 0},
+  {"data":  5, "value":  5, "startAngle": 4.886921905584122, "endAngle": 5.468698322915565, "padAngle": 0},
+  {"data":  8, "value":  8, "startAngle": 3.956079637853813, "endAngle": 4.886921905584122, "padAngle": 0},
+  {"data": 13, "value": 13, "startAngle": 2.443460952792061, "endAngle": 3.956079637853813, "padAngle": 0},
+  {"data": 21, "value": 21, "startAngle": 0.000000000000000, "endAngle": 2.443460952792061, "padAngle": 0}
 ]
 ```
 
-Each object has `startAngle` and `endAngle` (and `padAngle`) properties, designed to work with the arc generator’s default [startAngle](#arc_startAngle) and [endAngle](#arc_endAngle) accessors.
+Note that each object has `startAngle`, `endAngle` and `padAngle` properties, designed to work with the arc generator’s default [startAngle](#arc_startAngle), [endAngle](#arc_endAngle) and [padAngle](#arc_padAngle) accessors.
 
 <a name="pie" href="#pie">#</a> <b>pie</b>()
 
@@ -188,7 +188,7 @@ Constructs a new pie generator with the default settings.
 
 <a name="_pie" href="#_pie">#</a> <i>pie</i>(<i>data</i>)
 
-Generates an pie for the given array of *data*.
+Generates a pie for the given array of *data*.
 
 <a name="pie_value" href="#pie_value">#</a> <i>pie</i>.<b>value</b>([<i>value</i>])
 
