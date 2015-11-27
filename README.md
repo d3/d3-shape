@@ -227,7 +227,7 @@ var arcs = pie()
     (data);
 ```
 
-You can also [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) your data to values before invoking the pie generator:
+You can instead [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) your data to values before invoking the pie generator:
 
 ```js
 var arcs = pie()(data.map(function(d) { return d.number; }));
