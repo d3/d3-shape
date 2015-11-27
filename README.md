@@ -166,9 +166,7 @@ Constructs a new pie generator with the default settings.
 
 <a name="_pie" href="#_pie">#</a> <i>pie</i>(<i>data</i>[, <i>arguments…</i>])
 
-Generates a pie for the given array of *data*, returning an array of objects describing each datum’s corresponding arc. Any additional *arguments* are arbitrary; they are simply propagated to the associated accessor functions along with the `this` object.
-
-The length of the returned array is the same as *data*, and each element *i* in the returned array describes the arc for the corresponding element *i* in data. Each object in the returned array has the following properties:
+Generates a pie for the given array of *data*, returning an array of objects describing each datum’s corresponding arc. Any additional *arguments* are arbitrary; they are simply propagated to the associated accessor functions along with the `this` object. The length of the returned array is the same as *data*, and each element *i* in the returned array describes the arc for the corresponding element *i* in data. Each object in the returned array has the following properties:
 
 * `data` - the input datum; the *i*th element in the input data array.
 * `value` - the numeric [value](#pie_value) of the arc.
@@ -176,14 +174,16 @@ The length of the returned array is the same as *data*, and each element *i* in 
 * `endAngle` - the end angle of the arc.
 * `padAngle` - the pad angle of the arc.
 
-All angles are in radians, with 0 at -*y* (12 o’clock) and positive angles proceeding clockwise. For example:
+All angles are in radians, with 0 at -*y* (12 o’clock) and positive angles proceeding clockwise. Note that this representation is designed to work with the arc generator’s default [startAngle](#arc_startAngle), [endAngle](#arc_endAngle) and [padAngle](#arc_padAngle) accessors.
+
+Given a small dataset of numbers, here is how to compute the angles to render this data as a pie chart:
 
 ```js
 var data = [1, 1, 2, 3, 5, 8, 13, 21];
 var arcs = pie()(data);
 ```
 
-The first pair of parens, `pie()`, [constructs](#pie) a pie generator, returning a default pie generator. The second, `pie()(data)`, [invokes](#_pie) this generator on the data, returning an array of objects describing each datum’s corresponding arc:
+The first pair of parens, `pie()`, [constructs](#pie) a default pie generator. The second, `pie()(data)`, [invokes](#_pie) this generator on the dataset, returning an array of objects describing each datum’s corresponding arc:
 
 ```json
 [
@@ -198,7 +198,7 @@ The first pair of parens, `pie()`, [constructs](#pie) a pie generator, returning
 ]
 ```
 
-Note that each object has `startAngle`, `endAngle` and `padAngle` properties, designed to work with the arc generator’s default [startAngle](#arc_startAngle), [endAngle](#arc_endAngle) and [padAngle](#arc_padAngle) accessors.
+Note that returned array is in the same order as the data, even though the pie chart proceeds clockwise starting with the last datum (value 21), as the default [arc order](#pie_sortValues) is descending value.
 
 <a name="pie_value" href="#pie_value">#</a> <i>pie</i>.<b>value</b>([<i>value</i>])
 
@@ -208,9 +208,13 @@ Note that each object has `startAngle`, `endAngle` and `padAngle` properties, de
 
 …
 
+Sorting does *not* affect the order of the [returned arcs](#_pie); it merely affects the computed angles of each arc.
+
 <a name="pie_sortValues" href="#pie_sortValues">#</a> <i>pie</i>.<b>sortValues</b>([<i>compare</i>])
 
 …
+
+Sorting does *not* affect the order of the [returned arcs](#_pie); it merely affects the computed angles of each arc.
 
 <a name="pie_startAngle" href="#pie_startAngle">#</a> <i>pie</i>.<b>startAngle</b>([<i>angle</i>])
 
