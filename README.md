@@ -1,6 +1,6 @@
 # d3-shape
 
-Visualizations typically consist of many graphical marks, such as [symbols](#symbols), [arcs](#arcs), [pies](#pies), [lines](#lines) and [areas](#areas). While the rectangles of a bar chart may be easy enough to generate directly using [SVG](http://www.w3.org/TR/SVG/paths.html#PathData) or [Canvas](http://www.w3.org/TR/2dcontext/#canvaspathmethods), other shapes are complex, such as rounded annular sectors and centripetal Catmull–Rom splines. This module provides a variety of shape generators for your convenience.
+Visualizations typically consist of discrete graphical marks, such as [symbols](#symbols), [arcs](#arcs), [pies](#pies), [lines](#lines) and [areas](#areas). While the rectangles of a bar chart may be easy enough to generate directly using [SVG](http://www.w3.org/TR/SVG/paths.html#PathData) or [Canvas](http://www.w3.org/TR/2dcontext/#canvaspathmethods), other shapes are complex, such as rounded annular sectors and centripetal Catmull–Rom splines. This module provides a variety of shape generators for your convenience.
 
 As with other aspects of D3, these shapes are driven by data: each shape generator exposes accessors that control how the input data is mapped to a visual representation. For example, you might define a line generator by [linearly scaling](https://github.com/d3/d3-scale) the `time` and `value` fields of your data to fit the chart:
 
@@ -11,7 +11,7 @@ var l = line()
     .curve(shape.catmullRom, 0.5);
 ```
 
-The line generator can then be used to create an SVG path element:
+The line generator can then be used to set the `d` attribute of an SVG path element:
 
 ```js
 path.datum(data).attr("d", l);
@@ -33,7 +33,7 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 [<img src="https://cloud.githubusercontent.com/assets/230541/11412848/bb915934-9396-11e5-8a87-44ce0ab4a157.png" width="250" height="250">](http://bl.ocks.org/mbostock/3887235)[<img src="https://cloud.githubusercontent.com/assets/230541/11412847/bb89bcec-9396-11e5-85a0-ee4dfa4aa021.png" width="250" height="250">](http://bl.ocks.org/mbostock/3887193)[<img src="https://cloud.githubusercontent.com/assets/230541/11412846/bb760f4e-9396-11e5-8252-1b8f74bc09f9.png" width="250" height="250">](http://bl.ocks.org/mbostock/aff9e559c5c9968b7ac6)
 
-The arc generator produces a [circular](https://en.wikipedia.org/wiki/Circular_sector) or [annular](https://en.wikipedia.org/wiki/Annulus_\(mathematics\)) sector as in a pie or donut chart. If the difference between the [start](#arc_startAngle) and [end](#arc_endAngle) angles (the *angular span*) is greater than [τ](https://en.wikipedia.org/wiki/Turn_\(geometry\)#Tau_proposal), the arc generator will produce a complete circle or annulus. Arcs may have [rounded corners](#arc_cornerRadius) and [angular padding](#arc_padAngle). Arcs are always centered at ⟨0,0⟩; use a transform to move the arc to a different position.
+The arc generator produces a [circular](https://en.wikipedia.org/wiki/Circular_sector) or [annular](https://en.wikipedia.org/wiki/Annulus_\(mathematics\)) sector as in a pie or donut chart. If the difference between the [start](#arc_startAngle) and [end](#arc_endAngle) angles (the *angular span*) is greater than [τ](https://en.wikipedia.org/wiki/Turn_\(geometry\)#Tau_proposal), the arc generator will produce a complete circle or annulus. Arcs may have [rounded corners](#arc_cornerRadius) and [angular padding](#arc_padAngle). Arcs are always centered at ⟨0,0⟩; use a transform (*i.e.* [`transform` attribute](http://www.w3.org/TR/SVG/coords.html#TransformAttribute) or [`translate` method](http://www.w3.org/TR/2dcontext/#dom-context-2d-translate)) to move the arc to a different position.
 
 See also the [pie generator](#pies), which computes the appropriate angles to represent an array of data as a pie or donut chart; these angles can then be passed to the arc generator.
 
