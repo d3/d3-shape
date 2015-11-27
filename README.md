@@ -166,7 +166,7 @@ Constructs a new pie generator with the default settings.
 
 <a name="_pie" href="#_pie">#</a> <i>pie</i>(<i>data</i>[, <i>arguments…</i>])
 
-Generates a pie for the given array of *data*, returning an array of objects specifying each datum’s angles. Any additional *arguments* are arbitrary; they are simply propagated to the pie generator’s accessor functions along with the `this` object. The length of the returned array is the same as *data*, and each element *i* in the returned array describes the arc for the corresponding element *i* in data. Each object in the returned array has the following properties:
+Generates a pie for the given array of *data*, returning an array of objects specifying each datum’s angles. Any additional *arguments* are arbitrary; they are simply propagated to the pie generator’s accessor functions along with the `this` object. The length of the returned array is the same as *data*, and each element *i* in the returned array corresponds to the element *i* in the input data. Each object in the returned array has the following properties:
 
 * `data` - the input datum; the *i*th element in the input data array.
 * `value` - the numeric [value](#pie_value) of the arc.
@@ -174,7 +174,7 @@ Generates a pie for the given array of *data*, returning an array of objects spe
 * `endAngle` - the end angle of the arc.
 * `padAngle` - the pad angle of the arc.
 
-All angles are in radians, with 0 at -*y* (12 o’clock) and positive angles proceeding clockwise. Note that this representation is designed to work with the arc generator’s default [startAngle](#arc_startAngle), [endAngle](#arc_endAngle) and [padAngle](#arc_padAngle) accessors.
+All angles are in radians, with 0 at -*y* (12 o’clock) and positive angles proceeding clockwise. This representation is designed to work with the arc generator’s default [startAngle](#arc_startAngle), [endAngle](#arc_endAngle) and [padAngle](#arc_padAngle) accessors.
 
 Given a small dataset of numbers, here is how to compute the angles to render this data as a pie chart:
 
@@ -198,7 +198,7 @@ The first pair of parens, `pie()`, [constructs](#pie) a default pie generator. T
 ]
 ```
 
-Note that returned array is in the same order as the data, even though the pie chart proceeds clockwise starting with the last datum (value 21), as the default [arc order](#pie_sortValues) is descending value.
+Note that the returned array is in the same order as the data, even though this pie chart proceeds clockwise from noon starting with the last datum (value 21), due to the default [arc order](#pie_sortValues) being descending value.
 
 <a name="pie_value" href="#pie_value">#</a> <i>pie</i>.<b>value</b>([<i>value</i>])
 
