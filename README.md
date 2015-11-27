@@ -165,7 +165,7 @@ var data = [1, 1, 2, 3, 5, 8, 13, 21];
 var arcs = pie()(data);
 ```
 
-The first set of parens (`pie()`) [constructs](#pie) a pie generator, returning a default pie generator. The second set of parens (`pie()(data)`) [invokes](#_pie) this generator on the data, returning an array of objects describing each datum’s corresponding arc:
+The first set of parens, `pie()`, [constructs](#pie) a pie generator, returning a default pie generator. The second set of parens, `pie()(data)`, [invokes](#_pie) this generator on the data, returning an array of objects describing each datum’s corresponding arc:
 
 ```json
 [
