@@ -158,7 +158,25 @@ If *context* is specified, sets the context and returns this arc generator. If *
 
 ### Pies
 
-The pie generator does not produce a shape directly, but instead computes the appropriate angles to represent a tabular dataset as a pie or donut chart; these angles can then be passed to the [arc generator](#arcs). For example:
+The pie generator does not produce a shape directly, but instead computes the appropriate angles to represent a tabular dataset as a pie or donut chart; these angles can then be passed to the [arc generator](#arcs).
+
+<a name="pie" href="#pie">#</a> <b>pie</b>()
+
+Constructs a new pie generator with the default settings.
+
+<a name="_pie" href="#_pie">#</a> <i>pie</i>(<i>data</i>[, <i>arguments…</i>])
+
+Generates a pie for the given array of *data*, returning an array of objects describing each datum’s corresponding arc. Any additional *arguments* are arbitrary; they are simply propagated to the associated accessor functions along with the `this` object.
+
+The length of the returned array is the same as *data*, and each element *i* in the returned array describes the arc for the corresponding element *i* in data. Each object in the returned array has the following properties:
+
+* `data` - the input datum; the *i*th element in the input data array.
+* `value` - the numeric [value](#pie_value) of the arc.
+* `startAngle` - the start angle of the arc.
+* `endAngle` - the end angle of the arc.
+* `padAngle` - the pad angle of the arc.
+
+All angles are in radians, with 0 at -*y* (12 o’clock) and positive angles proceeding clockwise. For example:
 
 ```js
 var data = [1, 1, 2, 3, 5, 8, 13, 21];
@@ -181,24 +199,6 @@ The first pair of parens, `pie()`, [constructs](#pie) a pie generator, returning
 ```
 
 Note that each object has `startAngle`, `endAngle` and `padAngle` properties, designed to work with the arc generator’s default [startAngle](#arc_startAngle), [endAngle](#arc_endAngle) and [padAngle](#arc_padAngle) accessors.
-
-<a name="pie" href="#pie">#</a> <b>pie</b>()
-
-Constructs a new pie generator with the default settings.
-
-<a name="_pie" href="#_pie">#</a> <i>pie</i>(<i>data</i>[, <i>arguments…</i>])
-
-Generates a pie for the given array of *data*, returning an array of objects describing each datum’s corresponding arc. Any additional *arguments* are arbitrary; they are simply propagated to the associated accessor functions along with the `this` object.
-
-The length of the returned array is the same as *data*, and each element *i* in the returned array describes the arc for the corresponding element *i* in data. Each object in the returned array has the following properties:
-
-* `data` - the input datum; the *i*th element in the input data array.
-* `value` - the numeric [value](#pie_value) of the arc.
-* `startAngle` - the start angle of the arc.
-* `endAngle` - the end angle of the arc.
-* `padAngle` - the pad angle of the arc.
-
-All angles are in radians, with 0 at -*y* (12 o’clock) and positive angles proceeding clockwise.
 
 <a name="pie_value" href="#pie_value">#</a> <i>pie</i>.<b>value</b>([<i>value</i>])
 
