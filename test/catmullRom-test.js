@@ -23,16 +23,16 @@ tape("line.curve(catmullRom, 1)(data) generates the expected path", function(tes
   test.end();
 });
 
-tape("line.curve(catmullRom) uses a default alpha of zero", function(test) {
-  var l = shape.line().curve(shape.catmullRom, 0);
+tape("line.curve(catmullRom) uses a default alpha of 0.5 (centripetal)", function(test) {
+  var l = shape.line().curve(shape.catmullRom, 0.5);
   test.equal(shape.line().curve(shape.catmullRom)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.equal(shape.line().curve(shape.catmullRom, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.equal(shape.line().curve(shape.catmullRom, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.end();
 });
 
-tape("area.curve(catmullRom, 0.5)(data) generates the expected path", function(test) {
-  var a = shape.area().curve(shape.catmullRom, 0.5);
+tape("area.curve(catmullRom, 0)(data) generates the expected path", function(test) {
+  var a = shape.area().curve(shape.catmullRom, 0);
   test.equal(a([]), null);
   test.pathEqual(a([[0, 1]]), "M0,1L0,0Z");
   test.pathEqual(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");
@@ -41,8 +41,8 @@ tape("area.curve(catmullRom, 0.5)(data) generates the expected path", function(t
   test.end();
 });
 
-tape("area.curve(catmullRom) uses a default alpha of zero", function(test) {
-  var a = shape.area().curve(shape.catmullRom, 0);
+tape("area.curve(catmullRom) uses a default alpha of 0.5 (centripetal)", function(test) {
+  var a = shape.area().curve(shape.catmullRom, 0.5);
   test.equal(shape.area().curve(shape.catmullRom)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.equal(shape.area().curve(shape.catmullRom, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.equal(shape.area().curve(shape.catmullRom, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));

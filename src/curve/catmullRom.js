@@ -26,9 +26,9 @@ export function point(that, x, y) {
 };
 
 function catmullRom(context, alpha) {
-  return alpha == null || !(alpha = +alpha)
-      ? cardinal(context, 0)
-      : new CatmullRom(context, alpha);
+  return (alpha = alpha == null ? 0.5 : +alpha)
+      ? new CatmullRom(context, alpha)
+      : cardinal(context, 0);
 }
 
 function CatmullRom(context, alpha) {

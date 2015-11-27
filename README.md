@@ -8,7 +8,7 @@ As with other aspects of D3, these shapes are driven by data: each shape generat
 var l = line()
     .x(function(d) { return x(d.time); })
     .y(function(d) { return y(d.value); })
-    .curve(shape.catmullRom, 0.5);
+    .curve(shape.catmullRom);
 ```
 
 The line generator can then be used to set the `d` attribute of an SVG path element:
@@ -505,7 +505,7 @@ An array containing the set of all built-in symbol types: [circle](#circle), [cr
 
 * You can now render shapes to Canvas by specifying a context (e.g., [*line*.context](#line_context))! See [d3-path](https://github.com/d3/d3-path) for how it works.
 
-* The interpretation of the [cardinal](#cardinal) spline tension parameter has been fixed. The default tension is now 0 (corresponding to a uniform Catmull–Rom spline), not 0.7. Due to a bug in 3.x, the tension parameter was previously only valid in the range [2/3, 1]; this corresponds to the new corrected range of [0, 1]. Thus, the new default value of 0 is equivalent to the old value of 2/3, and the default behavior is only slightly changed.
+* The interpretation of the [cardinal](#cardinal) spline tension parameter has been fixed. The default cardinal tension is now 0 (corresponding to a uniform Catmull–Rom spline), not 0.7. Due to a bug in 3.x, the tension parameter was previously only valid in the range [2/3, 1]; this corresponds to the new corrected range of [0, 1]. Thus, the new default value of 0 is equivalent to the old value of 2/3, and the default behavior is only slightly changed.
 
 * To specify a [cardinal](#cardinal) spline tension of *t*, use `line.curve(cardinal, t)` instead of `line.interpolate("cardinal").tension(t)`.
 
