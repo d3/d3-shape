@@ -35,7 +35,7 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 The arc generator produces a [circular](https://en.wikipedia.org/wiki/Circular_sector) or [annular](https://en.wikipedia.org/wiki/Annulus_\(mathematics\)) sector as in a pie or donut chart. If the difference between the [start](#arc_startAngle) and [end](#arc_endAngle) angles (the *angular span*) is greater than [τ](https://en.wikipedia.org/wiki/Turn_\(geometry\)#Tau_proposal), the arc generator will produce a complete circle or annulus. Arcs may have [rounded corners](#arc_cornerRadius) and [angular padding](#arc_padAngle). Arcs are always centered at ⟨0,0⟩; use a transform (see: [SVG](http://www.w3.org/TR/SVG/coords.html#TransformAttribute), [Canvas](http://www.w3.org/TR/2dcontext/#transformations)) to move the arc to a different position.
 
-See also the [pie generator](#pies), which computes the appropriate angles to represent an array of data as a pie or donut chart; these angles can then be passed to the arc generator.
+See also the [pie generator](#pies), which computes the appropriate angles to represent an array of data as a pie or donut chart; these angles can then be passed to an arc generator.
 
 <a name="arc" href="#arc">#</a> <b>arc</b>()
 
@@ -165,7 +165,7 @@ var data = [1, 1, 2, 3, 5, 8, 13, 21];
 var arcs = pie()(data);
 ```
 
-Now `arcs` is an array of objects describing each datum’s corresponding arc:
+The first set of parens [constructs](#pie) a pie generator, returning a default pie generator. The second set of parens [invokes](#_pie) this generator on the data, returning an array of objects describing each datum’s corresponding arc:
 
 ```json
 [
