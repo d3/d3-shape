@@ -198,11 +198,37 @@ The first pair of parens, `pie()`, [constructs](#pie) a default pie generator. T
 ]
 ```
 
-Note that the returned array is in the same order as the data, even though this pie chart proceeds clockwise from noon starting with the last datum (value 21), due to the default [arc order](#pie_sortValues) being descending value.
+Note that the returned array is in the same order as the data, even though this pie chart proceeds clockwise from 12 o’clock starting with the last datum (value 21), due to the default [order](#pie_sortValues) being descending value.
 
 <a name="pie_value" href="#pie_value">#</a> <i>pie</i>.<b>value</b>([<i>value</i>])
 
-…
+If *value* is specified, sets the value to the specified function or number and returns this pie generator. If *value* is not specified, returns the current value accessor, which defaults to:
+
+```js
+function value(d) {
+  return d;
+}
+```
+
+The default value accessor assumes that the input data are numbers, or that they are coercible to numbers using [valueOf](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf). If your data is not numbers, then you should specify a value accessor that returns the corresponding value for the given data. For example:
+
+```js
+var data = [
+  {"number":  4, "name": Locke},
+  {"number":  8, "name": Reyes},
+  {"number": 15, "name": Ford},
+  {"number": 16, "name": Jarrah},
+  {"number": 23, "name": Shephard},
+  {"number": 42, "name": Kwon}
+];
+
+var arcs = pie()
+    .value(function(d) { return d.number; })
+    (data);
+```
+
+Specifying the inner radius as a function is useful for constructing a stacked polar bar chart, often in conjunction with a [sqrt scale](https://github.com/d3/d3-scale#sqrt). More commonly, a constant inner radius is used for a donut or pie chart. If the outer radius is smaller than the inner radius, the inner and outer radii are swapped.
+
 
 <a name="pie_sort" href="#pie_sort">#</a> <i>pie</i>.<b>sort</b>([<i>compare</i>])
 
