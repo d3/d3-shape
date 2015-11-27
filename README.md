@@ -168,7 +168,7 @@ Constructs a new pie generator with the default settings.
 
 Generates a pie for the given array of *data*, returning an array of objects representing each datum’s arc angles. Any additional *arguments* are arbitrary; they are simply propagated to the pie generator’s accessor functions along with the `this` object. The length of the returned array is the same as *data*, and each element *i* in the returned array corresponds to the element *i* in the input data. Each object in the returned array has the following properties:
 
-* `data` - the input datum; the *i*th element in the input data array.
+* `data` - the input datum; the corresponding element in the input data array.
 * `value` - the numeric [value](#pie_value) of the arc.
 * `startAngle` - the [start angle](#pie_startAngle) of the arc.
 * `endAngle` - the [end angle](#pie_endAngle) of the arc.
@@ -183,7 +183,7 @@ var data = [1, 1, 2, 3, 5, 8, 13, 21];
 var arcs = pie()(data);
 ```
 
-The first pair of parens, `pie()`, [constructs](#pie) a default pie generator. The second, `pie()(data)`, [invokes](#_pie) this generator on the dataset, returning an array of objects representing each datum’s arc angles:
+The first pair of parens, `pie()`, [constructs](#pie) a default pie generator. The second, `pie()(data)`, [invokes](#_pie) this generator on the dataset, returning an array of objects:
 
 ```json
 [
@@ -198,7 +198,7 @@ The first pair of parens, `pie()`, [constructs](#pie) a default pie generator. T
 ]
 ```
 
-Note that the returned array is in the same order as the data, even though this pie chart proceeds clockwise from 12 o’clock starting with the last datum (value 21), due to the default [order](#pie_sortValues) being descending value.
+Note that the returned array is in the same order as the data, even though this pie chart is [sorted](#pie_sortValues) by descending value, starting with the arc for the last datum (value 21) at 12 o’clock.
 
 <a name="pie_value" href="#pie_value">#</a> <i>pie</i>.<b>value</b>([<i>value</i>])
 
