@@ -108,7 +108,7 @@ function cornerRadius() {
 }
 ```
 
-The corner radius may not be larger than ([outerRadius](#arc_outerRadius) - [innerRadius](#arc_innerRadius)) / 2. In addition, for arcs whose angular span is less than π, the corner radius may be reduced as two adjacent rounded corners intersect. See the [arc corners animation](http://bl.ocks.org/mbostock/b7671cb38efdfa5da3af) for a visual demonstration.
+The corner radius may not be larger than ([outerRadius](#arc_outerRadius) - [innerRadius](#arc_innerRadius)) / 2. In addition, for arcs whose angular span is less than π, the corner radius may be reduced as two adjacent rounded corners intersect. See the [arc corners animation](http://bl.ocks.org/mbostock/b7671cb38efdfa5da3af) for a visual illustration.
 
 <a name="arc_startAngle" href="#arc_startAngle">#</a> <i>arc</i>.<b>startAngle</b>([<i>angle</i>])
 
@@ -144,7 +144,7 @@ function padAngle() {
 }
 ```
 
-If the [innerRadius](#arc_innerRadius) or angular span is small relative to the pad angle, it may not be possible to maintain parallel edges between adjacent arcs. In this case, the inner edge of the arc may collapse to a point, similar to a circular sector. The recommended minimum innerRadius when using padding is outerRadius \* padAngle / sin(θ), where θ is the angular span of the smallest arc before padding. For example, if the outerRadius is 200 pixels and the padAngle is 0.02 radians, a reasonable θ is 0.04 radians, and a reasonable innerRadius is 100 pixels. See the [arc padding animation](http://bl.ocks.org/mbostock/31ec1817b2be2660c453) for a visual demonstration.
+If the [innerRadius](#arc_innerRadius) or angular span is small relative to the pad angle, it may not be possible to maintain parallel edges between adjacent arcs. In this case, the inner edge of the arc may collapse to a point, similar to a circular sector. The recommended minimum innerRadius when using padding is outerRadius \* padAngle / sin(θ), where θ is the angular span of the smallest arc before padding. For example, if the outerRadius is 200 pixels and the padAngle is 0.02 radians, a reasonable θ is 0.04 radians, and a reasonable innerRadius is 100 pixels. See the [arc padding animation](http://bl.ocks.org/mbostock/31ec1817b2be2660c453) for a visual illustration.
 
 Often, the pad angle is not set directly on the arc generator, but is instead computed by the [pie generator](#pies) so as to ensure that the relative area of padded arcs is preserved; see [*pie*.padAngle](#pie_padAngle).
 
@@ -158,15 +158,37 @@ If *context* is specified, sets the context and returns this arc generator. If *
 
 ### Pies
 
-…
+The pie generator does not produce a shape directly, but instead computes the appropriate angles to represent an array of data as a pie or donut chart; these angles can then be passed to the [arc generator](#arcs). For example:
+
+```js
+var data = [1, 1, 2, 3, 5, 8, 13, 21];
+var arcs = pie()(data);
+```
+
+This returns an array of objects:
+
+```json
+[
+  {"data":  1, "value":  1, "startAngle": 6.0504747402470080, "endAngle": 6.1668300237132960, "padAngle": 0},
+  {"data":  1, "value":  1, "startAngle": 6.1668300237132960, "endAngle": 6.2831853071795845, "padAngle": 0},
+  {"data":  2, "value":  2, "startAngle": 5.8177641733144310, "endAngle": 6.0504747402470080, "padAngle": 0},
+  {"data":  3, "value":  3, "startAngle": 5.4686983229155650, "endAngle": 5.8177641733144310, "padAngle": 0},
+  {"data":  5, "value":  5, "startAngle": 4.8869219055841220, "endAngle": 5.4686983229155650, "padAngle": 0},
+  {"data":  8, "value":  8, "startAngle": 3.9560796378538132, "endAngle": 4.8869219055841220, "padAngle": 0},
+  {"data": 13, "value": 13, "startAngle": 2.4434609527920610, "endAngle": 3.9560796378538132, "padAngle": 0},
+  {"data": 21, "value": 21, "startAngle": 0.0000000000000000, "endAngle": 2.4434609527920610, "padAngle": 0}
+]
+```
+
+Each object has `startAngle` and `endAngle` (and `padAngle`) properties, designed to work with the arc generator’s default [startAngle](#arc_startAngle) and [endAngle](#arc_endAngle) accessors.
 
 <a name="pie" href="#pie">#</a> <b>pie</b>()
 
-…
+Constructs a new pie generator with the default settings.
 
 <a name="_pie" href="#_pie">#</a> <i>pie</i>(<i>data</i>)
 
-…
+Generates an pie for the given array of *data*.
 
 <a name="pie_value" href="#pie_value">#</a> <i>pie</i>.<b>value</b>([<i>value</i>])
 
