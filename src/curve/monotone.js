@@ -18,7 +18,7 @@ function slope3(that, x2, y2) {
 // Calculate a one-sided slope.
 function slope2(that, t) {
   var h = that._x1 - that._x0;
-  return h ? (that._y1 - that._y0) / h : t;
+  return h ? (3 * (that._y1 - that._y0) / h - t) / 2 : t;
 }
 
 // According to https://en.wikipedia.org/wiki/Cubic_Hermite_spline#Representations
@@ -56,7 +56,7 @@ Monotone.prototype = {
   lineEnd: function() {
     switch (this._point) {
       case 2: this._context.lineTo(this._x1, this._y1); break;
-      case 3: point(this, this._t0, 3 * slope2(this, this._t0) / 2 - this._t0 / 2); break;
+      case 3: point(this, this._t0, slope2(this, this._t0)); break;
     }
     if (this._line || (this._line !== 0 && this._point === 1)) this._context.closePath();
     this._line = 1 - this._line;
@@ -68,8 +68,8 @@ Monotone.prototype = {
     switch (this._point) {
       case 0: this._point = 1; this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y); break;
       case 1: this._point = 2; break;
-      case 2: this._point = 3; t1 = slope3(this, x, y); point(this, 3 * slope2(this, t1) / 2 - t1 / 2, t1); break;
-      default: t1 = slope3(this, x, y); point(this, this._t0, t1); break;
+      case 2: this._point = 3; point(this, slope2(this, t1 = slope3(this, x, y)), t1); break;
+      default: point(this, this._t0, t1 = slope3(this, x, y)); break;
     }
 
     this._x0 = this._x1, this._x1 = x;
