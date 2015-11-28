@@ -1,80 +1,81 @@
-// Computes the slope from points p0 to p1.
-function slope(p0, p1) {
-  return (p1[1] - p0[1]) / (p1[0] - p0[0]);
+function sign(x) {
+  return x < 0 ? -1 : 1;
 }
 
-// Compute three-point differences for the given points.
-// http://en.wikipedia.org/wiki/Cubic_Hermite_spline#Finite_difference
-function finiteDifferences(points) {
-  var i = 0,
-      j = points.length - 1,
-      m = [],
-      p0 = points[0],
-      p1 = points[1],
-      d = m[0] = slope(p0, p1);
-  while (++i < j) {
-    m[i] = (d + (d = slope(p0 = p1, p1 = points[i + 1]))) / 2;
-  }
-  m[i] = d;
-  return m;
+// Calculate the slopes of the tangents (Hermite-type interpolation) based on
+// the following paper: Steffen, M. 1990. A Simple Method for Monotonic
+// Interpolation in One Dimension. Astronomy and Astrophysics, Vol. 239, NO.
+// NOV(II), P. 443, 1990.
+function slope3(that, x2, y2) {
+  var h0 = that._x1 - that._x0,
+      h1 = x2 - that._x1,
+      s0 = h0 === 0 ? 0 : (that._y1 - that._y0) / h0,
+      s1 = h1 === 0 ? 0 : (y2 - that._y1) / h1,
+      p = h0 + h1 === 0 ? 0 : (s0 * h1 + s1 * h0) / (h0 + h1);
+  return (sign(s0) + sign(s1)) * Math.min(Math.abs(s0), Math.abs(s1), 0.5 * Math.abs(p));
 }
 
-// Interpolates the given points using Fritsch-Carlson Monotone cubic Hermite
-// interpolation. Returns an array of tangent vectors. For details, see
-// http://en.wikipedia.org/wiki/Monotone_cubic_interpolation
-function monotoneTangents(points) {
-  var tangents = [],
-      d,
-      a,
-      b,
-      s,
-      m = finiteDifferences(points),
-      i = -1,
-      j = points.length - 1;
+// Calculate a one-sided slope.
+function slope2(that) {
+  var h = that._x1 - that._x0;
+  return h === 0 ? 0 : (that._y1 - that._y0) / h;
+}
 
-  // The first two steps are done by computing finite-differences:
-  // 1. Compute the slopes of the secant lines between successive points.
-  // 2. Initialize the tangents at every point as the average of the secants.
+// According to https://en.wikipedia.org/wiki/Cubic_Hermite_spline#Representations
+// "you can express cubic Hermite interpolation in terms of cubic Bézier curves
+// with respect to the four values p0, p0 + m0 / 3, p1 - m1 / 3, p1".
+function point(that, t0, t1) {
+  var x0 = that._x0,
+      y0 = that._y0,
+      x1 = that._x1,
+      y1 = that._y1,
+      dx = (x1 - x0) / 3.0;
+  that._context.bezierCurveTo(x0 + dx, y0 + dx * t0, x1 - dx, y1 - dx * t1, x1, y1);
+}
 
-  // Then, for each segment…
-  while (++i < j) {
-    d = slope(points[i], points[i + 1]);
+function monotone(context) {
+  return new Monotone(context);
+}
 
-    // 3. If two successive yk = y{k + 1} are equal (i.e., d is zero), then set
-    // mk = m{k + 1} = 0 as the spline connecting these points must be flat to
-    // preserve monotonicity. Ignore step 4 and 5 for those k.
+function Monotone(context) {
+  this._context = context;
+}
 
-    if (abs(d) < ε) {
-      m[i] = m[i + 1] = 0;
-    } else {
-      // 4. Let ak = mk / dk and bk = m{k + 1} / dk.
-      a = m[i] / d;
-      b = m[i + 1] / d;
-
-      // 5. Prevent overshoot and ensure monotonicity by restricting the
-      // magnitude of vector <ak, bk> to a circle of radius 3.
-      s = a * a + b * b;
-      if (s > 9) {
-        s = d * 3 / Math.sqrt(s);
-        m[i] = s * a;
-        m[i + 1] = s * b;
-      }
+Monotone.prototype = {
+  areaStart: function() {
+    this._line = 0;
+  },
+  areaEnd: function() {
+    this._line = NaN;
+  },
+  lineStart: function() {
+    this._x0 = this._x1 =
+    this._y0 = this._y1 = NaN;
+    this._t0 = this._point = 0;
+  },
+  lineEnd: function() {
+    switch (this._point) {
+      case 2: this._context.lineTo(this._x1, this._y1); break;
+      case 3: point(this, this._t0, 3 * slope2(this) / 2 - this._t0 / 2); break;
     }
-  }
+    if (this._line || (this._line !== 0 && this._point === 1)) this._context.closePath();
+    this._line = 1 - this._line;
+  },
+  point: function(x, y) {
+    var t1 = 0;
 
-  // Compute the normalized tangent vector from the slopes. Note that if x is
-  // not monotonic, it's possible that the slope will be infinite, so we protect
-  // against NaN by setting the coordinate to zero.
-  i = -1; while (++i <= j) {
-    s = (points[Math.min(j, i + 1)][0] - points[Math.max(0, i - 1)][0]) / (6 * (1 + m[i] * m[i]));
-    tangents.push([s || 0, m[i] * s || 0]);
-  }
+    x = +x, y = +y;
+    switch (this._point) {
+      case 0: this._point = 1; this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y); break;
+      case 1: this._point = 2; break;
+      case 2: this._point = 3; t1 = slope3(this, x, y); point(this, 3 * slope2(this) / 2 - t1 / 2, t1); break;
+      default: t1 = slope3(this, x, y); point(this, this._t0, t1); break;
+    }
 
-  return tangents;
+    this._x0 = this._x1, this._x1 = x;
+    this._y0 = this._y1, this._y1 = y;
+    this._t0 = t1;
+  }
 }
 
-export function interpolateMonotone(points) {
-  return points.length < 3
-      ? interpolateLinear(points)
-      : points[0] + interpolateHermite(points, monotoneTangents(points));
-};
+export default monotone;
