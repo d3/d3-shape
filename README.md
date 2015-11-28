@@ -174,7 +174,7 @@ Generates a pie for the given array of *data*, returning an array of objects rep
 * `endAngle` - the [end angle](#pie_endAngle) of the arc.
 * `padAngle` - the [pad angle](#pie_padAngle) of the arc.
 
-This representation is designed to work with the arc generator’s default [startAngle](#arc_startAngle), [endAngle](#arc_endAngle) and [padAngle](#arc_padAngle) accessors. The units of *angle* are arbitrary, but if you plan to use the pie generator in conjunction with an [arc generator](#arcs), you should specify an angle in radians, with 0 at -*y* (12 o’clock) and positive angles proceeding clockwise.
+This representation is designed to work with the arc generator’s default [startAngle](#arc_startAngle), [endAngle](#arc_endAngle) and [padAngle](#arc_padAngle) accessors. The angular units are arbitrary, but if you plan to use the pie generator in conjunction with an [arc generator](#arcs), you should specify an angle in radians, with 0 at -*y* (12 o’clock) and positive angles proceeding clockwise.
 
 Given a small dataset of numbers, here is how to compute the arc angles to render this data as a pie chart:
 
