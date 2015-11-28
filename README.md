@@ -56,7 +56,7 @@ a({
 }); // "M0,-100A100,100,0,0,1,100,0L0,0Z"
 ```
 
-If the radii and angles are defined as constants, you can generate an arc without any arguments:
+If the radii and angles are instead defined as constants, you can generate an arc without any arguments:
 
 ```js
 var a = arc()
@@ -108,7 +108,7 @@ function cornerRadius() {
 }
 ```
 
-The corner radius may not be larger than ([outerRadius](#arc_outerRadius) - [innerRadius](#arc_innerRadius)) / 2. In addition, for arcs whose angular span is less than π, the corner radius may be reduced as two adjacent rounded corners intersect. See the [arc corners animation](http://bl.ocks.org/mbostock/b7671cb38efdfa5da3af) for a visual illustration.
+The corner radius may not be larger than ([outerRadius](#arc_outerRadius) - [innerRadius](#arc_innerRadius)) / 2. In addition, for arcs whose angular span is less than π, the corner radius may be reduced as two adjacent rounded corners intersect. See the [arc corners animation](http://bl.ocks.org/mbostock/b7671cb38efdfa5da3af) for illustration.
 
 <a name="arc_startAngle" href="#arc_startAngle">#</a> <i>arc</i>.<b>startAngle</b>([<i>angle</i>])
 
@@ -144,7 +144,7 @@ function padAngle() {
 }
 ```
 
-If the [innerRadius](#arc_innerRadius) or angular span is small relative to the pad angle, it may not be possible to maintain parallel edges between adjacent arcs. In this case, the inner edge of the arc may collapse to a point, similar to a circular sector. The recommended minimum innerRadius when using padding is outerRadius \* padAngle / sin(θ), where θ is the angular span of the smallest arc before padding. For example, if the outerRadius is 200 pixels and the padAngle is 0.02 radians, a reasonable θ is 0.04 radians, and a reasonable innerRadius is 100 pixels. See the [arc padding animation](http://bl.ocks.org/mbostock/31ec1817b2be2660c453) for a visual illustration.
+If the [inner radius](#arc_innerRadius) or angular span is small relative to the pad angle, it may not be possible to maintain parallel edges between adjacent arcs. In this case, the inner edge of the arc may collapse to a point, similar to a circular sector. The recommended minimum innerRadius when using padding is outerRadius \* padAngle / sin(θ), where θ is the angular span of the smallest arc before padding. For example, if the outerRadius is 200 pixels and the padAngle is 0.02 radians, a reasonable θ is 0.04 radians, and a reasonable innerRadius is 100 pixels. See the [arc padding animation](http://bl.ocks.org/mbostock/31ec1817b2be2660c453) for illustration.
 
 Often, the pad angle is not set directly on the arc generator, but is instead computed by the [pie generator](#pies) so as to ensure that the relative area of padded arcs is preserved; see [*pie*.padAngle](#pie_padAngle).
 
@@ -237,15 +237,35 @@ The benefit of a value accessor is that the input data remains associated with t
 
 <a name="pie_sort" href="#pie_sort">#</a> <i>pie</i>.<b>sort</b>([<i>compare</i>])
 
-…
+If *compare* is specified, sets the data comparator to the specified function and returns this pie generator. If *compare* is not specified, returns the current data comparator, which defaults to null. Setting the data comparator implicitly sets the [value comparator](#pie_sortValues) to null. If both the data comparator and the value comparator are null, then arcs are positioned in the original input order. Otherwise, the data is sorted according to the data comparator, and the resulting order is used.
 
-Sorting does *not* affect the order of the [returned arcs](#_pie); it merely affects the computed angles of each arc.
+The *compare* function takes two arguments *a* and *b*, each elements from the input data array. If the arc for *a* should be before the arc for *b*, then the comparator must return a number less than zero; if the arc for *a* should be after the arc for *b*, then the comparator must return a number greater than zero. Returning zero means that the relative order of *a* and *b* is unspecified. For example, to sort arcs by their associated name:
+
+```js
+pie.sort(function(a, b) { return a.name.localeCompare(b.name); });
+```
+
+Sorting does not affect the order of the [generated arc array](#_pie), which is always in the same order as the input data array; it merely affects the computed angles of each arc. The first arc starts at the [start angle](#pie_startAngle) and the last arc ends at the [end angle](#pie_endAngle).
 
 <a name="pie_sortValues" href="#pie_sortValues">#</a> <i>pie</i>.<b>sortValues</b>([<i>compare</i>])
 
-…
+If *compare* is specified, sets the value comparator to the specified function and returns this pie generator. If *compare* is not specified, returns the current value comparator, which defaults to descending value. The default value comparator is implemented as:
 
-Sorting does *not* affect the order of the [returned arcs](#_pie); it merely affects the computed angles of each arc.
+```js
+function compare(a, b) {
+  return b - a;
+}
+```
+
+Setting the value comparator implicitly sets the [data comparator](#pie_sort) to null. If both the data comparator and the value comparator are null, then arcs are positioned in the original input order. Otherwise, the data is sorted according to the data comparator, and the resulting order is used.
+
+The *compare* function takes two arguments *a* and *b*, each values derived from the input data array using the [value accessor](#pie_value). If the arc for *a* should be before the arc for *b*, then the comparator must return a number less than zero; if the arc for *a* should be after the arc for *b*, then the comparator must return a number greater than zero. Returning zero means that the relative order of *a* and *b* is unspecified. For example, to sort arcs by ascending value:
+
+```js
+pie.sortValues(function(a, b) { return a - b; });
+```
+
+Sorting does not affect the order of the [generated arc array](#_pie), which is always in the same order as the input data array; it merely affects the computed angles of each arc. The first arc starts at the [start angle](#pie_startAngle) and the last arc ends at the [end angle](#pie_endAngle).
 
 <a name="pie_startAngle" href="#pie_startAngle">#</a> <i>pie</i>.<b>startAngle</b>([<i>angle</i>])
 
