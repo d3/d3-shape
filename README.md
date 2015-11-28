@@ -43,7 +43,7 @@ Constructs a new arc generator with the default settings.
 
 <a name="_arc" href="#_arc">#</a> <i>arc</i>(<i>arguments…</i>)
 
-Generates an arc for the given *arguments*. The *arguments* are arbitrary; they are simply propagated to the arc generator’s accessor functions along with the `this` object. For example, with the default settings:
+Generates an arc for the given *arguments*. The *arguments* are arbitrary; they are simply propagated to the arc generator’s accessor functions along with the `this` object. For example, with the default settings, an object with radii and angles is expected:
 
 ```js
 var a = arc();
