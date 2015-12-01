@@ -74,6 +74,27 @@ tape("pie(data) puts everything at the startAngle when the sum is zero", functio
   test.end();
 });
 
+tape("pie(data) restricts |endAngle - startAngle| to τ", function(test) {
+  var p = shape.pie();
+  test.deepEqual(p.startAngle(0).endAngle(7)([1, 2]), [
+    {data: 1, value: 1, startAngle: 4.1887902047863905, endAngle: 6.2831853071795860, padAngle: 0},
+    {data: 2, value: 2, startAngle: 0.0000000000000000, endAngle: 4.1887902047863905, padAngle: 0}
+  ]);
+  test.deepEqual(p.startAngle(7).endAngle(0)([1, 2]), [
+    {data: 1, value: 1, startAngle: 2.8112097952136095, endAngle: 0.7168146928204142, padAngle: 0},
+    {data: 2, value: 2, startAngle: 7.0000000000000000, endAngle: 2.8112097952136095, padAngle: 0}
+  ]);
+  test.deepEqual(p.startAngle(1).endAngle(8)([1, 2]), [
+    {data: 1, value: 1, startAngle: 5.1887902047863905, endAngle: 7.2831853071795860, padAngle: 0},
+    {data: 2, value: 2, startAngle: 1.0000000000000000, endAngle: 5.1887902047863905, padAngle: 0}
+  ]);
+  test.deepEqual(p.startAngle(8).endAngle(1)([1, 2]), [
+    {data: 1, value: 1, startAngle: 3.8112097952136095, endAngle: 1.7168146928204142, padAngle: 0},
+    {data: 2, value: 2, startAngle: 8.0000000000000000, endAngle: 3.8112097952136095, padAngle: 0}
+  ]);
+  test.end();
+});
+
 tape("pie.value(value)(data) observes the specified value function", function(test) {
   test.deepEqual(shape.pie().value(function(d, i) { return i; })(new Array(3)), [
     {data: undefined, value: 0, startAngle: 6.2831853071795860, endAngle: 6.2831853071795860, padAngle: 0},

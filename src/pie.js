@@ -24,7 +24,7 @@ export default function() {
         index = new Array(n),
         arcs = new Array(n),
         a0 = +startAngle.apply(this, arguments),
-        da = endAngle.apply(this, arguments) - a0,
+        da = Math.min(tau, Math.max(-tau, endAngle.apply(this, arguments) - a0)),
         a1,
         p = Math.min(Math.abs(da) / n, padAngle.apply(this, arguments)),
         pa = p * (da < 0 ? -1 : 1);
