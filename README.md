@@ -144,9 +144,11 @@ function padAngle() {
 }
 ```
 
+The pad angle is converted to a fixed linear distance separating adjacent arcs, defined as [padRadius](#arc_padRadius) * padAngle. This distance is subtracted equally from the [start](#arc_startAngle) and [end](#arc_endAngle) of the arc. If the arc forms a complete circle or annulus, as when |endAngle - startAngle| ≥ τ, the pad angle is ignored.
+
 If the [inner radius](#arc_innerRadius) or angular span is small relative to the pad angle, it may not be possible to maintain parallel edges between adjacent arcs. In this case, the inner edge of the arc may collapse to a point, similar to a circular sector. The recommended minimum inner radius when using padding is outerRadius \* padAngle / sin(θ), where θ is the angular span of the smallest arc before padding. For example, if the outer radius is 200 pixels and the pad angle is 0.02 radians, a reasonable θ is 0.04 radians, and a reasonable inner radius is 100 pixels. See the [arc padding animation](http://bl.ocks.org/mbostock/31ec1817b2be2660c453) for illustration.
 
-Often, the pad angle is not set directly on the arc generator, but is instead computed by the [pie generator](#pies) so as to ensure that the area of padded arcs is proportional to their value; see [*pie*.padAngle](#pie_padAngle).
+Often, the pad angle is not set directly on the arc generator, but is instead computed by the [pie generator](#pies) so as to ensure that the area of padded arcs is proportional to their value; see [*pie*.padAngle](#pie_padAngle). If you apply a constant pad angle to the arc generator directly, it tends to subtract disproportionately from smaller arcs, introducing distortion.
 
 <a name="arc_padRadius" href="#arc_padRadius">#</a> <i>arc</i>.<b>padRadius</b>([<i>radius</i>])
 
@@ -309,7 +311,7 @@ The pad angle here means the angular separation between each adjacent arc. The t
 [<img width="290" alt="3884955" src="https://cloud.githubusercontent.com/assets/230541/11463882/613da6d2-96dd-11e5-8d81-ec3c28b40f99.png">](http://bl.ocks.org/mbostock/3884955)
 [<img width="290" alt="3969722" src="https://cloud.githubusercontent.com/assets/230541/11463881/6110ff42-96dd-11e5-94b7-75313b28dcbf.png">](http://bl.ocks.org/mbostock/3969722)
 
-…
+The line generator produces a [spline](https://en.wikipedia.org/wiki/Spline_\(mathematics\)) or [polyline](https://en.wikipedia.org/wiki/Polygonal_chain) as in a line chart.
 
 <a name="line" href="#line">#</a> <b>line</b>()
 
