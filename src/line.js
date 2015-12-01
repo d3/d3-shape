@@ -1,7 +1,7 @@
 import {path} from "d3-path";
 import constant from "./constant";
+import curveBind from "./curve/bind";
 import curveLinear from "./curve/linear";
-import curveCurry from "./curve/curry";
 import {x as pointX, y as pointY} from "./point";
 
 export default function() {
@@ -46,7 +46,7 @@ export default function() {
 
   line.curve = function(_) {
     var n = arguments.length;
-    return n ? (curve = n > 1 ? curveCurry(_, arguments) : _, context != null && (output = curve(context)), line) : curve;
+    return n ? (curve = n > 1 ? curveBind(_, arguments) : _, context != null && (output = curve(context)), line) : curve;
   };
 
   line.context = function(_) {
