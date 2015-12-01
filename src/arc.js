@@ -126,20 +126,24 @@ export default function() {
           a10 = a1,
           da0 = da,
           da1 = da,
-          ap = padAngle.apply(this, arguments) / 2,
-          rp = (ap > 0) && (padRadius ? +padRadius.apply(this, arguments) : Math.sqrt(r0 * r0 + r1 * r1)),
+          ap = padAngle.apply(this, arguments),
+          ap0 = (Array.isArray(ap) ? +ap[0] : ap / 2),
+          ap1 = (Array.isArray(ap) ? +ap[1] : ap / 2),
+          rp = (ap0 > 0 || ap1 > 0) && (padRadius ? +padRadius.apply(this, arguments) : Math.sqrt(r0 * r0 + r1 * r1)),
           rc = Math.min(Math.abs(r1 - r0) / 2, +cornerRadius.apply(this, arguments)),
           rc0 = rc,
           rc1 = rc;
 
       // Apply padding? Note that since r1 ≥ r0, da1 ≥ da0.
       if (rp > 0) {
-        var p0 = asin(rp / r0 * Math.sin(ap)),
-            p1 = asin(rp / r1 * Math.sin(ap));
-        if ((da0 -= p0 * 2) > 0) p0 *= (cw ? 1 : -1), a00 += p0, a10 -= p0;
-        else da0 = 0, a00 = a10 = (a0 + a1) / 2;
-        if ((da1 -= p1 * 2) > 0) p1 *= (cw ? 1 : -1), a01 += p1, a11 -= p1;
-        else da1 = 0, a01 = a11 = (a0 + a1) / 2;
+        var p00 = asin(rp / r0 * Math.sin(ap0)),
+            p01 = asin(rp / r0 * Math.sin(ap1)),
+            p10 = asin(rp / r1 * Math.sin(ap0)),
+            p11 = asin(rp / r1 * Math.sin(ap1));
+        if ((da0 -= p00 + p01) > 0) a00 += p00 * (cw ? 1 : -1), a10 -= p01 * (cw ? 1 : -1);
+        else da0 = 0, a00 = a10 = (a0 * p01 + a1 * p00) / (p00 + p01);
+        if ((da1 -= p10 + p11) > 0) a01 += p10 * (cw ? 1 : -1), a11 -= p11 * (cw ? 1 : -1);
+        else da1 = 0, a01 = a11 = (a0 * p11 + a1 * p10) / (p10 + p11);
       }
 
       var x01 = r1 * Math.cos(a01),

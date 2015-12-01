@@ -26,7 +26,7 @@ export default function() {
         a0 = +startAngle.apply(this, arguments),
         da = endAngle.apply(this, arguments) - a0,
         a1,
-        p = Math.min(Math.abs(da) / n, padAngle.apply(this, arguments)),
+        p = Math.min(Math.abs(da) / (n - 1), padAngle.apply(this, arguments)),
         pa = p * (da < 0 ? -1 : 1);
 
     for (var i = 0, v; i < n; ++i) {
@@ -40,13 +40,13 @@ export default function() {
     else if (sort !== null) index.sort(function(i, j) { return sort(data[i], data[j]); });
 
     // Compute the arcs! They are stored in the original data's order.
-    for (var i = 0, j, k = sum ? (da - n * pa) / sum : 0; i < n; ++i, a0 = a1) {
-      j = index[i], v = arcs[j], a1 = a0 + (v > 0 ? v * k : 0) + pa, arcs[j] = {
+    for (var i = 0, j, k = sum ? (da - (n - 1) * pa) / sum : 0; i < n; ++i, a0 = a1) {
+      j = index[i], v = arcs[j], a1 = a0 + (v > 0 ? v * k : 0) + (i === 0 || i === n - 1 ? pa / 2 : pa), arcs[j] = {
         data: data[j],
         value: v,
         startAngle: a0,
         endAngle: a1,
-        padAngle: p
+        padAngle: i === 0 ? [0, p / 2] : i === n - 1 ? [p / 2, 0] : [p / 2, p / 2]
       };
     }
 
