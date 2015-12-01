@@ -2,11 +2,11 @@
 
 Visualizations typically consist of discrete graphical marks, such as [symbols](#symbols), [arcs](#arcs), [pies](#pies), [lines](#lines) and [areas](#areas). While the rectangles of a bar chart may be easy enough to generate directly using [SVG](http://www.w3.org/TR/SVG/paths.html#PathData) or [Canvas](http://www.w3.org/TR/2dcontext/#canvaspathmethods), other shapes are complex, such as rounded annular sectors and centripetal Catmull–Rom splines. This module provides a variety of shape generators for your convenience.
 
-As with other aspects of D3, these shapes are driven by data: each shape generator exposes accessors that control how the input data are mapped to a visual representation. For example, you might define a line generator by [linearly scaling](https://github.com/d3/d3-scale) the `time` and `value` fields of your data to fit the chart:
+As with other aspects of D3, these shapes are driven by data: each shape generator exposes accessors that control how the input data are mapped to a visual representation. For example, you might define a line generator for a time series by [linearly scaling](https://github.com/d3/d3-scale) the `date` and `value` fields of your data to fit the chart:
 
 ```js
 var l = line()
-    .x(function(d) { return x(d.time); })
+    .x(function(d) { return x(d.date); })
     .y(function(d) { return y(d.value); })
     .curve(shape.catmullRom);
 ```
@@ -321,9 +321,7 @@ Constructs a new line generator with the default settings.
 
 <a name="_line" href="#_line">#</a> <i>line</i>(<i>data</i>)
 
-Generates a line for the given array of *data*. Depending on this line generator’s associated [curve](#line_curve), the given input *data* may need to be sorted by *x*-value before being passed to the line generator.
-
-If the line generator has a [context](#line_context), then the line is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls and this function returns void. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string is returned.
+Generates a line for the given array of *data*. Depending on this line generator’s associated [curve](#line_curve), the given input *data* may need to be sorted by *x*-value before being passed to the line generator. If the line generator has a [context](#line_context), then the line is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls and this function returns void. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string is returned.
 
 <a name="line_x" href="#line_x">#</a> <i>line</i>.<b>x</b>([<i>x</i>])
 
@@ -335,7 +333,7 @@ function x(d) {
 }
 ```
 
-When a line is [generated](#_line), the *x* accessor will be invoked for each element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default *x* accessor assumes that the input data are two-element arrays of numbers. If your data are in a different format, or if you wish to transform the data before rendering, then you should specify a custom accessor. For example, if `x` is a [time scale](https://github.com/d3/d3-scale#time-scales) and `y` is a [linear scale](https://github.com/d3/d3-scale#linear-scales):
+When a line is [generated](#_line), the *x* accessor will be invoked for each [defined](#line_defined) element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default *x* accessor assumes that the input data are two-element arrays of numbers. If your data are in a different format, or if you wish to transform the data before rendering, then you should specify a custom accessor. For example, if `x` is a [time scale](https://github.com/d3/d3-scale#time-scales) and `y` is a [linear scale](https://github.com/d3/d3-scale#linear-scales):
 
 ```js
 var data = [
@@ -353,7 +351,7 @@ var l = line()
     .y(function(d) { return y(d.value); });
 ```
 
-You can instead [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) your data to values before invoking the pie generator:
+You can instead [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) your data to values before invoking the line generator:
 
 ```js
 line()(data.map(function(d) { return [x(d.date), y(d.value)]; }));
@@ -371,7 +369,7 @@ function y(d) {
 }
 ```
 
-When a line is [generated](#_line), the *y* accessor will be invoked for each element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default *y* accessor assumes that the input data are two-element arrays of numbers. See [*line*.x](#line_x) for more information.
+When a line is [generated](#_line), the *y* accessor will be invoked for each [defined](#line_defined) element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default *y* accessor assumes that the input data are two-element arrays of numbers. See [*line*.x](#line_x) for more information.
 
 <a name="line_defined" href="#line_defined">#</a> <i>line</i>.<b>defined</b>([<i>defined</i>])
 
@@ -383,15 +381,15 @@ function defined() {
 }
 ```
 
-When a line is [generated](#_line), the defined accessor will be invoked for each element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. If the given element is defined (*i.e.*, if the defined accessor returns a truthy value for this element), the [*x*](#line_x) and [*y*](#line_y) accessors will subsequently be evaluated and the point will be added to the current line segment. Otherwise, the element will be skipped, the current line segment will be ended, and a new line segment will be generated for the next defined point. As a result, the generated line may have several discrete segments. For example:
+The default accessor thus assumes that the input data is always defined. When a line is [generated](#_line), the defined accessor will be invoked for each element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. If the given element is defined (*i.e.*, if the defined accessor returns a truthy value for this element), the [*x*](#line_x) and [*y*](#line_y) accessors will subsequently be evaluated and the point will be added to the current line segment. Otherwise, the element will be skipped, the current line segment will be ended, and a new line segment will be generated for the next defined point. As a result, the generated line may have several discrete segments. For example:
 
 [<img src="https://cloud.githubusercontent.com/assets/230541/11515272/f4f3b4fc-9831-11e5-9530-54adbaa4d896.png" width="480" height="250" alt="Line with Missing Data">](http://bl.ocks.org/mbostock/0533f44f2cfabecc5e3a)
 
-The default accessor assumes that the input data is always defined. Note that if a line segment consists of only a single point, it may appear invisible unless rendered with rounded or square [line caps](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap).
+Note that if a line segment consists of only a single point, it may appear invisible unless rendered with rounded or square [line caps](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap). In addition, some curves such as [cardinalOpen](#cardinalOpen) only render a visible segment if it contains multiple points.
 
 <a name="line_curve" href="#line_curve">#</a> <i>line</i>.<b>curve</b>([<i>curve</i>[, <i>parameters…</i>]])
 
-…
+If *curve* is specified, sets the [curve implementation](#curves) and returns this line generator. Any optional *parameters*, if specified, will be bound to the specified *curve*. If *curve* is not specified, returns the current curve implementation, which defaults to [linear](#linear).
 
 <a name="line_context" href="#line_context">#</a> <i>line</i>.<b>context</b>([<i>context</i>])
 
