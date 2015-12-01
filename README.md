@@ -389,7 +389,7 @@ Note that if a line segment consists of only a single point, it may appear invis
 
 <a name="line_curve" href="#line_curve">#</a> <i>line</i>.<b>curve</b>([<i>curve</i>[, <i>parameters…</i>]])
 
-If *curve* is specified, sets the [curve implementation](#curves) and returns this line generator. Any optional *parameters*, if specified, will be bound to the specified *curve*. If *curve* is not specified, returns the current curve implementation, which defaults to [linear](#linear).
+If *curve* is specified, sets the [curve factory](#curves) and returns this line generator. Any optional *parameters*, if specified, will be bound to the specified *curve*. If *curve* is not specified, returns the current curve factory, which defaults to [linear](#linear).
 
 <a name="line_context" href="#line_context">#</a> <i>line</i>.<b>context</b>([<i>context</i>])
 
