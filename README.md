@@ -508,103 +508,97 @@ Curves are typically not used directly, instead implementing paths for [lines](#
 
 <a name="basis" href="#basis">#</a> <b>basis</b>(<i>context</i>)
 
-![basis](https://github.com/d3/d3-shape/blob/master/img/basis.png)
+![basis](https://raw.githubusercontent.com/d3/d3-shape/master/img/basis.png)
 
 …
 
 <a name="basisClosed" href="#basisClosed">#</a> <b>basisClosed</b>(<i>context</i>)
 
-![basisClosed](https://cloud.githubusercontent.com/assets/230541/11522924/e9940068-9871-11e5-8657-9fc59fd465fc.png)
+![basisClosed](https://raw.githubusercontent.com/d3/d3-shape/master/img/basisClosed.png)
 
 …
 
 <a name="basisOpen" href="#basisOpen">#</a> <b>basisOpen</b>(<i>context</i>)
 
-![basisOpen](https://cloud.githubusercontent.com/assets/230541/11522921/e98f98c0-9871-11e5-8df2-c2f1e413f388.png)
+![basisOpen](https://raw.githubusercontent.com/d3/d3-shape/master/img/basisOpen.png)
 
 …
 
 <a name="bundle" href="#bundle">#</a> <b>bundle</b>(<i>context</i>[, <i>beta</i>])
 
-![bundle](https://cloud.githubusercontent.com/assets/230541/11522920/e98444c0-9871-11e5-8c79-e9fa52eb7324.png)
-
-…
+![bundle](https://raw.githubusercontent.com/d3/d3-shape/master/img/bundle.png
 
 <a name="cardinal" href="#cardinal">#</a> <b>cardinal</b>(<i>context</i>[, <i>tension</i>])
 
-![cardinal](https://cloud.githubusercontent.com/assets/230541/11522918/e9805626-9871-11e5-8043-4923e317122d.png)
+![cardinal](https://raw.githubusercontent.com/d3/d3-shape/master/img/cardinal.png)
 
 …
 
 <a name="cardinalClosed" href="#cardinalClosed">#</a> <b>cardinalClosed</b>(<i>context</i>[, <i>tension</i>])
 
-![cardinalClosed](https://cloud.githubusercontent.com/assets/230541/11522919/e9823d74-9871-11e5-8169-1caa4588e9a0.png)
+![cardinalClosed](https://raw.githubusercontent.com/d3/d3-shape/master/img/cardinalClosed.png)
 
 …
 
 <a name="cardinalOpen" href="#cardinalOpen">#</a> <b>cardinalOpen</b>(<i>context</i>[, <i>tension</i>])
 
-![cardinalOpen](https://cloud.githubusercontent.com/assets/230541/11522917/e980203e-9871-11e5-8f08-0a3259d08c95.png)
+![cardinalOpen](https://raw.githubusercontent.com/d3/d3-shape/master/img/cardinalOpen.png)
 
 …
 
 <a name="catmullRom" href="#catmullRom">#</a> <b>catmullRom</b>(<i>context</i>[, <i>alpha</i>])
 
-![catmullRom](https://cloud.githubusercontent.com/assets/230541/11522916/e97f4fec-9871-11e5-8d35-02202ea0e933.png)
+![catmullRom](https://raw.githubusercontent.com/d3/d3-shape/master/img/catmullRom.png)
 
 …
 
 <a name="catmullRomClosed" href="#catmullRomClosed">#</a> <b>catmullRomClosed</b>(<i>context</i>[, <i>alpha</i>])
 
-![catmullRomClosed](https://cloud.githubusercontent.com/assets/230541/11522910/e96dd5f0-9871-11e5-8ea7-354789103b54.png)
+![catmullRomClosed](https://raw.githubusercontent.com/d3/d3-shape/master/img/catmullRomClosed.png)
 
 …
 
 <a name="catmullRomOpen" href="#catmullRomOpen">#</a> <b>catmullRomOpen</b>(<i>context</i>[, <i>alpha</i>])
 
-![catmullRomOpen](https://cloud.githubusercontent.com/assets/230541/11522915/e97e66ae-9871-11e5-9c9c-18edccd7c440.png)
+![catmullRomOpen](https://raw.githubusercontent.com/d3/d3-shape/master/img/catmullRomOpen.png)
 
 …
 
 <a name="linear" href="#linear">#</a> <b>linear</b>(<i>context</i>)
 
-![linear](https://cloud.githubusercontent.com/assets/230541/11522923/e993be8c-9871-11e5-8528-1a346927dc64.png)
+![linear](https://raw.githubusercontent.com/d3/d3-shape/master/img/linear.png)
 
 …
 
 <a name="linearClosed" href="#linearClosed">#</a> <b>linearClosed</b>(<i>context</i>)
 
-![linearClosed](https://cloud.githubusercontent.com/assets/230541/11522911/e96fbef6-9871-11e5-9033-a62891dc8a02.png)
+![linearClosed](https://raw.githubusercontent.com/d3/d3-shape/master/img/linearClosed.png)
 
 …
 
 <a name="monotone" href="#monotone">#</a> <b>monotone</b>(<i>context</i>)
 
-![monotone](https://cloud.githubusercontent.com/assets/230541/11522913/e96fd9ae-9871-11e5-9ca3-5ce86d1e8095.png)
+![monotone](https://raw.githubusercontent.com/d3/d3-shape/master/img/monotone.png)
 
 …
 
 <a name="natural" href="#natural">#</a> <b>natural</b>(<i>context</i>)
 
-![natural](https://cloud.githubusercontent.com/assets/230541/11522912/e96fd620-9871-11e5-8ea2-c3f7062c30e0.png)
-
-…
+![natural](https://raw.githubusercontent.com/d3/d3-shape/master/img/natural.png
 
 <a name="step" href="#step">#</a> <b>step</b>(<i>context</i>)
 
-![step](https://cloud.githubusercontent.com/assets/230541/11522914/e96fd616-9871-11e5-9629-024332aaf7bd.png)
-
-…
+![step](https://raw.githubusercontent.com/d3/d3-shape/master/img/step.png
 
 <a name="stepAfter" href="#stepAfter">#</a> <b>stepAfter</b>(<i>context</i>)
 
-![stepAfter](https://cloud.githubusercontent.com/assets/230541/11522909/e96a6122-9871-11e5-9e91-79a8f23e1343.png)
+![stepAfter](https://raw.githubusercontent.com/d3/d3-shape/master/img/stepAfter.png)
 
 …
 
 <a name="stepBefore" href="#stepBefore">#</a> <b>stepBefore</b>(<i>context</i>)
 
-![stepBefore](https://cloud.githubusercontent.com/assets/230541/11522908/e956eb06-9871-11e5-8951-3479ed0b573b.png)
+![stepBefore](https://raw.githubusercontent.com/d3/d3-shape/master/img/stepBefore.png)
 
 …
 
