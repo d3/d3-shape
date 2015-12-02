@@ -229,7 +229,7 @@ var arcs = pie()
     (data);
 ```
 
-You can instead [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) your data to values before invoking the pie generator:
+This is similar to [mapping](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) your data to values before invoking the pie generator:
 
 ```js
 var arcs = pie()(data.map(function(d) { return d.number; }));
@@ -351,7 +351,7 @@ var l = line()
     .y(function(d) { return y(d.value); });
 ```
 
-You can instead [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) your data to values before invoking the line generator:
+This is similar to [mapping](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) your data to values before invoking the line generator:
 
 ```js
 line()(data.map(function(d) { return [x(d.date), y(d.value)]; }));
