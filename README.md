@@ -1,6 +1,6 @@
 # d3-shape
 
-Visualizations typically consist of discrete graphical marks, such as [symbols](#symbols), [arcs](#arcs), [pies](#pies), [lines](#lines) and [areas](#areas). While the rectangles of a bar chart may be easy enough to generate directly using [SVG](http://www.w3.org/TR/SVG/paths.html#PathData) or [Canvas](http://www.w3.org/TR/2dcontext/#canvaspathmethods), other shapes are complex, such as rounded annular sectors and centripetal Catmull–Rom splines. This module provides a variety of shape generators for your convenience.
+Visualizations typically consist of discrete graphical marks, such as [symbols](#symbols), [arcs](#arcs), [lines](#lines) and [areas](#areas). While the rectangles of a bar chart may be easy enough to generate directly using [SVG](http://www.w3.org/TR/SVG/paths.html#PathData) or [Canvas](http://www.w3.org/TR/2dcontext/#canvaspathmethods), other shapes are complex, such as rounded annular sectors and centripetal Catmull–Rom splines. This module provides a variety of shape generators for your convenience.
 
 As with other aspects of D3, these shapes are driven by data: each shape generator exposes accessors that control how the input data are mapped to a visual representation. For example, you might define a line generator for a time series by [linearly scaling](https://github.com/d3/d3-scale) the `date` and `value` fields of your data to fit the chart:
 
@@ -622,7 +622,7 @@ Produces a piecewise constant function (a [step function](https://en.wikipedia.o
 
 ### Custom Curves
 
-Curves are typically not used directly, instead being passed to [*line*.curve](#line_curve) and [*area*.curve](#area_curve). However, you can define your own curve implementation should none of the built-in curves satisfy your needs, using the following interface. You can also use this low-level interface with a built-in curve type as an alternative to the line and area generators.
+Curves are typically not used directly, instead being passed to [*line*.curve](#line_curve) and [*area*.curve](#area_curve). However, you can define your own curve implementation should none of the built-in curves satisfy your needs using the following interface. You can also use this low-level interface with a built-in curve type as an alternative to the line and area generators.
 
 <a name="curve_areaStart" href="#curve_areaStart">#</a> <i>curve</i>.<b>areaStart</b>()
 
@@ -718,7 +718,7 @@ An up-pointing triangle.
 
 ### Custom Symbol Types
 
-Symbol types are typically not used directly, instead being passed to [*symbol*.type](#symbol_type). However, you can define your own sumbol type implementation should none of the built-in types satisfy your needs, using the following interface. You can also use this low-level interface with a built-in symbol type as an alternative to the symbol generator.
+Symbol types are typically not used directly, instead being passed to [*symbol*.type](#symbol_type). However, you can define your own sumbol type implementation should none of the built-in types satisfy your needs using the following interface. You can also use this low-level interface with a built-in symbol type as an alternative to the symbol generator.
 
 <a name="symbolType_draw" href="#symbolType_draw">#</a> <i>symbolType</i>.<b>draw</b>(<i>context</i>, <i>size</i>)
 
