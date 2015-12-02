@@ -646,6 +646,8 @@ Indicates a new point in the current line segment with the given *x*- and *y*-va
 
 ### Symbols
 
+<a href="#circle"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/circle.png" width="100" height="100"></a><a href="#cross"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/cross.png" width="100" height="100"></a><a href="#diamond"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/diamond.png" width="100" height="100"></a><a href="#square"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/square.png" width="100" height="100"></a><a href="#triangleDown"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/triangleDown.png" width="100" height="100"></a><a href="#triangleUp"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/triangleUp.png" width="100" height="100"></a>
+
 Symbols provide a categorical shape encoding as is commonly used in scatterplots. Symbols are always centered at ⟨0,0⟩; use a transform (see: [SVG](http://www.w3.org/TR/SVG/coords.html#TransformAttribute), [Canvas](http://www.w3.org/TR/2dcontext/#transformations)) to move the arc to a different position.
 
 <a name="symbol" href="#symbol">#</a> <b>symbol</b>()
@@ -682,37 +684,25 @@ An array containing the set of all built-in symbol types: [circle](#circle), [cr
 
 <a name="circle" href="#circle">#</a> <b>circle</b>
 
-<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/circle.png" width="100" height="100">
-
 A circle.
 
 <a name="cross" href="#cross">#</a> <b>cross</b>
-
-<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/cross.png" width="100" height="100">
 
 A Greek cross with arms of equal length.
 
 <a name="diamond" href="#diamond">#</a> <b>diamond</b>
 
-<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/diamond.png" width="100" height="100">
-
 A rhombus.
 
 <a name="square" href="#square">#</a> <b>square</b>
-
-<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/square.png" width="100" height="100">
 
 A square.
 
 <a name="triangleDown" href="#triangleDown">#</a> <b>triangleDown</b>
 
-<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/triangleDown.png" width="100" height="100">
-
 A down-pointing triangle.
 
 <a name="triangleUp" href="#triangleUp">#</a> <b>triangleUp</b>
-
-<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/triangleUp.png" width="100" height="100">
 
 An up-pointing triangle.
 
