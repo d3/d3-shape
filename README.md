@@ -31,7 +31,7 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 ### Arcs
 
-[<img src="https://cloud.githubusercontent.com/assets/230541/11412848/bb915934-9396-11e5-8a87-44ce0ab4a157.png" width="295" height="295">](http://bl.ocks.org/mbostock/3887235)[<img src="https://cloud.githubusercontent.com/assets/230541/11412847/bb89bcec-9396-11e5-85a0-ee4dfa4aa021.png" width="295" height="295">](http://bl.ocks.org/mbostock/3887193)
+[<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/pie.png" width="295" height="295">](http://bl.ocks.org/mbostock/3887235)[<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/donut.png" width="295" height="295">](http://bl.ocks.org/mbostock/3887193)
 
 The arc generator produces a [circular](https://en.wikipedia.org/wiki/Circular_sector) or [annular](https://en.wikipedia.org/wiki/Annulus_\(mathematics\)) sector, as in a pie or donut chart. If the difference between the [start](#arc_startAngle) and [end](#arc_endAngle) angles (the *angular span*) is greater than [τ](https://en.wikipedia.org/wiki/Turn_\(geometry\)#Tau_proposal), the arc generator will produce a complete circle or annulus. If it is less than τ, arcs may have [rounded corners](#arc_cornerRadius) and [angular padding](#arc_padAngle). Arcs are always centered at ⟨0,0⟩; use a transform (see: [SVG](http://www.w3.org/TR/SVG/coords.html#TransformAttribute), [Canvas](http://www.w3.org/TR/2dcontext/#transformations)) to move the arc to a different position.
 
@@ -321,7 +321,7 @@ The pad angle here means the angular separation between each adjacent arc. The t
 
 ### Lines
 
-[<img width="295" alt="3883245" src="https://cloud.githubusercontent.com/assets/230541/11463879/5cb30d28-96dd-11e5-98ed-3e8eeaa91b94.png">](http://bl.ocks.org/mbostock/3883245)[<img width="295" alt="3884955" src="https://cloud.githubusercontent.com/assets/230541/11463882/613da6d2-96dd-11e5-8d81-ec3c28b40f99.png">](http://bl.ocks.org/mbostock/3884955)[<img width="295" alt="3969722" src="https://cloud.githubusercontent.com/assets/230541/11463881/6110ff42-96dd-11e5-94b7-75313b28dcbf.png">](http://bl.ocks.org/mbostock/3969722)
+[<img width="295" alt="3883245" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/line.png">](http://bl.ocks.org/mbostock/3883245)[<img width="295" alt="3884955" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/line-multi.png">](http://bl.ocks.org/mbostock/3884955)[<img width="295" alt="3969722" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/line-gradient.png">](http://bl.ocks.org/mbostock/3969722)
 
 The line generator produces a [spline](https://en.wikipedia.org/wiki/Spline_\(mathematics\)) or [polyline](https://en.wikipedia.org/wiki/Polygonal_chain), as in a line chart. Lines also appear in many other visualization types, such as the links in [hierarchical edge bundling](http://bl.ocks.org/mbostock/7607999).
 
@@ -393,7 +393,7 @@ function defined() {
 
 The default accessor thus assumes that the input data is always defined. When a line is [generated](#_line), the defined accessor will be invoked for each element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. If the given element is defined (*i.e.*, if the defined accessor returns a truthy value for this element), the [x](#line_x) and [y](#line_y) accessors will subsequently be evaluated and the point will be added to the current line segment. Otherwise, the element will be skipped, the current line segment will be ended, and a new line segment will be generated for the next defined point. As a result, the generated line may have several discrete segments. For example:
 
-[<img src="https://cloud.githubusercontent.com/assets/230541/11515272/f4f3b4fc-9831-11e5-9530-54adbaa4d896.png" width="480" height="250" alt="Line with Missing Data">](http://bl.ocks.org/mbostock/0533f44f2cfabecc5e3a)
+[<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/line-defined.png" width="480" height="250" alt="Line with Missing Data">](http://bl.ocks.org/mbostock/0533f44f2cfabecc5e3a)
 
 Note that if a line segment consists of only a single point, it may appear invisible unless rendered with rounded or square [line caps](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap). In addition, some curves such as [cardinalOpen](#cardinalOpen) only render a visible segment if it contains multiple points.
 
@@ -407,7 +407,7 @@ If *context* is specified, sets the context and returns this line generator. If 
 
 ### Areas
 
-[<img alt="Area Chart" width="295" src="https://cloud.githubusercontent.com/assets/230541/11519082/d7e49088-984b-11e5-974b-2097b59643cc.png">](http://bl.ocks.org/mbostock/3883195)[<img alt="Stacked Area Chart" width="295" src="https://cloud.githubusercontent.com/assets/230541/11519081/d7e3f358-984b-11e5-81e5-2fd75f655f3c.png">](http://bl.ocks.org/mbostock/3885211)[<img alt="Difference Chart" width="295" src="https://cloud.githubusercontent.com/assets/230541/11519080/d7e22406-984b-11e5-95b8-d3323b146ee4.png">](http://bl.ocks.org/mbostock/3894205)
+[<img alt="Area Chart" width="295" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/area.png">](http://bl.ocks.org/mbostock/3883195)[<img alt="Stacked Area Chart" width="295" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/area-stacked.png">](http://bl.ocks.org/mbostock/3885211)[<img alt="Difference Chart" width="295" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/area-difference.png">](http://bl.ocks.org/mbostock/3894205)
 
 The area generator produces an area, as in an area chart. An area is defined by two bounding [lines](#lines), either splines or polylines. Typically, the two lines share the same [*x*-values](#area_x) ([x0](#area_x0) = [x1](#area_x1)), differing only in *y*-value ([y0](#area_y0) and [y1](#area_y1)); most commonly, y0 is defined as a constant representing [zero](http://www.vox.com/2015/11/19/9758062/y-axis-zero-chart). The first line (the <i>topline</i>) is defined by x1 and y1 and is rendered first; the second line (the <i>baseline</i>) is defined by x0 and y0 and is rendered second, with the points in reverse order. With a [linear](#linear) [curve](#area_curve), this produces a clockwise polygon.
 
@@ -498,7 +498,7 @@ function defined() {
 
 The default accessor thus assumes that the input data is always defined. When an area is [generated](#_area), the defined accessor will be invoked for each element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. If the given element is defined (*i.e.*, if the defined accessor returns a truthy value for this element), the [x0](#area_x0), [x1](#area_x1), [y0](#area_y0) and [y1](#area_y1) accessors will subsequently be evaluated and the point will be added to the current area segment. Otherwise, the element will be skipped, the current area segment will be ended, and a new area segment will be generated for the next defined point. As a result, the generated area may have several discrete segments. For example:
 
-[<img src="https://cloud.githubusercontent.com/assets/230541/11519352/61a6ed50-984e-11e5-9b2c-d3950693fbdd.png" width="480" height="250" alt="Area with Missing Data">](http://bl.ocks.org/mbostock/3035090)
+[<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/area-defined.png" width="480" height="250" alt="Area with Missing Data">](http://bl.ocks.org/mbostock/3035090)
 
 Note that if an area segment consists of only a single point, it may appear invisible unless rendered with rounded or square [line caps](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap). In addition, some curves such as [cardinalOpen](#cardinalOpen) only render a visible segment if it contains multiple points.
 
