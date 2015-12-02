@@ -309,9 +309,7 @@ The pad angle here means the angular separation between each adjacent arc. The t
 
 ### Lines
 
-[<img width="295" alt="3883245" src="https://cloud.githubusercontent.com/assets/230541/11463879/5cb30d28-96dd-11e5-98ed-3e8eeaa91b94.png">](http://bl.ocks.org/mbostock/3883245)
-[<img width="295" alt="3884955" src="https://cloud.githubusercontent.com/assets/230541/11463882/613da6d2-96dd-11e5-8d81-ec3c28b40f99.png">](http://bl.ocks.org/mbostock/3884955)
-[<img width="295" alt="3969722" src="https://cloud.githubusercontent.com/assets/230541/11463881/6110ff42-96dd-11e5-94b7-75313b28dcbf.png">](http://bl.ocks.org/mbostock/3969722)
+[<img width="295" alt="3883245" src="https://cloud.githubusercontent.com/assets/230541/11463879/5cb30d28-96dd-11e5-98ed-3e8eeaa91b94.png">](http://bl.ocks.org/mbostock/3883245)[<img width="295" alt="3884955" src="https://cloud.githubusercontent.com/assets/230541/11463882/613da6d2-96dd-11e5-8d81-ec3c28b40f99.png">](http://bl.ocks.org/mbostock/3884955)[<img width="295" alt="3969722" src="https://cloud.githubusercontent.com/assets/230541/11463881/6110ff42-96dd-11e5-94b7-75313b28dcbf.png">](http://bl.ocks.org/mbostock/3969722)
 
 The line generator produces a [spline](https://en.wikipedia.org/wiki/Spline_\(mathematics\)) or [polyline](https://en.wikipedia.org/wiki/Polygonal_chain), as in a line chart. Lines also appear in many other visualization types, such as the links in [hierarchical edge bundling](http://bl.ocks.org/mbostock/7607999).
 
