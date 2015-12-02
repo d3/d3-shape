@@ -646,7 +646,7 @@ Indicates a new point in the current line segment with the given *x*- and *y*-va
 
 ### Symbols
 
-Symbols provide a categorical shape encoding as is commonly used in scatterplots.
+Symbols provide a categorical shape encoding as is commonly used in scatterplots. Symbols are always centered at ⟨0,0⟩; use a transform (see: [SVG](http://www.w3.org/TR/SVG/coords.html#TransformAttribute), [Canvas](http://www.w3.org/TR/2dcontext/#transformations)) to move the arc to a different position.
 
 <a name="symbol" href="#symbol">#</a> <b>symbol</b>()
 
@@ -670,7 +670,7 @@ function size() {
 }
 ```
 
-Specifying the size as a function is useful for constructing a scatterplot with a size encoding.
+Specifying the size as a function is useful for constructing a scatterplot with a size encoding. If you wish to scale the symbol to fit a given bounding box, rather than by area, try [SVG’s getBBox](http://bl.ocks.org/mbostock/3dd515e692504c92ab65).
 
 <a name="symbol_context" href="#symbol_context">#</a> <i>symbol</i>.<b>context</b>([<i>context</i>])
 
