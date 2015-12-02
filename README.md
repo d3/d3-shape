@@ -564,31 +564,31 @@ Produces a cubic [cardinal spline](https://en.wikipedia.org/wiki/Cubic_Hermite_s
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/catmullRom.png" width="888" height="240" alt="catmullRom">
 
-…
+Produces a cubic Catmull–Rom spline using the specified control points and the parameter *alpha*, as proposed by Yuksel et al. in [On the Parameterization of Catmull–Rom Curves](http://www.cemyuksel.com/research/catmullrom_param/), with one-sided differences used for the first and last piece. If *alpha* is zero, produces a uniform spline, equivalent to [cardinal](#cardinal) with a tension of zero; if *alpha* is one, produces a chordal spline; if *alpha* is 0.5, produces a [centripetal spline](https://en.wikipedia.org/wiki/Centripetal_Catmull–Rom_spline). If *alpha* is not specified, it defaults to 0.5. Centripetal splines are recommended to avoid self-intersections and overshoot.
 
 <a name="catmullRomClosed" href="#catmullRomClosed">#</a> <b>catmullRomClosed</b>(<i>context</i>[, <i>alpha</i>])
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/catmullRomClosed.png" width="888" height="240" alt="catmullRomClosed">
 
-…
+Produces a closed cubic Catmull–Rom spline using the specified control points and the parameter *alpha*, as proposed by Yuksel et al. When a line segment ends, the first three control points are repeated, producing a closed loop. If *alpha* is zero, produces a uniform spline, equivalent to [cardinalClosed](#cardinalClosed) with a tension of zero; if *alpha* is one, produces a chordal spline; if *alpha* is 0.5, produces a [centripetal spline](https://en.wikipedia.org/wiki/Centripetal_Catmull–Rom_spline). If *alpha* is not specified, it defaults to 0.5. Centripetal splines are recommended to avoid self-intersections and overshoot.
 
 <a name="catmullRomOpen" href="#catmullRomOpen">#</a> <b>catmullRomOpen</b>(<i>context</i>[, <i>alpha</i>])
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/catmullRomOpen.png" width="888" height="240" alt="catmullRomOpen">
 
-…
+Produces a cubic Catmull–Rom spline using the specified control points and the parameter *alpha*, as proposed by Yuksel et al. Unlike [catmullRom](#catmullRom), one-sided differences are not used for the first and last piece, and thus the curve starts at the second point and ends at the penultimate point. If *alpha* is zero, produces a uniform spline, equivalent to [cardinalOpen](#cardinalOpen) with a tension of zero; if *alpha* is one, produces a chordal spline; if *alpha* is 0.5, produces a [centripetal spline](https://en.wikipedia.org/wiki/Centripetal_Catmull–Rom_spline). If *alpha* is not specified, it defaults to 0.5. Centripetal splines are recommended to avoid self-intersections and overshoot.
 
 <a name="linear" href="#linear">#</a> <b>linear</b>(<i>context</i>)
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/linear.png" width="888" height="240" alt="linear">
 
-…
+Produces a polyline through the specified points.
 
 <a name="linearClosed" href="#linearClosed">#</a> <b>linearClosed</b>(<i>context</i>)
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/linearClosed.png" width="888" height="240" alt="linearClosed">
 
-…
+Produces a closed polyline through the specified points by repeating the first point when the line segment ends.
 
 <a name="monotone" href="#monotone">#</a> <b>monotone</b>(<i>context</i>)
 
