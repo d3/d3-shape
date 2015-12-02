@@ -568,7 +568,7 @@ Produces a cubic Catmull–Rom spline using the specified control points and the
 
 <a name="catmullRomClosed" href="#catmullRomClosed">#</a> <b>catmullRomClosed</b>(<i>context</i>[, <i>alpha</i>])
 
-<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/catmullRomClosed.png" width="888" height="240" alt="catmullRomClosed">
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/catmullRomClosed.png" width="888" height="340" alt="catmullRomClosed">
 
 Produces a closed cubic Catmull–Rom spline using the specified control points and the parameter *alpha*, as proposed by Yuksel et al. When a line segment ends, the first three control points are repeated, producing a closed loop. If *alpha* is zero, produces a uniform spline, equivalent to [cardinalClosed](#cardinalClosed) with a tension of zero; if *alpha* is one, produces a chordal spline; if *alpha* is 0.5, produces a [centripetal spline](https://en.wikipedia.org/wiki/Centripetal_Catmull–Rom_spline). If *alpha* is not specified, it defaults to 0.5. Centripetal splines are recommended to avoid self-intersections and overshoot.
 
