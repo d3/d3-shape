@@ -514,27 +514,28 @@ If *context* is specified, sets the context and returns this area generator. If 
 
 ### Curves
 
-Curves are typically not used directly, instead implementing paths for [lines](#lines) and [areas](#areas); they are passed to [*line*.curve](#line_curve) and [*area*.curve](#area_curve).
+While [lines](#lines) are defined as a sequence of two-dimensional [*x*, *y*] points, and [areas](#areas) are similarly defined by a topline and a baseline, there remains the task of transforming this discrete representation into a continuous spline: *i.e.*, what happens between the points. A variety of curves are provided for this purpose.
 
-…
+Curves are typically not used directly, instead being passed to [*line*.curve](#line_curve) and [*area*.curve](#area_curve). However, you may wish to define your own curve implementation should none of the built-in curves satisfy your needs.
 
 <a name="basis" href="#basis">#</a> <b>basis</b>(<i>context</i>)
 
 ![basis](https://raw.githubusercontent.com/d3/d3-shape/master/img/basis.png)
 
-…
+Produces a [B-spline](https://en.wikipedia.org/wiki/B-spline), or basis spline, through the specified control points. The first and last points are repeated such that the spline starts at the first point and ends at the last point.
 
 <a name="basisClosed" href="#basisClosed">#</a> <b>basisClosed</b>(<i>context</i>)
 
 ![basisClosed](https://raw.githubusercontent.com/d3/d3-shape/master/img/basisClosed.png)
 
-…
+Produces a closed [B-spline](https://en.wikipedia.org/wiki/B-spline), or basis spline, through the specified control points. When a line segment ends, the first three control points are repeated, producing a closed loop with C2 continuity.
+
 
 <a name="basisOpen" href="#basisOpen">#</a> <b>basisOpen</b>(<i>context</i>)
 
 ![basisOpen](https://raw.githubusercontent.com/d3/d3-shape/master/img/basisOpen.png)
 
-…
+Produces a [B-spline](https://en.wikipedia.org/wiki/B-spline), or basis spline, through the specified control points. Unlike [basis](#basis), the first and last points are not repeated, and thus the curve typically does not intersect these points.
 
 <a name="bundle" href="#bundle">#</a> <b>bundle</b>(<i>context</i>[, <i>beta</i>])
 
