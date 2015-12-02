@@ -626,7 +626,7 @@ Curves are typically not used directly, instead being passed to [*line*.curve](#
 
 <a name="curve_areaStart" href="#curve_areaStart">#</a> <i>curve</i>.<b>areaStart</b>()
 
-Indicates the start of a new area segment. The topline will follow, followed by the baseline. Each area segment consists of exactly two [line segments](#curve_lineStart). Note: this method need not be implemented by closed curves, such as <a href="#linearClosed">linearClosed</a>.
+Indicates the start of a new area segment. Each area segment consists of exactly two [line segments](#curve_lineStart): the topline, followed by the baseline, with the baseline points in reverse order. Note: this method need not be implemented by closed curves, such as <a href="#linearClosed">linearClosed</a>.
 
 <a name="curve_areaEnd" href="#curve_areaEnd">#</a> <i>curve</i>.<b>areaEnd</b>()
 
