@@ -516,7 +516,7 @@ If *context* is specified, sets the context and returns this area generator. If 
 
 While [lines](#lines) are defined as a sequence of two-dimensional [*x*, *y*] points, and [areas](#areas) are similarly defined by a topline and a baseline, there remains the task of transforming this discrete representation into a continuous shape: *i.e.*, how to interpolate between the points. A variety of curves are provided for this purpose.
 
-Curves are typically not used directly, instead being passed to [*line*.curve](#line_curve) and [*area*.curve](#area_curve). However, you can define your own curve implementation should none of the built-in curves satisfy your needs.
+Curves are typically not constructed or used directly, instead being passed to [*line*.curve](#line_curve) and [*area*.curve](#area_curve).
 
 <a name="basis" href="#basis">#</a> <b>basis</b>(<i>context</i>)
 
@@ -620,53 +620,61 @@ Produces a piecewise constant function (a [step function](https://en.wikipedia.o
 
 Produces a piecewise constant function (a [step function](https://en.wikipedia.org/wiki/Step_function)) consisting of alternating horizontal and vertical lines. The *y*-value changes before the *x*-value.
 
+### Custom Curves
+
+Curves are typically not used directly, instead being passed to [*line*.curve](#line_curve) and [*area*.curve](#area_curve). However, you can define your own curve implementation should none of the built-in curves satisfy your needs, using the following interface.
+
 <a name="curve_areaStart" href="#curve_areaStart">#</a> <i>curve</i>.<b>areaStart</b>()
 
-…
-
-Note: not implemented by closed curves, such as <a href="#linearClosed">linearClosed</a>.
+Indicates the start of a new area segment. The topline will follow, followed by the baseline. Each area segment consists of exactly two [line segments](#curve_lineStart). Note: this method need not be implemented by closed curves, such as <a href="#linearClosed">linearClosed</a>.
 
 <a name="curve_areaEnd" href="#curve_areaEnd">#</a> <i>curve</i>.<b>areaEnd</b>()
 
-…
-
-Note: not implemented by closed curves, such as <a href="#linearClosed">linearClosed</a>.
+Indicates the end of the current area segment. Note: this method need not be implemented by closed curves, such as <a href="#linearClosed">linearClosed</a>.
 
 <a name="curve_lineStart" href="#curve_lineStart">#</a> <i>curve</i>.<b>lineStart</b>()
 
-…
+Indicates the start of a new line segment. Zero or more [points](#curve_point) will follow.
 
 <a name="curve_lineEnd" href="#curve_lineEnd">#</a> <i>curve</i>.<b>lineEnd</b>()
 
-…
+Indicates the end of the current line segment.
 
 <a name="curve_point" href="#curve_point">#</a> <i>curve</i>.<b>point</b>(<i>x</i>, <i>y</i>)
 
-…
+Indicates a new point in the current line segment with the given *x*- and *y*-values.
 
 ### Symbols
 
-…
+Symbols provide a categorical shape encoding as is commonly used in scatterplots.
 
 <a name="symbol" href="#symbol">#</a> <b>symbol</b>()
 
-…
+Constructs a new symbol generator with the default settings.
 
-<a name="_symbol" href="#_symbol">#</a> <i>symbol</i>(…)
+<a name="_symbol" href="#_symbol">#</a> <i>symbol</i>(<i>arguments</i>…)
 
-…
+Generates a symbol for the given *arguments*. The *arguments* are arbitrary; they are simply propagated to the symbol generator’s accessor functions along with the `this` object. For example, with the default settings, no arguments are needed to produce a circle with area 64 square pixels. If the symbol generator has a [context](#symbol_context), then the symbol is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls and this function returns void. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string is returned.
 
 <a name="symbol_type" href="#symbol_type">#</a> <i>symbol</i>.<b>type</b>([<i>type</i>])
 
-…
+If *type* is specified, sets the symbol type and returns this line generator. If *type* is not specified, returns the current symbol type, which defaults to [circle](#circle). See [symbols](#symbols) for the set of built-in symbol types.
 
 <a name="symbol_size" href="#symbol_size">#</a> <i>symbol</i>.<b>size</b>([<i>size</i>])
 
-…
+If *size* is specified, sets the size to the specified function or number and returns this symbol generator. If *size* is not specified, returns the current size accessor, which defaults to:
+
+```js
+function size() {
+  return 64;
+}
+```
+
+Specifying the size as a function is useful for constructing a scatterplot with a size encoding.
 
 <a name="symbol_context" href="#symbol_context">#</a> <i>symbol</i>.<b>context</b>([<i>context</i>])
 
-…
+If *context* is specified, sets the context and returns this symbol generator. If *context* is not specified, returns the current context, which defaults to null. If the context is not null, then the [generated symbol](#_symbol) is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated symbol is returned.
 
 <a name="symbols" href="#symbols">#</a> <b>symbols</b>
 
@@ -708,11 +716,13 @@ A down-pointing triangle.
 
 An up-pointing triangle.
 
+### Custom Symbol Types
+
+Symbol types are typically not used directly, instead being passed to [*symbol*.type](#symbol_type). However, you can define your own sumbol type implementation should none of the built-in types satisfy your needs, using the following interface.
+
 <a name="symbolType_draw" href="#symbolType_draw">#</a> <i>symbolType</i>.<b>draw</b>(<i>context</i>, <i>size</i>)
 
-Symbol types are typically not used directly, instead implementing paths for [symbols](#symbols); they are passed to [*symbol*.type](#symbol_type).
-
-…
+Renders this symbol type to the specified *context* with the specified *size* in square pixels. The *context* implements the [CanvasPathMethods](http://www.w3.org/TR/2dcontext/#canvaspathmethods) interface. (Note that this is a subset of the CanvasRenderingContext2D interface!)
 
 ## Changes from D3 3.x:
 
