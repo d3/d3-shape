@@ -33,7 +33,7 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 [<img src="https://cloud.githubusercontent.com/assets/230541/11412848/bb915934-9396-11e5-8a87-44ce0ab4a157.png" width="250" height="250">](http://bl.ocks.org/mbostock/3887235)[<img src="https://cloud.githubusercontent.com/assets/230541/11412847/bb89bcec-9396-11e5-85a0-ee4dfa4aa021.png" width="250" height="250">](http://bl.ocks.org/mbostock/3887193)[<img src="https://cloud.githubusercontent.com/assets/230541/11412846/bb760f4e-9396-11e5-8252-1b8f74bc09f9.png" width="250" height="250">](http://bl.ocks.org/mbostock/aff9e559c5c9968b7ac6)
 
-The arc generator produces a [circular](https://en.wikipedia.org/wiki/Circular_sector) or [annular](https://en.wikipedia.org/wiki/Annulus_\(mathematics\)) sector as in a pie or donut chart. If the difference between the [start](#arc_startAngle) and [end](#arc_endAngle) angles (the *angular span*) is greater than [τ](https://en.wikipedia.org/wiki/Turn_\(geometry\)#Tau_proposal), the arc generator will produce a complete circle or annulus. If it is less than τ, arcs may have [rounded corners](#arc_cornerRadius) and [angular padding](#arc_padAngle). Arcs are always centered at ⟨0,0⟩; use a transform (see: [SVG](http://www.w3.org/TR/SVG/coords.html#TransformAttribute), [Canvas](http://www.w3.org/TR/2dcontext/#transformations)) to move the arc to a different position.
+The arc generator produces a [circular](https://en.wikipedia.org/wiki/Circular_sector) or [annular](https://en.wikipedia.org/wiki/Annulus_\(mathematics\)) sector, as in a pie or donut chart. If the difference between the [start](#arc_startAngle) and [end](#arc_endAngle) angles (the *angular span*) is greater than [τ](https://en.wikipedia.org/wiki/Turn_\(geometry\)#Tau_proposal), the arc generator will produce a complete circle or annulus. If it is less than τ, arcs may have [rounded corners](#arc_cornerRadius) and [angular padding](#arc_padAngle). Arcs are always centered at ⟨0,0⟩; use a transform (see: [SVG](http://www.w3.org/TR/SVG/coords.html#TransformAttribute), [Canvas](http://www.w3.org/TR/2dcontext/#transformations)) to move the arc to a different position.
 
 See also the [pie generator](#pies), which computes the necessary angles to represent an array of data as a pie or donut chart; these angles can then be passed to an arc generator.
 
@@ -313,7 +313,7 @@ The pad angle here means the angular separation between each adjacent arc. The t
 [<img width="290" alt="3884955" src="https://cloud.githubusercontent.com/assets/230541/11463882/613da6d2-96dd-11e5-8d81-ec3c28b40f99.png">](http://bl.ocks.org/mbostock/3884955)
 [<img width="290" alt="3969722" src="https://cloud.githubusercontent.com/assets/230541/11463881/6110ff42-96dd-11e5-94b7-75313b28dcbf.png">](http://bl.ocks.org/mbostock/3969722)
 
-The line generator produces a [spline](https://en.wikipedia.org/wiki/Spline_\(mathematics\)) or [polyline](https://en.wikipedia.org/wiki/Polygonal_chain) as in a line chart. Lines also appear in many other visualization types, such as the links in [hierarchical edge bundling](http://bl.ocks.org/mbostock/7607999).
+The line generator produces a [spline](https://en.wikipedia.org/wiki/Spline_\(mathematics\)) or [polyline](https://en.wikipedia.org/wiki/Polygonal_chain), as in a line chart. Lines also appear in many other visualization types, such as the links in [hierarchical edge bundling](http://bl.ocks.org/mbostock/7607999).
 
 <a name="line" href="#line">#</a> <b>line</b>()
 
@@ -397,51 +397,110 @@ If *context* is specified, sets the context and returns this line generator. If 
 
 ### Areas
 
-…
+[<img alt="Area Chart" width="250" src="https://cloud.githubusercontent.com/assets/230541/11519082/d7e49088-984b-11e5-974b-2097b59643cc.png">](http://bl.ocks.org/mbostock/3883195)[<img alt="Stacked Area Chart" width="250" src="https://cloud.githubusercontent.com/assets/230541/11519081/d7e3f358-984b-11e5-81e5-2fd75f655f3c.png">](http://bl.ocks.org/mbostock/3885211)[<img alt="Difference Chart" width="250" src="https://cloud.githubusercontent.com/assets/230541/11519080/d7e22406-984b-11e5-95b8-d3323b146ee4.png">](http://bl.ocks.org/mbostock/3894205)
+
+The area generator produces an area, as in an area chart. An area is defined by two bounding [lines](#lines), either splines or polylines. Typically, the two lines share the same [*x*-values](#area_x), differing only in *y*-value ([y0](#area_y0) and [y1](#area_y1)); most commonly, y0 is defined as a constant representing zero. The first line (the <i>topline</i>) is defined by x1 and y1 and is rendered first; the second line (the <i>baseline</i>) is defined by x0 and y0 and is rendered second, in reverse order. With a [linear](#linear) [curve](#area_curve), this produces a clockwise polygon.
 
 <a name="area" href="#area">#</a> <b>area</b>()
 
-…
+Constructs a new area generator with the default settings.
 
 <a name="_area" href="#_area">#</a> <i>area</i>(<i>data</i>)
 
-…
+Generates an area for the given array of *data*. Depending on this area generator’s associated [curve](#area_curve), the given input *data* may need to be sorted by *x*-value before being passed to the area generator. If the area generator has a [context](#line_context), then the area is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls and this function returns void. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string is returned.
 
 <a name="area_x" href="#area_x">#</a> <i>area</i>.<b>x</b>([<i>x</i>])
 
-…
+If *x* is specified, sets [x0](#area_x0) to *x* and [x1](#area_x1) to null and returns this area generator. If *x* is not specified, returns the current x0 accessor.
 
-<a name="area_x0" href="#area_x0">#</a> <i>area</i>.<b>x0</b>([<i>x0</i>])
+<a name="area_x0" href="#area_x0">#</a> <i>area</i>.<b>x0</b>([<i>x</i>])
 
-…
+If *x* is specified, sets the x0 accessor to the specified function or number and returns this area generator. If *x* is not specified, returns the current x0 accessor, which defaults to:
 
-<a name="area_x1" href="#area_x1">#</a> <i>area</i>.<b>x1</b>([<i>x1</i>])
+```js
+function x(d) {
+  return d[0];
+}
+```
 
-…
+When an area is [generated](#_area), the x0 accessor will be invoked for each [defined](#area_defined) element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default x0 accessor assumes that the input data are two-element arrays of numbers. If your data are in a different format, or if you wish to transform the data before rendering, then you should specify a custom accessor. For example, if `x` is a [time scale](https://github.com/d3/d3-scale#time-scales) and `y` is a [linear scale](https://github.com/d3/d3-scale#linear-scales):
+
+```js
+var data = [
+  {date: new Date(2007, 3, 24), value: 93.24},
+  {date: new Date(2007, 3, 25), value: 95.35},
+  {date: new Date(2007, 3, 26), value: 98.84},
+  {date: new Date(2007, 3, 27), value: 99.92},
+  {date: new Date(2007, 3, 30), value: 99.80},
+  {date: new Date(2007, 4,  1), value: 99.47},
+  …
+];
+
+var a = area()
+    .x(function(d) { return x(d.date); })
+    .y1(function(d) { return y(d.value); })
+    .y0(y(0));
+```
+
+<a name="area_x1" href="#area_x1">#</a> <i>area</i>.<b>x1</b>([<i>x</i>])
+
+If *x* is specified, sets the x1 accessor to the specified function or number and returns this area generator. If *x* is not specified, returns the current x1 accessor, which defaults to null, indicating that the previously-computed [x0](#area_x0) value should be reused for the x1 value.
+
+When an area is [generated](#_area), the x1 accessor will be invoked for each [defined](#area_defined) element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. See [*area*.x0](#area_x0) for more information.
 
 <a name="area_y" href="#area_y">#</a> <i>area</i>.<b>y</b>([<i>y</i>])
 
-…
+If *y* is specified, sets [y0](#area_y0) to *y* and [y1](#area_y1) to null and returns this area generator. If *y* is not specified, returns the current y0 accessor.
 
-<a name="area_y0" href="#area_y0">#</a> <i>area</i>.<b>y0</b>([<i>y0</i>])
+<a name="area_y0" href="#area_y0">#</a> <i>area</i>.<b>y0</b>([<i>y</i>])
 
-…
+If *y* is specified, sets the y0 accessor to the specified function or number and returns this area generator. If *y* is not specified, returns the current y0 accessor, which defaults to:
 
-<a name="area_y1" href="#area_y1">#</a> <i>area</i>.<b>y1</b>([<i>y1</i>])
+```js
+function y() {
+  return 0;
+}
+```
 
-…
+When an area is [generated](#_area), the y0 accessor will be invoked for each [defined](#area_defined) element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. See [*area*.x0](#area_x0) for more information.
+
+<a name="area_y1" href="#area_y1">#</a> <i>area</i>.<b>y1</b>([<i>y</i>])
+
+If *y* is specified, sets the y1 accessor to the specified function or number and returns this area generator. If *y* is not specified, returns the current y1 accessor, which defaults to:
+
+```js
+function y(d) {
+  return d[1];
+}
+```
+
+A null accessor is also allowed, indicating that the previously-computed [y0](#area_y0) value should be reused for the y1 value. When an area is [generated](#_area), the y1 accessor will be invoked for each [defined](#area_defined) element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. See [*area*.x0](#area_x0) for more information.
 
 <a name="area_defined" href="#area_defined">#</a> <i>area</i>.<b>defined</b>([<i>defined</i>])
 
-…
+If *defined* is specified, sets the defined accessor to the specified function or boolean and returns this area generator. If *defined* is not specified, returns the current defined accessor, which defaults to:
+
+```js
+function defined() {
+  return true;
+}
+```
+
+The default accessor thus assumes that the input data is always defined. When an area is [generated](#_area), the defined accessor will be invoked for each element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. If the given element is defined (*i.e.*, if the defined accessor returns a truthy value for this element), the [x0](#area_x0), [x1](#area_x1), [y0](#area_y0) and [y1](#area_y1) accessors will subsequently be evaluated and the point will be added to the current area segment. Otherwise, the element will be skipped, the current area segment will be ended, and a new area segment will be generated for the next defined point. As a result, the generated area may have several discrete segments. For example:
+
+[<img src="https://cloud.githubusercontent.com/assets/230541/11519352/61a6ed50-984e-11e5-9b2c-d3950693fbdd.png" width="480" height="250" alt="Area with Missing Data">](http://bl.ocks.org/mbostock/3035090)
+
+Note that if an area segment consists of only a single point, it may appear invisible unless rendered with rounded or square [line caps](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap). In addition, some curves such as [cardinalOpen](#cardinalOpen) only render a visible segment if it contains multiple points.
 
 <a name="area_curve" href="#area_curve">#</a> <i>area</i>.<b>curve</b>([<i>curve</i>[, <i>parameters…</i>]])
 
-…
+If *curve* is specified, sets the [curve factory](#curves) and returns this area generator. Any optional *parameters*, if specified, will be bound to the specified *curve*. If *curve* is not specified, returns the current curve factory, which defaults to [linear](#linear).
+
+Unlike [*line*.curve](#line_curve), this method requires that the curve implement [*curve*.areaStart](#curve_areaStart) and [*curve*.areaEnd](#curve_areaEnd); you cannot use closed curves such as [cardinalClosed](#cardinalClosed) with an area generator. Instead, a closed shape is produced by first rendering the topline and then rendering the baseline.
 
 <a name="area_context" href="#area_context">#</a> <i>area</i>.<b>context</b>([<i>context</i>])
 
-…
+If *context* is specified, sets the context and returns this area generator. If *context* is not specified, returns the current context, which defaults to null. If the context is not null, then the [generated area](#_area) is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated area is returned.
 
 ### Curves
 
