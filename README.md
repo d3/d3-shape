@@ -31,7 +31,7 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 ### Arcs
 
-[<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/pie.png" width="295" height="295">](http://bl.ocks.org/mbostock/3887235)[<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/donut.png" width="295" height="295">](http://bl.ocks.org/mbostock/3887193)
+[<img alt="Pie Chart" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/pie.png" width="295" height="295">](http://bl.ocks.org/mbostock/3887235)[<img alt="Donut Chart" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/donut.png" width="295" height="295">](http://bl.ocks.org/mbostock/3887193)
 
 The arc generator produces a [circular](https://en.wikipedia.org/wiki/Circular_sector) or [annular](https://en.wikipedia.org/wiki/Annulus_\(mathematics\)) sector, as in a pie or donut chart. If the difference between the [start](#arc_startAngle) and [end](#arc_endAngle) angles (the *angular span*) is greater than [τ](https://en.wikipedia.org/wiki/Turn_\(geometry\)#Tau_proposal), the arc generator will produce a complete circle or annulus. If it is less than τ, arcs may have [rounded corners](#arc_cornerRadius) and [angular padding](#arc_padAngle). Arcs are always centered at ⟨0,0⟩; use a transform (see: [SVG](http://www.w3.org/TR/SVG/coords.html#TransformAttribute), [Canvas](http://www.w3.org/TR/2dcontext/#transformations)) to move the arc to a different position.
 
@@ -74,7 +74,7 @@ If the arc generator has a [context](#arc_context), then the arc is rendered to 
 
 Computes the midpoint [*x*, *y*] of the center line of the arc that would be [generated](#_arc) by the given *arguments*. The *arguments* are arbitrary; they are simply propagated to the arc generator’s accessor functions along with the `this` object. To be consistent with the generated arc, the accessors must be deterministic, *i.e.*, return the same value given the same arguments. The midpoint is defined as ([startAngle](#arc_startAngle) + [endAngle](#arc_endAngle)) / 2 and ([innerRadius](#arc_innerRadius) + [outerRadius](#arc_outerRadius)) / 2. For example:
 
-<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/centroid-circular-sector.png" width="250" height="250"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/centroid-annular-sector.png" width="250" height="250">
+<img alt="Circular Sector Centroids" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/centroid-circular-sector.png" width="250" height="250"><img alt="Annular Sector Centroids" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/centroid-annular-sector.png" width="250" height="250">
 
 Note that this is **not the geometric center** of the arc, which may be outside the arc; this method is merely a convenience for positioning labels.
 
@@ -114,7 +114,7 @@ function cornerRadius() {
 
 If the corner radius is greater than zero, the corners of the arc are rounded using circles of the given radius. For a circular sector, the two outer corners are rounded; for an annular sector, all four corners are rounded. The corner circles are shown in this diagram:
 
-<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/rounded-circular-sector.png" width="250" height="250"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/rounded-annular-sector.png" width="250" height="250">
+<img alt="Rounded Circular Sectors" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/rounded-circular-sector.png" width="250" height="250"><img alt="Rounded Annular Sectors" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/rounded-annular-sector.png" width="250" height="250">
 
 The corner radius may not be larger than ([outerRadius](#arc_outerRadius) - [innerRadius](#arc_innerRadius)) / 2. In addition, for arcs whose angular span is less than π, the corner radius may be reduced as two adjacent rounded corners intersect. This is occurs more often with the inner corners. See the [arc corners animation](http://bl.ocks.org/mbostock/b7671cb38efdfa5da3af) for illustration.
 
@@ -156,7 +156,7 @@ The pad angle is converted to a fixed linear distance separating adjacent arcs, 
 
 If the [inner radius](#arc_innerRadius) or angular span is small relative to the pad angle, it may not be possible to maintain parallel edges between adjacent arcs. In this case, the inner edge of the arc may collapse to a point, similar to a circular sector. For this reason, padding is typically only applied to annular sectors (*i.e.*, when innerRadius is positive), as shown in this diagram:
 
-<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/padded-circular-sector.png" width="250" height="250"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/padded-annular-sector.png" width="250" height="250">
+<img alt="Padded Circular Sectors" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/padded-circular-sector.png" width="250" height="250"><img alt="Padded Annular Sectors" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/padded-annular-sector.png" width="250" height="250">
 
 The recommended minimum inner radius when using padding is outerRadius \* padAngle / sin(θ), where θ is the angular span of the smallest arc before padding. For example, if the outer radius is 200 pixels and the pad angle is 0.02 radians, a reasonable θ is 0.04 radians, and a reasonable inner radius is 100 pixels. See the [arc padding animation](http://bl.ocks.org/mbostock/053fcc2295a445afab07) for illustration.
 
@@ -321,7 +321,7 @@ The pad angle here means the angular separation between each adjacent arc. The t
 
 ### Lines
 
-[<img width="295" alt="3883245" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/line.png">](http://bl.ocks.org/mbostock/3883245)[<img width="295" alt="3884955" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/line-multi.png">](http://bl.ocks.org/mbostock/3884955)[<img width="295" alt="3969722" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/line-gradient.png">](http://bl.ocks.org/mbostock/3969722)
+[<img width="295" height="154" alt="Line Chart" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/line.png">](http://bl.ocks.org/mbostock/3883245)[<img width="295" height="154" alt="Multi-Line Chart" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/line-multi.png">](http://bl.ocks.org/mbostock/3884955)[<img width="295" height="154" alt="Line Gradient" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/line-gradient.png">](http://bl.ocks.org/mbostock/3969722)
 
 The line generator produces a [spline](https://en.wikipedia.org/wiki/Spline_\(mathematics\)) or [polyline](https://en.wikipedia.org/wiki/Polygonal_chain), as in a line chart. Lines also appear in many other visualization types, such as the links in [hierarchical edge bundling](http://bl.ocks.org/mbostock/7607999).
 
@@ -407,7 +407,7 @@ If *context* is specified, sets the context and returns this line generator. If 
 
 ### Areas
 
-[<img alt="Area Chart" width="295" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/area.png">](http://bl.ocks.org/mbostock/3883195)[<img alt="Stacked Area Chart" width="295" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/area-stacked.png">](http://bl.ocks.org/mbostock/3885211)[<img alt="Difference Chart" width="295" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/area-difference.png">](http://bl.ocks.org/mbostock/3894205)
+[<img alt="Area Chart" width="295" height="154" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/area.png">](http://bl.ocks.org/mbostock/3883195)[<img alt="Stacked Area Chart" width="295" height="154" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/area-stacked.png">](http://bl.ocks.org/mbostock/3885211)[<img alt="Difference Chart" width="295" height="154" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/area-difference.png">](http://bl.ocks.org/mbostock/3894205)
 
 The area generator produces an area, as in an area chart. An area is defined by two bounding [lines](#lines), either splines or polylines. Typically, the two lines share the same [*x*-values](#area_x) ([x0](#area_x0) = [x1](#area_x1)), differing only in *y*-value ([y0](#area_y0) and [y1](#area_y1)); most commonly, y0 is defined as a constant representing [zero](http://www.vox.com/2015/11/19/9758062/y-axis-zero-chart). The first line (the <i>topline</i>) is defined by x1 and y1 and is rendered first; the second line (the <i>baseline</i>) is defined by x0 and y0 and is rendered second, with the points in reverse order. With a [linear](#linear) [curve](#area_curve), this produces a clockwise polygon.
 
@@ -520,104 +520,103 @@ Curves are typically not used directly, instead being passed to [*line*.curve](#
 
 <a name="basis" href="#basis">#</a> <b>basis</b>(<i>context</i>)
 
-![basis](https://raw.githubusercontent.com/d3/d3-shape/master/img/basis.png)
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/basis.png" width="888" height="240" alt="basis">
 
-Produces a [basis spline](https://en.wikipedia.org/wiki/B-spline) using the specified control points. The first and last points are triplicated such that the spline starts at the first point and ends at the last point, and is tangent to the line between the first and second points, and to the line between the penultimate and last points.
+Produces a cubic [basis spline](https://en.wikipedia.org/wiki/B-spline) using the specified control points. The first and last points are triplicated such that the spline starts at the first point and ends at the last point, and is tangent to the line between the first and second points, and to the line between the penultimate and last points.
 
 <a name="basisClosed" href="#basisClosed">#</a> <b>basisClosed</b>(<i>context</i>)
 
-![basisClosed](https://raw.githubusercontent.com/d3/d3-shape/master/img/basisClosed.png)
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/basisClosed.png" width="888" height="240" alt="basisClosed">
 
-Produces a closed [basis spline](https://en.wikipedia.org/wiki/B-spline) using the specified control points. When a line segment ends, the first three control points are repeated, producing a closed loop with C2 continuity.
-
+Produces a closed cubic [basis spline](https://en.wikipedia.org/wiki/B-spline) using the specified control points. When a line segment ends, the first three control points are repeated, producing a closed loop with C2 continuity.
 
 <a name="basisOpen" href="#basisOpen">#</a> <b>basisOpen</b>(<i>context</i>)
 
-![basisOpen](https://raw.githubusercontent.com/d3/d3-shape/master/img/basisOpen.png)
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/basisOpen.png" width="888" height="240" alt="basisOpen">
 
-Produces a [basis spline](https://en.wikipedia.org/wiki/B-spline) using the specified control points. Unlike [basis](#basis), the first and last points are not repeated, and thus the curve typically does not intersect these points.
+Produces a cubic [basis spline](https://en.wikipedia.org/wiki/B-spline) using the specified control points. Unlike [basis](#basis), the first and last points are not repeated, and thus the curve typically does not intersect these points.
 
 <a name="bundle" href="#bundle">#</a> <b>bundle</b>(<i>context</i>[, <i>beta</i>])
 
-![bundle](https://raw.githubusercontent.com/d3/d3-shape/master/img/bundle.png)
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/bundle.png" width="888" height="240" alt="bundle">
 
-Produces a straighted [basis spline](https://en.wikipedia.org/wiki/B-spline) using the specified control points, with the spline straightened according to the specified parameter *beta* in the range [0, 1]. If *beta* equals zero, a straight line between the first and last point is produced; if *beta* equals one, a standard [basis](#basis) spline is produced. If *beta* is not specified, it defaults to 0.85. This curve is typically used in [hierarchical edge bundling](http://bl.ocks.org/mbostock/7607999) to disambiguate connections, as proposed by [Danny Holten](https://www.win.tue.nl/vis1/home/dholten/) in [Hierarchical Edge Bundles: Visualization of Adjacency Relations in Hierarchical Data](https://www.win.tue.nl/vis1/home/dholten/papers/bundles_infovis.pdf); *beta* represents the bundle strength.
+Produces a straighted cubic [basis spline](https://en.wikipedia.org/wiki/B-spline) using the specified control points, with the spline straightened according to the specified parameter *beta* in the range [0, 1]. If *beta* equals zero, a straight line between the first and last point is produced; if *beta* equals one, a standard [basis](#basis) spline is produced. If *beta* is not specified, it defaults to 0.85. This curve is typically used in [hierarchical edge bundling](http://bl.ocks.org/mbostock/7607999) to disambiguate connections, as proposed by [Danny Holten](https://www.win.tue.nl/vis1/home/dholten/) in [Hierarchical Edge Bundles: Visualization of Adjacency Relations in Hierarchical Data](https://www.win.tue.nl/vis1/home/dholten/papers/bundles_infovis.pdf); *beta* represents the bundle strength.
 
 <a name="cardinal" href="#cardinal">#</a> <b>cardinal</b>(<i>context</i>[, <i>tension</i>])
 
-![cardinal](https://raw.githubusercontent.com/d3/d3-shape/master/img/cardinal.png)
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/cardinal.png" width="888" height="240" alt="cardinal">
 
-…
+Produces a cubic [cardinal spline](https://en.wikipedia.org/wiki/Cubic_Hermite_spline#Cardinal_spline) using the specified control points, with one-sided differences used for the first and last piece. The *tension* parameter in the range [0, 1] determines the length of the tangents: a *tension* of one yields all zero tangents, equivalent to [linear](#linear); a *tension* of zero produces a uniform [Catmull–Rom](#catmullRom) spline. If *tension* is not specified, it defaults to zero.
 
 <a name="cardinalClosed" href="#cardinalClosed">#</a> <b>cardinalClosed</b>(<i>context</i>[, <i>tension</i>])
 
-![cardinalClosed](https://raw.githubusercontent.com/d3/d3-shape/master/img/cardinalClosed.png)
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/cardinalClosed.png" width="888" height="240" alt="cardinalClosed">
 
-…
+Produces a closed cubic [cardinal spline](https://en.wikipedia.org/wiki/Cubic_Hermite_spline#Cardinal_spline) using the specified control points. When a line segment ends, the first three control points are repeated, producing a closed loop. The *tension* parameter in the range [0, 1] determines the length of the tangents: a *tension* of one yields all zero tangents, equivalent to [linearClosed](#linearClosed); a *tension* of zero produces a closed uniform [Catmull–Rom](#catmullRomClosed) spline.
 
 <a name="cardinalOpen" href="#cardinalOpen">#</a> <b>cardinalOpen</b>(<i>context</i>[, <i>tension</i>])
 
-![cardinalOpen](https://raw.githubusercontent.com/d3/d3-shape/master/img/cardinalOpen.png)
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/cardinalOpen.png" width="888" height="240" alt="cardinalOpen">
 
-…
+Produces a cubic [cardinal spline](https://en.wikipedia.org/wiki/Cubic_Hermite_spline#Cardinal_spline) using the specified control points. Unlike [cardinal](#cardinal), one-sided differences are not used for the first and last piece, and thus the curve starts at the second point and ends at the penultimate point.
 
 <a name="catmullRom" href="#catmullRom">#</a> <b>catmullRom</b>(<i>context</i>[, <i>alpha</i>])
 
-![catmullRom](https://raw.githubusercontent.com/d3/d3-shape/master/img/catmullRom.png)
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/catmullRom.png" width="888" height="240" alt="catmullRom">
 
 …
 
 <a name="catmullRomClosed" href="#catmullRomClosed">#</a> <b>catmullRomClosed</b>(<i>context</i>[, <i>alpha</i>])
 
-![catmullRomClosed](https://raw.githubusercontent.com/d3/d3-shape/master/img/catmullRomClosed.png)
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/catmullRomClosed.png" width="888" height="240" alt="catmullRomClosed">
 
 …
 
 <a name="catmullRomOpen" href="#catmullRomOpen">#</a> <b>catmullRomOpen</b>(<i>context</i>[, <i>alpha</i>])
 
-![catmullRomOpen](https://raw.githubusercontent.com/d3/d3-shape/master/img/catmullRomOpen.png)
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/catmullRomOpen.png" width="888" height="240" alt="catmullRomOpen">
 
 …
 
 <a name="linear" href="#linear">#</a> <b>linear</b>(<i>context</i>)
 
-![linear](https://raw.githubusercontent.com/d3/d3-shape/master/img/linear.png)
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/linear.png" width="888" height="240" alt="linear">
 
 …
 
 <a name="linearClosed" href="#linearClosed">#</a> <b>linearClosed</b>(<i>context</i>)
 
-![linearClosed](https://raw.githubusercontent.com/d3/d3-shape/master/img/linearClosed.png)
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/linearClosed.png" width="888" height="240" alt="linearClosed">
 
 …
 
 <a name="monotone" href="#monotone">#</a> <b>monotone</b>(<i>context</i>)
 
-![monotone](https://raw.githubusercontent.com/d3/d3-shape/master/img/monotone.png)
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/monotone.png" width="888" height="240" alt="monotone">
 
 …
 
 <a name="natural" href="#natural">#</a> <b>natural</b>(<i>context</i>)
 
-![natural](https://raw.githubusercontent.com/d3/d3-shape/master/img/natural.png)
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/natural.png" width="888" height="240" alt="natural">
 
 …
 
 <a name="step" href="#step">#</a> <b>step</b>(<i>context</i>)
 
-![step](https://raw.githubusercontent.com/d3/d3-shape/master/img/step.png)
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/step.png" width="888" height="240" alt="step">
 
 …
 
 <a name="stepAfter" href="#stepAfter">#</a> <b>stepAfter</b>(<i>context</i>)
 
-![stepAfter](https://raw.githubusercontent.com/d3/d3-shape/master/img/stepAfter.png)
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/stepAfter.png" width="888" height="240" alt="stepAfter">
 
 …
 
 <a name="stepBefore" href="#stepBefore">#</a> <b>stepBefore</b>(<i>context</i>)
 
-![stepBefore](https://raw.githubusercontent.com/d3/d3-shape/master/img/stepBefore.png)
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/stepBefore.png" width="888" height="240" alt="stepBefore">
 
 …
 
