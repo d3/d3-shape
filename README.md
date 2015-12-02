@@ -496,7 +496,7 @@ Note that if an area segment consists of only a single point, it may appear invi
 
 If *curve* is specified, sets the [curve factory](#curves) and returns this area generator. Any optional *parameters*, if specified, will be bound to the specified *curve*. If *curve* is not specified, returns the current curve factory, which defaults to [linear](#linear).
 
-Unlike [*line*.curve](#line_curve), this method requires that the curve implement [*curve*.areaStart](#curve_areaStart) and [*curve*.areaEnd](#curve_areaEnd); you cannot use closed curves such as [cardinalClosed](#cardinalClosed) with an area generator. Instead, a closed shape is produced by first rendering the topline and then rendering the baseline.
+Unlike [*line*.curve](#line_curve), this method **requires** that the curve implement [*curve*.areaStart](#curve_areaStart) and [*curve*.areaEnd](#curve_areaEnd); you cannot use closed curves such as [cardinalClosed](#cardinalClosed) with an area generator. Instead, a closed shape is produced by first rendering the topline and then rendering the baseline.
 
 <a name="area_context" href="#area_context">#</a> <i>area</i>.<b>context</b>([<i>context</i>])
 
