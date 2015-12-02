@@ -514,7 +514,7 @@ If *context* is specified, sets the context and returns this area generator. If 
 
 ### Curves
 
-While [lines](#lines) are defined as a sequence of two-dimensional [*x*, *y*] points, and [areas](#areas) are similarly defined by a topline and a baseline, there remains the task of transforming this discrete representation into a continuous spline: *i.e.*, what happens between the points. A variety of curves are provided for this purpose.
+While [lines](#lines) are defined as a sequence of two-dimensional [*x*, *y*] points, and [areas](#areas) are similarly defined by a topline and a baseline, there remains the task of transforming this discrete representation into a continuous shape: *i.e.*, how to interpolate between the points. A variety of curves are provided for this purpose.
 
 Curves are typically not used directly, instead being passed to [*line*.curve](#line_curve) and [*area*.curve](#area_curve). However, you can define your own curve implementation should none of the built-in curves satisfy your needs.
 
@@ -541,7 +541,7 @@ Produces a [basis spline](https://en.wikipedia.org/wiki/B-spline) using the spec
 
 ![bundle](https://raw.githubusercontent.com/d3/d3-shape/master/img/bundle.png)
 
-…
+Produces a straighted [basis spline](https://en.wikipedia.org/wiki/B-spline) using the specified control points, with the spline straightened according to the specified parameter *beta* in the range [0, 1]. If *beta* equals one, a straight line between the first and last point is produced; if *beta* equals zero, a standard [basis](#basis) spline is produced. This curve is typically used in [hierarchical edge bundling](http://bl.ocks.org/mbostock/7607999) to disambiguate connections, as proposed by [Danny Holten](https://www.win.tue.nl/vis1/home/dholten/) in [Hierarchical Edge Bundles: Visualization of Adjacency Relations in Hierarchical Data](https://www.win.tue.nl/vis1/home/dholten/papers/bundles_infovis.pdf); *beta* represents the bundle strength.
 
 <a name="cardinal" href="#cardinal">#</a> <b>cardinal</b>(<i>context</i>[, <i>tension</i>])
 
