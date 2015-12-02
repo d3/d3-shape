@@ -622,7 +622,7 @@ Produces a piecewise constant function (a [step function](https://en.wikipedia.o
 
 ### Custom Curves
 
-Curves are typically not used directly, instead being passed to [*line*.curve](#line_curve) and [*area*.curve](#area_curve). However, you can define your own curve implementation should none of the built-in curves satisfy your needs, using the following interface.
+Curves are typically not used directly, instead being passed to [*line*.curve](#line_curve) and [*area*.curve](#area_curve). However, you can define your own curve implementation should none of the built-in curves satisfy your needs, using the following interface. You can also use this low-level interface as an alternative to the line and area generators.
 
 <a name="curve_areaStart" href="#curve_areaStart">#</a> <i>curve</i>.<b>areaStart</b>()
 
@@ -718,7 +718,7 @@ An up-pointing triangle.
 
 ### Custom Symbol Types
 
-Symbol types are typically not used directly, instead being passed to [*symbol*.type](#symbol_type). However, you can define your own sumbol type implementation should none of the built-in types satisfy your needs, using the following interface.
+Symbol types are typically not used directly, instead being passed to [*symbol*.type](#symbol_type). However, you can define your own sumbol type implementation should none of the built-in types satisfy your needs, using the following interface. You can also use this low-level interface as an alternative to the symbol generator.
 
 <a name="symbolType_draw" href="#symbolType_draw">#</a> <i>symbolType</i>.<b>draw</b>(<i>context</i>, <i>size</i>)
 
