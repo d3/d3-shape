@@ -526,7 +526,9 @@ Curves are typically not used directly, instead implementing paths for [lines](#
 
 <a name="bundle" href="#bundle">#</a> <b>bundle</b>(<i>context</i>[, <i>beta</i>])
 
-![bundle](https://raw.githubusercontent.com/d3/d3-shape/master/img/bundle.png
+![bundle](https://raw.githubusercontent.com/d3/d3-shape/master/img/bundle.png)
+
+…
 
 <a name="cardinal" href="#cardinal">#</a> <b>cardinal</b>(<i>context</i>[, <i>tension</i>])
 
@@ -584,11 +586,15 @@ Curves are typically not used directly, instead implementing paths for [lines](#
 
 <a name="natural" href="#natural">#</a> <b>natural</b>(<i>context</i>)
 
-![natural](https://raw.githubusercontent.com/d3/d3-shape/master/img/natural.png
+![natural](https://raw.githubusercontent.com/d3/d3-shape/master/img/natural.png)
+
+…
 
 <a name="step" href="#step">#</a> <b>step</b>(<i>context</i>)
 
-![step](https://raw.githubusercontent.com/d3/d3-shape/master/img/step.png
+![step](https://raw.githubusercontent.com/d3/d3-shape/master/img/step.png)
+
+…
 
 <a name="stepAfter" href="#stepAfter">#</a> <b>stepAfter</b>(<i>context</i>)
 
