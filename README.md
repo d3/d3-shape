@@ -508,7 +508,7 @@ Curves are typically not used directly, instead implementing paths for [lines](#
 
 <a name="basis" href="#basis">#</a> <b>basis</b>(<i>context</i>)
 
-![basis](https://cloud.githubusercontent.com/assets/230541/11522922/e992be24-9871-11e5-91b9-fab2879e0831.png)
+![basis](https://github.com/d3/d3-shape/blob/master/img/basis.png)
 
 …
 
