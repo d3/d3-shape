@@ -325,7 +325,7 @@ Generates a line for the given array of *data*. Depending on this line generator
 
 <a name="line_x" href="#line_x">#</a> <i>line</i>.<b>x</b>([<i>x</i>])
 
-If *x* is specified, sets the *x*-value accessor to the specified function or number and returns this line generator. If *x* is not specified, returns the current *x* accessor, which defaults to:
+If *x* is specified, sets the x accessor to the specified function or number and returns this line generator. If *x* is not specified, returns the current x accessor, which defaults to:
 
 ```js
 function x(d) {
@@ -333,7 +333,7 @@ function x(d) {
 }
 ```
 
-When a line is [generated](#_line), the *x* accessor will be invoked for each [defined](#line_defined) element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default *x* accessor assumes that the input data are two-element arrays of numbers. If your data are in a different format, or if you wish to transform the data before rendering, then you should specify a custom accessor. For example, if `x` is a [time scale](https://github.com/d3/d3-scale#time-scales) and `y` is a [linear scale](https://github.com/d3/d3-scale#linear-scales):
+When a line is [generated](#_line), the x accessor will be invoked for each [defined](#line_defined) element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default x accessor assumes that the input data are two-element arrays of numbers. If your data are in a different format, or if you wish to transform the data before rendering, then you should specify a custom accessor. For example, if `x` is a [time scale](https://github.com/d3/d3-scale#time-scales) and `y` is a [linear scale](https://github.com/d3/d3-scale#linear-scales):
 
 ```js
 var data = [
@@ -361,7 +361,7 @@ The benefit of an accessor is that the input data remains associated with the re
 
 <a name="line_y" href="#line_y">#</a> <i>line</i>.<b>y</b>([<i>y</i>])
 
-If *y* is specified, sets the *y*-value accessor to the specified function or number and returns this line generator. If *y* is not specified, returns the current *y* accessor, which defaults to:
+If *y* is specified, sets the y accessor to the specified function or number and returns this line generator. If *y* is not specified, returns the current y accessor, which defaults to:
 
 ```js
 function y(d) {
@@ -369,7 +369,7 @@ function y(d) {
 }
 ```
 
-When a line is [generated](#_line), the *y* accessor will be invoked for each [defined](#line_defined) element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default *y* accessor assumes that the input data are two-element arrays of numbers. See [*line*.x](#line_x) for more information.
+When a line is [generated](#_line), the y accessor will be invoked for each [defined](#line_defined) element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default y accessor assumes that the input data are two-element arrays of numbers. See [*line*.x](#line_x) for more information.
 
 <a name="line_defined" href="#line_defined">#</a> <i>line</i>.<b>defined</b>([<i>defined</i>])
 
@@ -381,7 +381,7 @@ function defined() {
 }
 ```
 
-The default accessor thus assumes that the input data is always defined. When a line is [generated](#_line), the defined accessor will be invoked for each element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. If the given element is defined (*i.e.*, if the defined accessor returns a truthy value for this element), the [*x*](#line_x) and [*y*](#line_y) accessors will subsequently be evaluated and the point will be added to the current line segment. Otherwise, the element will be skipped, the current line segment will be ended, and a new line segment will be generated for the next defined point. As a result, the generated line may have several discrete segments. For example:
+The default accessor thus assumes that the input data is always defined. When a line is [generated](#_line), the defined accessor will be invoked for each element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. If the given element is defined (*i.e.*, if the defined accessor returns a truthy value for this element), the [x](#line_x) and [y](#line_y) accessors will subsequently be evaluated and the point will be added to the current line segment. Otherwise, the element will be skipped, the current line segment will be ended, and a new line segment will be generated for the next defined point. As a result, the generated line may have several discrete segments. For example:
 
 [<img src="https://cloud.githubusercontent.com/assets/230541/11515272/f4f3b4fc-9831-11e5-9530-54adbaa4d896.png" width="480" height="250" alt="Line with Missing Data">](http://bl.ocks.org/mbostock/0533f44f2cfabecc5e3a)
 
