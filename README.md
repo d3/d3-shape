@@ -76,7 +76,7 @@ Computes the midpoint [*x*, *y*] of the center line of the arc that would be [ge
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/centroid-circular-sector.png" width="250" height="250"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/centroid-annular-sector.png" width="250" height="250">
 
-This is **not the geometric center** of the arc, which may be outside the arc; this method is merely a convenience for positioning labels.
+Note that this is **not the geometric center** of the arc, which may be outside the arc; this method is merely a convenience for positioning labels.
 
 <a name="arc_innerRadius" href="#arc_innerRadius">#</a> <i>arc</i>.<b>innerRadius</b>([<i>radius</i>])
 
@@ -675,27 +675,39 @@ An array containing the set of all built-in symbol types: [circle](#circle), [cr
 
 <a name="circle" href="#circle">#</a> <b>circle</b>
 
-…
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/circle.png" width="100" height="100">
+
+A circle.
 
 <a name="cross" href="#cross">#</a> <b>cross</b>
 
-…
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/cross.png" width="100" height="100">
+
+A Greek cross with arms of equal length.
 
 <a name="diamond" href="#diamond">#</a> <b>diamond</b>
 
-…
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/diamond.png" width="100" height="100">
+
+A rhombus.
 
 <a name="square" href="#square">#</a> <b>square</b>
 
-…
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/square.png" width="100" height="100">
+
+A square.
 
 <a name="triangleDown" href="#triangleDown">#</a> <b>triangleDown</b>
 
-…
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/triangleDown.png" width="100" height="100">
+
+A down-pointing triangle.
 
 <a name="triangleUp" href="#triangleUp">#</a> <b>triangleUp</b>
 
-…
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/triangleUp.png" width="100" height="100">
+
+An up-pointing triangle.
 
 <a name="symbolType_draw" href="#symbolType_draw">#</a> <i>symbolType</i>.<b>draw</b>(<i>context</i>, <i>size</i>)
 
