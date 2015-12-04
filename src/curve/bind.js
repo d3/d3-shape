@@ -1,10 +1,11 @@
 var slice = Array.prototype.slice;
 
-export default function(interpolate, args) {
+export default function(curve, args) {
+  if (args.length < 2) return curve;
   args = slice.call(args);
   args[0] = null;
   return function(context) {
     args[0] = context;
-    return interpolate.apply(null, args);
+    return curve.apply(null, args);
   };
 };

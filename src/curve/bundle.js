@@ -1,11 +1,5 @@
 import basis from "./basis";
 
-function bundle(context, beta) {
-  return beta == null ? new Bundle(context, 0.85)
-      : (beta = +beta) === 1 ? basis(context)
-      : new Bundle(context, beta);
-}
-
 function Bundle(context, beta) {
   this._basis = basis(context);
   this._beta = beta;
@@ -48,4 +42,8 @@ Bundle.prototype = {
   }
 };
 
-export default bundle;
+export default function(context, beta) {
+  return beta == null ? new Bundle(context, 0.85)
+      : (beta = +beta) === 1 ? basis(context)
+      : new Bundle(context, beta);
+};

@@ -25,12 +25,6 @@ export function point(that, x, y) {
   that._context.bezierCurveTo(x1, y1, x2, y2, that._x2, that._y2);
 };
 
-function catmullRom(context, alpha) {
-  return (alpha = alpha == null ? 0.5 : +alpha)
-      ? new CatmullRom(context, alpha)
-      : cardinal(context, 0);
-}
-
 function CatmullRom(context, alpha) {
   this._context = context;
   this._alpha = alpha;
@@ -81,4 +75,8 @@ CatmullRom.prototype = {
   }
 };
 
-export default catmullRom;
+export default function(context, alpha) {
+  return (alpha = alpha == null ? 0.5 : +alpha)
+      ? new CatmullRom(context, alpha)
+      : cardinal(context, 0);
+};

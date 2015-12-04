@@ -33,10 +33,6 @@ function point(that, t0, t1) {
   that._context.bezierCurveTo(x0 + dx, y0 + dx * t0, x1 - dx, y1 - dx * t1, x1, y1);
 }
 
-function monotone(context) {
-  return new Monotone(context);
-}
-
 function Monotone(context) {
   this._context = context;
 }
@@ -80,4 +76,6 @@ Monotone.prototype = {
   }
 }
 
-export default monotone;
+export default function(context) {
+  return new Monotone(context);
+};

@@ -9,10 +9,6 @@ export function point(that, x, y) {
   );
 };
 
-function basis(context) {
-  return new Basis(context);
-}
-
 function Basis(context) {
   this._context = context;
 }
@@ -50,4 +46,6 @@ Basis.prototype = {
   }
 };
 
-export default basis;
+export default function(context) {
+  return new Basis(context);
+};

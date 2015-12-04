@@ -1,12 +1,6 @@
 import cardinalOpen from "./cardinalOpen";
 import {point} from "./catmullRom";
 
-function catmullRomOpen(context, alpha) {
-  return (alpha = alpha == null ? 0.5 : +alpha)
-      ? new CatmullRomOpen(context, alpha)
-      : cardinalOpen(context, 0);
-}
-
 function CatmullRomOpen(context, alpha) {
   this._context = context;
   this._alpha = alpha;
@@ -54,4 +48,8 @@ CatmullRomOpen.prototype = {
   }
 };
 
-export default catmullRomOpen;
+export default function(context, alpha) {
+  return (alpha = alpha == null ? 0.5 : +alpha)
+      ? new CatmullRomOpen(context, alpha)
+      : cardinalOpen(context, 0);
+};

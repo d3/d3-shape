@@ -1,9 +1,5 @@
 import {point} from "./basis";
 
-function basisOpen(context) {
-  return new BasisOpen(context);
-}
-
 function BasisOpen(context) {
   this._context = context;
 }
@@ -38,4 +34,6 @@ BasisOpen.prototype = {
   }
 };
 
-export default basisOpen;
+export default function(context) {
+  return new BasisOpen(context);
+};

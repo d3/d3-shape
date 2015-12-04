@@ -1,9 +1,5 @@
 import {point} from "./cardinal";
 
-function cardinalClosed(context, tension) {
-  return new CardinalClosed(context, (tension == null ? 1 : 1 - tension) / 6);
-}
-
 function CardinalClosed(context, k) {
   this._context = context;
   this._k = k;
@@ -48,4 +44,6 @@ CardinalClosed.prototype = {
   }
 };
 
-export default cardinalClosed;
+export default function(context, tension) {
+  return new CardinalClosed(context, (tension == null ? 1 : 1 - tension) / 6);
+};

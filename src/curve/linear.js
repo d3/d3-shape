@@ -1,7 +1,3 @@
-function linear(context) {
-  return new Linear(context);
-}
-
 function Linear(context) {
   this._context = context;
 }
@@ -30,4 +26,6 @@ Linear.prototype = {
   }
 };
 
-export default linear;
+export default function(context) {
+  return new Linear(context);
+};

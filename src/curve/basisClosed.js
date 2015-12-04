@@ -1,9 +1,5 @@
 import {point} from "./basis";
 
-function basisClosed(context) {
-  return new BasisClosed(context);
-}
-
 function BasisClosed(context) {
   this._context = context;
 }
@@ -48,4 +44,6 @@ BasisClosed.prototype = {
   }
 };
 
-export default basisClosed;
+export default function(context) {
+  return new BasisClosed(context);
+};

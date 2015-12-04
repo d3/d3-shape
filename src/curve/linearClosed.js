@@ -1,7 +1,3 @@
-function linearClosed(context) {
-  return new LinearClosed(context);
-}
-
 function LinearClosed(context) {
   this._context = context;
 }
@@ -20,4 +16,6 @@ LinearClosed.prototype = {
   }
 };
 
-export default linearClosed;
+export default function(context) {
+  return new LinearClosed(context);
+};

@@ -1,42 +1,19 @@
 import constant from "./constant";
+import curveLinear from "./curve/linear";
+import curveRadial from "./curve/radial";
 import line from "./line";
-import {halfPi} from "./math";
-
-function lineRadius(d) {
-  return d.radius;
-}
-
-function lineAngle(d) {
-  return d.angle;
-}
 
 export default function() {
-  var radialLine = line().x(x).y(y),
-      r,
-      a,
-      radius = lineRadius,
-      angle = lineAngle;
+  var l = line(),
+      c = l.curve;
 
-  delete radialLine.x;
-  delete radialLine.y;
+  l.radius = l.x, delete l.x;
 
-  function x(d, i, data) {
-    r = +radius(d, i, data);
-    a = +angle(d, i, data) - halfPi;
-    return r * Math.cos(a);
-  }
+  l.angle = l.y, delete l.y;
 
-  function y() {
-    return r * Math.sin(a);
-  }
-
-  radialLine.radius = function(_) {
-    return arguments.length ? (radius = typeof _ === "function" ? _ : constant(+_), radialLine) : radius;
+  l.curve = function(_) {
+    return arguments.length ? c(curveRadial(_, arguments)) : c()._curve;
   };
 
-  radialLine.angle = function(_) {
-    return arguments.length ? (angle = typeof _ === "function" ? _ : constant(+_), radialLine) : angle;
-  };
-
-  return radialLine;
+  return l.curve(curveLinear);
 };
