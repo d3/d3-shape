@@ -1,9 +1,6 @@
-import {path} from "d3-path";
 import constant from "./constant";
-import curveBind from "./curve/bind";
-import curveLinear from "./curve/linear";
-
-var halfPi = Math.PI / 2;
+import line from "./line";
+import {halfPi} from "./math";
 
 function lineRadius(d) {
   return d.radius;
@@ -14,35 +11,23 @@ function lineAngle(d) {
 }
 
 export default function() {
-  var radius = lineRadius,
-      angle = lineAngle,
-      defined = constant(true),
-      context = null,
-      curve = curveLinear,
-      output = null;
+  var radialLine = line().x(x).y(y),
+      r,
+      a,
+      radius = lineRadius,
+      angle = lineAngle;
 
-  function radialLine(data) {
-    var i,
-        n = data.length,
-        d,
-        defined0 = false,
-        buffer;
+  delete radialLine.x;
+  delete radialLine.y;
 
-    if (!context) output = curve(buffer = path());
+  function x(d, i, data) {
+    r = +radius(d, i, data);
+    a = +angle(d, i, data) - halfPi;
+    return r * Math.cos(a);
+  }
 
-    for (i = 0; i <= n; ++i) {
-      if (!(i < n && defined(d = data[i], i, data)) === defined0) {
-        if (defined0 = !defined0) output.lineStart();
-        else output.lineEnd();
-      }
-      if (defined0) {
-        var r = +radius(d, i, data),
-            a = +angle(d, i, data) - halfPi;
-        output.point(r * Math.cos(a), r * Math.sin(a));
-      }
-    }
-
-    if (buffer) return output = null, buffer + "" || null;
+  function y() {
+    return r * Math.sin(a);
   }
 
   radialLine.radius = function(_) {
@@ -53,16 +38,5 @@ export default function() {
     return arguments.length ? (angle = typeof _ === "function" ? _ : constant(+_), radialLine) : angle;
   };
 
-  radialLine.defined = function(_) {
-    return arguments.length ? (defined = typeof _ === "function" ? _ : constant(!!_), radialLine) : defined;
-  };
-
-  radialLine.curve = function(_) {
-    var n = arguments.length;
-    return n ? (curve = n > 1 ? curveBind(_, arguments) : _, context != null && (output = curve(context)), radialLine) : curve;
-  };
-
-  radialLine.context = function(_) {
-    return arguments.length ? (_ == null ? context = output = null : output = curve(context = _), radialLine) : context;
-  };
+  return radialLine;
 };

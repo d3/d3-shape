@@ -1,6 +1,5 @@
 import constant from "./constant";
-
-var tau = 2 * Math.PI;
+import {tau} from "./math";
 
 function identity(d) {
   return d;
