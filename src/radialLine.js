@@ -8,7 +8,6 @@ export default function() {
       c = l.curve;
 
   l.radius = l.x, delete l.x;
-
   l.angle = l.y, delete l.y;
 
   l.curve = function(_) {

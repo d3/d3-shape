@@ -53,7 +53,7 @@ export default function() {
   }
 
   area.x = function(_) {
-    return arguments.length ? area.x0(_).x1(null) : x0;
+    return arguments.length ? (x0 = typeof _ === "function" ? _ : constant(+_), x1 = null, area) : x0;
   };
 
   area.x0 = function(_) {
@@ -65,7 +65,7 @@ export default function() {
   };
 
   area.y = function(_) {
-    return arguments.length ? area.y0(_).y1(null) : y0;
+    return arguments.length ? (y0 = typeof _ === "function" ? _ : constant(+_), y1 = null, area) : y0;
   };
 
   area.y0 = function(_) {

@@ -407,17 +407,15 @@ If *context* is specified, sets the context and returns this line generator. If 
 
 <a name="radialLine" href="#radialLine">#</a> <b>radialLine</b>()
 
-Constructs a new radial line generator with the default settings. A radial line generator is equivalent to the standard Cartesian [line generator](#line), except the [x](#line_x) and [y](#line_y) accessors are replaced with [radius](#radialLine_radius) and [angle](#radialLine_angle) accessors, respectively.
-
-Radial lines are always positioned relative to ⟨0,0⟩; use a transform (see: [SVG](http://www.w3.org/TR/SVG/coords.html#TransformAttribute), [Canvas](http://www.w3.org/TR/2dcontext/#transformations)) to change the origin.
+Constructs a new radial line generator with the default settings. A radial line generator is equivalent to the standard Cartesian [line generator](#line), except the [x](#line_x) and [y](#line_y) accessors are replaced with [radius](#radialLine_radius) and [angle](#radialLine_angle) accessors, respectively. Radial lines are always positioned relative to ⟨0,0⟩; use a transform (see: [SVG](http://www.w3.org/TR/SVG/coords.html#TransformAttribute), [Canvas](http://www.w3.org/TR/2dcontext/#transformations)) to change the origin.
 
 <a name="radialLine_radius" href="#radialLine_radius">#</a> <i>radialLine</i>.<b>radius</b>([<i>radius</i>])
 
-Equivalent to [*line*.x](#line_x), except the accessor determines the radius: the distance from the origin ⟨0,0⟩.
+Equivalent to [*line*.x](#line_x), except the accessor returns the radius: the distance from the origin ⟨0,0⟩.
 
 <a name="radialLine_angle" href="#radialLine_angle">#</a> <i>radialLine</i>.<b>angle</b>([<i>angle</i>])
 
-Equivalent to [*line*.y](#line_y), except the accessor determines the angle in radians, with 0 at -*y* (12 o’clock).
+Equivalent to [*line*.y](#line_y), except the accessor returns the angle in radians, with 0 at -*y* (12 o’clock).
 
 <a name="radialLine_defined" href="#radialLine_defined">#</a> <i>radialLine</i>.<b>defined</b>([<i>defined</i>])
 
@@ -540,33 +538,31 @@ If *context* is specified, sets the context and returns this area generator. If 
 
 <a name="radialArea" href="#radialArea">#</a> <b>radialArea</b>()
 
-Constructs a new radial area generator with the default settings. A radial area generator is equivalent to the standard Cartesian [area generator](#area), except the [x](#area_x) and [y](#area_y) accessors are replaced with [radius](#radialArea_radius) and [angle](#radialArea_angle) accessors, respectively.
-
-Radial areas are always positioned relative to ⟨0,0⟩; use a transform (see: [SVG](http://www.w3.org/TR/SVG/coords.html#TransformAttribute), [Canvas](http://www.w3.org/TR/2dcontext/#transformations)) to change the origin.
+Constructs a new radial area generator with the default settings. A radial area generator is equivalent to the standard Cartesian [area generator](#area), except the [x](#area_x) and [y](#area_y) accessors are replaced with [radius](#radialArea_radius) and [angle](#radialArea_angle) accessors, respectively. Radial areas are always positioned relative to ⟨0,0⟩; use a transform (see: [SVG](http://www.w3.org/TR/SVG/coords.html#TransformAttribute), [Canvas](http://www.w3.org/TR/2dcontext/#transformations)) to change the origin.
 
 <a name="radialArea_radius" href="#radialArea_radius">#</a> <i>radialArea</i>.<b>radius</b>([<i>radius</i>])
 
-Equivalent to [*area*.x](#area_x), except the accessor determines the radius: the distance from the origin ⟨0,0⟩.
+Equivalent to [*area*.x](#area_x), except the accessor returns the radius: the distance from the origin ⟨0,0⟩.
 
 <a name="radialArea_innerRadius" href="#radialArea_innerRadius">#</a> <i>radialArea</i>.<b>innerRadius</b>([<i>radius</i>])
 
-Equivalent to [*area*.x0](#area_x0), except the accessor determines the radius: the distance from the origin ⟨0,0⟩.
+Equivalent to [*area*.x0](#area_x0), except the accessor returns the radius: the distance from the origin ⟨0,0⟩.
 
 <a name="radialArea_outerRadius" href="#radialArea_outerRadius">#</a> <i>radialArea</i>.<b>outerRadius</b>([<i>radius</i>])
 
-Equivalent to [*area*.x1](#area_x1), except the accessor determines the radius: the distance from the origin ⟨0,0⟩.
+Equivalent to [*area*.x1](#area_x1), except the accessor returns the radius: the distance from the origin ⟨0,0⟩.
 
 <a name="radialArea_angle" href="#radialArea_angle">#</a> <i>radialArea</i>.<b>angle</b>([<i>angle</i>])
 
-Equivalent to [*area*.y](#area_y), except the accessor determines the angle in radians, with 0 at -*y* (12 o’clock).
+Equivalent to [*area*.y](#area_y), except the accessor returns the angle in radians, with 0 at -*y* (12 o’clock).
 
 <a name="radialArea_startAngle" href="#radialArea_startAngle">#</a> <i>radialArea</i>.<b>startAngle</b>([<i>angle</i>])
 
-Equivalent to [*area*.y0](#area_y0), except the accessor determines the angle in radians, with 0 at -*y* (12 o’clock). Note: typically [angle](#radialArea_angle) is used instead of setting separate start and end angles.
+Equivalent to [*area*.y0](#area_y0), except the accessor returns the angle in radians, with 0 at -*y* (12 o’clock). Note: typically [angle](#radialArea_angle) is used instead of setting separate start and end angles.
 
 <a name="radialArea_endAngle" href="#radialArea_endAngle">#</a> <i>radialArea</i>.<b>endAngle</b>([<i>angle</i>])
 
-Equivalent to [*area*.y1](#area_y1), except the accessor determines the angle in radians, with 0 at -*y* (12 o’clock). Note: typically [angle](#radialArea_angle) is used instead of setting separate start and end angles.
+Equivalent to [*area*.y1](#area_y1), except the accessor returns the angle in radians, with 0 at -*y* (12 o’clock). Note: typically [angle](#radialArea_angle) is used instead of setting separate start and end angles.
 
 <a name="radialArea_defined" href="#radialArea_defined">#</a> <i>radialArea</i>.<b>defined</b>([<i>defined</i>])
 
