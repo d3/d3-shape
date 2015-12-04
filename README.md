@@ -532,8 +532,6 @@ Note that if an area segment consists of only a single point, it may appear invi
 
 If *curve* is specified, sets the [curve factory](#curves) and returns this area generator. Any optional *parameters*, if specified, will be bound to the specified *curve*. If *curve* is not specified, returns the current curve factory, which defaults to [linear](#linear).
 
-Unlike [*line*.curve](#line_curve), this method **requires** that the curve implement [*curve*.areaStart](#curve_areaStart) and [*curve*.areaEnd](#curve_areaEnd); you cannot use closed curves such as [cardinalClosed](#cardinalClosed) with an area generator. Instead, a closed shape is produced by first rendering the topline and then rendering the baseline.
-
 <a name="area_context" href="#area_context">#</a> <i>area</i>.<b>context</b>([<i>context</i>])
 
 If *context* is specified, sets the context and returns this area generator. If *context* is not specified, returns the current context, which defaults to null. If the context is not null, then the [generated area](#_area) is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated area is returned.
@@ -694,11 +692,11 @@ Curves are typically not used directly, instead being passed to [*line*.curve](#
 
 <a name="curve_areaStart" href="#curve_areaStart">#</a> <i>curve</i>.<b>areaStart</b>()
 
-Indicates the start of a new area segment. Each area segment consists of exactly two [line segments](#curve_lineStart): the topline, followed by the baseline, with the baseline points in reverse order. Note: this method need not be implemented by closed curves, such as <a href="#linearClosed">linearClosed</a>.
+Indicates the start of a new area segment. Each area segment consists of exactly two [line segments](#curve_lineStart): the topline, followed by the baseline, with the baseline points in reverse order.
 
 <a name="curve_areaEnd" href="#curve_areaEnd">#</a> <i>curve</i>.<b>areaEnd</b>()
 
-Indicates the end of the current area segment. Note: this method need not be implemented by closed curves, such as <a href="#linearClosed">linearClosed</a>.
+Indicates the end of the current area segment.
 
 <a name="curve_lineStart" href="#curve_lineStart">#</a> <i>curve</i>.<b>lineStart</b>()
 

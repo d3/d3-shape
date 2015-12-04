@@ -1,13 +1,7 @@
 import constant from "./constant";
+import descending from "./descending";
+import identity from "./identity";
 import {tau} from "./math";
-
-function identity(d) {
-  return d;
-}
-
-function descending(a, b) {
-  return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
-}
 
 export default function() {
   var value = identity,
