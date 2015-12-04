@@ -18,7 +18,7 @@ Radial.prototype = {
   lineEnd: function() {
     this._curve.lineEnd();
   },
-  point: function(r, a) {
+  point: function(a, r) {
     a -= halfPi, this._curve.point(r * Math.cos(a), r * Math.sin(a));
   }
 };

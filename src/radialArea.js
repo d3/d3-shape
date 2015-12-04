@@ -8,12 +8,12 @@ export default function() {
   var a = area(),
       c = a.curve;
 
-  a.radius = a.x, delete a.x;
-  a.innerRadius = a.x0, delete a.x0;
-  a.outerRadius = a.x1, delete a.x1;
-  a.angle = a.y, delete a.y;
-  a.startAngle = a.y0, delete a.y0;
-  a.endAngle = a.y1, delete a.y1;
+  a.angle = a.x, delete a.x;
+  a.startAngle = a.x0, delete a.x0;
+  a.endAngle = a.x1, delete a.x1;
+  a.radius = a.y, delete a.y;
+  a.innerRadius = a.y0, delete a.y0;
+  a.outerRadius = a.y1, delete a.y1;
 
   a.curve = function(_) {
     return arguments.length ? c(curveRadial(_, arguments)) : c()._curve;
