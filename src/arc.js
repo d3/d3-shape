@@ -1,9 +1,6 @@
 import {path} from "d3-path";
 import constant from "./constant";
-
-var pi = Math.PI,
-    piHalf = pi / 2,
-    tau = 2 * pi;
+import {pi, halfPi, tau} from "./math";
 
 function arcInnerRadius(d) {
   return d.innerRadius;
@@ -26,7 +23,7 @@ function arcPadAngle(d) {
 }
 
 function asin(x) {
-  return x >= 1 ? piHalf : x <= -1 ? -piHalf : Math.asin(x);
+  return x >= 1 ? halfPi : x <= -1 ? -halfPi : Math.asin(x);
 }
 
 function intersect(x0, y0, x1, y1, x2, y2, x3, y3) {
@@ -95,8 +92,8 @@ export default function() {
         r,
         r0 = +innerRadius.apply(this, arguments),
         r1 = +outerRadius.apply(this, arguments),
-        a0 = startAngle.apply(this, arguments) - piHalf,
-        a1 = endAngle.apply(this, arguments) - piHalf,
+        a0 = startAngle.apply(this, arguments) - halfPi,
+        a1 = endAngle.apply(this, arguments) - halfPi,
         da = Math.abs(a1 - a0),
         cw = a1 > a0;
 

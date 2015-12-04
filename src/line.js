@@ -45,8 +45,7 @@ export default function() {
   };
 
   line.curve = function(_) {
-    var n = arguments.length;
-    return n ? (curve = n > 1 ? curveBind(_, arguments) : _, context != null && (output = curve(context)), line) : curve;
+    return arguments.length ? (curve = curveBind(_, arguments), context != null && (output = curve(context)), line) : curve;
   };
 
   line.context = function(_) {

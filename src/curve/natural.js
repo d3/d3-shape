@@ -1,7 +1,3 @@
-function natural(context) {
-  return new Natural(context);
-}
-
 function Natural(context) {
   this._context = context;
 }
@@ -64,4 +60,6 @@ function controlPoints(x) {
   return [a, b];
 }
 
-export default natural;
+export default function(context) {
+  return new Natural(context);
+};

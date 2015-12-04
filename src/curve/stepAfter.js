@@ -1,7 +1,3 @@
-function stepAfter(context) {
-  return new StepAfter(context);
-}
-
 function StepAfter(context) {
   this._context = context;
 }
@@ -36,4 +32,6 @@ StepAfter.prototype = {
   }
 };
 
-export default stepAfter;
+export default function(context) {
+  return new StepAfter(context);
+};

@@ -1,12 +1,12 @@
-function linearClosed(context) {
-  return new LinearClosed(context);
-}
+import noop from "../noop";
 
 function LinearClosed(context) {
   this._context = context;
 }
 
 LinearClosed.prototype = {
+  areaStart: noop,
+  areaEnd: noop,
   lineStart: function() {
     this._point = 0;
   },
@@ -20,4 +20,6 @@ LinearClosed.prototype = {
   }
 };
 
-export default linearClosed;
+export default function(context) {
+  return new LinearClosed(context);
+};

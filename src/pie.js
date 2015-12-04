@@ -1,14 +1,7 @@
 import constant from "./constant";
-
-var tau = 2 * Math.PI;
-
-function identity(d) {
-  return d;
-}
-
-function descending(a, b) {
-  return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
-}
+import descending from "./descending";
+import identity from "./identity";
+import {tau} from "./math";
 
 export default function() {
   var value = identity,

@@ -1,11 +1,6 @@
 import cardinalClosed from "./cardinalClosed";
+import noop from "../noop";
 import {point} from "./catmullRom";
-
-function catmullRomClosed(context, alpha) {
-  return (alpha = alpha == null ? 0.5 : +alpha)
-      ? new CatmullRomClosed(context, alpha)
-      : cardinalClosed(context, 0);
-}
 
 function CatmullRomClosed(context, alpha) {
   this._context = context;
@@ -13,6 +8,8 @@ function CatmullRomClosed(context, alpha) {
 }
 
 CatmullRomClosed.prototype = {
+  areaStart: noop,
+  areaEnd: noop,
   lineStart: function() {
     this._x0 = this._x1 = this._x2 = this._x3 = this._x4 = this._x5 =
     this._y0 = this._y1 = this._y2 = this._y3 = this._y4 = this._y5 = NaN;
@@ -63,4 +60,8 @@ CatmullRomClosed.prototype = {
   }
 };
 
-export default catmullRomClosed;
+export default function(context, alpha) {
+  return (alpha = alpha == null ? 0.5 : +alpha)
+      ? new CatmullRomClosed(context, alpha)
+      : cardinalClosed(context, 0);
+};

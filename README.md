@@ -405,6 +405,32 @@ If *curve* is specified, sets the [curve factory](#curves) and returns this line
 
 If *context* is specified, sets the context and returns this line generator. If *context* is not specified, returns the current context, which defaults to null. If the context is not null, then the [generated line](#_line) is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated line is returned.
 
+<a name="radialLine" href="#radialLine">#</a> <b>radialLine</b>()
+
+<img alt="Radial Line" width="250" height="250" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/line-radial.png">
+
+Constructs a new radial line generator with the default settings. A radial line generator is equivalent to the standard Cartesian [line generator](#line), except the [x](#line_x) and [y](#line_y) accessors are replaced with [radius](#radialLine_radius) and [angle](#radialLine_angle) accessors, respectively. Radial lines are always positioned relative to ⟨0,0⟩; use a transform (see: [SVG](http://www.w3.org/TR/SVG/coords.html#TransformAttribute), [Canvas](http://www.w3.org/TR/2dcontext/#transformations)) to change the origin.
+
+<a name="radialLine_radius" href="#radialLine_radius">#</a> <i>radialLine</i>.<b>radius</b>([<i>radius</i>])
+
+Equivalent to [*line*.x](#line_x), except the accessor returns the radius: the distance from the origin ⟨0,0⟩.
+
+<a name="radialLine_angle" href="#radialLine_angle">#</a> <i>radialLine</i>.<b>angle</b>([<i>angle</i>])
+
+Equivalent to [*line*.y](#line_y), except the accessor returns the angle in radians, with 0 at -*y* (12 o’clock).
+
+<a name="radialLine_defined" href="#radialLine_defined">#</a> <i>radialLine</i>.<b>defined</b>([<i>defined</i>])
+
+Equivalent to [*line*.defined](#line_defined).
+
+<a name="radialLine_curve" href="#radialLine_curve">#</a> <i>radialLine</i>.<b>curve</b>([<i>curve</i>[, <i>parameters…</i>]])
+
+Equivalent to [*line*.curve](#line_curve). Note that the [monotone](#monotone) curve is not recommended for radial lines because it assumes that the data is monotonic in *x*, which is typically untrue of radial lines.
+
+<a name="radialLine_context" href="#radialLine_context">#</a> <i>radialLine</i>.<b>context</b>([<i>context</i>])
+
+Equivalent to [*line*.context](#line_context).
+
 ### Areas
 
 [<img alt="Area Chart" width="295" height="154" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/area.png">](http://bl.ocks.org/mbostock/3883195)[<img alt="Stacked Area Chart" width="295" height="154" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/area-stacked.png">](http://bl.ocks.org/mbostock/3885211)[<img alt="Difference Chart" width="295" height="154" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/area-difference.png">](http://bl.ocks.org/mbostock/3894205)
@@ -506,11 +532,51 @@ Note that if an area segment consists of only a single point, it may appear invi
 
 If *curve* is specified, sets the [curve factory](#curves) and returns this area generator. Any optional *parameters*, if specified, will be bound to the specified *curve*. If *curve* is not specified, returns the current curve factory, which defaults to [linear](#linear).
 
-Unlike [*line*.curve](#line_curve), this method **requires** that the curve implement [*curve*.areaStart](#curve_areaStart) and [*curve*.areaEnd](#curve_areaEnd); you cannot use closed curves such as [cardinalClosed](#cardinalClosed) with an area generator. Instead, a closed shape is produced by first rendering the topline and then rendering the baseline.
-
 <a name="area_context" href="#area_context">#</a> <i>area</i>.<b>context</b>([<i>context</i>])
 
 If *context* is specified, sets the context and returns this area generator. If *context* is not specified, returns the current context, which defaults to null. If the context is not null, then the [generated area](#_area) is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated area is returned.
+
+<a name="radialArea" href="#radialArea">#</a> <b>radialArea</b>()
+
+<img alt="Radial Area" width="250" height="250" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/area-radial.png">
+
+Constructs a new radial area generator with the default settings. A radial area generator is equivalent to the standard Cartesian [area generator](#area), except the [x](#area_x) and [y](#area_y) accessors are replaced with [radius](#radialArea_radius) and [angle](#radialArea_angle) accessors, respectively. Radial areas are always positioned relative to ⟨0,0⟩; use a transform (see: [SVG](http://www.w3.org/TR/SVG/coords.html#TransformAttribute), [Canvas](http://www.w3.org/TR/2dcontext/#transformations)) to change the origin.
+
+<a name="radialArea_radius" href="#radialArea_radius">#</a> <i>radialArea</i>.<b>radius</b>([<i>radius</i>])
+
+Equivalent to [*area*.x](#area_x), except the accessor returns the radius: the distance from the origin ⟨0,0⟩.
+
+<a name="radialArea_innerRadius" href="#radialArea_innerRadius">#</a> <i>radialArea</i>.<b>innerRadius</b>([<i>radius</i>])
+
+Equivalent to [*area*.x0](#area_x0), except the accessor returns the radius: the distance from the origin ⟨0,0⟩.
+
+<a name="radialArea_outerRadius" href="#radialArea_outerRadius">#</a> <i>radialArea</i>.<b>outerRadius</b>([<i>radius</i>])
+
+Equivalent to [*area*.x1](#area_x1), except the accessor returns the radius: the distance from the origin ⟨0,0⟩.
+
+<a name="radialArea_angle" href="#radialArea_angle">#</a> <i>radialArea</i>.<b>angle</b>([<i>angle</i>])
+
+Equivalent to [*area*.y](#area_y), except the accessor returns the angle in radians, with 0 at -*y* (12 o’clock).
+
+<a name="radialArea_startAngle" href="#radialArea_startAngle">#</a> <i>radialArea</i>.<b>startAngle</b>([<i>angle</i>])
+
+Equivalent to [*area*.y0](#area_y0), except the accessor returns the angle in radians, with 0 at -*y* (12 o’clock). Note: typically [angle](#radialArea_angle) is used instead of setting separate start and end angles.
+
+<a name="radialArea_endAngle" href="#radialArea_endAngle">#</a> <i>radialArea</i>.<b>endAngle</b>([<i>angle</i>])
+
+Equivalent to [*area*.y1](#area_y1), except the accessor returns the angle in radians, with 0 at -*y* (12 o’clock). Note: typically [angle](#radialArea_angle) is used instead of setting separate start and end angles.
+
+<a name="radialArea_defined" href="#radialArea_defined">#</a> <i>radialArea</i>.<b>defined</b>([<i>defined</i>])
+
+Equivalent to [*area*.defined](#area_defined).
+
+<a name="radialArea_curve" href="#radialArea_curve">#</a> <i>radialArea</i>.<b>curve</b>([<i>curve</i>[, <i>parameters…</i>]])
+
+Equivalent to [*area*.curve](#area_curve). Note that the [monotone](#monotone) curve is not recommended for radial areas because it assumes that the data is monotonic in *x*, which is typically untrue of radial areas.
+
+<a name="radialArea_context" href="#radialArea_context">#</a> <i>radialArea</i>.<b>context</b>([<i>context</i>])
+
+Equivalent to [*line*.context](#line_context).
 
 ### Curves
 
@@ -626,11 +692,11 @@ Curves are typically not used directly, instead being passed to [*line*.curve](#
 
 <a name="curve_areaStart" href="#curve_areaStart">#</a> <i>curve</i>.<b>areaStart</b>()
 
-Indicates the start of a new area segment. Each area segment consists of exactly two [line segments](#curve_lineStart): the topline, followed by the baseline, with the baseline points in reverse order. Note: this method need not be implemented by closed curves, such as <a href="#linearClosed">linearClosed</a>.
+Indicates the start of a new area segment. Each area segment consists of exactly two [line segments](#curve_lineStart): the topline, followed by the baseline, with the baseline points in reverse order.
 
 <a name="curve_areaEnd" href="#curve_areaEnd">#</a> <i>curve</i>.<b>areaEnd</b>()
 
-Indicates the end of the current area segment. Note: this method need not be implemented by closed curves, such as <a href="#linearClosed">linearClosed</a>.
+Indicates the end of the current area segment.
 
 <a name="curve_lineStart" href="#curve_lineStart">#</a> <i>curve</i>.<b>lineStart</b>()
 
