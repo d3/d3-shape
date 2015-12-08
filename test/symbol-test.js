@@ -69,15 +69,8 @@ tape("symbol.type(square) generates the expected path", function(test) {
   test.end();
 });
 
-tape("symbol.type(triangleUp) generates the expected path", function(test) {
-  var s = shape.symbol().type(shape.triangleDown).size(function(d) { return d; });
-  test.pathEqual(s(0), "M0,0L0,0L0,0Z");
-  test.pathEqual(s(10), "M0,2.080896L2.402811,-2.080896L-2.402811,-2.080896Z");
-  test.end();
-});
-
-tape("symbol.type(triangleDown) generates the expected path", function(test) {
-  var s = shape.symbol().type(shape.triangleUp).size(function(d) { return d; });
+tape("symbol.type(triangle) generates the expected path", function(test) {
+  var s = shape.symbol().type(shape.triangle).size(function(d) { return d; });
   test.pathEqual(s(0), "M0,0L0,0L0,0Z");
   test.pathEqual(s(10), "M0,-2.080896L2.402811,2.080896L-2.402811,2.080896Z");
   test.end();

@@ -7,8 +7,8 @@ tape("symbols is the array of symbol types", function(test) {
     shape.cross,
     shape.diamond,
     shape.square,
-    shape.triangleDown,
-    shape.triangleUp
+    shape.triangle,
+    shape.wye
   ]);
   test.end();
 });

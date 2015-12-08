@@ -3,7 +3,8 @@ import circle from "./symbol/circle";
 import cross from "./symbol/cross";
 import diamond from "./symbol/diamond";
 import square from "./symbol/square";
-import {triangleDown, triangleUp} from "./symbol/triangle";
+import triangle from "./symbol/triangle";
+import wye from "./symbol/wye";
 import constant from "./constant";
 
 export var symbols = [
@@ -11,8 +12,8 @@ export var symbols = [
   cross,
   diamond,
   square,
-  triangleDown,
-  triangleUp
+  triangle,
+  wye
 ];
 
 export default function() {

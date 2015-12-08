@@ -26,4 +26,5 @@ export {default as stepAfter} from "./src/curve/stepAfter";
 export {default as stepBefore} from "./src/curve/stepBefore";
 export {default as step} from "./src/curve/step";
 export {default as symbol, symbols} from "./src/symbol";
-export {triangleDown, triangleUp} from "./src/symbol/triangle";
+export {default as triangle} from "./src/symbol/triangle";
+export {default as wye} from "./src/symbol/wye";
