@@ -6,8 +6,8 @@ tape("symbols is the array of symbol types", function(test) {
     shape.circle,
     shape.cross,
     shape.diamond,
-    shape.star,
     shape.square,
+    shape.star,
     shape.triangle,
     shape.wye
   ]);

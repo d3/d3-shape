@@ -12,8 +12,8 @@ export var symbols = [
   circle,
   cross,
   diamond,
-  star,
   square,
+  star,
   triangle,
   wye
 ];
