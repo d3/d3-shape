@@ -30,6 +30,7 @@
     "d3-path": "~0.1.2"
   },
   "devDependencies": {
+    "d3-polygon": "~0.0.3",
     "faucet": "0.0",
     "rollup": "0.20.5",
     "tape": "4",

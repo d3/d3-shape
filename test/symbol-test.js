@@ -1,6 +1,8 @@
 var tape = require("tape"),
-    shape = require("../");
+    shape = require("../"),
+    polygonContext = require("./polygonContext");
 
+require("./inDelta");
 require("./pathEqual");
 
 tape("symbol() returns a default symbol shape", function(test) {
@@ -47,10 +49,31 @@ tape("symbol.size(size) observes the specified size constant", function(test) {
   test.end();
 });
 
+tape("symbol.type(circle) generates the expected path", function(test) {
+  var s = shape.symbol().type(shape.circle).size(function(d) { return d; });
+  test.pathEqual(s(0), "M0,0");
+  test.pathEqual(s(20), "M2.523133,0A2.523133,2.523133,0,1,1,-2.523133,0A2.523133,2.523133,0,1,1,2.523133,0");
+  test.end();
+});
+
+tape("symbol.type(cross) generates a polygon with the specified size", function(test) {
+  var p = polygonContext(), s = shape.symbol().type(shape.cross).context(p);
+  s.size(1)(); test.inDelta(p.area(), 1);
+  s.size(240)(); test.inDelta(p.area(), 240);
+  test.end();
+});
+
 tape("symbol.type(cross) generates the expected path", function(test) {
   var s = shape.symbol().type(shape.cross).size(function(d) { return d; });
   test.pathEqual(s(0), "M0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0Z");
   test.pathEqual(s(20), "M-3,-1L-1,-1L-1,-3L1,-3L1,-1L3,-1L3,1L1,1L1,3L-1,3L-1,1L-3,1Z");
+  test.end();
+});
+
+tape("symbol.type(diamond) generates a polygon with the specified size", function(test) {
+  var p = polygonContext(), s = shape.symbol().type(shape.diamond).context(p);
+  s.size(1)(); test.inDelta(p.area(), 1);
+  s.size(240)(); test.inDelta(p.area(), 240);
   test.end();
 });
 
@@ -61,10 +84,24 @@ tape("symbol.type(diamond) generates the expected path", function(test) {
   test.end();
 });
 
+tape("symbol.type(star) generates a polygon with the specified size", function(test) {
+  var p = polygonContext(), s = shape.symbol().type(shape.star).context(p);
+  s.size(1)(); test.inDelta(p.area(), 1);
+  s.size(240)(); test.inDelta(p.area(), 240);
+  test.end();
+});
+
 tape("symbol.type(star) generates the expected path", function(test) {
   var s = shape.symbol().type(shape.star).size(function(d) { return d; });
   test.pathEqual(s(0), "M0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0Z");
   test.pathEqual(s(10), "M0,-2.984649L0.670095,-0.922307L2.838570,-0.922307L1.084237,0.352290L1.754333,2.414632L0,1.140035L-1.754333,2.414632L-1.084237,0.352290L-2.838570,-0.922307L-0.670095,-0.922307Z");
+  test.end();
+});
+
+tape("symbol.type(square) generates a polygon with the specified size", function(test) {
+  var p = polygonContext(), s = shape.symbol().type(shape.square).context(p);
+  s.size(1)(); test.inDelta(p.area(), 1);
+  s.size(240)(); test.inDelta(p.area(), 240);
   test.end();
 });
 
@@ -76,10 +113,24 @@ tape("symbol.type(square) generates the expected path", function(test) {
   test.end();
 });
 
+tape("symbol.type(triangle) generates a polygon with the specified size", function(test) {
+  var p = polygonContext(), s = shape.symbol().type(shape.triangle).context(p);
+  s.size(1)(); test.inDelta(p.area(), 1);
+  s.size(240)(); test.inDelta(p.area(), 240);
+  test.end();
+});
+
 tape("symbol.type(triangle) generates the expected path", function(test) {
   var s = shape.symbol().type(shape.triangle).size(function(d) { return d; });
   test.pathEqual(s(0), "M0,0L0,0L0,0Z");
-  test.pathEqual(s(10), "M0,-2.434322L2.108185,1.217161L-2.108185,1.217161Z");
+  test.pathEqual(s(10), "M0,-2.774528L2.402811,1.387264L-2.402811,1.387264Z");
+  test.end();
+});
+
+tape("symbol.type(wye) generates a polygon with the specified size", function(test) {
+  var p = polygonContext(), s = shape.symbol().type(shape.wye).context(p);
+  s.size(1)(); test.inDelta(p.area(), 1);
+  s.size(240)(); test.inDelta(p.area(), 240);
   test.end();
 });
 
