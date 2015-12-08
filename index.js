@@ -22,6 +22,7 @@ export {default as pie} from "./src/pie";
 export {default as radialArea} from "./src/radialArea";
 export {default as radialLine} from "./src/radialLine";
 export {default as square} from "./src/symbol/square";
+export {default as star} from "./src/symbol/star";
 export {default as stepAfter} from "./src/curve/stepAfter";
 export {default as stepBefore} from "./src/curve/stepBefore";
 export {default as step} from "./src/curve/step";

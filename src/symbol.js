@@ -2,6 +2,7 @@ import {path} from "d3-path";
 import circle from "./symbol/circle";
 import cross from "./symbol/cross";
 import diamond from "./symbol/diamond";
+import star from "./symbol/star";
 import square from "./symbol/square";
 import triangle from "./symbol/triangle";
 import wye from "./symbol/wye";
@@ -11,6 +12,7 @@ export var symbols = [
   circle,
   cross,
   diamond,
+  star,
   square,
   triangle,
   wye

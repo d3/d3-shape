@@ -61,6 +61,13 @@ tape("symbol.type(diamond) generates the expected path", function(test) {
   test.end();
 });
 
+tape("symbol.type(star) generates the expected path", function(test) {
+  var s = shape.symbol().type(shape.star).size(function(d) { return d; });
+  test.pathEqual(s(0), "M0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0Z");
+  test.pathEqual(s(10), "M0,-2.984649L0.670095,-0.922307L2.838570,-0.922307L1.084237,0.352290L1.754333,2.414632L0,1.140035L-1.754333,2.414632L-1.084237,0.352290L-2.838570,-0.922307L-0.670095,-0.922307Z");
+  test.end();
+});
+
 tape("symbol.type(square) generates the expected path", function(test) {
   var s = shape.symbol().type(shape.square).size(function(d) { return d; });
   test.pathEqual(s(0), "M0,0h0v0h0Z");
@@ -72,6 +79,13 @@ tape("symbol.type(square) generates the expected path", function(test) {
 tape("symbol.type(triangle) generates the expected path", function(test) {
   var s = shape.symbol().type(shape.triangle).size(function(d) { return d; });
   test.pathEqual(s(0), "M0,0L0,0L0,0Z");
-  test.pathEqual(s(10), "M0,-2.080896L2.402811,2.080896L-2.402811,2.080896Z");
+  test.pathEqual(s(10), "M0,-2.434322L2.108185,1.217161L-2.108185,1.217161Z");
+  test.end();
+});
+
+tape("symbol.type(wye) generates the expected path", function(test) {
+  var s = shape.symbol().type(shape.wye).size(function(d) { return d; });
+  test.pathEqual(s(0), "M0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0Z");
+  test.pathEqual(s(10), "M0.853360,0.492688L0.853360,2.199408L-0.853360,2.199408L-0.853360,0.492688L-2.331423,-0.360672L-1.478063,-1.838735L0,-0.985375L1.478063,-1.838735L2.331423,-0.360672Z");
   test.end();
 });
