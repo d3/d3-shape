@@ -361,14 +361,6 @@ var l = line()
     .y(function(d) { return y(d.value); });
 ```
 
-This is similar to [mapping](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) your data to values before invoking the line generator:
-
-```js
-line()(data.map(function(d) { return [x(d.date), y(d.value)]; }));
-```
-
-The benefit of an accessor is that the input data remains associated with the returned objects, thereby making it easier to access other fields of the data, for example to set the color or to add text labels.
-
 <a name="line_y" href="#line_y">#</a> <i>line</i>.<b>y</b>([<i>y</i>])
 
 If *y* is specified, sets the y accessor to the specified function or number and returns this line generator. If *y* is not specified, returns the current y accessor, which defaults to:
