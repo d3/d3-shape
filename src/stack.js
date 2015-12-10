@@ -2,7 +2,7 @@ import constant from "./constant";
 import identity from "./identity";
 import {x as pointX} from "./point";
 
-function stackY(d, i, data, layer) {
+function stackY(d, layer) {
   return d[layer];
 }
 
@@ -26,7 +26,7 @@ export default function() {
 
     for (var i = 0; i < n; ++i) {
       for (var li = l[i], si = s[i] = new Array(m), j = 0, sij; j < m; ++j) {
-        si[j] = sij = [xz[j], yz[j], yz[j] += +dy(data[j], j, data, li)];
+        si[j] = sij = [xz[j], yz[j], yz[j] += +dy(data[j], li, j, data)];
         sij.data = data[j];
       }
       si.data = li;
