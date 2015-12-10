@@ -201,6 +201,7 @@ Generates a pie for the given array of *data*, returning an array of objects rep
 
 * `data` - the input datum; the corresponding element in the input data array.
 * `value` - the numeric [value](#pie_value) of the arc.
+* `index` - the zero-based [sorted index](#pie_sort) of the arc.
 * `startAngle` - the [start angle](#pie_startAngle) of the arc.
 * `endAngle` - the [end angle](#pie_endAngle) of the arc.
 * `padAngle` - the [pad angle](#pie_padAngle) of the arc.

@@ -36,6 +36,7 @@ export default function() {
     for (var i = 0, j, k = sum ? (da - n * pa) / sum : 0; i < n; ++i, a0 = a1) {
       j = index[i], v = arcs[j], a1 = a0 + (v > 0 ? v * k : 0) + pa, arcs[j] = {
         data: data[j],
+        index: i,
         value: v,
         startAngle: a0,
         endAngle: a1,
