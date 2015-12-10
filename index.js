@@ -4,7 +4,6 @@ export {default as line} from "./src/line";
 export {default as pie} from "./src/pie";
 export {default as radialArea} from "./src/radialArea";
 export {default as radialLine} from "./src/radialLine";
-export {default as stack} from "./src/stack";
 
 export {default as symbol, symbols} from "./src/symbol";
 export {default as circle} from "./src/symbol/circle";
@@ -30,3 +29,9 @@ export {default as linear} from "./src/curve/linear";
 export {default as monotone} from "./src/curve/monotone";
 export {default as natural} from "./src/curve/natural";
 export {default as step, stepAfter, stepBefore} from "./src/curve/step";
+
+export {default as stack} from "./src/stack";
+export {default as orderAscending} from "./src/order/ascending";
+export {default as orderDescending} from "./src/order/descending";
+export {default as orderInsideOut} from "./src/order/insideOut";
+export {default as orderReverse} from "./src/order/reverse";
