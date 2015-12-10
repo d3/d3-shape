@@ -1,5 +1,6 @@
-function Step(context) {
+function Step(context, t) {
   this._context = context;
+  this._t = t;
 }
 
 Step.prototype = {
@@ -14,7 +15,7 @@ Step.prototype = {
     this._point = 0;
   },
   lineEnd: function() {
-    if (this._point === 2) this._context.lineTo(this._x, this._y);
+    if (0 < this._t && this._t < 1 && this._point === 2) this._context.lineTo(this._x, this._y);
     if (this._line || (this._line !== 0 && this._point === 1)) this._context.closePath();
     this._line = 1 - this._line;
   },
@@ -24,9 +25,18 @@ Step.prototype = {
       case 0: this._point = 1; this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y); break;
       case 1: this._point = 2; // proceed
       default: {
-        var x1 = (this._x + x) / 2;
-        this._context.lineTo(x1, this._y);
-        this._context.lineTo(x1, y);
+        var t = x > this._x ? this._t : 1 - this._t;
+        if (t <= 0) {
+          this._context.lineTo(this._x, y);
+          this._context.lineTo(x, y);
+        } else if (t >= 1) {
+          this._context.lineTo(x, this._y);
+          this._context.lineTo(x, y);
+        } else {
+          var x1 = (this._x + x) * t;
+          this._context.lineTo(x1, this._y);
+          this._context.lineTo(x1, y);
+        }
         break;
       }
     }
@@ -35,5 +45,13 @@ Step.prototype = {
 };
 
 export default function(context) {
-  return new Step(context);
+  return new Step(context, 0.5);
+};
+
+export function stepBefore(context) {
+  return new Step(context, 0);
+};
+
+export function stepAfter(context) {
+  return new Step(context, 1);
 };

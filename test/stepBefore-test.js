@@ -16,7 +16,7 @@ tape("area.curve(stepBefore)(data) generates the expected path", function(test) 
   var a = shape.area().curve(shape.stepBefore);
   test.equal(a([]), null);
   test.pathEqual(a([[0, 1]]), "M0,1L0,0Z");
-  test.pathEqual(a([[0, 1], [2, 3]]), "M0,1L0,3L2,3L2,0L2,0L0,0Z");
-  test.pathEqual(a([[0, 1], [2, 3], [4, 5]]), "M0,1L0,3L2,3L2,5L4,5L4,0L4,0L2,0L2,0L0,0Z");
+  test.pathEqual(a([[0, 1], [2, 3]]), "M0,1L0,3L2,3L2,0L0,0L0,0Z");
+  test.pathEqual(a([[0, 1], [2, 3], [4, 5]]), "M0,1L0,3L2,3L2,5L4,5L4,0L2,0L2,0L0,0L0,0Z");
   test.end();
 });
