@@ -19,8 +19,8 @@ export default function() {
         yz = new Array(m),
         s = new Array(n);
 
-    for (var j = 0; j < m; ++j) {
-      xz[j] = +x(data[j], j, data);
+    if (n > 0) for (var j = 0, l0 = l[0]; j < m; ++j) {
+      xz[j] = +x(data[j], l0, j, data);
       yz[j] = 0;
     }
 
