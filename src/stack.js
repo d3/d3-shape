@@ -1,5 +1,6 @@
 import constant from "./constant";
 import identity from "./identity";
+import offsetZero from "./offset/zero";
 import orderDefault from "./order/default";
 import {x as pointX} from "./point";
 
@@ -9,7 +10,8 @@ function stackY(d, layer) {
 
 export default function() {
   var keys = constant([1]), // one layer equivalent to pointY by default
-      order = null,
+      order = orderDefault,
+      offset = offsetZero,
       x = pointX,
       dy = stackY;
 
@@ -18,12 +20,10 @@ export default function() {
         m = data.length,
         n = kz.length,
         xz = new Array(m),
-        yz = new Array(m),
         sz = new Array(n);
 
     if (n > 0) for (var j = 0, k0 = kz[0]; j < m; ++j) {
       xz[j] = +x(data[j], k0, j, data);
-      yz[j] = 0;
     }
 
     for (var i = 0; i < n; ++i) {
@@ -34,13 +34,7 @@ export default function() {
       si.key = ki;
     }
 
-    for (var oz = (order == null ? orderDefault : order)(sz), i = 0; i < n; ++i) {
-      for (var si = sz[oz[i]], sij, j = 0; j < m; ++j) {
-        sij = si[j];
-        sij[1] = yz[j];
-        sij[2] = yz[j] += sij[2];
-      }
-    }
+    offset(sz, order(sz));
 
     return sz;
   }
@@ -50,7 +44,11 @@ export default function() {
   };
 
   stack.order = function(_) {
-    return arguments.length ? (order = _ == null ? null : typeof _ === "function" ? _ : constant(Array.prototype.slice.call(_)), stack) : order;
+    return arguments.length ? (order = _ == null ? orderDefault : typeof _ === "function" ? _ : constant(Array.prototype.slice.call(_)), stack) : order;
+  };
+
+  stack.offset = function(_) {
+    return arguments.length ? (offset = _ == null ? offsetZero : _, stack) : offset;
   };
 
   stack.x = function(_) {
