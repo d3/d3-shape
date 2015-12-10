@@ -10,5 +10,5 @@ export function sum(series) {
 };
 
 function add(p, d) {
-  return p + d[2];
+  return p + d[1];
 }

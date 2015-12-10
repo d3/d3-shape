@@ -3,7 +3,7 @@ export default function(series, order) {
   for (var i = 1, s0, s1 = series[order[0]], n, m = s1.length; i < n; ++i) {
     s0 = s1, s1 = series[order[i]];
     for (var j = 0; j < m; ++j) {
-      s1[j][2] += s1[j][1] = s0[j][2];
+      s1[j][1] += s1[j][0] = s0[j][1];
     }
   }
 };
