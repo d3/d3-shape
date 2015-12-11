@@ -1,5 +1,5 @@
-import orderDefault from "./default";
+import none from "./none";
 
 export default function(series) {
-  return orderDefault(series).reverse();
+  return none(series).reverse();
 };

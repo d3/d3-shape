@@ -801,6 +801,92 @@ Symbol types are typically not used directly, instead being passed to [*symbol*.
 
 Renders this symbol type to the specified *context* with the specified *size* in square pixels. The *context* implements the [CanvasPathMethods](http://www.w3.org/TR/2dcontext/#canvaspathmethods) interface. (Note that this is a subset of the CanvasRenderingContext2D interface!)
 
+### Stacks
+
+[<img alt="Stacked Bar Chart" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/stacked-bar.png" width="295" height="295">](http://bl.ocks.org/mbostock/3886208)[<img alt="Streamgraph" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/stacked-stream.png" width="295" height="295">](http://bl.ocks.org/mbostock/4060954)
+
+…
+
+<a name="stack" href="#stack">#</a> <b>stack</b>()
+
+…
+
+<a name="_stack" href="#_stack">#</a> <i>stack</i>(<i>data</i>[, <i>arguments</i>])
+
+…
+
+<a name="keys" href="#stack_keys">#</a> <i>stack</i>.<b>keys</b>([<i>keys</i>])
+
+…
+
+`[1]`
+
+<a name="value" href="#stack_value">#</a> <i>stack</i>.<b>value</b>([<i>value</i>])
+
+…
+
+```js
+function value(d, key) {
+  return d[key];
+}
+```
+
+<a name="order" href="#stack_order">#</a> <i>stack</i>.<b>order</b>([<i>order</i>])
+
+…
+
+[orderNone](#orderNone)
+
+<a name="offset" href="#stack_offset">#</a> <i>stack</i>.<b>offset</b>([<i>offset</i>])
+
+…
+
+[offsetNone](#offsetNone)
+
+### Stack Orders
+
+…
+
+<a name="orderAscending" href="#orderAscending">#</a> <b>orderAscending</b>(<i>series</i>)
+
+…
+
+<a name="orderDescending" href="#orderDescending">#</a> <b>orderDescending</b>(<i>series</i>)
+
+…
+
+<a name="orderInsideOut" href="#orderInsideOut">#</a> <b>orderInsideOut</b>(<i>series</i>)
+
+…
+
+<a name="orderNone" href="#orderNone">#</a> <b>orderNone</b>(<i>series</i>)
+
+…
+
+<a name="orderReverse" href="#orderReverse">#</a> <b>orderReverse</b>(<i>series</i>)
+
+…
+
+### Stack Offsets
+
+…
+
+<a name="offsetExpand" href="#offsetExpand">#</a> <b>offsetExpand</b>(<i>series</i>, <i>order</i>)
+
+…
+
+<a name="offsetNone" href="#offsetNone">#</a> <b>offsetNone</b>(<i>series</i>, <i>order</i>)
+
+…
+
+<a name="offsetSilhouette" href="#offsetSilhouette">#</a> <b>offsetSilhouette</b>(<i>series</i>, <i>order</i>)
+
+…
+
+<a name="offsetWiggle" href="#offsetWiggle">#</a> <b>offsetWiggle</b>(<i>series</i>, <i>order</i>)
+
+…
+
 ## Changes from D3 3.x:
 
 * You can now render shapes to Canvas by specifying a context (e.g., [*line*.context](#line_context))! See [d3-path](https://github.com/d3/d3-path) for how it works.

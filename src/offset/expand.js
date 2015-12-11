@@ -1,4 +1,4 @@
-import offsetZero from "./zero";
+import none from "./none";
 
 export default function(series, order) {
   if (!((n = series.length) > 0)) return;
@@ -6,5 +6,5 @@ export default function(series, order) {
     for (var i = 0, y = 0; i < n; ++i) y += series[i][j][1];
     for (var i = 0; i < n; ++i) series[i][j][1] /= y;
   }
-  offsetZero(series, order);
+  none(series, order);
 };

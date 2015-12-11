@@ -32,11 +32,11 @@ export {default as step, stepAfter, stepBefore} from "./src/curve/step";
 
 export {default as stack} from "./src/stack";
 export {default as offsetExpand} from "./src/offset/expand";
+export {default as offsetNone} from "./src/offset/none";
 export {default as offsetSilhouette} from "./src/offset/silhouette";
 export {default as offsetWiggle} from "./src/offset/wiggle";
-export {default as offsetZero} from "./src/offset/zero";
 export {default as orderAscending} from "./src/order/ascending";
-export {default as orderDefault} from "./src/order/default";
 export {default as orderDescending} from "./src/order/descending";
 export {default as orderInsideOut} from "./src/order/insideOut";
+export {default as orderNone} from "./src/order/none";
 export {default as orderReverse} from "./src/order/reverse";

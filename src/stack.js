@@ -1,7 +1,7 @@
 import constant from "./constant";
 import identity from "./identity";
-import offsetZero from "./offset/zero";
-import orderDefault from "./order/default";
+import offsetNone from "./offset/none";
+import orderNone from "./order/none";
 
 function stackValue(d, key) {
   return d[key];
@@ -9,8 +9,8 @@ function stackValue(d, key) {
 
 export default function() {
   var keys = constant([1]), // one series; equivalent to pointY by default
-      order = orderDefault,
-      offset = offsetZero,
+      order = orderNone,
+      offset = offsetNone,
       value = stackValue;
 
   function stack(data) {
@@ -39,16 +39,16 @@ export default function() {
     return arguments.length ? (keys = typeof _ === "function" ? _ : constant(Array.prototype.slice.call(_)), stack) : keys;
   };
 
+  stack.value = function(_) {
+    return arguments.length ? (value = typeof _ === "function" ? _ : constant(+_), stack) : value;
+  };
+
   stack.order = function(_) {
     return arguments.length ? (order = _ == null ? orderDefault : typeof _ === "function" ? _ : constant(Array.prototype.slice.call(_)), stack) : order;
   };
 
   stack.offset = function(_) {
     return arguments.length ? (offset = _ == null ? offsetZero : _, stack) : offset;
-  };
-
-  stack.value = function(_) {
-    return arguments.length ? (value = typeof _ === "function" ? _ : constant(+_), stack) : value;
   };
 
   return stack;

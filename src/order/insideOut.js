@@ -1,4 +1,4 @@
-import orderDefault from "./default";
+import none from "./none";
 import {sum} from "./ascending";
 
 export default function(series) {
@@ -6,7 +6,7 @@ export default function(series) {
       i,
       j,
       sums = series.map(sum),
-      order = orderDefault(series).sort(function(a, b) { return sums[b] - sums[a]; }),
+      order = none(series).sort(function(a, b) { return sums[b] - sums[a]; }),
       top = 0,
       bottom = 0,
       tops = [],

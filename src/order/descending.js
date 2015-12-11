@@ -1,5 +1,5 @@
-import orderAscending from "./ascending";
+import ascending from "./ascending";
 
 export default function(series) {
-  return orderAscending(series).reverse();
+  return ascending(series).reverse();
 };
