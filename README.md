@@ -805,7 +805,7 @@ Renders this symbol type to the specified *context* with the specified *size* in
 
 [<img alt="Stacked Bar Chart" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/stacked-bar.png" width="295" height="295">](http://bl.ocks.org/mbostock/3886208)[<img alt="Streamgraph" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/stacked-stream.png" width="295" height="295">](http://bl.ocks.org/mbostock/4060954)
 
-With some chart types, such as bars or areas, you can subdivide the chart along a categorical dimension and apply color to produce a <i>stacked</i> chart. For example, you might plot monthly sales broken down by product category. A stacked chart can show the overall value (total sales per month) and per-category values simultaneously. However, note that it is typically harder to compare across categories, as only the bottommost layer of the stack is aligned. (See also [grouped charts](http://bl.ocks.org/mbostock/3887051).)
+With some chart types, such as bars or areas, you can subdivide the chart along a categorical dimension and apply color. For example, you might plot monthly sales broken down by product category. Such a <i>stacked</i> chart can show the overall value (total sales per month) and per-category values simultaneously. However, note that it is typically harder to compare across categories, as only the bottom layer of the stack is aligned. (See also [grouped charts](http://bl.ocks.org/mbostock/3887051).)
 
 Like the [pie generator](#pies), the stack generator does not produce a shape directly. Instead it computes a layout which you can then pass to an [area generator](#areas) or use directly, say to position bars.
 
