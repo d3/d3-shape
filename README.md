@@ -817,11 +817,11 @@ Constructs a new stack generator with the default settings.
 
 Generates a stack for the given array of *data*, returning an array representing each series. Any additional *arguments* are arbitrary; they are simply propagated to the stack generator’s accessor functions along with the `this` object. The number of series is determined by the number of [keys](#stack_keys); each series *i* in the returned array corresponds to the *i*th key. Each series is then represented as an array of points; each point *j* corresponds to the *j*th element in the input *data*. Lastly, each point is represented as an array [*y0*, *y1*] where *y0* is the lower value (baseline) and *y1* is the upper value (topline).
 
-The corresponding key for each series is available as *series*.key, and the [ordered index](#stack_order) as *series*.index. The corresponding input data element for each point is available as *point*.data.
+The corresponding key for each series is available as *series*.key, and the [index](#stack_order) as *series*.index. The corresponding input data element for each point is available as *point*.data.
 
 <a name="keys" href="#stack_keys">#</a> <i>stack</i>.<b>keys</b>([<i>keys</i>])
 
-If *keys* is specified, sets the keys accessor to the specified function or array and returns this stack generator. If *keys* is not specified, returns the current keys accessor, which defaults to:
+If *keys* is specified, sets the keys accessor to the specified function or array and returns this stack generator. If *keys* is not specified, returns the current keys accessor, which defaults to the empty array:
 
 ```js
 function keys() {
@@ -829,7 +829,7 @@ function keys() {
 }
 ```
 
-For each key, a layer (series) will be generated. Keys are typically strings but they can be arbitrary values.
+For each key, a layer (series) will be generated. Keys are typically strings but they can be arbitrary values. The series’ key is passed to the [value accessor](#stack_value), along with each data point, to compute the point’s value.
 
 <a name="value" href="#stack_value">#</a> <i>stack</i>.<b>value</b>([<i>value</i>])
 
