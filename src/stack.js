@@ -8,7 +8,7 @@ function stackValue(d, key) {
 }
 
 export default function() {
-  var keys = constant([1]), // one series; equivalent to pointY by default
+  var keys = constant([]),
       order = orderNone,
       offset = offsetNone,
       value = stackValue;
