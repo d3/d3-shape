@@ -805,30 +805,49 @@ Renders this symbol type to the specified *context* with the specified *size* in
 
 [<img alt="Stacked Bar Chart" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/stacked-bar.png" width="295" height="295">](http://bl.ocks.org/mbostock/3886208)[<img alt="Streamgraph" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/stacked-stream.png" width="295" height="295">](http://bl.ocks.org/mbostock/4060954)
 
-…
+With some chart types, such as bars or areas, you can divide the bars or area along a categorical dimension and apply color to produce a <i>stacked</i> chart. For example, you might plot monthly sales broken down by product category. A stacked graph can show the overall value (total sales per month) and per-category values simultaneously. However, note that it is typically harder to compare across categories, as only the bottommost layer of the stack is aligned. (See also [grouped charts](http://bl.ocks.org/mbostock/3887051).)
 
 <a name="stack" href="#stack">#</a> <b>stack</b>()
 
-…
+Constructs a new stack generator with the default settings.
 
 <a name="_stack" href="#_stack">#</a> <i>stack</i>(<i>data</i>[, <i>arguments</i>])
 
-…
+Generates a stack for the given array of *data*, returning an array representing each series. Any additional *arguments* are arbitrary; they are simply propagated to the stack generator’s accessor functions along with the `this` object. The number of series is determined by the number of [keys](#stack_keys); each series *i* in the returned array corresponds to the *i*th key. Each series is then represented as an array of points; each point *j* corresponds to the *j*th element in the input *data*. Lastly, each point is represented as an array [*y0*, *y1*] where *y0* is the lower value (baseline) and *y1* is the upper value (topline).
+
+The corresponding key for each series is available as *series*.key, and the [ordered index](#stack_order) as *series*.index. The corresponding input data element for each point is available as *point*.data.
 
 <a name="keys" href="#stack_keys">#</a> <i>stack</i>.<b>keys</b>([<i>keys</i>])
 
-…
+If *keys* is specified, sets the keys accessor to the specified function or array and returns this stack generator. If *keys* is not specified, returns the current keys accessor, which defaults to:
 
-`[1]`
+```js
+function keys() {
+  return [];
+}
+```
+
+For each key, a layer (series) will be generated. Keys are typically strings but they can be arbitrary values.
 
 <a name="value" href="#stack_value">#</a> <i>stack</i>.<b>value</b>([<i>value</i>])
 
-…
+If *value* is specified, sets the value accessor to the specified function or number and returns this stack generator. If *value* is not specified, returns the current value accessor, which defaults to:
 
 ```js
 function value(d, key) {
   return d[key];
 }
+```
+
+Thus, by default the stack generator assumes that the input data is an array of objects, with each object exposing named properties with numeric values.
+
+```js
+var data = [
+  {date: "2015/1/2", apples: 12, oranges: 49, bananas: 9},
+  {date: "2015/1/3", apples: 15, oranges: 43, bananas: 4},
+  {date: "2015/1/4", apples: 20, oranges: 46, bananas: 1},
+  …
+];
 ```
 
 <a name="order" href="#stack_order">#</a> <i>stack</i>.<b>order</b>([<i>order</i>])
