@@ -1,6 +1,6 @@
 import {path} from "d3-path";
 import constant from "./constant";
-import {pi, halfPi, tau} from "./math";
+import {epsilon, pi, halfPi, tau} from "./math";
 
 function arcInnerRadius(d) {
   return d.innerRadius;
@@ -103,13 +103,13 @@ export default function() {
     if (r1 < r0) r = r1, r1 = r0, r0 = r;
 
     // Is it a point?
-    if (!(r1 > 0)) context.moveTo(0, 0);
+    if (!(r1 > epsilon)) context.moveTo(0, 0);
 
     // Or is it a circle or annulus?
-    else if (da >= tau) {
+    else if (da > tau - epsilon) {
       context.moveTo(r1 * Math.cos(a0), r1 * Math.sin(a0));
       context.arc(0, 0, r1, a0, a1, !cw);
-      if (r0 > 0) {
+      if (r0 > epsilon) {
         context.moveTo(r0 * Math.cos(a1), r0 * Math.sin(a1));
         context.arc(0, 0, r0, a1, a0, cw);
       }
@@ -124,18 +124,18 @@ export default function() {
           da0 = da,
           da1 = da,
           ap = padAngle.apply(this, arguments) / 2,
-          rp = (ap > 0) && (padRadius ? +padRadius.apply(this, arguments) : Math.sqrt(r0 * r0 + r1 * r1)),
+          rp = (ap > epsilon) && (padRadius ? +padRadius.apply(this, arguments) : Math.sqrt(r0 * r0 + r1 * r1)),
           rc = Math.min(Math.abs(r1 - r0) / 2, +cornerRadius.apply(this, arguments)),
           rc0 = rc,
           rc1 = rc;
 
       // Apply padding? Note that since r1 ≥ r0, da1 ≥ da0.
-      if (rp > 0) {
+      if (rp > epsilon) {
         var p0 = asin(rp / r0 * Math.sin(ap)),
             p1 = asin(rp / r1 * Math.sin(ap));
-        if ((da0 -= p0 * 2) > 0) p0 *= (cw ? 1 : -1), a00 += p0, a10 -= p0;
+        if ((da0 -= p0 * 2) > epsilon) p0 *= (cw ? 1 : -1), a00 += p0, a10 -= p0;
         else da0 = 0, a00 = a10 = (a0 + a1) / 2;
-        if ((da1 -= p1 * 2) > 0) p1 *= (cw ? 1 : -1), a01 += p1, a11 -= p1;
+        if ((da1 -= p1 * 2) > epsilon) p1 *= (cw ? 1 : -1), a01 += p1, a11 -= p1;
         else da1 = 0, a01 = a11 = (a0 + a1) / 2;
       }
 
@@ -145,7 +145,7 @@ export default function() {
           y10 = r0 * Math.sin(a10);
 
       // Apply rounded corners?
-      if (rc > 0) {
+      if (rc > epsilon) {
         var x11 = r1 * Math.cos(a11),
             y11 = r1 * Math.sin(a11),
             x00 = r0 * Math.cos(a00),
@@ -153,7 +153,7 @@ export default function() {
 
         // Restrict the corner radius according to the sector angle.
         if (da < pi) {
-          var oc = da0 > 0 ? intersect(x01, y01, x00, y00, x11, y11, x10, y10) : [x10, y10],
+          var oc = da0 > epsilon ? intersect(x01, y01, x00, y00, x11, y11, x10, y10) : [x10, y10],
               ax = x01 - oc[0],
               ay = y01 - oc[1],
               bx = x11 - oc[0],
@@ -166,10 +166,10 @@ export default function() {
       }
 
       // Is the sector collapsed to a line?
-      if (!(da1 > 0)) context.moveTo(x01, y01);
+      if (!(da1 > epsilon)) context.moveTo(x01, y01);
 
       // Does the sector’s outer ring have rounded corners?
-      else if (rc1 > 0) {
+      else if (rc1 > epsilon) {
         var t0 = cornerTangents(x00, y00, x01, y01, r1, rc1, cw),
             t1 = cornerTangents(x11, y11, x10, y10, r1, rc1, cw);
 
@@ -191,10 +191,10 @@ export default function() {
 
       // Is there no inner ring, and it’s a circular sector?
       // Or perhaps it’s an annular sector collapsed due to padding?
-      if (!(r0 > 0) || !(da0 > 0)) context.lineTo(x10, y10);
+      if (!(r0 > epsilon) || !(da0 > epsilon)) context.lineTo(x10, y10);
 
       // Does the sector’s inner ring (or point) have rounded corners?
-      else if (rc0 > 0) {
+      else if (rc0 > epsilon) {
         var t0 = cornerTangents(x10, y10, x11, y11, r0, -rc0, cw),
             t1 = cornerTangents(x01, y01, x00, y00, r0, -rc0, cw);
 

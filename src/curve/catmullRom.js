@@ -1,6 +1,5 @@
+import {epsilon} from "../math";
 import cardinal from "./cardinal";
-
-var epsilon = 1e-6;
 
 export function point(that, x, y) {
   var x1 = that._x1,
