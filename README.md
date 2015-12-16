@@ -23,6 +23,8 @@ Or you can use it to render to a Canvas 2D context:
 l.context(context)(data);
 ```
 
+For more, read [Introducing d3-shape](https://medium.com/@mbostock/introducing-d3-shape-73f8367e6d12).
+
 ## Installing
 
 If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release](https://github.com/d3/d3-shape/releases/latest).
