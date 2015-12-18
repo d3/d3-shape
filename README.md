@@ -2,16 +2,15 @@
 
 Visualizations typically consist of discrete graphical marks, such as [symbols](#symbols), [arcs](#arcs), [lines](#lines) and [areas](#areas). While the rectangles of a bar chart may be easy enough to generate directly using [SVG](http://www.w3.org/TR/SVG/paths.html#PathData) or [Canvas](http://www.w3.org/TR/2dcontext/#canvaspathmethods), other shapes are complex, such as rounded annular sectors and centripetal Catmull–Rom splines. This module provides a variety of shape generators for your convenience.
 
-As with other aspects of D3, these shapes are driven by data: each shape generator exposes accessors that control how the input data are mapped to a visual representation. For example, you might define a line generator for a time series by [linearly scaling](https://github.com/d3/d3-scale) the `date` and `value` fields of your data to fit the chart:
+As with other aspects of D3, these shapes are driven by data: each shape generator exposes accessors that control how the input data are mapped to a visual representation. For example, you might define a line generator for a time series by [scaling](https://github.com/d3/d3-scale) fields of your data to fit the chart:
 
 ```js
 var line = d3_shape.line()
     .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.value); })
-    .curve(shape.catmullRom);
+    .y(function(d) { return y(d.value); });
 ```
 
-The line generator can then be used to set the `d` attribute of an SVG path element:
+This line generator can then be used to compute the `d` attribute of an SVG path element:
 
 ```js
 path.datum(data).attr("d", line);
@@ -591,7 +590,14 @@ Equivalent to [*line*.context](#line_context).
 
 While [lines](#lines) are defined as a sequence of two-dimensional [*x*, *y*] points, and [areas](#areas) are similarly defined by a topline and a baseline, there remains the task of transforming this discrete representation into a continuous shape: *i.e.*, how to interpolate between the points. A variety of curves are provided for this purpose.
 
-Curves are typically not constructed or used directly, instead being passed to [*line*.curve](#line_curve) and [*area*.curve](#area_curve).
+Curves are typically not constructed or used directly, instead being passed to [*line*.curve](#line_curve) and [*area*.curve](#area_curve). For example:
+
+```js
+var line = d3_shape.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.value); })
+    .curve(d3_shape.catmullRom, 0.5);
+```
 
 <a name="basis" href="#basis">#</a> d3_shape.<b>basis</b>(<i>context</i>)
 
