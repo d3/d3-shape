@@ -29,6 +29,7 @@ For more, read [Introducing d3-shape](https://medium.com/@mbostock/introducing-d
 If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release](https://github.com/d3/d3-shape/releases/latest). The released bundle supports AMD, CommonJS, and vanilla environments. Create a custom build using [Rollup](https://github.com/rollup/rollup) or your preferred bundler. You can also load directly from [d3js.org](https://d3js.org):
 
 ```html
+<script src="https://d3js.org/d3-path.v0.1.min.js"></script>
 <script src="https://d3js.org/d3-shape.v0.2.min.js"></script>
 ```
 
