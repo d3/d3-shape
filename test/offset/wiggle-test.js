@@ -32,8 +32,8 @@ tape("offsetWiggle(series, order) observes the specified order", function(test) 
 });
 
 function roundSeries(series) {
-  return series.map(function(span) {
-    return span.map(function(value) {
+  return series.map(function(point) {
+    return point.map(function(value) {
       return Math.round(value * 1e6) / 1e6;
     });
   });
