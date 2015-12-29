@@ -928,7 +928,7 @@ Returns a series order such that the largest series (according to the sum of val
 
 <a name="orderInsideOut" href="#orderInsideOut">#</a> <b>orderInsideOut</b>(<i>series</i>)
 
-Returns a series order such that the largest series (according to the sum of values) are on the inside, with smaller series on the outside. This order is recommended for streamgraphs in conjunction with the [wiggle offset](#offsetWiggle). See [Stacked Graphs—Geometry & Aesthetics](http://leebyron.com/streamgraph/) by Bryon & Wattenberg for more information.
+Returns a series order such that the larger series (according to the sum of values) are on the inside and the smaller series are on the outside. This order is recommended for streamgraphs in conjunction with the [wiggle offset](#offsetWiggle). See [Stacked Graphs—Geometry & Aesthetics](http://leebyron.com/streamgraph/) by Bryon & Wattenberg for more information.
 
 <a name="orderNone" href="#orderNone">#</a> <b>orderNone</b>(<i>series</i>)
 
