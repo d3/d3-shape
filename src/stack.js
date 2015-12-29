@@ -1,3 +1,4 @@
+import {slice} from "./array";
 import constant from "./constant";
 import identity from "./identity";
 import offsetNone from "./offset/none";
@@ -36,7 +37,7 @@ export default function() {
   }
 
   stack.keys = function(_) {
-    return arguments.length ? (keys = typeof _ === "function" ? _ : constant(Array.prototype.slice.call(_)), stack) : keys;
+    return arguments.length ? (keys = typeof _ === "function" ? _ : constant(slice.call(_)), stack) : keys;
   };
 
   stack.value = function(_) {
@@ -44,7 +45,7 @@ export default function() {
   };
 
   stack.order = function(_) {
-    return arguments.length ? (order = _ == null ? orderDefault : typeof _ === "function" ? _ : constant(Array.prototype.slice.call(_)), stack) : order;
+    return arguments.length ? (order = _ == null ? orderDefault : typeof _ === "function" ? _ : constant(slice.call(_)), stack) : order;
   };
 
   stack.offset = function(_) {
