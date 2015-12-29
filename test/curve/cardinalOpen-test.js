@@ -1,7 +1,7 @@
 var tape = require("tape"),
-    shape = require("../");
+    shape = require("../../");
 
-require("./pathEqual");
+require("../pathEqual");
 
 tape("line.curve(cardinalOpen)(data) generates the expected path", function(test) {
   var l = shape.line().curve(shape.cardinalOpen);

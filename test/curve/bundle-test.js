@@ -1,7 +1,7 @@
 var tape = require("tape"),
-    shape = require("../");
+    shape = require("../../");
 
-require("./pathEqual");
+require("../pathEqual");
 
 tape("line.curve(bundle) uses a default beta of 0.85", function(test) {
   var l = shape.line().curve(shape.bundle, 0.85);
