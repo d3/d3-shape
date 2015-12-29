@@ -866,9 +866,7 @@ Each series in then typically passed to an [area generator](#areas) to render an
 
 <a name="keys" href="#stack_keys">#</a> <i>stack</i>.<b>keys</b>([<i>keys</i>])
 
-If *keys* is specified, sets the keys accessor to the specified function or array and returns this stack generator. If *keys* is not specified, returns the current keys accessor, which defaults to the empty array.
-
-For each key, a layer (series) will be generated. Keys are typically strings but they can be arbitrary values. The series’ key is passed to the [value accessor](#stack_value), along with each data point, to compute the point’s value.
+If *keys* is specified, sets the keys accessor to the specified function or array and returns this stack generator. If *keys* is not specified, returns the current keys accessor, which defaults to the empty array. A series (layer) is [generated](#_stack) for each key. Keys are typically strings, but they may be arbitrary values. The series’ key is passed to the [value accessor](#stack_value), along with each data point, to compute the point’s value.
 
 <a name="value" href="#stack_value">#</a> <i>stack</i>.<b>value</b>([<i>value</i>])
 
