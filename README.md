@@ -45,6 +45,7 @@ In a vanilla environment, a `d3_shape` global is exported. [Try d3-shape in your
 * [Custom Curves](#custom-curves)
 * [Symbols](#symbols)
 * [Custom Symbol Types](#custom-symbol-types)
+* [Stacks](#stacks)
 
 ### Arcs
 
@@ -805,7 +806,7 @@ Renders this symbol type to the specified *context* with the specified *size* in
 
 [<img alt="Stacked Bar Chart" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/stacked-bar.png" width="295" height="295">](http://bl.ocks.org/mbostock/3886208)[<img alt="Streamgraph" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/stacked-stream.png" width="295" height="295">](http://bl.ocks.org/mbostock/4060954)
 
-With some chart types, such as bars or areas, you can subdivide the chart along a categorical dimension and apply color. For example, you might plot monthly sales broken down by product category. Such a <i>stacked</i> chart can show the overall value (total sales per month) and per-category values simultaneously. However, note that it is typically harder to compare across categories, as only the bottom layer of the stack is aligned. (See also [grouped charts](http://bl.ocks.org/mbostock/3887051).)
+Some shape types can be stacked, placing one shape adjacent to another. For example, a bar chart of monthly sales might be broken down into a multi-series bar chart of monthly sales by product category by stacking bars vertically. Equivalently, a bar chart can be subdivided by an ordinal dimension (product category), applying a color encoding. Stacked charts can show overall value and per-category value simultaneously; however, it is typically harder to compare across categories, as only the bottom layer of the stack is aligned. (See also [grouped charts](http://bl.ocks.org/mbostock/3887051).)
 
 Like the [pie generator](#pies), the stack generator does not produce a shape directly. Instead it computes a layout which you can then pass to an [area generator](#areas) or use directly, say to position bars.
 
@@ -813,21 +814,57 @@ Like the [pie generator](#pies), the stack generator does not produce a shape di
 
 Constructs a new stack generator with the default settings.
 
-<a name="_stack" href="#_stack">#</a> <i>stack</i>(<i>data</i>[, <i>arguments</i>])
+<a name="_stack" href="#_stack">#</a> <i>stack</i>(<i>data</i>[, <i>arguments…</i>])
 
-Generates a stack for the given array of *data*, returning an array representing each series. Any additional *arguments* are arbitrary; they are simply propagated to the stack generator’s accessor functions along with the `this` object. The number of series is determined by the number of [keys](#stack_keys); each series *i* in the returned array corresponds to the *i*th key. Each series is then represented as an array of points; each point *j* corresponds to the *j*th element in the input *data*. Lastly, each point is represented as an array [*y0*, *y1*] where *y0* is the lower value (baseline) and *y1* is the upper value (topline).
+Generates a stack for the given array of *data*, returning an array representing each series. Any additional *arguments* are arbitrary; they are simply propagated to the [keys accessor](#stack_keys) along with the `this` object.
 
-The corresponding key for each series is available as *series*.key, and the [index](#stack_order) as *series*.index. The corresponding input data element for each point is available as *point*.data.
+The set of series is determined by the [keys accessor](#stack_keys); each series *i* in the returned array corresponds to the *i*th key. Each series is an array of points, where each point *j* corresponds to the *j*th element in the input *data*. Lastly, each point is represented as an array [*y0*, *y1*] where *y0* is the lower value (baseline) and *y1* is the upper value (topline); the difference between *y0* and *y1* corresponds to the computed [value](#stack_value) for this point. The key for each series is available as *series*.key, and the [index](#stack_order) as *series*.index. The input data element for each point is available as *point*.data.
+
+For example, consider the following table representing monthly sales of fruits:
+
+Month   | Apples | Bananas | Cherries | Dates
+--------|--------|---------|----------|-------
+ 1/2015 |   3840 |    1920 |      960 |   400
+ 2/2015 |   1600 |    1440 |      960 |   400
+ 3/2015 |    640 |     960 |      640 |   400
+ 4/2015 |    320 |     480 |      640 |   400
+
+This might be represented in JavaScript as an array of objects:
+
+```js
+var data = [
+  {month: new Date(2015, 0, 1), apples: 3840, bananas: 1920, cherries: 960, dates: 400},
+  {month: new Date(2015, 1, 1), apples: 1600, bananas: 1440, cherries: 960, dates: 400},
+  {month: new Date(2015, 2, 1), apples:  640, bananas:  960, cherries: 640, dates: 400},
+  {month: new Date(2015, 3, 1), apples:  320, bananas:  480, cherries: 640, dates: 400}
+];
+```
+
+To produce a stack for this data:
+
+```js
+var stack = d3_shape.stack()
+    .keys(["apples", "bananas", "cherries", "dates"])
+    .order(d3_shape.orderNone)
+    .offset(d3_shape.offsetNone);
+
+var series = stack(data);
+```
+
+The resulting *series* array has one element per fruit. Each series has one point per month, and each point has a lower and upper value:
+
+```js
+[
+  [[   0, 3840], [   0, 1600], [   0,  640], [   0,  320]], // apples
+  [[3840, 5760], [1600, 3040], [ 640, 1600], [ 320,  800]], // bananas
+  [[5760, 6720], [3040, 4000], [1600, 2240], [ 800, 1440]], // cherries
+  [[6720, 7120], [4000, 4400], [2240, 2640], [1440, 1840]], // dates
+]
+```
 
 <a name="keys" href="#stack_keys">#</a> <i>stack</i>.<b>keys</b>([<i>keys</i>])
 
-If *keys* is specified, sets the keys accessor to the specified function or array and returns this stack generator. If *keys* is not specified, returns the current keys accessor, which defaults to the empty array:
-
-```js
-function keys() {
-  return [];
-}
-```
+If *keys* is specified, sets the keys accessor to the specified function or array and returns this stack generator. If *keys* is not specified, returns the current keys accessor, which defaults to the empty array.
 
 For each key, a layer (series) will be generated. Keys are typically strings but they can be arbitrary values. The series’ key is passed to the [value accessor](#stack_value), along with each data point, to compute the point’s value.
 
@@ -841,87 +878,82 @@ function value(d, key) {
 }
 ```
 
-Thus, by default the stack generator assumes that the input data is an array of objects, with each object exposing named properties with numeric values.
-
-```js
-var data = [
-  {date: "2015/1/2", apples: 12, oranges: 49, bananas: 9},
-  {date: "2015/1/3", apples: 15, oranges: 43, bananas: 4},
-  {date: "2015/1/4", apples: 20, oranges: 46, bananas: 1},
-  …
-];
-```
+Thus, by default the stack generator assumes that the input data is an array of objects, with each object exposing named properties with numeric values; see [*stack*](#_stack) for an example.
 
 <a name="order" href="#stack_order">#</a> <i>stack</i>.<b>order</b>([<i>order</i>])
 
-…
+If *order* is specified, sets the order accessor to the specified function or array and returns this stack generator. If *order* is not specified, returns the current order acccesor, which defaults to [orderNone](#orderNone); this uses the order given by the [key accessor](#stack_key). See [stack orders](#stack-orders) for the built-in orders.
 
-[orderNone](#orderNone)
+If *order* is a function, it is passed the generated series array and must return an array of numeric indexes representing the stack order. For example, the default order is defined as:
+
+```js
+function orderNone(series) {
+  var n = series.length, o = new Array(n);
+  while (--n >= 0) o[n] = n;
+  return o;
+}
+```
+
+The stack order is computed prior to the [offset](#stack_offset); thus, the lower value for all points is zero at the time the order is computed. The index attribute for each series is also not set until after the order is computed.
 
 <a name="offset" href="#stack_offset">#</a> <i>stack</i>.<b>offset</b>([<i>offset</i>])
 
-…
+If *offset* is specified, sets the offset accessor to the specified function or array and returns this stack generator. If *offset* is not specified, returns the current offset acccesor, which defaults to [offsetNone](#offsetNone); this uses a zero baseline. See [stack offsets](#stack-offsets) for the built-in offsets.
 
-[offsetNone](#offsetNone)
+If *offset* is a function, it is passed the generated series array and the order index array. The offset function is then responsible for updating the lower and upper values in the series array to layout the stack. For example, the default offset is defined as:
+
+```js
+function offsetNone(series, order) {
+  if (!((n = series.length) > 1)) return;
+  for (var i = 1, s0, s1 = series[order[0]], n, m = s1.length; i < n; ++i) {
+    s0 = s1, s1 = series[order[i]];
+    for (var j = 0; j < m; ++j) {
+      s1[j][1] += s1[j][0] = s0[j][1];
+    }
+  }
+}
+```
 
 ### Stack Orders
 
-…
+Stack orders are typically not used directly, but are instead passed to [*stack*.order](#stack_order).
 
 <a name="orderAscending" href="#orderAscending">#</a> <b>orderAscending</b>(<i>series</i>)
 
-…
+Orders series such that the smallest series (according to the sum of values) is at the bottom.
 
 <a name="orderDescending" href="#orderDescending">#</a> <b>orderDescending</b>(<i>series</i>)
 
-…
+Orders series such that the largest series (according to the sum of values) is at the bottom.
 
 <a name="orderInsideOut" href="#orderInsideOut">#</a> <b>orderInsideOut</b>(<i>series</i>)
 
-…
+Orders series such that the largest series (according to the sum of values) are on the inside, with smaller series on the outside. This order is recommended for streamgraphs in conjunction with the [wiggle offset](#offsetWiggle). See [Stacked Graphs—Geometry & Aesthetics](http://leebyron.com/streamgraph/) by Bryon & Wattenberg for more information.
 
 <a name="orderNone" href="#orderNone">#</a> <b>orderNone</b>(<i>series</i>)
 
-…
+Does not reorder series, instead using the order given by the stack generator’s [key accessor](#stack_keys).
 
 <a name="orderReverse" href="#orderReverse">#</a> <b>orderReverse</b>(<i>series</i>)
 
-…
+Reverses the series order given by the stack generator’s [key accessor](#stack_keys).
 
 ### Stack Offsets
 
-…
+Stack offsets are typically not used directly, but are instead passed to [*stack*.offset](#stack_offset).
 
 <a name="offsetExpand" href="#offsetExpand">#</a> <b>offsetExpand</b>(<i>series</i>, <i>order</i>)
 
-…
+Applies a zero baseline and normalizes the values for each point such that the topline is always one.
 
 <a name="offsetNone" href="#offsetNone">#</a> <b>offsetNone</b>(<i>series</i>, <i>order</i>)
 
-…
+Applies a zero baseline.
 
 <a name="offsetSilhouette" href="#offsetSilhouette">#</a> <b>offsetSilhouette</b>(<i>series</i>, <i>order</i>)
 
-…
+Shifts the baseline down such that the center of the streamgraph is always at zero.
 
 <a name="offsetWiggle" href="#offsetWiggle">#</a> <b>offsetWiggle</b>(<i>series</i>, <i>order</i>)
 
-…
-
-## Changes from D3 3.x:
-
-* You can now render shapes to Canvas by specifying a context (e.g., [*line*.context](#line_context))! See [d3-path](https://github.com/d3/d3-path) for how it works.
-
-* The interpretation of the [cardinal](#cardinal) spline tension parameter has been fixed. The default cardinal tension is now 0 (corresponding to a uniform Catmull–Rom spline), not 0.7. Due to a bug in 3.x, the tension parameter was previously only valid in the range [2/3, 1]; this corresponds to the new corrected range of [0, 1]. Thus, the new default value of 0 is equivalent to the old value of 2/3, and the default behavior is only slightly changed.
-
-* To specify a [cardinal](#cardinal) spline tension of *t*, use `line.curve(cardinal, t)` instead of `line.interpolate("cardinal").tension(t)`.
-
-* To specify a custom line or area interpolator, implement a [curve](#curves).
-
-* Added [natural](#natural) cubic splines.
-
-* Added [Catmull–Rom](#catmullRom) splines, parameterized by alpha. If α = 0, produces a uniform Catmull–Rom spline equivalent to a Cardinal spline with zero tension; if α = 0.5, produces a centripetal spline; if α = 1.0, produces a chordal spline.
-
-* By setting [*area*.x1](#area_x1) or [*area*.y1](#area_y1) to null, you can reuse the [*area*.x0](#area_x0) or [*area*.y0](#area_y0) value, rather than computing it twice. This is useful for nondeterministic values (e.g., jitter).
-
-* Accessor functions now always return functions, even if the value was set to a constant.
+Shifts the baseline so as to minimize the weighted wiggle of layers. This offset is recommended for streamgraphs in conjunction with the [inside-out order](#orderInsideOut). See [Stacked Graphs—Geometry & Aesthetics](http://leebyron.com/streamgraph/) by Bryon & Wattenberg for more information.
