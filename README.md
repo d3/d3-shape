@@ -806,7 +806,7 @@ Renders this symbol type to the specified *context* with the specified *size* in
 
 [<img alt="Stacked Bar Chart" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/stacked-bar.png" width="295" height="295">](http://bl.ocks.org/mbostock/3886208)[<img alt="Streamgraph" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/stacked-stream.png" width="295" height="295">](http://bl.ocks.org/mbostock/4060954)
 
-Some shape types can be stacked, placing one shape adjacent to another. For example, a bar chart of monthly sales might be broken down into a multi-series bar chart by product category, stacking bars vertically. This is equivalent to subdividing a bar chart by an ordinal dimension (product category) and applying a color encoding. Stacked charts can show overall value and per-category value simultaneously; however, it is typically harder to compare across categories, as only the bottom layer of the stack is aligned. (See also [grouped charts](http://bl.ocks.org/mbostock/3887051).)
+Some shape types can be stacked, placing one shape adjacent to another. For example, a bar chart of monthly sales might be broken down into a multi-series bar chart by product category, stacking bars vertically. This is equivalent to subdividing a bar chart by an ordinal dimension (such as product category) and applying a color encoding. Stacked charts can show overall value and per-category value simultaneously; however, it is typically harder to compare across categories, as only the bottom layer of the stack is aligned. (See also [grouped charts](http://bl.ocks.org/mbostock/3887051).)
 
 Like the [pie generator](#pies), the stack generator does not produce a shape directly. Instead it computes a layout which you can then pass to an [area generator](#areas) or use directly, say to position bars.
 
@@ -818,7 +818,7 @@ Constructs a new stack generator with the default settings.
 
 Generates a stack for the given array of *data*, returning an array representing each series. Any additional *arguments* are arbitrary; they are simply propagated to the [keys accessor](#stack_keys) along with the `this` object.
 
-The set of series is determined by the [keys accessor](#stack_keys); each series *i* in the returned array corresponds to the *i*th key. Each series is an array of points, where each point *j* corresponds to the *j*th element in the input *data*. Lastly, each point is represented as an array [*y0*, *y1*] where *y0* is the lower value (baseline) and *y1* is the upper value (topline); the difference between *y0* and *y1* corresponds to the computed [value](#stack_value) for this point. The key for each series is available as *series*.key, and the [index](#stack_order) as *series*.index. The input data element for each point is available as *point*.data.
+The series are determined by the [keys accessor](#stack_keys); each series *i* in the returned array corresponds to the *i*th key. Each series is an array of points, where each point *j* corresponds to the *j*th element in the input *data*. Lastly, each point is represented as an array [*y0*, *y1*] where *y0* is the lower value (baseline) and *y1* is the upper value (topline); the difference between *y0* and *y1* corresponds to the computed [value](#stack_value) for this point. The key for each series is available as *series*.key, and the [index](#stack_order) as *series*.index. The input data element for each point is available as *point*.data.
 
 For example, consider the following table representing monthly sales of fruits:
 
@@ -851,7 +851,7 @@ var stack = d3_shape.stack()
 var series = stack(data);
 ```
 
-The resulting *series* array has one element per fruit. Each series has one point per month, and each point has a lower and upper value:
+The resulting array has one element per *series*. Each series has one point per month, and each point has a lower and upper value defining the baseline and topline:
 
 ```js
 [
@@ -861,6 +861,8 @@ The resulting *series* array has one element per fruit. Each series has one poin
   [[6720, 7120], [4000, 4400], [2240, 2640], [1440, 1840]], // dates
 ]
 ```
+
+Each series in then typically passed to an [area generator](#areas) to render an area chart, or used to construct rectangles for a bar chart.
 
 <a name="keys" href="#stack_keys">#</a> <i>stack</i>.<b>keys</b>([<i>keys</i>])
 
