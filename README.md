@@ -920,23 +920,23 @@ Stack orders are typically not used directly, but are instead passed to [*stack*
 
 <a name="orderAscending" href="#orderAscending">#</a> <b>orderAscending</b>(<i>series</i>)
 
-Orders series such that the smallest series (according to the sum of values) is at the bottom.
+Returns a series order such that the smallest series (according to the sum of values) is at the bottom.
 
 <a name="orderDescending" href="#orderDescending">#</a> <b>orderDescending</b>(<i>series</i>)
 
-Orders series such that the largest series (according to the sum of values) is at the bottom.
+Returns a series order such that the largest series (according to the sum of values) is at the bottom.
 
 <a name="orderInsideOut" href="#orderInsideOut">#</a> <b>orderInsideOut</b>(<i>series</i>)
 
-Orders series such that the largest series (according to the sum of values) are on the inside, with smaller series on the outside. This order is recommended for streamgraphs in conjunction with the [wiggle offset](#offsetWiggle). See [Stacked Graphs—Geometry & Aesthetics](http://leebyron.com/streamgraph/) by Bryon & Wattenberg for more information.
+Returns a series order such that the largest series (according to the sum of values) are on the inside, with smaller series on the outside. This order is recommended for streamgraphs in conjunction with the [wiggle offset](#offsetWiggle). See [Stacked Graphs—Geometry & Aesthetics](http://leebyron.com/streamgraph/) by Bryon & Wattenberg for more information.
 
 <a name="orderNone" href="#orderNone">#</a> <b>orderNone</b>(<i>series</i>)
 
-Does not reorder series, instead using the order given by the stack generator’s [key accessor](#stack_keys).
+Returns the given series order [0, 1, … *n* - 1] where *n* is the number of elements in *series*. Thus, the stack order is given by the [key accessor](#stack_keys).
 
 <a name="orderReverse" href="#orderReverse">#</a> <b>orderReverse</b>(<i>series</i>)
 
-Reverses the series order given by the stack generator’s [key accessor](#stack_keys).
+Returns the reverse of the given series order [*n* - 1, *n* - 2, … 0] where *n* is the number of elements in *series*. Thus, the stack order is given by the reverse of the [key accessor](#stack_keys).
 
 ### Stack Offsets
 
