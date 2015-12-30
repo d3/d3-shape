@@ -16,6 +16,23 @@ tape("offsetExpand(series, order) expands to fill [0, 1]", function(test) {
   test.end();
 });
 
+tape("offsetExpand(series, order) treats NaN as zero", function(test) {
+  var series = [
+    [[0, 1], [0,   2], [0, 1]],
+    [[0, 3], [0, NaN], [0, 2]],
+    [[0, 5], [0,   2], [0, 4]]
+  ];
+  shape.offsetExpand(series, shape.orderNone(series));
+  test.ok(isNaN(series[1][1][1]));
+  series[1][1][1] = "NaN"; // can’t test.equal NaN
+  test.deepEqual(series, [
+    [[0 / 9, 1 / 9], [0 / 4, 2 / 4], [0 / 7, 1 / 7]],
+    [[1 / 9, 4 / 9], [2 / 4, "NaN"], [1 / 7, 3 / 7]],
+    [[4 / 9, 9 / 9], [2 / 4, 4 / 4], [3 / 7, 7 / 7]]
+  ]);
+  test.end();
+});
+
 tape("offsetExpand(series, order) observes the specified order", function(test) {
   var series = [
     [[0, 1], [0, 2], [0, 1]],

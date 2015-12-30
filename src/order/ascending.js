@@ -6,9 +6,7 @@ export default function(series) {
 };
 
 export function sum(series) {
-  return series.reduce(add, 0);
+  var s = 0, i = -1, n = series.length, v;
+  while (++i < n) if (v = +series[i][1]) s += v;
+  return s;
 };
-
-function add(p, d) {
-  return p + d[1];
-}

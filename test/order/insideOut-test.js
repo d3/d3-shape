@@ -13,3 +13,16 @@ tape("orderInsideOut(series) returns an order by sum", function(test) {
   ]), [2, 3, 6, 5, 4, 1, 0]);
   test.end();
 });
+
+tape("orderInsideOut(series) treats NaN values as zero", function(test) {
+  test.deepEqual(shape.orderInsideOut([
+    [[0, 0], [0, NaN]],
+    [[0, 1], [0, NaN]],
+    [[0, 2], [0, NaN]],
+    [[0, 3], [0, NaN]],
+    [[0, 4], [0, NaN]],
+    [[0, 5], [0, NaN]],
+    [[0, 6], [0, NaN]]
+  ]), [2, 3, 6, 5, 4, 1, 0]);
+  test.end();
+});
