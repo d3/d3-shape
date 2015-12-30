@@ -340,7 +340,7 @@ The pad angle here means the angular separation between each adjacent arc. The t
 
 ### Lines
 
-[<img width="295" height="154" alt="Line Chart" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/line.png">](http://bl.ocks.org/mbostock/3883245)[<img width="295" height="154" alt="Multi-Line Chart" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/line-multi.png">](http://bl.ocks.org/mbostock/3884955)[<img width="295" height="154" alt="Line Gradient" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/line-gradient.png">](http://bl.ocks.org/mbostock/3969722)
+[<img width="295" height="154" alt="Line Chart" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/line.png">](http://bl.ocks.org/mbostock/1550e57e12e73b86ad9e)
 
 The line generator produces a [spline](https://en.wikipedia.org/wiki/Spline_\(mathematics\)) or [polyline](https://en.wikipedia.org/wiki/Polygonal_chain), as in a line chart. Lines also appear in many other visualization types, such as the links in [hierarchical edge bundling](http://bl.ocks.org/mbostock/7607999).
 
