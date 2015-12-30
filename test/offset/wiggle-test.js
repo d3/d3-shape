@@ -16,6 +16,27 @@ tape("offsetWiggle(series, order) minimizes weighted wiggle", function(test) {
   test.end();
 });
 
+tape("offsetWiggle(series, order) treats NaN as zero", function(test) {
+  var series = [
+    [[0,   1], [0,   2], [0,   1]],
+    [[0, NaN], [0, NaN], [0, NaN]],
+    [[0,   3], [0,   4], [0,   2]],
+    [[0,   5], [0,   2], [0,   4]]
+  ];
+  shape.offsetWiggle(series, shape.orderNone(series));
+  test.ok(isNaN(series[1][0][1]));
+  test.ok(isNaN(series[1][0][2]));
+  test.ok(isNaN(series[1][0][3]));
+  series[1][0][1] = series[1][1][1] = series[1][2][1] = "NaN"; // can’t test.equal NaN
+  test.deepEqual(series.map(roundSeries), [
+    [[0,     1], [-1,     1], [0.7857143, 1.7857143]],
+    [[1, "NaN"], [ 1, "NaN"], [1.7857143,     "NaN"]],
+    [[1,     4], [ 1,     5], [1.7857143, 3.7857143]],
+    [[4,     9], [ 5,     7], [3.7857143, 7.7857143]]
+  ].map(roundSeries));
+  test.end();
+});
+
 tape("offsetWiggle(series, order) observes the specified order", function(test) {
   var series = [
     [[0, 1], [0, 2], [0, 1]],
@@ -34,7 +55,7 @@ tape("offsetWiggle(series, order) observes the specified order", function(test) 
 function roundSeries(series) {
   return series.map(function(point) {
     return point.map(function(value) {
-      return Math.round(value * 1e6) / 1e6;
+      return isNaN(value) ? value : Math.round(value * 1e6) / 1e6;
     });
   });
 }
