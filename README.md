@@ -30,7 +30,7 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 ```html
 <script src="https://d3js.org/d3-path.v0.1.min.js"></script>
-<script src="https://d3js.org/d3-shape.v0.2.min.js"></script>
+<script src="https://d3js.org/d3-shape.v0.3.min.js"></script>
 ```
 
 In a vanilla environment, a `d3_shape` global is exported. [Try d3-shape in your browser.](https://tonicdev.com/npm/d3-shape)
