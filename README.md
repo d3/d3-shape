@@ -866,11 +866,11 @@ The resulting array has one element per *series*. Each series has one point per 
 
 Each series in then typically passed to an [area generator](#areas) to render an area chart, or used to construct rectangles for a bar chart.
 
-<a name="keys" href="#stack_keys">#</a> <i>stack</i>.<b>keys</b>([<i>keys</i>])
+<a name="stack_keys" href="#stack_keys">#</a> <i>stack</i>.<b>keys</b>([<i>keys</i>])
 
 If *keys* is specified, sets the keys accessor to the specified function or array and returns this stack generator. If *keys* is not specified, returns the current keys accessor, which defaults to the empty array. A series (layer) is [generated](#_stack) for each key. Keys are typically strings, but they may be arbitrary values. The series’ key is passed to the [value accessor](#stack_value), along with each data point, to compute the point’s value.
 
-<a name="value" href="#stack_value">#</a> <i>stack</i>.<b>value</b>([<i>value</i>])
+<a name="stack_value" href="#stack_value">#</a> <i>stack</i>.<b>value</b>([<i>value</i>])
 
 If *value* is specified, sets the value accessor to the specified function or number and returns this stack generator. If *value* is not specified, returns the current value accessor, which defaults to:
 
@@ -882,7 +882,7 @@ function value(d, key) {
 
 Thus, by default the stack generator assumes that the input data is an array of objects, with each object exposing named properties with numeric values; see [*stack*](#_stack) for an example.
 
-<a name="order" href="#stack_order">#</a> <i>stack</i>.<b>order</b>([<i>order</i>])
+<a name="stack_order" href="#stack_order">#</a> <i>stack</i>.<b>order</b>([<i>order</i>])
 
 If *order* is specified, sets the order accessor to the specified function or array and returns this stack generator. If *order* is not specified, returns the current order acccesor, which defaults to [orderNone](#orderNone); this uses the order given by the [key accessor](#stack_key). See [stack orders](#stack-orders) for the built-in orders.
 
@@ -898,7 +898,7 @@ function orderNone(series) {
 
 The stack order is computed prior to the [offset](#stack_offset); thus, the lower value for all points is zero at the time the order is computed. The index attribute for each series is also not set until after the order is computed.
 
-<a name="offset" href="#stack_offset">#</a> <i>stack</i>.<b>offset</b>([<i>offset</i>])
+<a name="stack_offset" href="#stack_offset">#</a> <i>stack</i>.<b>offset</b>([<i>offset</i>])
 
 If *offset* is specified, sets the offset accessor to the specified function or array and returns this stack generator. If *offset* is not specified, returns the current offset acccesor, which defaults to [offsetNone](#offsetNone); this uses a zero baseline. See [stack offsets](#stack-offsets) for the built-in offsets.
 
