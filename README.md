@@ -422,6 +422,10 @@ If *context* is specified, sets the context and returns this line generator. If 
 
 Constructs a new radial line generator with the default settings. A radial line generator is equivalent to the standard Cartesian [line generator](#line), except the [x](#line_x) and [y](#line_y) accessors are replaced with [angle](#radialLine_angle) and [radius](#radialLine_radius) accessors. Radial lines are always positioned relative to ⟨0,0⟩; use a transform (see: [SVG](http://www.w3.org/TR/SVG/coords.html#TransformAttribute), [Canvas](http://www.w3.org/TR/2dcontext/#transformations)) to change the origin.
 
+<a name="_radialLine" href="#_radialLine">#</a> <i>radialLine</i>(<i>data</i>)
+
+Equivalent to [*line*](#_line).
+
 <a name="radialLine_angle" href="#radialLine_angle">#</a> <i>radialLine</i>.<b>angle</b>([<i>angle</i>])
 
 Equivalent to [*line*.x](#line_x), except the accessor returns the angle in radians, with 0 at -*y* (12 o’clock).
@@ -552,6 +556,10 @@ If *context* is specified, sets the context and returns this area generator. If 
 <img alt="Radial Area" width="250" height="250" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/area-radial.png">
 
 Constructs a new radial area generator with the default settings. A radial area generator is equivalent to the standard Cartesian [area generator](#area), except the [x](#area_x) and [y](#area_y) accessors are replaced with [angle](#radialArea_angle) and [radius](#radialArea_radius) accessors. Radial areas are always positioned relative to ⟨0,0⟩; use a transform (see: [SVG](http://www.w3.org/TR/SVG/coords.html#TransformAttribute), [Canvas](http://www.w3.org/TR/2dcontext/#transformations)) to change the origin.
+
+<a name="_radialArea" href="#_radialArea">#</a> <i>radialArea</i>(<i>data</i>)
+
+Equivalent to [*area*](#_area).
 
 <a name="radialArea_angle" href="#radialArea_angle">#</a> <i>radialArea</i>.<b>angle</b>([<i>angle</i>])
 
