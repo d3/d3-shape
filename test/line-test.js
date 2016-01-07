@@ -8,7 +8,7 @@ tape("line() returns a default line shape", function(test) {
   test.equal(l.x()([42, 34]), 42);
   test.equal(l.y()([42, 34]), 34);
   test.equal(l.defined()([42, 34]), true);
-  test.equal(l.curve(), shape.linear);
+  test.equal(l.curve(), shape.curveLinear);
   test.equal(l.context(), null);
   test.pathEqual(l([[0, 1], [2, 3], [4, 5]]), "M0,1L2,3L4,5");
   test.end();
@@ -60,14 +60,14 @@ tape("line.y(y)(data) observes the specified constant", function(test) {
 });
 
 tape("line.curve(curve) sets the curve method", function(test) {
-  var l = shape.line().curve(shape.linearClosed);
+  var l = shape.line().curve(shape.curveLinearClosed);
   test.equal(l([]), null);
   test.pathEqual(l([[0, 1], [2, 3]]), "M0,1L2,3Z");
   test.end();
 });
 
-tape("line.curve(cardinal, tension) sets the cardinal spline tension", function(test) {
-  var l = shape.line().curve(shape.cardinal, 0.1);
+tape("line.curve(curveCardinal, tension) sets the cardinal spline tension", function(test) {
+  var l = shape.line().curve(shape.curveCardinal, 0.1);
   test.equal(l([]), null);
   test.pathEqual(l([[0, 1]]), "M0,1Z");
   test.pathEqual(l([[0, 1], [1, 3]]), "M0,1L1,3");
@@ -76,8 +76,8 @@ tape("line.curve(cardinal, tension) sets the cardinal spline tension", function(
   test.end();
 });
 
-tape("line.curve(cardinal, tension) coerces the specified tension to a number", function(test) {
-  var l = shape.line().curve(shape.cardinal, "0.1");
+tape("line.curve(curveCardinal, tension) coerces the specified tension to a number", function(test) {
+  var l = shape.line().curve(shape.curveCardinal, "0.1");
   test.equal(l([]), null);
   test.pathEqual(l([[0, 1]]), "M0,1Z");
   test.pathEqual(l([[0, 1], [1, 3]]), "M0,1L1,3");

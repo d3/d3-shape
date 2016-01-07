@@ -3,8 +3,8 @@ var tape = require("tape"),
 
 require("../pathEqual");
 
-tape("line.curve(basisClosed)(data) generates the expected path", function(test) {
-  var l = shape.line().curve(shape.basisClosed);
+tape("line.curve(curveBasisClosed)(data) generates the expected path", function(test) {
+  var l = shape.line().curve(shape.curveBasisClosed);
   test.equal(l([]), null);
   test.pathEqual(l([[0, 0]]), "M0,0Z");
   test.pathEqual(l([[0, 0], [0, 10]]), "M0,6.666667L0,3.333333Z");

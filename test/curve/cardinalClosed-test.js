@@ -3,8 +3,8 @@ var tape = require("tape"),
 
 require("../pathEqual");
 
-tape("line.curve(cardinalClosed)(data) generates the expected path", function(test) {
-  var l = shape.line().curve(shape.cardinalClosed);
+tape("line.curve(curveCardinalClosed)(data) generates the expected path", function(test) {
+  var l = shape.line().curve(shape.curveCardinalClosed);
   test.equal(l([]), null);
   test.pathEqual(l([[0, 1]]), "M0,1Z");
   test.pathEqual(l([[0, 1], [1, 3]]), "M1,3L0,1Z");
@@ -13,10 +13,10 @@ tape("line.curve(cardinalClosed)(data) generates the expected path", function(te
   test.end();
 });
 
-tape("line.curve(cardinalClosed) uses a default tension of zero", function(test) {
-  var l = shape.line().curve(shape.cardinalClosed, 0);
-  test.equal(shape.line().curve(shape.cardinalClosed)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.line().curve(shape.cardinalClosed, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.line().curve(shape.cardinalClosed, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+tape("line.curve(curveCardinalClosed) uses a default tension of zero", function(test) {
+  var l = shape.line().curve(shape.curveCardinalClosed, 0);
+  test.equal(shape.line().curve(shape.curveCardinalClosed)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().curve(shape.curveCardinalClosed, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().curve(shape.curveCardinalClosed, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.end();
 });

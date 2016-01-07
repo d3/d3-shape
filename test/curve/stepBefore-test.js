@@ -3,8 +3,8 @@ var tape = require("tape"),
 
 require("../pathEqual");
 
-tape("line.curve(stepBefore)(data) generates the expected path", function(test) {
-  var l = shape.line().curve(shape.stepBefore);
+tape("line.curve(curveStepBefore)(data) generates the expected path", function(test) {
+  var l = shape.line().curve(shape.curveStepBefore);
   test.equal(l([]), null);
   test.pathEqual(l([[0, 1]]), "M0,1Z");
   test.pathEqual(l([[0, 1], [2, 3]]), "M0,1L0,3L2,3");
@@ -12,8 +12,8 @@ tape("line.curve(stepBefore)(data) generates the expected path", function(test) 
   test.end();
 });
 
-tape("area.curve(stepBefore)(data) generates the expected path", function(test) {
-  var a = shape.area().curve(shape.stepBefore);
+tape("area.curve(curveStepBefore)(data) generates the expected path", function(test) {
+  var a = shape.area().curve(shape.curveStepBefore);
   test.equal(a([]), null);
   test.pathEqual(a([[0, 1]]), "M0,1L0,0Z");
   test.pathEqual(a([[0, 1], [2, 3]]), "M0,1L0,3L2,3L2,0L0,0L0,0Z");

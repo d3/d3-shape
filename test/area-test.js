@@ -10,7 +10,7 @@ tape("area() returns a default area shape", function(test) {
   test.equal(a.y0()([42, 34]), 0);
   test.equal(a.y1()([42, 34]), 34);
   test.equal(a.defined()([42, 34]), true);
-  test.equal(a.curve(), shape.linear);
+  test.equal(a.curve(), shape.curveLinear);
   test.equal(a.context(), null);
   test.pathEqual(a([[0, 1], [2, 3], [4, 5]]), "M0,1L2,3L4,5L4,0L2,0L0,0Z");
   test.end();
@@ -105,13 +105,13 @@ tape("area.y(y)(data) observes the specified constant", function(test) {
 });
 
 tape("area.curve(curve) sets the curve method", function(test) {
-  var a = shape.area().curve(shape.cardinal);
+  var a = shape.area().curve(shape.curveCardinal);
   test.pathEqual(a([[0, 1], [1, 3], [2, 1], [3, 3]]), "M0,1C0,1,0.666667,3,1,3C1.333333,3,1.666667,1,2,1C2.333333,1,3,3,3,3L3,0C3,0,2.333333,0,2,0C1.666667,0,1.333333,0,1,0C0.666667,0,0,0,0,0Z");
   test.end();
 });
 
-tape("area.curve(cardinal, tension) sets the cardinal spline tension", function(test) {
-  var a = shape.area().curve(shape.cardinal, 0.1);
+tape("area.curve(curveCardinal, tension) sets the cardinal spline tension", function(test) {
+  var a = shape.area().curve(shape.curveCardinal, 0.1);
   test.equal(a([]), null);
   test.pathEqual(a([[0, 1]]), "M0,1L0,0Z");
   test.pathEqual(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");
@@ -120,8 +120,8 @@ tape("area.curve(cardinal, tension) sets the cardinal spline tension", function(
   test.end();
 });
 
-tape("area.curve(cardinal, tension) coerces the specified tension to a number", function(test) {
-  var a = shape.area().curve(shape.cardinal, "0.1");
+tape("area.curve(curveCardinal, tension) coerces the specified tension to a number", function(test) {
+  var a = shape.area().curve(shape.curveCardinal, "0.1");
   test.equal(a([]), null);
   test.pathEqual(a([[0, 1]]), "M0,1L0,0Z");
   test.pathEqual(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");

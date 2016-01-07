@@ -5,7 +5,7 @@ Visualizations typically consist of discrete graphical marks, such as [symbols](
 As with other aspects of D3, these shapes are driven by data: each shape generator exposes accessors that control how the input data are mapped to a visual representation. For example, you might define a line generator for a time series by [scaling](https://github.com/d3/d3-scale) fields of your data to fit the chart:
 
 ```js
-var line = d3_shape.line()
+var line = d3.line()
     .x(function(d) { return x(d.date); })
     .y(function(d) { return y(d.value); });
 ```
@@ -30,7 +30,7 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 
 ```html
 <script src="https://d3js.org/d3-path.v0.1.min.js"></script>
-<script src="https://d3js.org/d3-shape.v0.3.min.js"></script>
+<script src="https://d3js.org/d3-shape.v0.4.min.js"></script>
 ```
 
 In a vanilla environment, a `d3_shape` global is exported. [Try d3-shape in your browser.](https://tonicdev.com/npm/d3-shape)
@@ -55,7 +55,7 @@ The arc generator produces a [circular](https://en.wikipedia.org/wiki/Circular_s
 
 See also the [pie generator](#pies), which computes the necessary angles to represent an array of data as a pie or donut chart; these angles can then be passed to an arc generator.
 
-<a name="arc" href="#arc">#</a> d3_shape.<b>arc</b>()
+<a name="arc" href="#arc">#</a> d3.<b>arc</b>()
 
 Constructs a new arc generator with the default settings.
 
@@ -64,7 +64,7 @@ Constructs a new arc generator with the default settings.
 Generates an arc for the given *arguments*. The *arguments* are arbitrary; they are simply propagated to the arc generator’s accessor functions along with the `this` object. For example, with the default settings, an object with radii and angles is expected:
 
 ```js
-var arc = d3_shape.arc();
+var arc = d3.arc();
 
 arc({
   innerRadius: 0,
@@ -77,7 +77,7 @@ arc({
 If the radii and angles are instead defined as constants, you can generate an arc without any arguments:
 
 ```js
-var arc = d3_shape.arc()
+var arc = d3.arc()
     .innerRadius(0)
     .outerRadius(100)
     .startAngle(0)
@@ -192,7 +192,7 @@ If *context* is specified, sets the context and returns this arc generator. If *
 
 The pie generator does not produce a shape directly, but instead computes the necessary angles to represent a tabular dataset as a pie or donut chart; these angles can then be passed to an [arc generator](#arcs).
 
-<a name="pie" href="#pie">#</a> d3_shape.<b>pie</b>()
+<a name="pie" href="#pie">#</a> d3.<b>pie</b>()
 
 Constructs a new pie generator with the default settings.
 
@@ -213,7 +213,7 @@ Given a small dataset of numbers, here is how to compute the arc angles to rende
 
 ```js
 var data = [1, 1, 2, 3, 5, 8, 13, 21];
-var arcs = d3_shape.pie()(data);
+var arcs = d3.pie()(data);
 ```
 
 The first pair of parens, `pie()`, [constructs](#pie) a default pie generator. The second, `pie()(data)`, [invokes](#_pie) this generator on the dataset, returning an array of objects:
@@ -255,7 +255,7 @@ var data = [
   {"number": 42, "name": Kwon}
 ];
 
-var arcs = d3_shape.pie()
+var arcs = d3.pie()
     .value(function(d) { return d.number; })
     (data);
 ```
@@ -263,7 +263,7 @@ var arcs = d3_shape.pie()
 This is similar to [mapping](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) your data to values before invoking the pie generator:
 
 ```js
-var arcs = d3_shape.pie()(data.map(function(d) { return d.number; }));
+var arcs = d3.pie()(data.map(function(d) { return d.number; }));
 ```
 
 The benefit of an accessor is that the input data remains associated with the returned objects, thereby making it easier to access other fields of the data, for example to set the color or to add text labels.
@@ -344,7 +344,7 @@ The pad angle here means the angular separation between each adjacent arc. The t
 
 The line generator produces a [spline](https://en.wikipedia.org/wiki/Spline_\(mathematics\)) or [polyline](https://en.wikipedia.org/wiki/Polygonal_chain), as in a line chart. Lines also appear in many other visualization types, such as the links in [hierarchical edge bundling](http://bl.ocks.org/mbostock/7607999).
 
-<a name="line" href="#line">#</a> d3_shape.<b>line</b>()
+<a name="line" href="#line">#</a> d3.<b>line</b>()
 
 Constructs a new line generator with the default settings.
 
@@ -375,7 +375,7 @@ var data = [
   …
 ];
 
-var line = d3_shape.line()
+var line = d3.line()
     .x(function(d) { return x(d.date); })
     .y(function(d) { return y(d.value); });
 ```
@@ -406,17 +406,17 @@ The default accessor thus assumes that the input data is always defined. When a 
 
 [<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/line-defined.png" width="480" height="250" alt="Line with Missing Data">](http://bl.ocks.org/mbostock/0533f44f2cfabecc5e3a)
 
-Note that if a line segment consists of only a single point, it may appear invisible unless rendered with rounded or square [line caps](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap). In addition, some curves such as [cardinalOpen](#cardinalOpen) only render a visible segment if it contains multiple points.
+Note that if a line segment consists of only a single point, it may appear invisible unless rendered with rounded or square [line caps](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap). In addition, some curves such as [curveCardinalOpen](#curveCardinalOpen) only render a visible segment if it contains multiple points.
 
 <a name="line_curve" href="#line_curve">#</a> <i>line</i>.<b>curve</b>([<i>curve</i>[, <i>parameters…</i>]])
 
-If *curve* is specified, sets the [curve factory](#curves) and returns this line generator. Any optional *parameters*, if specified, will be bound to the specified *curve*. If *curve* is not specified, returns the current curve factory, which defaults to [linear](#linear).
+If *curve* is specified, sets the [curve factory](#curves) and returns this line generator. Any optional *parameters*, if specified, will be bound to the specified *curve*. If *curve* is not specified, returns the current curve factory, which defaults to [curveLinear](#curveLinear).
 
 <a name="line_context" href="#line_context">#</a> <i>line</i>.<b>context</b>([<i>context</i>])
 
 If *context* is specified, sets the context and returns this line generator. If *context* is not specified, returns the current context, which defaults to null. If the context is not null, then the [generated line](#_line) is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated line is returned.
 
-<a name="radialLine" href="#radialLine">#</a> d3_shape.<b>radialLine</b>()
+<a name="radialLine" href="#radialLine">#</a> d3.<b>radialLine</b>()
 
 <img alt="Radial Line" width="250" height="250" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/line-radial.png">
 
@@ -440,7 +440,7 @@ Equivalent to [*line*.defined](#line_defined).
 
 <a name="radialLine_curve" href="#radialLine_curve">#</a> <i>radialLine</i>.<b>curve</b>([<i>curve</i>[, <i>parameters…</i>]])
 
-Equivalent to [*line*.curve](#line_curve). Note that the [monotone](#monotone) curve is not recommended for radial lines because it assumes that the data is monotonic in *x*, which is typically untrue of radial lines.
+Equivalent to [*line*.curve](#line_curve). Note that [curveMonotone](#curveMonotone) is not recommended for radial lines because it assumes that the data is monotonic in *x*, which is typically untrue of radial lines.
 
 <a name="radialLine_context" href="#radialLine_context">#</a> <i>radialLine</i>.<b>context</b>([<i>context</i>])
 
@@ -450,9 +450,9 @@ Equivalent to [*line*.context](#line_context).
 
 [<img alt="Area Chart" width="295" height="154" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/area.png">](http://bl.ocks.org/mbostock/3883195)[<img alt="Stacked Area Chart" width="295" height="154" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/area-stacked.png">](http://bl.ocks.org/mbostock/3885211)[<img alt="Difference Chart" width="295" height="154" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/area-difference.png">](http://bl.ocks.org/mbostock/3894205)
 
-The area generator produces an area, as in an area chart. An area is defined by two bounding [lines](#lines), either splines or polylines. Typically, the two lines share the same [*x*-values](#area_x) ([x0](#area_x0) = [x1](#area_x1)), differing only in *y*-value ([y0](#area_y0) and [y1](#area_y1)); most commonly, y0 is defined as a constant representing [zero](http://www.vox.com/2015/11/19/9758062/y-axis-zero-chart). The first line (the <i>topline</i>) is defined by x1 and y1 and is rendered first; the second line (the <i>baseline</i>) is defined by x0 and y0 and is rendered second, with the points in reverse order. With a [linear](#linear) [curve](#area_curve), this produces a clockwise polygon.
+The area generator produces an area, as in an area chart. An area is defined by two bounding [lines](#lines), either splines or polylines. Typically, the two lines share the same [*x*-values](#area_x) ([x0](#area_x0) = [x1](#area_x1)), differing only in *y*-value ([y0](#area_y0) and [y1](#area_y1)); most commonly, y0 is defined as a constant representing [zero](http://www.vox.com/2015/11/19/9758062/y-axis-zero-chart). The first line (the <i>topline</i>) is defined by x1 and y1 and is rendered first; the second line (the <i>baseline</i>) is defined by x0 and y0 and is rendered second, with the points in reverse order. With a [curveLinear](#curveLinear) [curve](#area_curve), this produces a clockwise polygon.
 
-<a name="area" href="#area">#</a> d3_shape.<b>area</b>()
+<a name="area" href="#area">#</a> d3.<b>area</b>()
 
 Constructs a new area generator with the default settings.
 
@@ -487,7 +487,7 @@ var data = [
   …
 ];
 
-var area = d3_shape.area()
+var area = d3.area()
     .x(function(d) { return x(d.date); })
     .y1(function(d) { return y(d.value); })
     .y0(y(0));
@@ -541,17 +541,17 @@ The default accessor thus assumes that the input data is always defined. When an
 
 [<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/area-defined.png" width="480" height="250" alt="Area with Missing Data">](http://bl.ocks.org/mbostock/3035090)
 
-Note that if an area segment consists of only a single point, it may appear invisible unless rendered with rounded or square [line caps](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap). In addition, some curves such as [cardinalOpen](#cardinalOpen) only render a visible segment if it contains multiple points.
+Note that if an area segment consists of only a single point, it may appear invisible unless rendered with rounded or square [line caps](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap). In addition, some curves such as [curveCardinalOpen](#curveCardinalOpen) only render a visible segment if it contains multiple points.
 
 <a name="area_curve" href="#area_curve">#</a> <i>area</i>.<b>curve</b>([<i>curve</i>[, <i>parameters…</i>]])
 
-If *curve* is specified, sets the [curve factory](#curves) and returns this area generator. Any optional *parameters*, if specified, will be bound to the specified *curve*. If *curve* is not specified, returns the current curve factory, which defaults to [linear](#linear).
+If *curve* is specified, sets the [curve factory](#curves) and returns this area generator. Any optional *parameters*, if specified, will be bound to the specified *curve*. If *curve* is not specified, returns the current curve factory, which defaults to [curveLinear](#curveLinear).
 
 <a name="area_context" href="#area_context">#</a> <i>area</i>.<b>context</b>([<i>context</i>])
 
 If *context* is specified, sets the context and returns this area generator. If *context* is not specified, returns the current context, which defaults to null. If the context is not null, then the [generated area](#_area) is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated area is returned.
 
-<a name="radialArea" href="#radialArea">#</a> d3_shape.<b>radialArea</b>()
+<a name="radialArea" href="#radialArea">#</a> d3.<b>radialArea</b>()
 
 <img alt="Radial Area" width="250" height="250" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/area-radial.png">
 
@@ -591,7 +591,7 @@ Equivalent to [*area*.defined](#area_defined).
 
 <a name="radialArea_curve" href="#radialArea_curve">#</a> <i>radialArea</i>.<b>curve</b>([<i>curve</i>[, <i>parameters…</i>]])
 
-Equivalent to [*area*.curve](#area_curve). Note that the [monotone](#monotone) curve is not recommended for radial areas because it assumes that the data is monotonic in *x*, which is typically untrue of radial areas.
+Equivalent to [*area*.curve](#area_curve). Note that [curveMonotone](#curveMonotone) is not recommended for radial areas because it assumes that the data is monotonic in *x*, which is typically untrue of radial areas.
 
 <a name="radialArea_context" href="#radialArea_context">#</a> <i>radialArea</i>.<b>context</b>([<i>context</i>])
 
@@ -604,109 +604,109 @@ While [lines](#lines) are defined as a sequence of two-dimensional [*x*, *y*] po
 Curves are typically not constructed or used directly, instead being passed to [*line*.curve](#line_curve) and [*area*.curve](#area_curve). For example:
 
 ```js
-var line = d3_shape.line()
+var line = d3.line()
     .x(function(d) { return x(d.date); })
     .y(function(d) { return y(d.value); })
-    .curve(d3_shape.catmullRom, 0.5);
+    .curve(d3.curveCatmullRom, 0.5);
 ```
 
-<a name="basis" href="#basis">#</a> d3_shape.<b>basis</b>(<i>context</i>)
+<a name="curveBasis" href="#curveBasis">#</a> d3.<b>curveBasis</b>(<i>context</i>)
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/basis.png" width="888" height="240" alt="basis">
 
 Produces a cubic [basis spline](https://en.wikipedia.org/wiki/B-spline) using the specified control points. The first and last points are triplicated such that the spline starts at the first point and ends at the last point, and is tangent to the line between the first and second points, and to the line between the penultimate and last points.
 
-<a name="basisClosed" href="#basisClosed">#</a> d3_shape.<b>basisClosed</b>(<i>context</i>)
+<a name="curveBasisClosed" href="#curveBasisClosed">#</a> d3.<b>curveBasisClosed</b>(<i>context</i>)
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/basisClosed.png" width="888" height="240" alt="basisClosed">
 
 Produces a closed cubic [basis spline](https://en.wikipedia.org/wiki/B-spline) using the specified control points. When a line segment ends, the first three control points are repeated, producing a closed loop with C2 continuity.
 
-<a name="basisOpen" href="#basisOpen">#</a> d3_shape.<b>basisOpen</b>(<i>context</i>)
+<a name="curveBasisOpen" href="#curveBasisOpen">#</a> d3.<b>curveBasisOpen</b>(<i>context</i>)
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/basisOpen.png" width="888" height="240" alt="basisOpen">
 
 Produces a cubic [basis spline](https://en.wikipedia.org/wiki/B-spline) using the specified control points. Unlike [basis](#basis), the first and last points are not repeated, and thus the curve typically does not intersect these points.
 
-<a name="bundle" href="#bundle">#</a> d3_shape.<b>bundle</b>(<i>context</i>[, <i>beta</i>])
+<a name="curveBundle" href="#curveBundle">#</a> d3.<b>curveBundle</b>(<i>context</i>[, <i>beta</i>])
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/bundle.png" width="888" height="240" alt="bundle">
 
 Produces a straightened cubic [basis spline](https://en.wikipedia.org/wiki/B-spline) using the specified control points, with the spline straightened according to the specified parameter *beta* in the range [0, 1]. If *beta* equals zero, a straight line between the first and last point is produced; if *beta* equals one, a standard [basis](#basis) spline is produced. If *beta* is not specified, it defaults to 0.85. This curve is typically used in [hierarchical edge bundling](http://bl.ocks.org/mbostock/7607999) to disambiguate connections, as proposed by [Danny Holten](https://www.win.tue.nl/vis1/home/dholten/) in [Hierarchical Edge Bundles: Visualization of Adjacency Relations in Hierarchical Data](https://www.win.tue.nl/vis1/home/dholten/papers/bundles_infovis.pdf); *beta* represents the bundle strength.
 
-<a name="cardinal" href="#cardinal">#</a> d3_shape.<b>cardinal</b>(<i>context</i>[, <i>tension</i>])
+<a name="curveCardinal" href="#curveCardinal">#</a> d3.<b>curveCardinal</b>(<i>context</i>[, <i>tension</i>])
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/cardinal.png" width="888" height="240" alt="cardinal">
 
-Produces a cubic [cardinal spline](https://en.wikipedia.org/wiki/Cubic_Hermite_spline#Cardinal_spline) using the specified control points, with one-sided differences used for the first and last piece. The *tension* parameter in the range [0, 1] determines the length of the tangents: a *tension* of one yields all zero tangents, equivalent to [linear](#linear); a *tension* of zero produces a uniform [Catmull–Rom](#catmullRom) spline. If *tension* is not specified, it defaults to zero.
+Produces a cubic [cardinal spline](https://en.wikipedia.org/wiki/Cubic_Hermite_spline#Cardinal_spline) using the specified control points, with one-sided differences used for the first and last piece. The *tension* parameter in the range [0, 1] determines the length of the tangents: a *tension* of one yields all zero tangents, equivalent to [curveLinear](#curveLinear); a *tension* of zero produces a uniform [Catmull–Rom](#curveCatmullRom) spline. If *tension* is not specified, it defaults to zero.
 
-<a name="cardinalClosed" href="#cardinalClosed">#</a> d3_shape.<b>cardinalClosed</b>(<i>context</i>[, <i>tension</i>])
+<a name="curveCardinalClosed" href="#curveCardinalClosed">#</a> d3.<b>curveCardinalClosed</b>(<i>context</i>[, <i>tension</i>])
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/cardinalClosed.png" width="888" height="240" alt="cardinalClosed">
 
-Produces a closed cubic [cardinal spline](https://en.wikipedia.org/wiki/Cubic_Hermite_spline#Cardinal_spline) using the specified control points. When a line segment ends, the first three control points are repeated, producing a closed loop. The *tension* parameter in the range [0, 1] determines the length of the tangents: a *tension* of one yields all zero tangents, equivalent to [linearClosed](#linearClosed); a *tension* of zero produces a closed uniform [Catmull–Rom](#catmullRomClosed) spline.
+Produces a closed cubic [cardinal spline](https://en.wikipedia.org/wiki/Cubic_Hermite_spline#Cardinal_spline) using the specified control points. When a line segment ends, the first three control points are repeated, producing a closed loop. The *tension* parameter in the range [0, 1] determines the length of the tangents: a *tension* of one yields all zero tangents, equivalent to [curveLinearClosed](#curveLinearClosed); a *tension* of zero produces a closed uniform [Catmull–Rom](#curveCatmullRomClosed) spline.
 
-<a name="cardinalOpen" href="#cardinalOpen">#</a> d3_shape.<b>cardinalOpen</b>(<i>context</i>[, <i>tension</i>])
+<a name="curveCardinalOpen" href="#curveCardinalOpen">#</a> d3.<b>curveCardinalOpen</b>(<i>context</i>[, <i>tension</i>])
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/cardinalOpen.png" width="888" height="240" alt="cardinalOpen">
 
-Produces a cubic [cardinal spline](https://en.wikipedia.org/wiki/Cubic_Hermite_spline#Cardinal_spline) using the specified control points. Unlike [cardinal](#cardinal), one-sided differences are not used for the first and last piece, and thus the curve starts at the second point and ends at the penultimate point.
+Produces a cubic [cardinal spline](https://en.wikipedia.org/wiki/Cubic_Hermite_spline#Cardinal_spline) using the specified control points. Unlike [curveCardinal](#curveCardinal), one-sided differences are not used for the first and last piece, and thus the curve starts at the second point and ends at the penultimate point.
 
-<a name="catmullRom" href="#catmullRom">#</a> d3_shape.<b>catmullRom</b>(<i>context</i>[, <i>alpha</i>])
+<a name="curveCatmullRom" href="#curveCatmullRom">#</a> d3.<b>curveCatmullRom</b>(<i>context</i>[, <i>alpha</i>])
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/catmullRom.png" width="888" height="240" alt="catmullRom">
 
-Produces a cubic Catmull–Rom spline using the specified control points and the parameter *alpha*, as proposed by Yuksel et al. in [On the Parameterization of Catmull–Rom Curves](http://www.cemyuksel.com/research/catmullrom_param/), with one-sided differences used for the first and last piece. If *alpha* is zero, produces a uniform spline, equivalent to [cardinal](#cardinal) with a tension of zero; if *alpha* is one, produces a chordal spline; if *alpha* is 0.5, produces a [centripetal spline](https://en.wikipedia.org/wiki/Centripetal_Catmull–Rom_spline). If *alpha* is not specified, it defaults to 0.5. Centripetal splines are recommended to avoid self-intersections and overshoot.
+Produces a cubic Catmull–Rom spline using the specified control points and the parameter *alpha*, as proposed by Yuksel et al. in [On the Parameterization of Catmull–Rom Curves](http://www.cemyuksel.com/research/catmullrom_param/), with one-sided differences used for the first and last piece. If *alpha* is zero, produces a uniform spline, equivalent to [curveCardinal](#curveCardinal) with a tension of zero; if *alpha* is one, produces a chordal spline; if *alpha* is 0.5, produces a [centripetal spline](https://en.wikipedia.org/wiki/Centripetal_Catmull–Rom_spline). If *alpha* is not specified, it defaults to 0.5. Centripetal splines are recommended to avoid self-intersections and overshoot.
 
-<a name="catmullRomClosed" href="#catmullRomClosed">#</a> d3_shape.<b>catmullRomClosed</b>(<i>context</i>[, <i>alpha</i>])
+<a name="curveCatmullRomClosed" href="#curveCatmullRomClosed">#</a> d3.<b>curveCatmullRomClosed</b>(<i>context</i>[, <i>alpha</i>])
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/catmullRomClosed.png" width="888" height="330" alt="catmullRomClosed">
 
-Produces a closed cubic Catmull–Rom spline using the specified control points and the parameter *alpha*, as proposed by Yuksel et al. When a line segment ends, the first three control points are repeated, producing a closed loop. If *alpha* is zero, produces a uniform spline, equivalent to [cardinalClosed](#cardinalClosed) with a tension of zero; if *alpha* is one, produces a chordal spline; if *alpha* is 0.5, produces a [centripetal spline](https://en.wikipedia.org/wiki/Centripetal_Catmull–Rom_spline). If *alpha* is not specified, it defaults to 0.5. Centripetal splines are recommended to avoid self-intersections and overshoot.
+Produces a closed cubic Catmull–Rom spline using the specified control points and the parameter *alpha*, as proposed by Yuksel et al. When a line segment ends, the first three control points are repeated, producing a closed loop. If *alpha* is zero, produces a uniform spline, equivalent to [curveCardinalClosed](#curveCardinalClosed) with a tension of zero; if *alpha* is one, produces a chordal spline; if *alpha* is 0.5, produces a [centripetal spline](https://en.wikipedia.org/wiki/Centripetal_Catmull–Rom_spline). If *alpha* is not specified, it defaults to 0.5. Centripetal splines are recommended to avoid self-intersections and overshoot.
 
-<a name="catmullRomOpen" href="#catmullRomOpen">#</a> d3_shape.<b>catmullRomOpen</b>(<i>context</i>[, <i>alpha</i>])
+<a name="curveCatmullRomOpen" href="#curveCatmullRomOpen">#</a> d3.<b>curveCatmullRomOpen</b>(<i>context</i>[, <i>alpha</i>])
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/catmullRomOpen.png" width="888" height="240" alt="catmullRomOpen">
 
-Produces a cubic Catmull–Rom spline using the specified control points and the parameter *alpha*, as proposed by Yuksel et al. Unlike [catmullRom](#catmullRom), one-sided differences are not used for the first and last piece, and thus the curve starts at the second point and ends at the penultimate point. If *alpha* is zero, produces a uniform spline, equivalent to [cardinalOpen](#cardinalOpen) with a tension of zero; if *alpha* is one, produces a chordal spline; if *alpha* is 0.5, produces a [centripetal spline](https://en.wikipedia.org/wiki/Centripetal_Catmull–Rom_spline). If *alpha* is not specified, it defaults to 0.5. Centripetal splines are recommended to avoid self-intersections and overshoot.
+Produces a cubic Catmull–Rom spline using the specified control points and the parameter *alpha*, as proposed by Yuksel et al. Unlike [curveCatmullRom](#curveCatmullRom), one-sided differences are not used for the first and last piece, and thus the curve starts at the second point and ends at the penultimate point. If *alpha* is zero, produces a uniform spline, equivalent to [curveCardinalOpen](#curveCardinalOpen) with a tension of zero; if *alpha* is one, produces a chordal spline; if *alpha* is 0.5, produces a [centripetal spline](https://en.wikipedia.org/wiki/Centripetal_Catmull–Rom_spline). If *alpha* is not specified, it defaults to 0.5. Centripetal splines are recommended to avoid self-intersections and overshoot.
 
-<a name="linear" href="#linear">#</a> d3_shape.<b>linear</b>(<i>context</i>)
+<a name="curveLinear" href="#curveLinear">#</a> d3.<b>curveLinear</b>(<i>context</i>)
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/linear.png" width="888" height="240" alt="linear">
 
 Produces a polyline through the specified points.
 
-<a name="linearClosed" href="#linearClosed">#</a> d3_shape.<b>linearClosed</b>(<i>context</i>)
+<a name="curveLinearClosed" href="#curveLinearClosed">#</a> d3.<b>curveLinearClosed</b>(<i>context</i>)
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/linearClosed.png" width="888" height="240" alt="linearClosed">
 
 Produces a closed polyline through the specified points by repeating the first point when the line segment ends.
 
-<a name="monotone" href="#monotone">#</a> d3_shape.<b>monotone</b>(<i>context</i>)
+<a name="curveMonotone" href="#curveMonotone">#</a> d3.<b>curveMonotone</b>(<i>context</i>)
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/monotone.png" width="888" height="240" alt="monotone">
 
 Produces a cubic spline that [preserves monotonicity](https://en.wikipedia.org/wiki/Monotone_cubic_interpolation) in *y*, as proposed by Steffen in [A simple method for monotonic interpolation in one dimension](http://adsabs.harvard.edu/full/1990A%26A...239..443S): “a smooth curve with continuous first-order derivatives that passes through any given set of data points without spurious oscillations. Local extrema can occur only at grid points where they are given by the data, but not in between two adjacent grid points.” Assumes that the input data is monotonic in *x*.
 
-<a name="natural" href="#natural">#</a> d3_shape.<b>natural</b>(<i>context</i>)
+<a name="curveNatural" href="#curveNatural">#</a> d3.<b>curveNatural</b>(<i>context</i>)
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/natural.png" width="888" height="240" alt="natural">
 
 Produces a [natural](https://en.wikipedia.org/wiki/Spline_interpolation) [cubic spline](http://mathworld.wolfram.com/CubicSpline.html) with the second derivative of the spline set to zero at the endpoints.
 
-<a name="step" href="#step">#</a> d3_shape.<b>step</b>(<i>context</i>)
+<a name="curveStep" href="#curveStep">#</a> d3.<b>curveStep</b>(<i>context</i>)
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/step.png" width="888" height="240" alt="step">
 
 Produces a piecewise constant function (a [step function](https://en.wikipedia.org/wiki/Step_function)) consisting of alternating horizontal and vertical lines. The *y*-value changes at the midpoint of each pair of adjacent *x*-values.
 
-<a name="stepAfter" href="#stepAfter">#</a> d3_shape.<b>stepAfter</b>(<i>context</i>)
+<a name="curveStepAfter" href="#curveStepAfter">#</a> d3.<b>curveStepAfter</b>(<i>context</i>)
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/stepAfter.png" width="888" height="240" alt="stepAfter">
 
 Produces a piecewise constant function (a [step function](https://en.wikipedia.org/wiki/Step_function)) consisting of alternating horizontal and vertical lines. The *y*-value changes after the *x*-value.
 
-<a name="stepBefore" href="#stepBefore">#</a> d3_shape.<b>stepBefore</b>(<i>context</i>)
+<a name="curveStepBefore" href="#curveStepBefore">#</a> d3.<b>curveStepBefore</b>(<i>context</i>)
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/stepBefore.png" width="888" height="240" alt="stepBefore">
 
@@ -738,11 +738,11 @@ Indicates a new point in the current line segment with the given *x*- and *y*-va
 
 ### Symbols
 
-<a href="#circle"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/circle.png" width="100" height="100"></a><a href="#cross"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/cross.png" width="100" height="100"></a><a href="#diamond"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/diamond.png" width="100" height="100"></a><a href="#square"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/square.png" width="100" height="100"></a><a href="#star"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/star.png" width="100" height="100"></a><a href="#triangle"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/triangle.png" width="100" height="100"><a href="#wye"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/wye.png" width="100" height="100"></a>
+<a href="#sybmolCircle"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/circle.png" width="100" height="100"></a><a href="#sybmolCross"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/cross.png" width="100" height="100"></a><a href="#sybmolDiamond"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/diamond.png" width="100" height="100"></a><a href="#sybmolSquare"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/square.png" width="100" height="100"></a><a href="#sybmolStar"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/star.png" width="100" height="100"></a><a href="#sybmolTriangle"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/triangle.png" width="100" height="100"><a href="#sybmolWye"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/wye.png" width="100" height="100"></a>
 
 Symbols provide a categorical shape encoding as is commonly used in scatterplots. Symbols are always centered at ⟨0,0⟩; use a transform (see: [SVG](http://www.w3.org/TR/SVG/coords.html#TransformAttribute), [Canvas](http://www.w3.org/TR/2dcontext/#transformations)) to move the arc to a different position.
 
-<a name="symbol" href="#symbol">#</a> d3_shape.<b>symbol</b>()
+<a name="symbol" href="#symbol">#</a> d3.<b>symbol</b>()
 
 Constructs a new symbol generator with the default settings.
 
@@ -770,35 +770,35 @@ Specifying the size as a function is useful for constructing a scatterplot with 
 
 If *context* is specified, sets the context and returns this symbol generator. If *context* is not specified, returns the current context, which defaults to null. If the context is not null, then the [generated symbol](#_symbol) is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated symbol is returned.
 
-<a name="symbols" href="#symbols">#</a> d3_shape.<b>symbols</b>
+<a name="symbols" href="#symbols">#</a> d3.<b>symbols</b>
 
 An array containing the set of all built-in symbol types: [circle](#circle), [cross](#cross), [diamond](#diamond), [square](#square), [star](#star), [triangle](#triangle), and [wye](#wye). Useful for constructing the range of an [ordinal scale](https://github.com/d3/d3-scale#ordinal-scales) should you wish to use a shape encoding for categorical data.
 
-<a name="circle" href="#circle">#</a> d3_shape.<b>circle</b>
+<a name="sybmolCircle" href="#sybmolCircle">#</a> d3.<b>sybmolCircle</b>
 
 A circle.
 
-<a name="cross" href="#cross">#</a> d3_shape.<b>cross</b>
+<a name="sybmolCross" href="#sybmolCross">#</a> d3.<b>sybmolCross</b>
 
 A Greek cross with arms of equal length.
 
-<a name="diamond" href="#diamond">#</a> d3_shape.<b>diamond</b>
+<a name="sybmolDiamond" href="#sybmolDiamond">#</a> d3.<b>sybmolDiamond</b>
 
 A rhombus.
 
-<a name="square" href="#square">#</a> d3_shape.<b>square</b>
+<a name="sybmolSquare" href="#sybmolSquare">#</a> d3.<b>sybmolSquare</b>
 
 A square.
 
-<a name="star" href="#star">#</a> d3_shape.<b>star</b>
+<a name="sybmolStar" href="#sybmolStar">#</a> d3.<b>sybmolStar</b>
 
 A pentagonal star (pentagram).
 
-<a name="triangle" href="#triangle">#</a> d3_shape.<b>triangle</b>
+<a name="sybmolTriangle" href="#sybmolTriangle">#</a> d3.<b>sybmolTriangle</b>
 
 An up-pointing triangle.
 
-<a name="wye" href="#wye">#</a> d3_shape.<b>wye</b>
+<a name="sybmolWye" href="#sybmolWye">#</a> d3.<b>sybmolWye</b>
 
 A Y-shape.
 
@@ -816,11 +816,11 @@ Renders this symbol type to the specified *context* with the specified *size* in
 
 Some shape types can be stacked, placing one shape adjacent to another. For example, a bar chart of monthly sales might be broken down into a multi-series bar chart by product category, stacking bars vertically. This is equivalent to subdividing a bar chart by an ordinal dimension (such as product category) and applying a color encoding.
 
-Stacked charts can show overall value and per-category value simultaneously; however, it is typically harder to compare across categories, as only the bottom layer of the stack is aligned. So, chose the [stack order](#stack_order) carefully, and consider a [streamgraph](#orderWiggle). (See also [grouped charts](http://bl.ocks.org/mbostock/3887051).)
+Stacked charts can show overall value and per-category value simultaneously; however, it is typically harder to compare across categories, as only the bottom layer of the stack is aligned. So, chose the [stack order](#stack_order) carefully, and consider a [streamgraph](#stackOrderWiggle). (See also [grouped charts](http://bl.ocks.org/mbostock/3887051).)
 
 Like the [pie generator](#pies), the stack generator does not produce a shape directly. Instead it computes positions which you can then pass to an [area generator](#areas) or use directly, say to position bars.
 
-<a name="stack" href="#stack">#</a> <b>stack</b>()
+<a name="stack" href="#stack">#</a> d3.<b>stack</b>()
 
 Constructs a new stack generator with the default settings.
 
@@ -853,7 +853,7 @@ var data = [
 To produce a stack for this data:
 
 ```js
-var stack = d3_shape.stack()
+var stack = d3.stack()
     .keys(["apples", "bananas", "cherries", "dates"])
     .order(d3_shape.orderNone)
     .offset(d3_shape.offsetNone);
@@ -892,7 +892,7 @@ Thus, by default the stack generator assumes that the input data is an array of 
 
 <a name="stack_order" href="#stack_order">#</a> <i>stack</i>.<b>order</b>([<i>order</i>])
 
-If *order* is specified, sets the order accessor to the specified function or array and returns this stack generator. If *order* is not specified, returns the current order acccesor, which defaults to [orderNone](#orderNone); this uses the order given by the [key accessor](#stack_key). See [stack orders](#stack-orders) for the built-in orders.
+If *order* is specified, sets the order accessor to the specified function or array and returns this stack generator. If *order* is not specified, returns the current order acccesor, which defaults to [stackOrderNone](#stackOrderNone); this uses the order given by the [key accessor](#stack_key). See [stack orders](#stack-orders) for the built-in orders.
 
 If *order* is a function, it is passed the generated series array and must return an array of numeric indexes representing the stack order. For example, the default order is defined as:
 
@@ -908,7 +908,7 @@ The stack order is computed prior to the [offset](#stack_offset); thus, the lowe
 
 <a name="stack_offset" href="#stack_offset">#</a> <i>stack</i>.<b>offset</b>([<i>offset</i>])
 
-If *offset* is specified, sets the offset accessor to the specified function or array and returns this stack generator. If *offset* is not specified, returns the current offset acccesor, which defaults to [offsetNone](#offsetNone); this uses a zero baseline. See [stack offsets](#stack-offsets) for the built-in offsets.
+If *offset* is specified, sets the offset accessor to the specified function or array and returns this stack generator. If *offset* is not specified, returns the current offset acccesor, which defaults to [stackOffsetNone](#stackOffsetNone); this uses a zero baseline. See [stack offsets](#stack-offsets) for the built-in offsets.
 
 If *offset* is a function, it is passed the generated series array and the order index array. The offset function is then responsible for updating the lower and upper values in the series array to layout the stack. For example, the default offset is defined as:
 
@@ -928,23 +928,23 @@ function offsetNone(series, order) {
 
 Stack orders are typically not used directly, but are instead passed to [*stack*.order](#stack_order).
 
-<a name="orderAscending" href="#orderAscending">#</a> <b>orderAscending</b>(<i>series</i>)
+<a name="stackOrderAscending" href="#stackOrderAscending">#</a> d3.<b>stackOrderAscending</b>(<i>series</i>)
 
 Returns a series order such that the smallest series (according to the sum of values) is at the bottom.
 
-<a name="orderDescending" href="#orderDescending">#</a> <b>orderDescending</b>(<i>series</i>)
+<a name="stackOrderDescending" href="#stackOrderDescending">#</a> d3.<b>stackOrderDescending</b>(<i>series</i>)
 
 Returns a series order such that the largest series (according to the sum of values) is at the bottom.
 
-<a name="orderInsideOut" href="#orderInsideOut">#</a> <b>orderInsideOut</b>(<i>series</i>)
+<a name="stackOrderInsideOut" href="#stackOrderInsideOut">#</a> d3.<b>stackOrderInsideOut</b>(<i>series</i>)
 
-Returns a series order such that the larger series (according to the sum of values) are on the inside and the smaller series are on the outside. This order is recommended for streamgraphs in conjunction with the [wiggle offset](#offsetWiggle). See [Stacked Graphs—Geometry & Aesthetics](http://leebyron.com/streamgraph/) by Bryon & Wattenberg for more information.
+Returns a series order such that the larger series (according to the sum of values) are on the inside and the smaller series are on the outside. This order is recommended for streamgraphs in conjunction with the [wiggle offset](#stackOffsetWiggle). See [Stacked Graphs—Geometry & Aesthetics](http://leebyron.com/streamgraph/) by Bryon & Wattenberg for more information.
 
-<a name="orderNone" href="#orderNone">#</a> <b>orderNone</b>(<i>series</i>)
+<a name="stackOrderNone" href="#stackOrderNone">#</a> d3.<b>stackOrderNone</b>(<i>series</i>)
 
 Returns the given series order [0, 1, … *n* - 1] where *n* is the number of elements in *series*. Thus, the stack order is given by the [key accessor](#stack_keys).
 
-<a name="orderReverse" href="#orderReverse">#</a> <b>orderReverse</b>(<i>series</i>)
+<a name="stackOrderReverse" href="#stackOrderReverse">#</a> d3.<b>stackOrderReverse</b>(<i>series</i>)
 
 Returns the reverse of the given series order [*n* - 1, *n* - 2, … 0] where *n* is the number of elements in *series*. Thus, the stack order is given by the reverse of the [key accessor](#stack_keys).
 
@@ -952,18 +952,18 @@ Returns the reverse of the given series order [*n* - 1, *n* - 2, … 0] where *n
 
 Stack offsets are typically not used directly, but are instead passed to [*stack*.offset](#stack_offset).
 
-<a name="offsetExpand" href="#offsetExpand">#</a> <b>offsetExpand</b>(<i>series</i>, <i>order</i>)
+<a name="stackOffsetExpand" href="#stackOffsetExpand">#</a> d3.<b>stackOffsetExpand</b>(<i>series</i>, <i>order</i>)
 
 Applies a zero baseline and normalizes the values for each point such that the topline is always one.
 
-<a name="offsetNone" href="#offsetNone">#</a> <b>offsetNone</b>(<i>series</i>, <i>order</i>)
+<a name="stackOffsetNone" href="#stackOffsetNone">#</a> d3.<b>stackOffsetNone</b>(<i>series</i>, <i>order</i>)
 
 Applies a zero baseline.
 
-<a name="offsetSilhouette" href="#offsetSilhouette">#</a> <b>offsetSilhouette</b>(<i>series</i>, <i>order</i>)
+<a name="stackOffsetSilhouette" href="#stackOffsetSilhouette">#</a> d3.<b>stackOffsetSilhouette</b>(<i>series</i>, <i>order</i>)
 
 Shifts the baseline down such that the center of the streamgraph is always at zero.
 
-<a name="offsetWiggle" href="#offsetWiggle">#</a> <b>offsetWiggle</b>(<i>series</i>, <i>order</i>)
+<a name="stackOffsetWiggle" href="#stackOffsetWiggle">#</a> d3.<b>stackOffsetWiggle</b>(<i>series</i>, <i>order</i>)
 
-Shifts the baseline so as to minimize the weighted wiggle of layers. This offset is recommended for streamgraphs in conjunction with the [inside-out order](#orderInsideOut). See [Stacked Graphs—Geometry & Aesthetics](http://leebyron.com/streamgraph/) by Bryon & Wattenberg for more information.
+Shifts the baseline so as to minimize the weighted wiggle of layers. This offset is recommended for streamgraphs in conjunction with the [inside-out order](#stackOrderInsideOut). See [Stacked Graphs—Geometry & Aesthetics](http://leebyron.com/streamgraph/) by Bryon & Wattenberg for more information.

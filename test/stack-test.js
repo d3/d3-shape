@@ -5,8 +5,8 @@ tape("stack() has the expected defaults", function(test) {
   var s = shape.stack();
   test.deepEqual(s.keys()(), []);
   test.equal(s.value()({foo: 42}, "foo"), 42);
-  test.equal(s.order(), shape.orderNone);
-  test.equal(s.offset(), shape.offsetNone);
+  test.equal(s.order(), shape.stackOrderNone);
+  test.equal(s.offset(), shape.stackOffsetNone);
   test.end();
 });
 
@@ -84,9 +84,9 @@ tape("stack(data) coerces the return value of the value accessor to a number", f
 });
 
 tape("stack.order(function) sets the order function", function(test) {
-  var s = shape.stack().keys([0, 1, 2, 3]).order(shape.orderReverse),
+  var s = shape.stack().keys([0, 1, 2, 3]).order(shape.stackOrderReverse),
       data = [[1, 3, 5, 1], [2, 4, 2, 3], [1, 2, 4, 2]];
-  test.equal(s.order(), shape.orderReverse);
+  test.equal(s.order(), shape.stackOrderReverse);
   test.deepEqual(s(data), [
     series([[9, 10], [9, 11], [8, 9]], data, 0, 3),
     series([[6,  9], [5,  9], [6, 8]], data, 1, 2),
@@ -97,9 +97,9 @@ tape("stack.order(function) sets the order function", function(test) {
 });
 
 tape("stack.offset(function) sets the offset function", function(test) {
-  var s = shape.stack().keys([0, 1, 2, 3]).offset(shape.offsetExpand),
+  var s = shape.stack().keys([0, 1, 2, 3]).offset(shape.stackOffsetExpand),
       data = [[1, 3, 5, 1], [2, 4, 2, 3], [1, 2, 4, 2]];
-  test.equal(s.offset(), shape.offsetExpand);
+  test.equal(s.offset(), shape.stackOffsetExpand);
   test.deepEqual(s(data).map(roundSeries), [
     [[0 / 10,  1 / 10], [0 / 11,  2 / 11], [0 / 9, 1 / 9]],
     [[1 / 10,  4 / 10], [2 / 11,  6 / 11], [1 / 9, 3 / 9]],

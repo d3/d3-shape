@@ -3,8 +3,8 @@ var tape = require("tape"),
 
 require("../pathEqual");
 
-tape("line.curve(cardinal)(data) generates the expected path", function(test) {
-  var l = shape.line().curve(shape.cardinal);
+tape("line.curve(curveCardinal)(data) generates the expected path", function(test) {
+  var l = shape.line().curve(shape.curveCardinal);
   test.equal(l([]), null);
   test.pathEqual(l([[0, 1]]), "M0,1Z");
   test.pathEqual(l([[0, 1], [1, 3]]), "M0,1L1,3");
@@ -13,16 +13,16 @@ tape("line.curve(cardinal)(data) generates the expected path", function(test) {
   test.end();
 });
 
-tape("line.curve(cardinal) uses a default tension of zero", function(test) {
-  var l = shape.line().curve(shape.cardinal, 0);
-  test.equal(shape.line().curve(shape.cardinal)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.line().curve(shape.cardinal, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.line().curve(shape.cardinal, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+tape("line.curve(curveCardinal) uses a default tension of zero", function(test) {
+  var l = shape.line().curve(shape.curveCardinal, 0);
+  test.equal(shape.line().curve(shape.curveCardinal)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().curve(shape.curveCardinal, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.line().curve(shape.curveCardinal, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.end();
 });
 
-tape("area.curve(cardinal)(data) generates the expected path", function(test) {
-  var a = shape.area().curve(shape.cardinal);
+tape("area.curve(curveCardinal)(data) generates the expected path", function(test) {
+  var a = shape.area().curve(shape.curveCardinal);
   test.equal(a([]), null);
   test.pathEqual(a([[0, 1]]), "M0,1L0,0Z");
   test.pathEqual(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");
@@ -31,10 +31,10 @@ tape("area.curve(cardinal)(data) generates the expected path", function(test) {
   test.end();
 });
 
-tape("area.curve(cardinal) uses a default tension of zero", function(test) {
-  var a = shape.area().curve(shape.cardinal, 0);
-  test.equal(shape.area().curve(shape.cardinal)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().curve(shape.cardinal, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().curve(shape.cardinal, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+tape("area.curve(curveCardinal) uses a default tension of zero", function(test) {
+  var a = shape.area().curve(shape.curveCardinal, 0);
+  test.equal(shape.area().curve(shape.curveCardinal)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.area().curve(shape.curveCardinal, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.equal(shape.area().curve(shape.curveCardinal, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.end();
 });

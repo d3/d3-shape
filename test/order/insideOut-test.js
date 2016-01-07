@@ -1,8 +1,8 @@
 var tape = require("tape"),
     shape = require("../../");
 
-tape("orderInsideOut(series) returns an order by sum", function(test) {
-  test.deepEqual(shape.orderInsideOut([
+tape("stackOrderInsideOut(series) returns an order by sum", function(test) {
+  test.deepEqual(shape.stackOrderInsideOut([
     [[0, 0]],
     [[0, 1]],
     [[0, 2]],
@@ -14,8 +14,8 @@ tape("orderInsideOut(series) returns an order by sum", function(test) {
   test.end();
 });
 
-tape("orderInsideOut(series) treats NaN values as zero", function(test) {
-  test.deepEqual(shape.orderInsideOut([
+tape("stackOrderInsideOut(series) treats NaN values as zero", function(test) {
+  test.deepEqual(shape.stackOrderInsideOut([
     [[0, 0], [0, NaN]],
     [[0, 1], [0, NaN]],
     [[0, 2], [0, NaN]],
