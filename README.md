@@ -855,8 +855,8 @@ To produce a stack for this data:
 ```js
 var stack = d3.stack()
     .keys(["apples", "bananas", "cherries", "dates"])
-    .order(d3_shape.orderNone)
-    .offset(d3_shape.offsetNone);
+    .order(d3.stackOrderNone)
+    .offset(d3.stackOffsetNone);
 
 var series = stack(data);
 ```
