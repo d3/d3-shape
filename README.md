@@ -738,7 +738,7 @@ Indicates a new point in the current line segment with the given *x*- and *y*-va
 
 ### Symbols
 
-<a href="#sybmolCircle"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/circle.png" width="100" height="100"></a><a href="#sybmolCross"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/cross.png" width="100" height="100"></a><a href="#sybmolDiamond"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/diamond.png" width="100" height="100"></a><a href="#sybmolSquare"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/square.png" width="100" height="100"></a><a href="#sybmolStar"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/star.png" width="100" height="100"></a><a href="#sybmolTriangle"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/triangle.png" width="100" height="100"><a href="#sybmolWye"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/wye.png" width="100" height="100"></a>
+<a href="#symbolCircle"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/circle.png" width="100" height="100"></a><a href="#symbolCross"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/cross.png" width="100" height="100"></a><a href="#symbolDiamond"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/diamond.png" width="100" height="100"></a><a href="#symbolSquare"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/square.png" width="100" height="100"></a><a href="#symbolStar"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/star.png" width="100" height="100"></a><a href="#symbolTriangle"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/triangle.png" width="100" height="100"><a href="#symbolWye"><img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/wye.png" width="100" height="100"></a>
 
 Symbols provide a categorical shape encoding as is commonly used in scatterplots. Symbols are always centered at ⟨0,0⟩; use a transform (see: [SVG](http://www.w3.org/TR/SVG/coords.html#TransformAttribute), [Canvas](http://www.w3.org/TR/2dcontext/#transformations)) to move the arc to a different position.
 
@@ -774,31 +774,31 @@ If *context* is specified, sets the context and returns this symbol generator. I
 
 An array containing the set of all built-in symbol types: [circle](#circle), [cross](#cross), [diamond](#diamond), [square](#square), [star](#star), [triangle](#triangle), and [wye](#wye). Useful for constructing the range of an [ordinal scale](https://github.com/d3/d3-scale#ordinal-scales) should you wish to use a shape encoding for categorical data.
 
-<a name="sybmolCircle" href="#sybmolCircle">#</a> d3.<b>sybmolCircle</b>
+<a name="symbolCircle" href="#symbolCircle">#</a> d3.<b>symbolCircle</b>
 
 A circle.
 
-<a name="sybmolCross" href="#sybmolCross">#</a> d3.<b>sybmolCross</b>
+<a name="symbolCross" href="#symbolCross">#</a> d3.<b>symbolCross</b>
 
 A Greek cross with arms of equal length.
 
-<a name="sybmolDiamond" href="#sybmolDiamond">#</a> d3.<b>sybmolDiamond</b>
+<a name="symbolDiamond" href="#symbolDiamond">#</a> d3.<b>symbolDiamond</b>
 
 A rhombus.
 
-<a name="sybmolSquare" href="#sybmolSquare">#</a> d3.<b>sybmolSquare</b>
+<a name="symbolSquare" href="#symbolSquare">#</a> d3.<b>symbolSquare</b>
 
 A square.
 
-<a name="sybmolStar" href="#sybmolStar">#</a> d3.<b>sybmolStar</b>
+<a name="symbolStar" href="#symbolStar">#</a> d3.<b>symbolStar</b>
 
 A pentagonal star (pentagram).
 
-<a name="sybmolTriangle" href="#sybmolTriangle">#</a> d3.<b>sybmolTriangle</b>
+<a name="symbolTriangle" href="#symbolTriangle">#</a> d3.<b>symbolTriangle</b>
 
 An up-pointing triangle.
 
-<a name="sybmolWye" href="#sybmolWye">#</a> d3.<b>sybmolWye</b>
+<a name="symbolWye" href="#symbolWye">#</a> d3.<b>symbolWye</b>
 
 A Y-shape.
 
