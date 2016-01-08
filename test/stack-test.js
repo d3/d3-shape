@@ -83,6 +83,13 @@ tape("stack(data) coerces the return value of the value accessor to a number", f
   test.end();
 });
 
+tape("stack.order(null) is equivalent to stack.order(stackOrderNone)", function(test) {
+  var s = shape.stack().order(null);
+  test.equal(s.order(), shape.stackOrderNone);
+  test.equal(typeof s.order(), "function");
+  test.end();
+});
+
 tape("stack.order(function) sets the order function", function(test) {
   var s = shape.stack().keys([0, 1, 2, 3]).order(shape.stackOrderReverse),
       data = [[1, 3, 5, 1], [2, 4, 2, 3], [1, 2, 4, 2]];
@@ -93,6 +100,13 @@ tape("stack.order(function) sets the order function", function(test) {
     series([[1,  6], [3,  5], [2, 6]], data, 2, 1),
     series([[0,  1], [0,  3], [0, 2]], data, 3, 0)
   ]);
+  test.end();
+});
+
+tape("stack.offset(null) is equivalent to stack.offset(stackOffsetNone)", function(test) {
+  var s = shape.stack().offset(null);
+  test.equal(s.offset(), shape.stackOffsetNone);
+  test.equal(typeof s.offset(), "function");
   test.end();
 });
 
