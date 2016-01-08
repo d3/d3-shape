@@ -45,11 +45,11 @@ export default function() {
   };
 
   stack.order = function(_) {
-    return arguments.length ? (order = _ == null ? orderDefault : typeof _ === "function" ? _ : constant(slice.call(_)), stack) : order;
+    return arguments.length ? (order = _ == null ? orderNone : typeof _ === "function" ? _ : constant(slice.call(_)), stack) : order;
   };
 
   stack.offset = function(_) {
-    return arguments.length ? (offset = _ == null ? offsetZero : _, stack) : offset;
+    return arguments.length ? (offset = _ == null ? offsetNone : _, stack) : offset;
   };
 
   return stack;
