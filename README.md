@@ -776,31 +776,31 @@ An array containing the set of all built-in symbol types: [circle](#circle), [cr
 
 <a name="symbolCircle" href="#symbolCircle">#</a> d3.<b>symbolCircle</b>
 
-A circle.
+The circle symbol type.
 
 <a name="symbolCross" href="#symbolCross">#</a> d3.<b>symbolCross</b>
 
-A Greek cross with arms of equal length.
+The Greek cross symbol type, with arms of equal length.
 
 <a name="symbolDiamond" href="#symbolDiamond">#</a> d3.<b>symbolDiamond</b>
 
-A rhombus.
+The rhombus symbol type.
 
 <a name="symbolSquare" href="#symbolSquare">#</a> d3.<b>symbolSquare</b>
 
-A square.
+The square symbol type.
 
 <a name="symbolStar" href="#symbolStar">#</a> d3.<b>symbolStar</b>
 
-A pentagonal star (pentagram).
+The pentagonal star (pentagram) symbol type.
 
 <a name="symbolTriangle" href="#symbolTriangle">#</a> d3.<b>symbolTriangle</b>
 
-An up-pointing triangle.
+The up-pointing triangle symbol type.
 
 <a name="symbolWye" href="#symbolWye">#</a> d3.<b>symbolWye</b>
 
-A Y-shape.
+The Y-shape symbol type.
 
 ### Custom Symbol Types
 
