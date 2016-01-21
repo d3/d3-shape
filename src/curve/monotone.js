@@ -78,4 +78,4 @@ Monotone.prototype = {
 
 export default function(context) {
   return new Monotone(context);
-};
+}

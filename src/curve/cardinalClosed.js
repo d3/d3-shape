@@ -49,4 +49,4 @@ CardinalClosed.prototype = {
 
 export default function(context, tension) {
   return new CardinalClosed(context, (tension == null ? 1 : 1 - tension) / 6);
-};
+}

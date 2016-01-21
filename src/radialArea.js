@@ -1,5 +1,3 @@
-import constant from "./constant";
-import curveBind from "./curve/bind";
 import curveLinear from "./curve/linear";
 import curveRadial from "./curve/radial";
 import area from "./area";
@@ -20,4 +18,4 @@ export default function() {
   };
 
   return a.curve(curveLinear);
-};
+}

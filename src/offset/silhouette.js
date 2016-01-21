@@ -7,4 +7,4 @@ export default function(series, order) {
     s0[j][1] += s0[j][0] = -y / 2;
   }
   none(series, order);
-};
+}

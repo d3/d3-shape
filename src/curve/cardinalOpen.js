@@ -37,4 +37,4 @@ CardinalOpen.prototype = {
 
 export default function(context, tension) {
   return new CardinalOpen(context, (tension == null ? 1 : 1 - tension) / 6);
-};
+}

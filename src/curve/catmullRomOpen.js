@@ -52,4 +52,4 @@ export default function(context, alpha) {
   return (alpha = alpha == null ? 0.5 : +alpha)
       ? new CatmullRomOpen(context, alpha)
       : cardinalOpen(context, 0);
-};
+}

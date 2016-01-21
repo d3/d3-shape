@@ -22,4 +22,4 @@ LinearClosed.prototype = {
 
 export default function(context) {
   return new LinearClosed(context);
-};
+}

@@ -49,4 +49,4 @@ BasisClosed.prototype = {
 
 export default function(context) {
   return new BasisClosed(context);
-};
+}

@@ -46,4 +46,4 @@ export default function(context, beta) {
   return beta == null ? new Bundle(context, 0.85)
       : (beta = +beta) === 1 ? basis(context)
       : new Bundle(context, beta);
-};
+}

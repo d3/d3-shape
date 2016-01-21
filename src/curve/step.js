@@ -46,12 +46,12 @@ Step.prototype = {
 
 export default function(context) {
   return new Step(context, 0.5);
-};
+}
 
 export function stepBefore(context) {
   return new Step(context, 0);
-};
+}
 
 export function stepAfter(context) {
   return new Step(context, 1);
-};
+}

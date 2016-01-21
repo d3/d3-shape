@@ -1,4 +1,3 @@
-import constant from "./constant";
 import curveLinear from "./curve/linear";
 import curveRadial from "./curve/radial";
 import line from "./line";
@@ -15,4 +14,4 @@ export default function() {
   };
 
   return l.curve(curveLinear);
-};
+}

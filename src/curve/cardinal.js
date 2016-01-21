@@ -7,7 +7,7 @@ export function point(that, x, y) {
     that._x2,
     that._y2
   );
-};
+}
 
 function Cardinal(context, k) {
   this._context = context;
@@ -49,4 +49,4 @@ Cardinal.prototype = {
 
 export default function(context, tension) {
   return new Cardinal(context, (tension == null ? 1 : 1 - tension) / 6);
-};
+}

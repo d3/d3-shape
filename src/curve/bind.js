@@ -8,4 +8,4 @@ export default function(curve, args) {
     args[0] = context;
     return curve.apply(null, args);
   };
-};
+}

@@ -1,6 +1,5 @@
 import {slice} from "./array";
 import constant from "./constant";
-import identity from "./identity";
 import offsetNone from "./offset/none";
 import orderNone from "./order/none";
 
@@ -16,11 +15,13 @@ export default function() {
 
   function stack(data) {
     var kz = keys.apply(this, arguments),
+        i,
         m = data.length,
         n = kz.length,
-        sz = new Array(n);
+        sz = new Array(n),
+        oz;
 
-    for (var i = 0; i < n; ++i) {
+    for (i = 0; i < n; ++i) {
       for (var ki = kz[i], si = sz[i] = new Array(m), j = 0, sij; j < m; ++j) {
         si[j] = sij = [0, +value(data[j], ki, j, data)];
         sij.data = data[j];
@@ -28,7 +29,7 @@ export default function() {
       si.key = ki;
     }
 
-    for (var i = 0, oz = order(sz); i < n; ++i) {
+    for (i = 0, oz = order(sz); i < n; ++i) {
       sz[oz[i]].index = i;
     }
 
@@ -53,4 +54,4 @@ export default function() {
   };
 
   return stack;
-};
+}

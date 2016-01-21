@@ -36,4 +36,4 @@ BasisOpen.prototype = {
 
 export default function(context) {
   return new BasisOpen(context);
-};
+}

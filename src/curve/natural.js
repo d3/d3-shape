@@ -62,4 +62,4 @@ function controlPoints(x) {
 
 export default function(context) {
   return new Natural(context);
-};
+}

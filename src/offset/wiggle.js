@@ -21,4 +21,4 @@ export default function(series, order) {
   }
   s0[j - 1][1] += s0[j - 1][0] = y;
   none(series, order);
-};
+}

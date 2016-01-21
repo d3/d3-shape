@@ -7,7 +7,7 @@ export function point(that, x, y) {
     (that._x0 + 4 * that._x1 + x) / 6,
     (that._y0 + 4 * that._y1 + y) / 6
   );
-};
+}
 
 function Basis(context) {
   this._context = context;
@@ -48,4 +48,4 @@ Basis.prototype = {
 
 export default function(context) {
   return new Basis(context);
-};
+}

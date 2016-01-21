@@ -24,4 +24,4 @@ export default function(series) {
   }
 
   return bottoms.reverse().concat(tops);
-};
+}

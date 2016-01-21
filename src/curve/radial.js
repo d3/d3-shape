@@ -33,4 +33,4 @@ export default function(curve, args) {
   radial._curve = curve;
 
   return radial;
-};
+}

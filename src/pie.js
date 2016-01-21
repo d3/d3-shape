@@ -12,7 +12,10 @@ export default function() {
       padAngle = constant(0);
 
   function pie(data) {
-    var n = data.length,
+    var i,
+        n = data.length,
+        j,
+        k,
         sum = 0,
         index = new Array(n),
         arcs = new Array(n),
@@ -20,9 +23,10 @@ export default function() {
         da = Math.min(tau, Math.max(-tau, endAngle.apply(this, arguments) - a0)),
         a1,
         p = Math.min(Math.abs(da) / n, padAngle.apply(this, arguments)),
-        pa = p * (da < 0 ? -1 : 1);
+        pa = p * (da < 0 ? -1 : 1),
+        v;
 
-    for (var i = 0, v; i < n; ++i) {
+    for (i = 0; i < n; ++i) {
       if ((v = arcs[index[i] = i] = +value(data[i], i, data)) > 0) {
         sum += v;
       }
@@ -33,7 +37,7 @@ export default function() {
     else if (sort !== null) index.sort(function(i, j) { return sort(data[i], data[j]); });
 
     // Compute the arcs! They are stored in the original data's order.
-    for (var i = 0, j, k = sum ? (da - n * pa) / sum : 0; i < n; ++i, a0 = a1) {
+    for (i = 0, k = sum ? (da - n * pa) / sum : 0; i < n; ++i, a0 = a1) {
       j = index[i], v = arcs[j], a1 = a0 + (v > 0 ? v * k : 0) + pa, arcs[j] = {
         data: data[j],
         index: i,
@@ -72,4 +76,4 @@ export default function() {
   };
 
   return pie;
-};
+}

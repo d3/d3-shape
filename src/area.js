@@ -89,4 +89,4 @@ export default function() {
   };
 
   return area;
-};
+}

@@ -28,4 +28,4 @@ Linear.prototype = {
 
 export default function(context) {
   return new Linear(context);
-};
+}

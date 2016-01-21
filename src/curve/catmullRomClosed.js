@@ -64,4 +64,4 @@ export default function(context, alpha) {
   return (alpha = alpha == null ? 0.5 : +alpha)
       ? new CatmullRomClosed(context, alpha)
       : cardinalClosed(context, 0);
-};
+}

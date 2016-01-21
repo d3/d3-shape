@@ -84,8 +84,7 @@ export default function() {
       startAngle = arcStartAngle,
       endAngle = arcEndAngle,
       padAngle = arcPadAngle,
-      context = null,
-      output = null;
+      context = null;
 
   function arc() {
     var buffer,
@@ -127,7 +126,9 @@ export default function() {
           rp = (ap > epsilon) && (padRadius ? +padRadius.apply(this, arguments) : Math.sqrt(r0 * r0 + r1 * r1)),
           rc = Math.min(Math.abs(r1 - r0) / 2, +cornerRadius.apply(this, arguments)),
           rc0 = rc,
-          rc1 = rc;
+          rc1 = rc,
+          t0,
+          t1;
 
       // Apply padding? Note that since r1 ≥ r0, da1 ≥ da0.
       if (rp > epsilon) {
@@ -170,8 +171,8 @@ export default function() {
 
       // Does the sector’s outer ring have rounded corners?
       else if (rc1 > epsilon) {
-        var t0 = cornerTangents(x00, y00, x01, y01, r1, rc1, cw),
-            t1 = cornerTangents(x11, y11, x10, y10, r1, rc1, cw);
+        t0 = cornerTangents(x00, y00, x01, y01, r1, rc1, cw);
+        t1 = cornerTangents(x11, y11, x10, y10, r1, rc1, cw);
 
         context.moveTo(t0.cx + t0.x01, t0.cy + t0.y01);
 
@@ -195,8 +196,8 @@ export default function() {
 
       // Does the sector’s inner ring (or point) have rounded corners?
       else if (rc0 > epsilon) {
-        var t0 = cornerTangents(x10, y10, x11, y11, r0, -rc0, cw),
-            t1 = cornerTangents(x01, y01, x00, y00, r0, -rc0, cw);
+        t0 = cornerTangents(x10, y10, x11, y11, r0, -rc0, cw);
+        t1 = cornerTangents(x01, y01, x00, y00, r0, -rc0, cw);
 
         context.lineTo(t0.cx + t0.x01, t0.cy + t0.y01);
 
@@ -255,8 +256,8 @@ export default function() {
   };
 
   arc.context = function(_) {
-    return arguments.length ? ((context = output = _ == null ? null : _), arc) : context;
+    return arguments.length ? ((context = _ == null ? null : _), arc) : context;
   };
 
   return arc;
-};
+}
