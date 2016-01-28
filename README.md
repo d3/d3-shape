@@ -440,7 +440,7 @@ Equivalent to [*line*.defined](#line_defined).
 
 <a name="radialLine_curve" href="#radialLine_curve">#</a> <i>radialLine</i>.<b>curve</b>([<i>curve</i>[, <i>parameters…</i>]])
 
-Equivalent to [*line*.curve](#line_curve). Note that [curveMonotone](#curveMonotone) is not recommended for radial lines because it assumes that the data is monotonic in *x*, which is typically untrue of radial lines.
+Equivalent to [*line*.curve](#line_curve). Note that [curveMonotoneX](#curveMonotoneX) or [curveMonotoneY](#curveMonotoneY) are not recommended for radial lines because they assume that the data is monotonic in *x* or *y*, which is typically untrue of radial lines.
 
 <a name="radialLine_context" href="#radialLine_context">#</a> <i>radialLine</i>.<b>context</b>([<i>context</i>])
 
@@ -591,7 +591,7 @@ Equivalent to [*area*.defined](#area_defined).
 
 <a name="radialArea_curve" href="#radialArea_curve">#</a> <i>radialArea</i>.<b>curve</b>([<i>curve</i>[, <i>parameters…</i>]])
 
-Equivalent to [*area*.curve](#area_curve). Note that [curveMonotone](#curveMonotone) is not recommended for radial areas because it assumes that the data is monotonic in *x*, which is typically untrue of radial areas.
+Equivalent to [*area*.curve](#area_curve). Note that [curveMonotoneX](#curveMonotoneX) or [curveMonotoneY](#curveMonotoneY) are not recommended for radial areas because they assume that the data is monotonic in *x* or *y*, which is typically untrue of radial areas.
 
 <a name="radialArea_context" href="#radialArea_context">#</a> <i>radialArea</i>.<b>context</b>([<i>context</i>])
 
@@ -682,11 +682,17 @@ Produces a polyline through the specified points.
 
 Produces a closed polyline through the specified points by repeating the first point when the line segment ends.
 
-<a name="curveMonotone" href="#curveMonotone">#</a> d3.<b>curveMonotone</b>(<i>context</i>)
+<a name="curveMonotoneX" href="#curveMonotoneX">#</a> d3.<b>curveMonotoneX</b>(<i>context</i>)
 
-<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/monotone.png" width="888" height="240" alt="monotone">
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/monotoneX.png" width="888" height="240" alt="monotoneX">
 
-Produces a cubic spline that [preserves monotonicity](https://en.wikipedia.org/wiki/Monotone_cubic_interpolation) in *y*, as proposed by Steffen in [A simple method for monotonic interpolation in one dimension](http://adsabs.harvard.edu/full/1990A%26A...239..443S): “a smooth curve with continuous first-order derivatives that passes through any given set of data points without spurious oscillations. Local extrema can occur only at grid points where they are given by the data, but not in between two adjacent grid points.” Assumes that the input data is monotonic in *x*.
+Produces a cubic spline that [preserves monotonicity](https://en.wikipedia.org/wiki/Monotone_cubic_interpolation) in *y*, assuming monotonicity in *x*, as proposed by Steffen in [A simple method for monotonic interpolation in one dimension](http://adsabs.harvard.edu/full/1990A%26A...239..443S): “a smooth curve with continuous first-order derivatives that passes through any given set of data points without spurious oscillations. Local extrema can occur only at grid points where they are given by the data, but not in between two adjacent grid points.”
+
+<a name="curveMonotoneY" href="#curveMonotoneY">#</a> d3.<b>curveMonotoneY</b>(<i>context</i>)
+
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/monotoneY.png" width="888" height="240" alt="monotoneY">
+
+Produces a cubic spline that [preserves monotonicity](https://en.wikipedia.org/wiki/Monotone_cubic_interpolation) in *x*, assuming monotonicity in *y*, as proposed by Steffen in [A simple method for monotonic interpolation in one dimension](http://adsabs.harvard.edu/full/1990A%26A...239..443S): “a smooth curve with continuous first-order derivatives that passes through any given set of data points without spurious oscillations. Local extrema can occur only at grid points where they are given by the data, but not in between two adjacent grid points.”
 
 <a name="curveNatural" href="#curveNatural">#</a> d3.<b>curveNatural</b>(<i>context</i>)
 
@@ -704,13 +710,13 @@ Produces a piecewise constant function (a [step function](https://en.wikipedia.o
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/stepAfter.png" width="888" height="240" alt="stepAfter">
 
-Produces a piecewise constant function (a [step function](https://en.wikipedia.org/wiki/Step_function)) consisting of alternating horizontal and vertical lines. The *y*-value changes after the *x*-value.
+Produces a piecewise constant function (a [step function](https://en.wikipedia.org/wiki/Step_function)) consisting of alternating horizontal and vertical lines. If the change in *x* is positive, the *y*-value changes after the *x*-value; otherwise the *y*-value changes before the *x*-value.
 
 <a name="curveStepBefore" href="#curveStepBefore">#</a> d3.<b>curveStepBefore</b>(<i>context</i>)
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/stepBefore.png" width="888" height="240" alt="stepBefore">
 
-Produces a piecewise constant function (a [step function](https://en.wikipedia.org/wiki/Step_function)) consisting of alternating horizontal and vertical lines. The *y*-value changes before the *x*-value.
+Produces a piecewise constant function (a [step function](https://en.wikipedia.org/wiki/Step_function)) consisting of alternating horizontal and vertical lines. If the change in *x* is positive, the *y*-value changes before the *x*-value; otherwise the *y*-value changes after the *x*-value.
 
 ### Custom Curves
 

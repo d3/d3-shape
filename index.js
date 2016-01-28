@@ -26,7 +26,7 @@ export {default as curveCatmullRomOpen} from "./src/curve/catmullRomOpen";
 export {default as curveCatmullRom} from "./src/curve/catmullRom";
 export {default as curveLinearClosed} from "./src/curve/linearClosed";
 export {default as curveLinear} from "./src/curve/linear";
-export {default as curveMonotone} from "./src/curve/monotone";
+export {monotoneX as curveMonotoneX, monotoneY as curveMonotoneY} from "./src/curve/monotone";
 export {default as curveNatural} from "./src/curve/natural";
 export {default as curveStep, stepAfter as curveStepAfter, stepBefore as curveStepBefore} from "./src/curve/step";
 

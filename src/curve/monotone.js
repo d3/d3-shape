@@ -33,11 +33,11 @@ function point(that, t0, t1) {
   that._context.bezierCurveTo(x0 + dx, y0 + dx * t0, x1 - dx, y1 - dx * t1, x1, y1);
 }
 
-function Monotone(context) {
+function MonotoneX(context) {
   this._context = context;
 }
 
-Monotone.prototype = {
+MonotoneX.prototype = {
   areaStart: function() {
     this._line = 0;
   },
@@ -76,6 +76,29 @@ Monotone.prototype = {
   }
 }
 
-export default function(context) {
-  return new Monotone(context);
+function MonotoneY(context) {
+  this._context = new ReflectContext(context);
+}
+
+(MonotoneY.prototype = Object.create(MonotoneX.prototype)).point = function(x, y) {
+  MonotoneX.prototype.point.call(this, y, x);
+};
+
+function ReflectContext(context) {
+  this._context = context;
+}
+
+ReflectContext.prototype = {
+  moveTo: function(x, y) { this._context.moveTo(y, x); },
+  closePath: function() { this._context.closePath(); },
+  lineTo: function(x, y) { this._context.lineTo(y, x); },
+  bezierCurveTo: function(x1, y1, x2, y2, x, y) { this._context.bezierCurveTo(y1, x1, y2, x2, y, x); }
+};
+
+export function monotoneX(context) {
+  return new MonotoneX(context);
+}
+
+export function monotoneY(context) {
+  return new MonotoneY(context);
 }
