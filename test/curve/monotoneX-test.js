@@ -27,6 +27,13 @@ tape("line.curve(curveMonotoneX)(data) handles duplicate x-values", function(tes
   test.end();
 });
 
+tape("line.curve(curveMonotoneX)(data) handles segments of infinite slope", function(test) {
+  var l = shape.line().curve(shape.curveMonotoneX);
+  test.pathEqual(l([[0, 200], [100, 150], [100, 50], [200, 0]]), "M0,200C33.333333,191.666667,66.666667,183.333333,100,150C100,150,100,50,100,50C133.333333,16.666667,166.666667,8.333333,200,0");
+  test.pathEqual(l([[200, 0], [100, 50], [100, 150], [0, 200]]), "M200,0C166.666667,8.333333,133.333333,16.666667,100,50C100,50,100,150,100,150C66.666667,183.333333,33.333333,191.666667,0,200");
+  test.end();
+});
+
 tape("line.curve(curveMonotoneX)(data) ignores coincident points", function(test) {
   var l = shape.line().curve(shape.curveMonotoneX),
       p = l([[0, 200], [50, 200], [100, 100], [150, 0], [200, 0]]);

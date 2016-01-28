@@ -9,8 +9,8 @@ function sign(x) {
 function slope3(that, x2, y2) {
   var h0 = that._x1 - that._x0,
       h1 = x2 - that._x1,
-      s0 = (that._y1 - that._y0) / h0,
-      s1 = (y2 - that._y1) / h1,
+      s0 = (that._y1 - that._y0) / (h0 || h1 < 0 && -0),
+      s1 = (y2 - that._y1) / (h1 || h0 < 0 && -0),
       p = (s0 * h1 + s1 * h0) / (h0 + h1);
   return (sign(s0) + sign(s1)) * Math.min(Math.abs(s0), Math.abs(s1), 0.5 * Math.abs(p)) || 0;
 }
