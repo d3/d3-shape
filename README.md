@@ -758,7 +758,7 @@ Generates a symbol for the given *arguments*. The *arguments* are arbitrary; the
 
 <a name="symbol_type" href="#symbol_type">#</a> <i>symbol</i>.<b>type</b>([<i>type</i>])
 
-If *type* is specified, sets the symbol type to the specified function or type and returns this line generator. If *type* is not specified, returns the current symbol type, which defaults:
+If *type* is specified, sets the symbol type to the specified function or symbol type and returns this line generator. If *type* is not specified, returns the current symbol type accessor, which defaults to:
 
 ```js
 function type() {
