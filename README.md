@@ -758,7 +758,15 @@ Generates a symbol for the given *arguments*. The *arguments* are arbitrary; the
 
 <a name="symbol_type" href="#symbol_type">#</a> <i>symbol</i>.<b>type</b>([<i>type</i>])
 
-If *type* is specified, sets the symbol type and returns this line generator. If *type* is not specified, returns the current symbol type, which defaults to [circle](#circle). See [symbols](#symbols) for the set of built-in symbol types.
+If *type* is specified, sets the symbol type to the specified function or type and returns this line generator. If *type* is not specified, returns the current symbol type, which defaults:
+
+```js
+function type() {
+  return circle;
+}
+```
+
+See [symbols](#symbols) for the set of built-in symbol types. To implement a custom symbol type, pass an object that implements [*symbolType*.draw](#symbolType_draw).
 
 <a name="symbol_size" href="#symbol_size">#</a> <i>symbol</i>.<b>size</b>([<i>size</i>])
 
