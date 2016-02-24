@@ -26,14 +26,19 @@ For more, read [Introducing d3-shape](https://medium.com/@mbostock/introducing-d
 
 ## Installing
 
-If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release](https://github.com/d3/d3-shape/releases/latest). The released bundle supports AMD, CommonJS, and vanilla environments. Create a custom build using [Rollup](https://github.com/rollup/rollup) or your preferred bundler. You can also load directly from [d3js.org](https://d3js.org):
+If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release](https://github.com/d3/d3-shape/releases/latest). You can also load directly from [d3js.org](https://d3js.org), either as a [standalone library](https://d3js.org/d3-shape.v0.5.min.js) or as part of [D3 4.0 alpha](https://github.com/mbostock/d3/tree/4). AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3_shape` global is exported:
 
 ```html
 <script src="https://d3js.org/d3-path.v0.1.min.js"></script>
 <script src="https://d3js.org/d3-shape.v0.5.min.js"></script>
+<script>
+
+var line = d3_shape.line();
+
+</script>
 ```
 
-In a vanilla environment, a `d3_shape` global is exported. [Try d3-shape in your browser.](https://tonicdev.com/npm/d3-shape)
+[Try d3-shape in your browser.](https://tonicdev.com/npm/d3-shape)
 
 ## API Reference
 
