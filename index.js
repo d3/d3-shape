@@ -1,3 +1,5 @@
+export {version} from "./build/version";
+
 export {default as arc} from "./src/arc";
 export {default as area} from "./src/area";
 export {default as line} from "./src/line";
