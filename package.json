@@ -25,7 +25,7 @@
     "pretest": "mkdir -p build && node -e 'process.stdout.write(\"export var version = \\\"\" + require(\"./package.json\").version + \"\\\";\\n\");' > build/version.js && rollup -f umd -g d3-path:d3_path -n d3_shape -o build/d3-shape.js -- index.js",
     "test": "faucet `find test -name '*-test.js'` && eslint index.js src",
     "prepublish": "npm run test && uglifyjs build/d3-shape.js -c -m -o build/d3-shape.min.js && rm -f build/d3-shape.zip",
-    "postpublish": "VERSION=`node -e 'console.log(require(\"./package.json\").version)'`; git push && git push --tags && cp build/d3-shape.js ../d3.github.com/d3-shape.v0.5.js && cp build/d3-shape.min.js ../d3.github.com/d3-shape.v0.5.min.js && cd ../d3.github.com && git add d3-shape.v0.5.js d3-shape.v0.5.min.js && git commit -m \"d3-shape ${VERSION}\" && git push && zip -j build/d3-shape.zip -- LICENSE README.md build/d3-shape.js build/d3-shape.min.js"
+    "postpublish": "VERSION=`node -e 'console.log(require(\"./package.json\").version)'`; git push && git push --tags && cp build/d3-shape.js ../d3.github.com/d3-shape.v0.5.js && cp build/d3-shape.min.js ../d3.github.com/d3-shape.v0.5.min.js && cd ../d3.github.com && git add d3-shape.v0.5.js d3-shape.v0.5.min.js && git commit -m \"d3-shape ${VERSION}\" && git push && cd - && zip -j build/d3-shape.zip -- LICENSE README.md build/d3-shape.js build/d3-shape.min.js"
   },
   "dependencies": {
     "d3-path": "~0.1.3"
