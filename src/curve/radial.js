@@ -1,5 +1,3 @@
-import {halfPi} from "../math";
-
 function Radial(curve) {
   this._curve = curve;
 }
@@ -18,7 +16,7 @@ Radial.prototype = {
     this._curve.lineEnd();
   },
   point: function(a, r) {
-    a -= halfPi, this._curve.point(r * Math.cos(a), r * Math.sin(a));
+    this._curve.point(r * Math.sin(a), r * -Math.cos(a));
   }
 };
 

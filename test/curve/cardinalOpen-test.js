@@ -20,7 +20,7 @@ tape("line.curve(curveCardinalOpen) uses a default tension of zero", function(te
 });
 
 tape("line.curve(curveCardinalOpen.tension(tension)) uses the specified tension", function(test) {
-  test.equal(shape.line().curve(shape.curveCardinalOpen.tension(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), "M1,3C1.1666666666666667,3,1.8333333333333333,1,2,1");
+  test.pathEqual(shape.line().curve(shape.curveCardinalOpen.tension(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), "M1,3C1.166667,3,1.833333,1,2,1");
   test.end();
 });
 
@@ -47,7 +47,7 @@ tape("area.curve(curveCardinalOpen) uses a default tension of zero", function(te
 });
 
 tape("area.curve(curveCardinalOpen.tension(tension)) uses the specified tension", function(test) {
-  test.equal(shape.area().curve(shape.curveCardinalOpen.tension(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), "M1,3C1.1666666666666667,3,1.8333333333333333,1,2,1L2,0C1.8333333333333333,0,1.1666666666666667,0,1,0Z");
+  test.pathEqual(shape.area().curve(shape.curveCardinalOpen.tension(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), "M1,3C1.166667,3,1.833333,1,2,1L2,0C1.833333,0,1.166667,0,1,0Z");
   test.end();
 });
 

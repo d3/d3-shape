@@ -20,7 +20,7 @@ tape("line.curve(curveCardinalClosed) uses a default tension of zero", function(
 });
 
 tape("line.curve(curveCardinalClosed.tension(tension)) uses the specified tension", function(test) {
-  test.equal(shape.line().curve(shape.curveCardinalClosed.tension(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), "M1,3C1.1666666666666667,3,1.8333333333333333,1,2,1C2.1666666666666665,1,3.1666666666666665,3,3,3C2.8333333333333335,3,0.16666666666666666,1,0,1C-0.16666666666666666,1,0.8333333333333334,3,1,3");
+  test.pathEqual(shape.line().curve(shape.curveCardinalClosed.tension(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), "M1,3C1.166667,3,1.833333,1,2,1C2.166667,1,3.166667,3,3,3C2.833333,3,0.166667,1,0,1C-0.166667,1,0.833333,3,1,3");
   test.end();
 });
 
@@ -47,7 +47,7 @@ tape("area.curve(curveCardinalClosed) uses a default tension of zero", function(
 });
 
 tape("area.curve(curveCardinalClosed.tension(tension)) uses the specified tension", function(test) {
-  test.equal(shape.area().curve(shape.curveCardinalClosed.tension(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), "M1,3C1.1666666666666667,3,1.8333333333333333,1,2,1C2.1666666666666665,1,3.1666666666666665,3,3,3C2.8333333333333335,3,0.16666666666666666,1,0,1C-0.16666666666666666,1,0.8333333333333334,3,1,3M2,0C1.8333333333333333,0,1.1666666666666667,0,1,0C0.8333333333333334,0,-0.16666666666666666,0,0,0C0.16666666666666666,0,2.8333333333333335,0,3,0C3.1666666666666665,0,2.1666666666666665,0,2,0");
+  test.pathEqual(shape.area().curve(shape.curveCardinalClosed.tension(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), "M1,3C1.166667,3,1.833333,1,2,1C2.166667,1,3.166667,3,3,3C2.833333,3,0.166667,1,0,1C-0.166667,1,0.833333,3,1,3M2,0C1.833333,0,1.166667,0,1,0C0.833333,0,-0.166667,0,0,0C0.166667,0,2.833333,0,3,0C3.166667,0,2.166667,0,2,0");
   test.end();
 });
 
