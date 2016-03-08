@@ -612,7 +612,7 @@ Curves are typically not constructed or used directly, instead being passed to [
 var line = d3.line()
     .x(function(d) { return x(d.date); })
     .y(function(d) { return y(d.value); })
-    .curve(d3.curveCatmullRom, 0.5);
+    .curve(d3.curveCatmullRom.alpha(0.5));
 ```
 
 <a name="curveBasis" href="#curveBasis">#</a> d3.<b>curveBasis</b>(<i>context</i>)
