@@ -1,6 +1,5 @@
 import {path} from "d3-path";
 import constant from "./constant";
-import curveBind from "./curve/bind";
 import curveLinear from "./curve/linear";
 import {x as pointX, y as pointY} from "./point";
 
@@ -19,7 +18,7 @@ export default function() {
         defined0 = false,
         buffer;
 
-    if (!context) output = curve(buffer = path());
+    if (context == null) output = curve(buffer = path());
 
     for (i = 0; i <= n; ++i) {
       if (!(i < n && defined(d = data[i], i, data)) === defined0) {
@@ -45,7 +44,7 @@ export default function() {
   };
 
   line.curve = function(_) {
-    return arguments.length ? (curve = curveBind(_, arguments), context != null && (output = curve(context)), line) : curve;
+    return arguments.length ? (curve = _, context != null && (output = curve(context)), line) : curve;
   };
 
   line.context = function(_) {

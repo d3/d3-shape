@@ -9,7 +9,7 @@ export function point(that, x, y) {
   );
 }
 
-function Basis(context) {
+export function Basis(context) {
   this._context = context;
 }
 

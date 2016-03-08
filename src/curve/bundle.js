@@ -1,7 +1,7 @@
-import basis from "./basis";
+import {Basis} from "./basis";
 
 function Bundle(context, beta) {
-  this._basis = basis(context);
+  this._basis = new Basis(context);
   this._beta = beta;
 }
 
@@ -42,8 +42,15 @@ Bundle.prototype = {
   }
 };
 
-export default function(context, beta) {
-  return beta == null ? new Bundle(context, 0.85)
-      : (beta = +beta) === 1 ? basis(context)
-      : new Bundle(context, beta);
-}
+export default (function custom(beta) {
+
+  function bundle(context) {
+    return beta === 1 ? new Basis(context) : new Bundle(context, beta);
+  }
+
+  bundle.beta = function(beta) {
+    return custom(+beta);
+  };
+
+  return bundle;
+})(0.85);

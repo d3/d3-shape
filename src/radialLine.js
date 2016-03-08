@@ -10,7 +10,7 @@ export default function() {
   l.radius = l.y, delete l.y;
 
   l.curve = function(_) {
-    return arguments.length ? c(curveRadial(_, arguments)) : c()._curve;
+    return arguments.length ? c(curveRadial(_)) : c()._curve;
   };
 
   return l.curve(curveLinear);

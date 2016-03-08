@@ -1,4 +1,3 @@
-import bind from "./bind";
 import {halfPi} from "../math";
 
 function Radial(curve) {
@@ -23,8 +22,7 @@ Radial.prototype = {
   }
 };
 
-export default function(curve, args) {
-  curve = bind(curve, args);
+export default function(curve) {
 
   function radial(context) {
     return new Radial(curve(context));

@@ -14,10 +14,19 @@ tape("line.curve(curveCardinalOpen)(data) generates the expected path", function
 });
 
 tape("line.curve(curveCardinalOpen) uses a default tension of zero", function(test) {
-  var l = shape.line().curve(shape.curveCardinalOpen, 0);
+  var l = shape.line().curve(shape.curveCardinalOpen.tension(0));
   test.equal(shape.line().curve(shape.curveCardinalOpen)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.line().curve(shape.curveCardinalOpen, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.line().curve(shape.curveCardinalOpen, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.end();
+});
+
+tape("line.curve(curveCardinalOpen.tension(tension)) uses the specified tension", function(test) {
+  test.equal(shape.line().curve(shape.curveCardinalOpen.tension(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), "M1,3C1.1666666666666667,3,1.8333333333333333,1,2,1");
+  test.end();
+});
+
+tape("line.curve(curveCardinalOpen.tension(tension)) coerces the specified tension to a number", function(test) {
+  var l = shape.line().curve(shape.curveCardinalOpen.tension("0.5"));
+  test.equal(shape.line().curve(shape.curveCardinalOpen.tension(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.end();
 });
 
@@ -32,9 +41,18 @@ tape("area.curve(curveCardinalOpen)(data) generates the expected path", function
 });
 
 tape("area.curve(curveCardinalOpen) uses a default tension of zero", function(test) {
-  var a = shape.area().curve(shape.curveCardinalOpen, 0);
+  var a = shape.area().curve(shape.curveCardinalOpen.tension(0));
   test.equal(shape.area().curve(shape.curveCardinalOpen)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().curve(shape.curveCardinalOpen, null)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
-  test.equal(shape.area().curve(shape.curveCardinalOpen, undefined)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  test.end();
+});
+
+tape("area.curve(curveCardinalOpen.tension(tension)) uses the specified tension", function(test) {
+  test.equal(shape.area().curve(shape.curveCardinalOpen.tension(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), "M1,3C1.1666666666666667,3,1.8333333333333333,1,2,1L2,0C1.8333333333333333,0,1.1666666666666667,0,1,0Z");
+  test.end();
+});
+
+tape("area.curve(curveCardinalOpen.tension(tension)) coerces the specified tension to a number", function(test) {
+  var a = shape.area().curve(shape.curveCardinalOpen.tension("0.5"));
+  test.equal(shape.area().curve(shape.curveCardinalOpen.tension(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
   test.end();
 });

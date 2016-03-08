@@ -1,5 +1,5 @@
 import {epsilon} from "../math";
-import cardinal from "./cardinal";
+import {Cardinal} from "./cardinal";
 
 export function point(that, x, y) {
   var x1 = that._x1,
@@ -74,8 +74,15 @@ CatmullRom.prototype = {
   }
 };
 
-export default function(context, alpha) {
-  return (alpha = alpha == null ? 0.5 : +alpha)
-      ? new CatmullRom(context, alpha)
-      : cardinal(context, 0);
-}
+export default (function custom(alpha) {
+
+  function catmullRom(context) {
+    return alpha ? new CatmullRom(context, alpha) : new Cardinal(context, 0);
+  }
+
+  catmullRom.alpha = function(alpha) {
+    return custom(+alpha);
+  };
+
+  return catmullRom;
+})(0.5);

@@ -110,8 +110,8 @@ tape("area.curve(curve) sets the curve method", function(test) {
   test.end();
 });
 
-tape("area.curve(curveCardinal, tension) sets the cardinal spline tension", function(test) {
-  var a = shape.area().curve(shape.curveCardinal, 0.1);
+tape("area.curve(curveCardinal.tension(tension)) sets the cardinal spline tension", function(test) {
+  var a = shape.area().curve(shape.curveCardinal.tension(0.1));
   test.equal(a([]), null);
   test.pathEqual(a([[0, 1]]), "M0,1L0,0Z");
   test.pathEqual(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");
@@ -120,8 +120,8 @@ tape("area.curve(curveCardinal, tension) sets the cardinal spline tension", func
   test.end();
 });
 
-tape("area.curve(curveCardinal, tension) coerces the specified tension to a number", function(test) {
-  var a = shape.area().curve(shape.curveCardinal, "0.1");
+tape("area.curve(curveCardinal.tension(tension)) coerces the specified tension to a number", function(test) {
+  var a = shape.area().curve(shape.curveCardinal.tension("0.1"));
   test.equal(a([]), null);
   test.pathEqual(a([[0, 1]]), "M0,1L0,0Z");
   test.pathEqual(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");

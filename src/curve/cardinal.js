@@ -9,9 +9,9 @@ export function point(that, x, y) {
   );
 }
 
-function Cardinal(context, k) {
+export function Cardinal(context, tension) {
   this._context = context;
-  this._k = k;
+  this._k = (1 - tension) / 6;
 }
 
 Cardinal.prototype = {
@@ -47,6 +47,15 @@ Cardinal.prototype = {
   }
 };
 
-export default function(context, tension) {
-  return new Cardinal(context, (tension == null ? 1 : 1 - tension) / 6);
-}
+export default (function custom(tension) {
+
+  function cardinal(context) {
+    return new Cardinal(context, tension);
+  }
+
+  cardinal.tension = function(tension) {
+    return custom(+tension);
+  };
+
+  return cardinal;
+})(0);

@@ -14,7 +14,7 @@ export default function() {
   a.outerRadius = a.y1, delete a.y1;
 
   a.curve = function(_) {
-    return arguments.length ? c(curveRadial(_, arguments)) : c()._curve;
+    return arguments.length ? c(curveRadial(_)) : c()._curve;
   };
 
   return a.curve(curveLinear);

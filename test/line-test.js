@@ -65,23 +65,3 @@ tape("line.curve(curve) sets the curve method", function(test) {
   test.pathEqual(l([[0, 1], [2, 3]]), "M0,1L2,3Z");
   test.end();
 });
-
-tape("line.curve(curveCardinal, tension) sets the cardinal spline tension", function(test) {
-  var l = shape.line().curve(shape.curveCardinal, 0.1);
-  test.equal(l([]), null);
-  test.pathEqual(l([[0, 1]]), "M0,1Z");
-  test.pathEqual(l([[0, 1], [1, 3]]), "M0,1L1,3");
-  test.pathEqual(l([[0, 1], [1, 3], [2, 1]]), "M0,1C0,1,0.700000,3,1,3C1.300000,3,2,1,2,1");
-  test.pathEqual(l([[0, 1], [1, 3], [2, 1], [3, 3]]), "M0,1C0,1,0.700000,3,1,3C1.300000,3,1.700000,1,2,1C2.300000,1,3,3,3,3");
-  test.end();
-});
-
-tape("line.curve(curveCardinal, tension) coerces the specified tension to a number", function(test) {
-  var l = shape.line().curve(shape.curveCardinal, "0.1");
-  test.equal(l([]), null);
-  test.pathEqual(l([[0, 1]]), "M0,1Z");
-  test.pathEqual(l([[0, 1], [1, 3]]), "M0,1L1,3");
-  test.pathEqual(l([[0, 1], [1, 3], [2, 1]]), "M0,1C0,1,0.700000,3,1,3C1.300000,3,2,1,2,1");
-  test.pathEqual(l([[0, 1], [1, 3], [2, 1], [3, 3]]), "M0,1C0,1,0.700000,3,1,3C1.300000,3,1.700000,1,2,1C2.300000,1,3,3,3,3");
-  test.end();
-});

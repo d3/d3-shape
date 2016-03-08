@@ -1,8 +1,8 @@
 import {point} from "./cardinal";
 
-function CardinalOpen(context, k) {
+export function CardinalOpen(context, tension) {
   this._context = context;
-  this._k = k;
+  this._k = (1 - tension) / 6;
 }
 
 CardinalOpen.prototype = {
@@ -35,6 +35,15 @@ CardinalOpen.prototype = {
   }
 };
 
-export default function(context, tension) {
-  return new CardinalOpen(context, (tension == null ? 1 : 1 - tension) / 6);
-}
+export default (function custom(tension) {
+
+  function cardinal(context) {
+    return new CardinalOpen(context, tension);
+  }
+
+  cardinal.tension = function(tension) {
+    return custom(+tension);
+  };
+
+  return cardinal;
+})(0);

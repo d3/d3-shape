@@ -1,4 +1,4 @@
-import cardinalClosed from "./cardinalClosed";
+import {CardinalClosed} from "./cardinalClosed";
 import noop from "../noop";
 import {point} from "./catmullRom";
 
@@ -60,8 +60,15 @@ CatmullRomClosed.prototype = {
   }
 };
 
-export default function(context, alpha) {
-  return (alpha = alpha == null ? 0.5 : +alpha)
-      ? new CatmullRomClosed(context, alpha)
-      : cardinalClosed(context, 0);
-}
+export default (function custom(alpha) {
+
+  function catmullRom(context) {
+    return alpha ? new CatmullRomClosed(context, alpha) : new CardinalClosed(context, 0);
+  }
+
+  catmullRom.alpha = function(alpha) {
+    return custom(+alpha);
+  };
+
+  return catmullRom;
+})(0.5);

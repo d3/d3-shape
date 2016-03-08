@@ -1,9 +1,9 @@
 import noop from "../noop";
 import {point} from "./cardinal";
 
-function CardinalClosed(context, k) {
+export function CardinalClosed(context, tension) {
   this._context = context;
-  this._k = k;
+  this._k = (1 - tension) / 6;
 }
 
 CardinalClosed.prototype = {
@@ -47,6 +47,15 @@ CardinalClosed.prototype = {
   }
 };
 
-export default function(context, tension) {
-  return new CardinalClosed(context, (tension == null ? 1 : 1 - tension) / 6);
-}
+export default (function custom(tension) {
+
+  function cardinal(context) {
+    return new CardinalClosed(context, tension);
+  }
+
+  cardinal.tension = function(tension) {
+    return custom(+tension);
+  };
+
+  return cardinal;
+})(0);
