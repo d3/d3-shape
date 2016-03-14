@@ -1,4 +1,4 @@
-export {version} from "./build/version";
+export {version} from "./build/package";
 
 export {default as arc} from "./src/arc";
 export {default as area} from "./src/area";
