@@ -34,7 +34,7 @@ export default function() {
 
     // Optionally sort the arcs by previously-computed values or by data.
     if (sortValues != null) index.sort(function(i, j) { return sortValues(arcs[i], arcs[j]); });
-    else if (sort !== null) index.sort(function(i, j) { return sort(data[i], data[j]); });
+    else if (sort != null) index.sort(function(i, j) { return sort(data[i], data[j]); });
 
     // Compute the arcs! They are stored in the original data's order.
     for (i = 0, k = sum ? (da - n * pa) / sum : 0; i < n; ++i, a0 = a1) {
