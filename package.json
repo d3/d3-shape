@@ -32,8 +32,9 @@
   },
   "devDependencies": {
     "d3-polygon": "~0.2.0",
+    "eslint": "2",
     "json2module": "0.0",
-    "rollup": "0.25",
+    "rollup": "0.26",
     "tape": "4",
     "uglify-js": "2"
   }
