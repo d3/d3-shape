@@ -739,13 +739,13 @@ Produces a piecewise constant function (a [step function](https://en.wikipedia.o
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/stepAfter.png" width="888" height="240" alt="stepAfter">
 
-Produces a piecewise constant function (a [step function](https://en.wikipedia.org/wiki/Step_function)) consisting of alternating horizontal and vertical lines. If the change in *x* is positive, the *y*-value changes after the *x*-value; otherwise the *y*-value changes before the *x*-value.
+Produces a piecewise constant function (a [step function](https://en.wikipedia.org/wiki/Step_function)) consisting of alternating horizontal and vertical lines. The *y*-value changes after the *x*-value.
 
 <a name="curveStepBefore" href="#curveStepBefore">#</a> d3.<b>curveStepBefore</b>(<i>context</i>)
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/stepBefore.png" width="888" height="240" alt="stepBefore">
 
-Produces a piecewise constant function (a [step function](https://en.wikipedia.org/wiki/Step_function)) consisting of alternating horizontal and vertical lines. If the change in *x* is positive, the *y*-value changes before the *x*-value; otherwise the *y*-value changes after the *x*-value.
+Produces a piecewise constant function (a [step function](https://en.wikipedia.org/wiki/Step_function)) consisting of alternating horizontal and vertical lines. The *y*-value changes before the *x*-value.
 
 ### Custom Curves
 

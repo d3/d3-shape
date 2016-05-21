@@ -17,7 +17,7 @@ Step.prototype = {
   lineEnd: function() {
     if (0 < this._t && this._t < 1 && this._point === 2) this._context.lineTo(this._x, this._y);
     if (this._line || (this._line !== 0 && this._point === 1)) this._context.closePath();
-    this._line = 1 - this._line;
+    if (this._line >= 0) this._t = 1 - this._t, this._line = 1 - this._line;
   },
   point: function(x, y) {
     x = +x, y = +y;
@@ -25,15 +25,11 @@ Step.prototype = {
       case 0: this._point = 1; this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y); break;
       case 1: this._point = 2; // proceed
       default: {
-        var t = x > this._x ? this._t : 1 - this._t;
-        if (t <= 0) {
+        if (this._t <= 0) {
           this._context.lineTo(this._x, y);
           this._context.lineTo(x, y);
-        } else if (t >= 1) {
-          this._context.lineTo(x, this._y);
-          this._context.lineTo(x, y);
         } else {
-          var x1 = (this._x + x) * t;
+          var x1 = this._x * (1 - this._t) + x * this._t;
           this._context.lineTo(x1, this._y);
           this._context.lineTo(x1, y);
         }
