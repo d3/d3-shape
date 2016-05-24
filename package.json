@@ -1,6 +1,6 @@
 {
   "name": "d3-shape",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Graphical primitives for visualization, such as lines and areas.",
   "keywords": [
     "d3",
