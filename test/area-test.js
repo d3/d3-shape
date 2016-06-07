@@ -129,3 +129,71 @@ tape("area.curve(curveCardinal.tension(tension)) coerces the specified tension t
   test.pathEqual(a([[0, 1], [1, 3], [2, 1], [3, 3]]), "M0,1C0,1,0.700000,3,1,3C1.300000,3,1.700000,1,2,1C2.300000,1,3,3,3,3L3,0C3,0,2.300000,0,2,0C1.700000,0,1.300000,0,1,0C0.700000,0,0,0,0,0Z");
   test.end();
 });
+
+tape("area.lineX0() returns a line derived from the area", function(test) {
+  var defined = function() { return true; },
+      curve = shape.curveCardinal,
+      context = {},
+      x0 = function() {},
+      x1 = function() {},
+      y = function() {},
+      a = shape.area().defined(defined).curve(curve).context(context).y(y).x0(x0).x1(x1),
+      l = a.lineX0();
+  test.equal(l.defined(), defined);
+  test.equal(l.curve(), curve);
+  test.equal(l.context(), context);
+  test.equal(l.x(), x0);
+  test.equal(l.y(), y);
+  test.end();
+});
+
+tape("area.lineX1() returns a line derived from the area", function(test) {
+  var defined = function() { return true; },
+      curve = shape.curveCardinal,
+      context = {},
+      x0 = function() {},
+      x1 = function() {},
+      y = function() {},
+      a = shape.area().defined(defined).curve(curve).context(context).y(y).x0(x0).x1(x1),
+      l = a.lineX1();
+  test.equal(l.defined(), defined);
+  test.equal(l.curve(), curve);
+  test.equal(l.context(), context);
+  test.equal(l.x(), x1);
+  test.equal(l.y(), y);
+  test.end();
+});
+
+tape("area.lineY0() returns a line derived from the area", function(test) {
+  var defined = function() { return true; },
+      curve = shape.curveCardinal,
+      context = {},
+      x = function() {},
+      y0 = function() {},
+      y1 = function() {},
+      a = shape.area().defined(defined).curve(curve).context(context).x(x).y0(y0).y1(y1),
+      l = a.lineY0();
+  test.equal(l.defined(), defined);
+  test.equal(l.curve(), curve);
+  test.equal(l.context(), context);
+  test.equal(l.x(), x);
+  test.equal(l.y(), y0);
+  test.end();
+});
+
+tape("area.lineY1() returns a line derived from the area", function(test) {
+  var defined = function() { return true; },
+      curve = shape.curveCardinal,
+      context = {},
+      x = function() {},
+      y0 = function() {},
+      y1 = function() {},
+      a = shape.area().defined(defined).curve(curve).context(context).x(x).y0(y0).y1(y1),
+      l = a.lineY1();
+  test.equal(l.defined(), defined);
+  test.equal(l.curve(), curve);
+  test.equal(l.context(), context);
+  test.equal(l.x(), x);
+  test.equal(l.y(), y1);
+  test.end();
+});
