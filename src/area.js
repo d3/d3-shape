@@ -1,6 +1,7 @@
 import {path} from "d3-path";
 import constant from "./constant";
 import curveLinear from "./curve/linear";
+import line from "./line";
 import {x as pointX, y as pointY} from "./point";
 
 export default function() {
@@ -51,6 +52,10 @@ export default function() {
     if (buffer) return output = null, buffer + "" || null;
   }
 
+  function arealine() {
+    return line().defined(defined).curve(curve).context(context);
+  }
+
   area.x = function(_) {
     return arguments.length ? (x0 = typeof _ === "function" ? _ : constant(+_), x1 = null, area) : x0;
   };
@@ -73,6 +78,19 @@ export default function() {
 
   area.y1 = function(_) {
     return arguments.length ? (y1 = _ == null ? null : typeof _ === "function" ? _ : constant(+_), area) : y1;
+  };
+
+  area.lineX0 =
+  area.lineY0 = function() {
+    return arealine().x(x0).y(y0);
+  };
+
+  area.lineY1 = function() {
+    return arealine().x(x0).y(y1);
+  };
+
+  area.lineX1 = function() {
+    return arealine().x(x1).y(y0);
   };
 
   area.defined = function(_) {
