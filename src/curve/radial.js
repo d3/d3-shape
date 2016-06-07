@@ -1,3 +1,7 @@
+import curveLinear from "./linear";
+
+export var curveRadialLinear = curveRadial(curveLinear);
+
 function Radial(curve) {
   this._curve = curve;
 }
@@ -20,7 +24,7 @@ Radial.prototype = {
   }
 };
 
-export default function(curve) {
+export default function curveRadial(curve) {
 
   function radial(context) {
     return new Radial(curve(context));
