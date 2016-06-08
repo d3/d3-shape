@@ -9,7 +9,7 @@
     "canvas",
     "svg"
   ],
-  "homepage": "https://github.com/d3/d3-shape",
+  "homepage": "https://d3js.org/d3-shape/",
   "license": "BSD-3-Clause",
   "author": {
     "name": "Mike Bostock",
@@ -22,19 +22,19 @@
     "url": "https://github.com/d3/d3-shape.git"
   },
   "scripts": {
-    "pretest": "rm -rf build && mkdir build && json2module package.json > build/package.js && rollup -f umd -g d3-path:d3_path -n d3_shape -o build/d3-shape.js -- index.js",
+    "pretest": "rm -rf build && mkdir build && rollup --banner \"$(preamble)\" -f umd -g d3-path:d3 -n d3 -o build/d3-shape.js -- index.js",
     "test": "tape 'test/**/*-test.js' && eslint index.js src",
-    "prepublish": "npm run test && uglifyjs build/d3-shape.js -c -m -o build/d3-shape.min.js",
-    "postpublish": "VERSION=`node -e 'console.log(require(\"./package.json\").version)'`; git push && git push --tags && cp build/d3-shape.js ../d3.github.com/d3-shape.v0.6.js && cp build/d3-shape.min.js ../d3.github.com/d3-shape.v0.6.min.js && cd ../d3.github.com && git add d3-shape.v0.6.js d3-shape.v0.6.min.js && git commit -m \"d3-shape ${VERSION}\" && git push && cd - && zip -j build/d3-shape.zip -- LICENSE README.md build/d3-shape.js build/d3-shape.min.js"
+    "prepublish": "npm run test && uglifyjs --preamble \"$(preamble)\" build/d3-shape.js -c -m -o build/d3-shape.min.js",
+    "postpublish": "VERSION=`node -e 'console.log(require(\"./package.json\").version)'`; git push && git push --tags && cp build/d3-shape.js ../d3.github.com/d3-shape.v0.7.js && cp build/d3-shape.min.js ../d3.github.com/d3-shape.v0.7.min.js && cd ../d3.github.com && git add d3-shape.v0.7.js d3-shape.v0.7.min.js && git commit -m \"d3-shape ${VERSION}\" && git push && cd - && zip -j build/d3-shape.zip -- LICENSE README.md build/d3-shape.js build/d3-shape.min.js"
   },
   "dependencies": {
-    "d3-path": "~0.1.3"
+    "d3-path": "~0.2.0"
   },
   "devDependencies": {
-    "d3-polygon": "~0.2.0",
+    "d3-polygon": "~0.3.0",
     "eslint": "2",
-    "json2module": "0.0",
-    "rollup": "0.26",
+    "package-preamble": "0.0",
+    "rollup": "0.27",
     "tape": "4",
     "uglify-js": "2"
   }
