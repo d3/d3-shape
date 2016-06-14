@@ -4,6 +4,7 @@
   "description": "Graphical primitives for visualization, such as lines and areas.",
   "keywords": [
     "d3",
+    "d3-module",
     "graphics",
     "visualization",
     "canvas",
