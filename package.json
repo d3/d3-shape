@@ -29,13 +29,13 @@
     "postpublish": "VERSION=`node -e 'console.log(require(\"./package.json\").version)'`; git push && git push --tags && cp build/d3-shape.js ../d3.github.com/d3-shape.v0.7.js && cp build/d3-shape.min.js ../d3.github.com/d3-shape.v0.7.min.js && cd ../d3.github.com && git add d3-shape.v0.7.js d3-shape.v0.7.min.js && git commit -m \"d3-shape ${VERSION}\" && git push && cd - && zip -j build/d3-shape.zip -- LICENSE README.md build/d3-shape.js build/d3-shape.min.js"
   },
   "dependencies": {
-    "d3-path": "~0.2.0"
+    "d3-path": "1"
   },
   "devDependencies": {
-    "d3-polygon": "~0.3.0",
+    "d3-polygon": "1",
     "eslint": "2",
     "package-preamble": "0.0",
-    "rollup": "0.27",
+    "rollup": "0.31",
     "tape": "4",
     "uglify-js": "2"
   }
