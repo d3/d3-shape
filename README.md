@@ -841,7 +841,7 @@ If *context* is specified, sets the context and returns this symbol generator. I
 
 <a name="symbols" href="#symbols">#</a> d3.<b>symbols</b>
 
-An array containing the set of all built-in symbol types: [circle](#circle), [cross](#cross), [diamond](#diamond), [square](#square), [star](#star), [triangle](#triangle), and [wye](#wye). Useful for constructing the range of an [ordinal scale](https://github.com/d3/d3-scale#ordinal-scales) should you wish to use a shape encoding for categorical data.
+An array containing the set of all built-in symbol types: [circle](#symbolCircle), [cross](#symbolCross), [diamond](#symbolDiamond), [square](#symbolSquare), [star](#symbolStar), [triangle](#symbolTriangle), and [wye](#symbolWye). Useful for constructing the range of an [ordinal scale](https://github.com/d3/d3-scale#ordinal-scales) should you wish to use a shape encoding for categorical data.
 
 <a name="symbolCircle" href="#symbolCircle">#</a> d3.<b>symbolCircle</b>
 
