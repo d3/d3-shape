@@ -17,6 +17,7 @@
     "url": "http://bost.ocks.org/mike"
   },
   "main": "build/d3-shape.js",
+  "module": "index",
   "jsnext:main": "index",
   "repository": {
     "type": "git",
