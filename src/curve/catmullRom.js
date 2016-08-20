@@ -46,7 +46,7 @@ CatmullRom.prototype = {
   lineEnd: function() {
     switch (this._point) {
       case 2: this._context.lineTo(this._x2, this._y2); break;
-      case 3: this.point(this, this._x2, this._y2); break;
+      case 3: this.point(this._x2, this._y2); break;
     }
     if (this._line || (this._line !== 0 && this._point === 1)) this._context.closePath();
     this._line = 1 - this._line;
