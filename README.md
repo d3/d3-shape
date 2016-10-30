@@ -252,12 +252,12 @@ When a pie is [generated](#_pie), the value accessor will be invoked for each el
 
 ```js
 var data = [
-  {"number":  4, "name": Locke},
-  {"number":  8, "name": Reyes},
-  {"number": 15, "name": Ford},
-  {"number": 16, "name": Jarrah},
-  {"number": 23, "name": Shephard},
-  {"number": 42, "name": Kwon}
+  {"number":  4, "name": "Locke"},
+  {"number":  8, "name": "Reyes"},
+  {"number": 15, "name": "Ford"},
+  {"number": 16, "name": "Jarrah"},
+  {"number": 23, "name": "Shephard"},
+  {"number": 42, "name": "Kwon"}
 ];
 
 var arcs = d3.pie()
