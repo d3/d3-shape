@@ -22,6 +22,10 @@ function arcPadAngle(d) {
   return d && d.padAngle; // Note: optional!
 }
 
+function arcCornerRadius(d) {
+  return d.cornerRadius;
+}
+
 function asin(x) {
   return x >= 1 ? halfPi : x <= -1 ? -halfPi : Math.asin(x);
 }
@@ -253,6 +257,10 @@ export default function() {
 
   arc.padAngle = function(_) {
     return arguments.length ? (padAngle = typeof _ === "function" ? _ : constant(+_), arc) : padAngle;
+  };
+
+  arc.cornerRadius = function(_) {
+    return arguments.length ? (cornerRadius = typeof _ === "function" ? _ : constant(+_), arc) : cornerRadius;
   };
 
   arc.context = function(_) {
