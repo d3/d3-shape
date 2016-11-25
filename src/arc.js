@@ -22,6 +22,10 @@ function arcPadAngle(d) {
   return d && d.padAngle; // Note: optional!
 }
 
+function arcCornerRadius(d) {
+  return (d && d.cornerRadius) || 0;
+}
+
 function asin(x) {
   return x >= 1 ? halfPi : x <= -1 ? -halfPi : Math.asin(x);
 }
@@ -79,7 +83,7 @@ function cornerTangents(x0, y0, x1, y1, r1, rc, cw) {
 export default function() {
   var innerRadius = arcInnerRadius,
       outerRadius = arcOuterRadius,
-      cornerRadius = constant(0),
+      cornerRadius = arcCornerRadius,
       padRadius = null,
       startAngle = arcStartAngle,
       endAngle = arcEndAngle,
