@@ -25,7 +25,7 @@ export default function() {
         if (defined0 = !defined0) output.lineStart();
         else output.lineEnd();
       }
-      if (defined0) output.point(+x(d, i, data), +y(d, i, data));
+      if (defined0) output.point(x(d, i, data), y(d, i, data));
     }
 
     if (buffer) return output = null, buffer + "" || null;
