@@ -1,6 +1,6 @@
 import {path} from "d3-path";
 import constant from "./constant";
-import {epsilon, pi, halfPi, tau} from "./math";
+import {acos, epsilon, pi, halfPi, tau} from "./math";
 
 function arcInnerRadius(d) {
   return d.innerRadius;
@@ -159,7 +159,7 @@ export default function() {
               ay = y01 - oc[1],
               bx = x11 - oc[0],
               by = y11 - oc[1],
-              kc = 1 / Math.sin(Math.acos((ax * bx + ay * by) / (Math.sqrt(ax * ax + ay * ay) * Math.sqrt(bx * bx + by * by))) / 2),
+              kc = 1 / Math.sin(acos((ax * bx + ay * by) / (Math.sqrt(ax * ax + ay * ay) * Math.sqrt(bx * bx + by * by))) / 2),
               lc = Math.sqrt(oc[0] * oc[0] + oc[1] * oc[1]);
           rc0 = Math.min(rc, (r0 - lc) / (kc - 1));
           rc1 = Math.min(rc, (r1 - lc) / (kc + 1));
