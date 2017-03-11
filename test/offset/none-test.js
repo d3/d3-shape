@@ -1,17 +1,17 @@
 var tape = require("tape"),
     shape = require("../../");
 
-tape("stackOffsetNone(series, order) uses the existing baseline", function(test) {
+tape("stackOffsetNone(series, order) stacks upon the first layer’s existing positions", function(test) {
   var series = [
-    [[0, 1], [0, 2], [0, 1]],
+    [[1, 2], [2, 4], [3, 4]],
     [[0, 3], [0, 4], [0, 2]],
     [[0, 5], [0, 2], [0, 4]]
   ];
   shape.stackOffsetNone(series, shape.stackOrderNone(series));
   test.deepEqual(series, [
-    [[0, 1], [0, 2], [0, 1]],
-    [[1, 4], [2, 6], [1, 3]],
-    [[4, 9], [6, 8], [3, 7]]
+    [[1,  2], [2,  4], [3,  4]],
+    [[2,  5], [4,  8], [4,  6]],
+    [[5, 10], [8, 10], [6, 10]]
   ]);
   test.end();
 });

@@ -1025,6 +1025,10 @@ Stack offsets are typically not used directly, but are instead passed to [*stack
 
 Applies a zero baseline and normalizes the values for each point such that the topline is always one.
 
+<a name="stackOffsetDiverging" href="#stackOffsetDiverging">#</a> d3.<b>stackOffsetDiverging</b>(<i>series</i>, <i>order</i>) [<>](https://github.com/d3/d3-shape/blob/master/src/offset/diverging.js "Source")
+
+Positive values are stacked above zero, while negative values are stacked below zero.
+
 <a name="stackOffsetNone" href="#stackOffsetNone">#</a> d3.<b>stackOffsetNone</b>(<i>series</i>, <i>order</i>) [<>](https://github.com/d3/d3-shape/blob/master/src/offset/none.js "Source")
 
 Applies a zero baseline.

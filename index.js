@@ -32,6 +32,7 @@ export {default as curveStep, stepAfter as curveStepAfter, stepBefore as curveSt
 
 export {default as stack} from "./src/stack";
 export {default as stackOffsetExpand} from "./src/offset/expand";
+export {default as stackOffsetDiverging} from "./src/offset/diverging";
 export {default as stackOffsetNone} from "./src/offset/none";
 export {default as stackOffsetSilhouette} from "./src/offset/silhouette";
 export {default as stackOffsetWiggle} from "./src/offset/wiggle";
