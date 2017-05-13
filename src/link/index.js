@@ -11,7 +11,7 @@ function linkTarget(d) {
   return d.target;
 }
 
-function link(horizontal) {
+function link(curve) {
   var source = linkSource,
       target = linkTarget,
       x = pointX,
@@ -19,18 +19,9 @@ function link(horizontal) {
       context = null;
 
   function link() {
-    var buffer,
-        argv = slice.call(arguments),
-        s = source.apply(this, argv),
-        t = target.apply(this, argv),
-        x0 = +x.apply(this, (argv[0] = s, argv)),
-        y0 = +y.apply(this, argv),
-        x1 = +x.apply(this, (argv[0] = t, argv)),
-        y1 = +y.apply(this, argv);
+    var buffer, argv = slice.call(arguments), s = source.apply(this, argv), t = target.apply(this, argv);
     if (!context) context = buffer = path();
-    context.moveTo(x0, y0);
-    if (horizontal) context.bezierCurveTo(x0 = (x0 + x1) / 2, y0, x0, y1, x1, y1);
-    else context.bezierCurveTo(x0, y0 = (y0 + y1) / 2, x1, y0, x1, y1);
+    curve(context, +x.apply(this, (argv[0] = s, argv)), +y.apply(this, argv), +x.apply(this, (argv[0] = t, argv)), +y.apply(this, argv));
     if (buffer) return context = null, buffer + "" || null;
   }
 
@@ -57,61 +48,41 @@ function link(horizontal) {
   return link;
 }
 
+function curveHorizontal(context, x0, y0, x1, y1) {
+  context.moveTo(x0, y0);
+  context.bezierCurveTo(x0 = (x0 + x1) / 2, y0, x0, y1, x1, y1);
+}
+
+function curveVertical(context, x0, y0, x1, y1) {
+  context.moveTo(x0, y0);
+  context.bezierCurveTo(x0, y0 = (y0 + y1) / 2, x1, y0, x1, y1);
+}
+
+function curveRadial(context, x0, y0, x1, y1) {
+  var p0 = cartesian(x0, y0),
+      p1 = cartesian(x0, y0 = (y0 + y1) / 2),
+      p2 = cartesian(x1, y0),
+      p3 = cartesian(x1, y1);
+  context.moveTo(p0[0], p0[1]);
+  context.bezierCurveTo(p1[0], p1[1], p2[0], p2[1], p3[0], p3[1]);
+}
+
 export function linkHorizontal() {
-  return link(true);
+  return link(curveHorizontal);
 }
 
 export function linkVertical() {
-  return link(false);
-}
-
-function project(x, y) {
-  var angle = (x - 90) / 180 * Math.PI, radius = y;
-  return [radius * Math.cos(angle), radius * Math.sin(angle)];
+  return link(curveVertical);
 }
 
 export function linkRadial() {
-  var source = linkSource,
-      target = linkTarget,
-      angle = pointX,
-      radius = pointY,
-      context = null;
+  var l = link(curveRadial);
+  l.angle = l.x, delete l.x;
+  l.radius = l.y, delete l.y;
+  return l;
+}
 
-  function link() {
-    var buffer,
-        argv = slice.call(arguments),
-        s = source.apply(this, argv),
-        t = target.apply(this, argv),
-        a0 = +angle.apply(this, (argv[0] = s, argv)),
-        r0 = +radius.apply(this, argv),
-        a1 = +angle.apply(this, (argv[0] = t, argv)),
-        r1 = +radius.apply(this, argv),
-        p;
-    if (!context) context = buffer = path();
-    context.moveTo((p = project(a0, r0))[0], p[1]);
-    context.bezierCurveTo((p = project(a0, r0 = (r0 + r1) / 2))[0], p[1], (p = project(a1, r0))[0], p[1], (p = project(a1, r1))[0], p[1]);
-    if (buffer) return context = null, buffer + "" || null;
-  }
-
-  link.source = function(_) {
-    return arguments.length ? (source = _, link) : source;
-  };
-
-  link.target = function(_) {
-    return arguments.length ? (target = _, link) : target;
-  };
-
-  link.angle = function(_) {
-    return arguments.length ? (angle = typeof _ === "function" ? _ : constant(+_), link) : angle;
-  };
-
-  link.radius = function(_) {
-    return arguments.length ? (radius = typeof _ === "function" ? _ : constant(+_), link) : radius;
-  };
-
-  link.context = function(_) {
-    return arguments.length ? ((context = _ == null ? null : _), link) : context;
-  };
-
-  return link;
+function cartesian(x, y) {
+  var angle = (x - 90) / 180 * Math.PI, radius = y;
+  return [radius * Math.cos(angle), radius * Math.sin(angle)];
 }
