@@ -48,6 +48,7 @@ var line = d3.line();
 * [Areas](#areas)
 * [Curves](#curves)
 * [Custom Curves](#custom-curves)
+* [Links](#links)
 * [Symbols](#symbols)
 * [Custom Symbol Types](#custom-symbol-types)
 * [Stacks](#stacks)
@@ -796,6 +797,87 @@ Indicates the end of the current line segment.
 <a name="curve_point" href="#curve_point">#</a> <i>curve</i>.<b>point</b>(<i>x</i>, <i>y</i>) [<>](https://github.com/d3/d3-shape/blob/master/src/curve/step.js#L22 "Source")
 
 Indicates a new point in the current line segment with the given *x*- and *y*-values.
+
+### Links
+
+[<img alt="Tidy Tree" src="https://raw.githubusercontent.com/d3/d3-hierarchy/master/img/tree.png">](http://bl.ocks.org/mbostock/9d0899acb5d3b8d839d9d613a9e1fe04)
+
+The **link** shape generates a smooth cubic Bézier curve from a source point to a target point. The tangents of the curve at the start and end are either [vertical](#linkVertical) or [horizontal](#linkHorizontal).
+
+<a name="linkVertical" href="#linkVertical">#</a> d3.<b>linkVertical</b>() [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#59 "Source")
+
+Returns a new [link generator](#_link) with vertical tangents. For example, to visualize [links](https://github.com/d3/d3-hierarchy/blob/master/README.md#node_links) in a [tree diagram](https://github.com/d3/d3-hierarchy/blob/master/README.md#tree) rooted on the top edge of the display, you might say:
+
+```js
+var link = d3.linkVertical()
+    .x(function(d) { return d.x; })
+    .y(function(d) { return d.y; });
+```
+
+<a name="linkHorizontal" href="#linkHorizontal">#</a> d3.<b>linkHorizontal</b>() [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#63 "Source")
+
+Returns a new [link generator](#_link) with horizontal tangents. For example, to visualize [links](https://github.com/d3/d3-hierarchy/blob/master/README.md#node_links) in a [tree diagram](https://github.com/d3/d3-hierarchy/blob/master/README.md#tree) rooted on the left edge of the display, you might say:
+
+```js
+var link = d3.linkHorizontal()
+    .x(function(d) { return d.y; })
+    .y(function(d) { return d.x; });
+```
+
+<a href="#_link" name="_link">#</a> <i>link</i>(<i>arguments…</i>) [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#L20 "Source")
+
+Generates a link for the given *arguments*. The *arguments* are arbitrary; they are simply propagated to the link generator’s accessor functions along with the `this` object. For example, with the default settings, an object expected:
+
+```js
+link({
+  source: [100, 100],
+  target: [300, 300]
+});
+```
+
+<a name="link_source" href="#link_source">#</a> <i>link</i>.<b>source</b>([<i>source</i>]) [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#36 "Source")
+
+If *source* is specified, sets the source accessor to the specified function and returns this link generator. If *source* is not specified, returns the current source accessor, which defaults to:
+
+```js
+function source(d) {
+  return d.source;
+}
+```
+
+<a name="link_target" href="#link_target">#</a> <i>link</i>.<b>target</b>([<i>target</i>]) [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#40 "Source")
+
+If *target* is specified, sets the target accessor to the specified function and returns this link generator. If *target* is not specified, returns the current target accessor, which defaults to:
+
+```js
+function target(d) {
+  return d.target;
+}
+```
+
+<a name="link_x" href="#link_x">#</a> <i>link</i>.<b>x</b>([<i>x</i>]) [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#L44 "Source")
+
+If *x* is specified, sets the *x*-accessor to the specified function or number and returns this link generator. If *x* is not specified, returns the current *x*-accessor, which defaults to:
+
+```js
+function x(d) {
+  return d[0];
+}
+```
+
+<a name="link_x" href="#link_x">#</a> <i>link</i>.<b>y</b>([<i>y</i>]) [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#L44 "Source")
+
+If *y* is specified, sets the *y*-accessor to the specified function or number and returns this link generator. If *y* is not specified, returns the current *y*-accessor, which defaults to:
+
+```js
+function y(d) {
+  return d[1];
+}
+```
+
+<a name="link_context" href="#link_context">#</a> <i>link</i>.<b>context</b>([<i>context</i>]) [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#L52 "Source")
+
+If *context* is specified, sets the context and returns this link generator. If *context* is not specified, returns the current context, which defaults to null. If the context is not null, then the [generated link](#_link) is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated link is returned. See also [d3-path](https://github.com/d3/d3-path).
 
 ### Symbols
 

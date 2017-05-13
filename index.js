@@ -4,6 +4,7 @@ export {default as line} from "./src/line";
 export {default as pie} from "./src/pie";
 export {default as radialArea} from "./src/radialArea";
 export {default as radialLine} from "./src/radialLine";
+export {linkHorizontal, linkVertical} from "./src/link/index";
 
 export {default as symbol, symbols} from "./src/symbol";
 export {default as symbolCircle} from "./src/symbol/circle";
