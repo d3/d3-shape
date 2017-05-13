@@ -802,7 +802,7 @@ Indicates a new point in the current line segment with the given *x*- and *y*-va
 
 [<img alt="Tidy Tree" src="https://raw.githubusercontent.com/d3/d3-hierarchy/master/img/tree.png">](http://bl.ocks.org/mbostock/9d0899acb5d3b8d839d9d613a9e1fe04)
 
-The **link** shape generates a smooth cubic Bézier curve from a source point to a target point. The tangents of the curve at the start and end are either [vertical](#linkVertical) or [horizontal](#linkHorizontal).
+The **link** shape generates a smooth cubic Bézier curve from a source point to a target point. The tangents of the curve at the start and end are either [vertical](#linkVertical), [horizontal](#linkHorizontal) or [radial](#linkRadial).
 
 <a name="linkVertical" href="#linkVertical">#</a> d3.<b>linkVertical</b>() [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#L64 "Source")
 
@@ -878,6 +878,24 @@ function y(d) {
 <a name="link_context" href="#link_context">#</a> <i>link</i>.<b>context</b>([<i>context</i>]) [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#L53 "Source")
 
 If *context* is specified, sets the context and returns this link generator. If *context* is not specified, returns the current context, which defaults to null. If the context is not null, then the [generated link](#_link) is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated link is returned. See also [d3-path](https://github.com/d3/d3-path).
+
+<a name="linkRadial" href="#linkRadial">#</a> d3.<b>linkRadial</b>() [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#L73 "Source")
+
+Returns a new [link generator](#_link) with radial tangents. For example, to visualize [links](https://github.com/d3/d3-hierarchy/blob/master/README.md#node_links) in a [tree diagram](https://github.com/d3/d3-hierarchy/blob/master/README.md#tree) rooted in the center of the display, you might say:
+
+```js
+var link = d3.linkRadial()
+    .angle(function(d) { return d.x; })
+    .radius(function(d) { return d.y; });
+```
+
+<a name="radialLink_angle" href="#radialLink_angle">#</a> <i>radialLink</i>.<b>angle</b>([<i>angle</i>]) [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#L104 "Source")
+
+Equivalent to [*link*.x](#link_x), except the accessor returns the angle in radians, with 0 at -*y* (12 o’clock).
+
+<a name="radialLink_radius" href="#radialLink_radius">#</a> <i>radialLink</i>.<b>radius</b>([<i>radius</i>]) [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#L108 "Source")
+
+Equivalent to [*link*.y](#link_y), except the accessor returns the radius: the distance from the origin ⟨0,0⟩.
 
 ### Symbols
 
