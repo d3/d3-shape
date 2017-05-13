@@ -86,10 +86,10 @@ export function linkRadial() {
         r0 = +radius.apply(this, argv),
         a1 = +angle.apply(this, (argv[0] = t, argv)),
         r1 = +radius.apply(this, argv),
-        r2 = (r0 + r1) / 2, p;
+        p;
     if (!context) context = buffer = path();
     context.moveTo((p = project(a0, r0))[0], p[1]);
-    context.bezierCurveTo((p = project(a0, r2))[0], p[1], (p = project(a1, r2))[0], p[1], (p = project(a1, r1))[0], p[1]);
+    context.bezierCurveTo((p = project(a0, r0 = (r0 + r1) / 2))[0], p[1], (p = project(a1, r0))[0], p[1], (p = project(a1, r1))[0], p[1]);
     if (buffer) return context = null, buffer + "" || null;
   }
 
