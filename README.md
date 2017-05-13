@@ -804,7 +804,7 @@ Indicates a new point in the current line segment with the given *x*- and *y*-va
 
 The **link** shape generates a smooth cubic Bézier curve from a source point to a target point. The tangents of the curve at the start and end are either [vertical](#linkVertical) or [horizontal](#linkHorizontal).
 
-<a name="linkVertical" href="#linkVertical">#</a> d3.<b>linkVertical</b>() [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#59 "Source")
+<a name="linkVertical" href="#linkVertical">#</a> d3.<b>linkVertical</b>() [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#L59 "Source")
 
 Returns a new [link generator](#_link) with vertical tangents. For example, to visualize [links](https://github.com/d3/d3-hierarchy/blob/master/README.md#node_links) in a [tree diagram](https://github.com/d3/d3-hierarchy/blob/master/README.md#tree) rooted on the top edge of the display, you might say:
 
@@ -814,7 +814,7 @@ var link = d3.linkVertical()
     .y(function(d) { return d.y; });
 ```
 
-<a name="linkHorizontal" href="#linkHorizontal">#</a> d3.<b>linkHorizontal</b>() [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#63 "Source")
+<a name="linkHorizontal" href="#linkHorizontal">#</a> d3.<b>linkHorizontal</b>() [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#L63 "Source")
 
 Returns a new [link generator](#_link) with horizontal tangents. For example, to visualize [links](https://github.com/d3/d3-hierarchy/blob/master/README.md#node_links) in a [tree diagram](https://github.com/d3/d3-hierarchy/blob/master/README.md#tree) rooted on the left edge of the display, you might say:
 
@@ -835,7 +835,7 @@ link({
 });
 ```
 
-<a name="link_source" href="#link_source">#</a> <i>link</i>.<b>source</b>([<i>source</i>]) [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#36 "Source")
+<a name="link_source" href="#link_source">#</a> <i>link</i>.<b>source</b>([<i>source</i>]) [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#L36 "Source")
 
 If *source* is specified, sets the source accessor to the specified function and returns this link generator. If *source* is not specified, returns the current source accessor, which defaults to:
 
@@ -845,7 +845,7 @@ function source(d) {
 }
 ```
 
-<a name="link_target" href="#link_target">#</a> <i>link</i>.<b>target</b>([<i>target</i>]) [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#40 "Source")
+<a name="link_target" href="#link_target">#</a> <i>link</i>.<b>target</b>([<i>target</i>]) [<>](https://github.com/d3/d3-shape/blob/master/src/link/index.js#L40 "Source")
 
 If *target* is specified, sets the target accessor to the specified function and returns this link generator. If *target* is not specified, returns the current target accessor, which defaults to:
 
