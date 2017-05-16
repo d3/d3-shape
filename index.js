@@ -2,8 +2,9 @@ export {default as arc} from "./src/arc";
 export {default as area} from "./src/area";
 export {default as line} from "./src/line";
 export {default as pie} from "./src/pie";
-export {default as radialArea} from "./src/radialArea";
-export {default as radialLine} from "./src/radialLine";
+export {default as areaRadial, default as radialArea} from "./src/areaRadial"; // Note: radialArea is deprecated!
+export {default as lineRadial, default as radialLine} from "./src/lineRadial"; // Note: radialLine is deprecated!
+export {default as pointRadial} from "./src/pointRadial";
 export {linkHorizontal, linkVertical, linkRadial} from "./src/link/index";
 
 export {default as symbol, symbols} from "./src/symbol";

@@ -3,8 +3,8 @@ var tape = require("tape"),
 
 require("./pathEqual");
 
-tape("radialLine() returns a default radial line shape", function(test) {
-  var l = shape.radialLine();
+tape("lineRadial() returns a default radial line shape", function(test) {
+  var l = shape.lineRadial();
   test.equal(l.angle()([42, 34]), 42);
   test.equal(l.radius()([42, 34]), 34);
   test.equal(l.defined()([42, 34]), true);

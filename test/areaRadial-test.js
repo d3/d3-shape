@@ -3,8 +3,8 @@ var tape = require("tape"),
 
 require("./pathEqual");
 
-tape("radialArea() returns a default radial area shape", function(test) {
-  var a = shape.radialArea();
+tape("areaRadial() returns a default radial area shape", function(test) {
+  var a = shape.areaRadial();
   test.equal(a.startAngle()([42, 34]), 42);
   test.equal(a.endAngle(), null);
   test.equal(a.innerRadius()([42, 34]), 0);
@@ -16,14 +16,14 @@ tape("radialArea() returns a default radial area shape", function(test) {
   test.end();
 });
 
-tape("radialArea.lineStartAngle() returns a line derived from the area", function(test) {
+tape("areaRadial.lineStartAngle() returns a line derived from the area", function(test) {
   var defined = function() { return true; },
       curve = shape.curveCardinal,
       context = {},
       startAngle = function() {},
       endAngle = function() {},
       radius = function() {},
-      a = shape.radialArea().defined(defined).curve(curve).context(context).radius(radius).startAngle(startAngle).endAngle(endAngle),
+      a = shape.areaRadial().defined(defined).curve(curve).context(context).radius(radius).startAngle(startAngle).endAngle(endAngle),
       l = a.lineStartAngle();
   test.equal(l.defined(), defined);
   test.equal(l.curve(), curve);
@@ -33,14 +33,14 @@ tape("radialArea.lineStartAngle() returns a line derived from the area", functio
   test.end();
 });
 
-tape("radialArea.lineEndAngle() returns a line derived from the area", function(test) {
+tape("areaRadial.lineEndAngle() returns a line derived from the area", function(test) {
   var defined = function() { return true; },
       curve = shape.curveCardinal,
       context = {},
       startAngle = function() {},
       endAngle = function() {},
       radius = function() {},
-      a = shape.radialArea().defined(defined).curve(curve).context(context).radius(radius).startAngle(startAngle).endAngle(endAngle),
+      a = shape.areaRadial().defined(defined).curve(curve).context(context).radius(radius).startAngle(startAngle).endAngle(endAngle),
       l = a.lineEndAngle();
   test.equal(l.defined(), defined);
   test.equal(l.curve(), curve);
@@ -50,14 +50,14 @@ tape("radialArea.lineEndAngle() returns a line derived from the area", function(
   test.end();
 });
 
-tape("radialArea.lineInnerRadius() returns a line derived from the area", function(test) {
+tape("areaRadial.lineInnerRadius() returns a line derived from the area", function(test) {
   var defined = function() { return true; },
       curve = shape.curveCardinal,
       context = {},
       angle = function() {},
       innerRadius = function() {},
       outerRadius = function() {},
-      a = shape.radialArea().defined(defined).curve(curve).context(context).angle(angle).innerRadius(innerRadius).outerRadius(outerRadius),
+      a = shape.areaRadial().defined(defined).curve(curve).context(context).angle(angle).innerRadius(innerRadius).outerRadius(outerRadius),
       l = a.lineInnerRadius();
   test.equal(l.defined(), defined);
   test.equal(l.curve(), curve);
@@ -67,14 +67,14 @@ tape("radialArea.lineInnerRadius() returns a line derived from the area", functi
   test.end();
 });
 
-tape("radialArea.lineOuterRadius() returns a line derived from the area", function(test) {
+tape("areaRadial.lineOuterRadius() returns a line derived from the area", function(test) {
   var defined = function() { return true; },
       curve = shape.curveCardinal,
       context = {},
       angle = function() {},
       innerRadius = function() {},
       outerRadius = function() {},
-      a = shape.radialArea().defined(defined).curve(curve).context(context).angle(angle).innerRadius(innerRadius).outerRadius(outerRadius),
+      a = shape.areaRadial().defined(defined).curve(curve).context(context).angle(angle).innerRadius(innerRadius).outerRadius(outerRadius),
       l = a.lineOuterRadius();
   test.equal(l.defined(), defined);
   test.equal(l.curve(), curve);

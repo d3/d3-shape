@@ -1,6 +1,6 @@
 import curveRadial, {curveRadialLinear} from "./curve/radial";
 import area from "./area";
-import {radialLine} from "./radialLine"
+import {lineRadial} from "./lineRadial"
 
 export default function() {
   var a = area().curve(curveRadialLinear),
@@ -16,10 +16,10 @@ export default function() {
   a.radius = a.y, delete a.y;
   a.innerRadius = a.y0, delete a.y0;
   a.outerRadius = a.y1, delete a.y1;
-  a.lineStartAngle = function() { return radialLine(x0()); }, delete a.lineX0;
-  a.lineEndAngle = function() { return radialLine(x1()); }, delete a.lineX1;
-  a.lineInnerRadius = function() { return radialLine(y0()); }, delete a.lineY0;
-  a.lineOuterRadius = function() { return radialLine(y1()); }, delete a.lineY1;
+  a.lineStartAngle = function() { return lineRadial(x0()); }, delete a.lineX0;
+  a.lineEndAngle = function() { return lineRadial(x1()); }, delete a.lineX1;
+  a.lineInnerRadius = function() { return lineRadial(y0()); }, delete a.lineY0;
+  a.lineOuterRadius = function() { return lineRadial(y1()); }, delete a.lineY1;
 
   a.curve = function(_) {
     return arguments.length ? c(curveRadial(_)) : c()._curve;

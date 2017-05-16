@@ -2,7 +2,7 @@ import {path} from "d3-path";
 import {slice} from "../array";
 import constant from "../constant";
 import {x as pointX, y as pointY} from "../point";
-import radialPoint from "../radialPoint";
+import pointRadial from "../pointRadial";
 
 function linkSource(d) {
   return d.source;
@@ -60,10 +60,10 @@ function curveVertical(context, x0, y0, x1, y1) {
 }
 
 function curveRadial(context, x0, y0, x1, y1) {
-  var p0 = radialPoint(x0, y0),
-      p1 = radialPoint(x0, y0 = (y0 + y1) / 2),
-      p2 = radialPoint(x1, y0),
-      p3 = radialPoint(x1, y1);
+  var p0 = pointRadial(x0, y0),
+      p1 = pointRadial(x0, y0 = (y0 + y1) / 2),
+      p2 = pointRadial(x1, y0),
+      p3 = pointRadial(x1, y1);
   context.moveTo(p0[0], p0[1]);
   context.bezierCurveTo(p1[0], p1[1], p2[0], p2[1], p3[0], p3[1]);
 }

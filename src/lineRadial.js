@@ -1,7 +1,7 @@
 import curveRadial, {curveRadialLinear} from "./curve/radial";
 import line from "./line";
 
-export function radialLine(l) {
+export function lineRadial(l) {
   var c = l.curve;
 
   l.angle = l.x, delete l.x;
@@ -15,5 +15,5 @@ export function radialLine(l) {
 }
 
 export default function() {
-  return radialLine(line().curve(curveRadialLinear));
+  return lineRadial(line().curve(curveRadialLinear));
 }
