@@ -83,6 +83,5 @@ export function linkRadial() {
 }
 
 function cartesian(x, y) {
-  var angle = (x - 90) / 180 * Math.PI, radius = y;
-  return [radius * Math.cos(angle), radius * Math.sin(angle)];
+  return [(y = +y) * Math.cos(x -= Math.PI / 2), y * Math.sin(x)];
 }
