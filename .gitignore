@@ -1,5 +1,7 @@
 *.sublime-workspace
 .DS_Store
 build/
+lib/
+esm/
 node_modules
 npm-debug.log

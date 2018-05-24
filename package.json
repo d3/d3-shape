@@ -17,14 +17,26 @@
     "url": "http://bost.ocks.org/mike"
   },
   "main": "build/d3-shape.js",
-  "module": "index",
-  "jsnext:main": "index",
+  "module": "esm/index.js",
+  "jsnext:main": "esm/index.js",
+  "files": [
+    "build/*.js",
+    "esm",
+    "lib",
+    "src"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/d3/d3-shape.git"
   },
   "scripts": {
-    "pretest": "rm -rf build && mkdir build && rollup --banner \"$(preamble)\" -f umd -g d3-path:d3 -n d3 -o build/d3-shape.js -- index.js",
+    "build:commonjs": "BABEL_OUTPUT=commonjs babel src --out-dir lib",
+    "build:esm": "babel src --out-dir esm",
+    "build:umd": "rollup --banner \"$(preamble)\" -f umd -g d3-path:d3 -n d3 -o build/d3-shape.js -- src/index.js",
+    "prebuild:umd": "mkdir build",
+    "build": "npm-run-all --parallel build:*",
+    "prebuild": "rm -rf build lib esm",
+    "pretest": "npm run build",
     "test": "tape 'test/**/*-test.js' && eslint index.js src",
     "prepublish": "npm run test && uglifyjs --preamble \"$(preamble)\" build/d3-shape.js -c -m -o build/d3-shape.min.js",
     "postpublish": "git push && git push --tags && cd ../d3.github.com && git pull && cp ../d3-shape/build/d3-shape.js d3-shape.v1.js && cp ../d3-shape/build/d3-shape.min.js d3-shape.v1.min.js && git add d3-shape.v1.js d3-shape.v1.min.js && git commit -m \"d3-shape ${npm_package_version}\" && git push && cd - && zip -j build/d3-shape.zip -- LICENSE README.md build/d3-shape.js build/d3-shape.min.js"
@@ -33,8 +45,12 @@
     "d3-path": "1"
   },
   "devDependencies": {
+    "@babel/cli": "7.0.0-beta.48",
+    "@babel/core": "7.0.0-beta.48",
+    "@babel/preset-env": "7.0.0-beta.48",
     "d3-polygon": "1",
     "eslint": "3",
+    "npm-run-all": "4.1.3",
     "package-preamble": "0.1",
     "rollup": "0.41",
     "tape": "4",
