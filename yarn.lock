@@ -187,12 +187,12 @@ cross-spawn@^6.0.5:
     which "^1.2.9"
 
 d3-path@1:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/d3-path/-/d3-path-1.0.6.tgz#15da50926093a05589d16c213f8bbf5aea9ea9ed"
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/d3-path/-/d3-path-1.0.7.tgz#8de7cd693a75ac0b5480d3abaccd94793e58aae8"
 
 d3-polygon@1:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/d3-polygon/-/d3-polygon-1.0.4.tgz#ce5c86a9f2e515eea56d30f0e94b01845157bc41"
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/d3-polygon/-/d3-polygon-1.0.5.tgz#9a645a0a64ff6cbf9efda96ee0b4a6909184c363"
 
 debug@^3.1.0:
   version "3.1.0"
