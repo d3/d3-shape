@@ -16,7 +16,7 @@
     "name": "Mike Bostock",
     "url": "http://bost.ocks.org/mike"
   },
-  "main": "build/d3-shape.js",
+  "main": "dist/d3-shape.min.js",
   "module": "index",
   "jsnext:main": "index",
   "repository": {
@@ -24,20 +24,19 @@
     "url": "https://github.com/d3/d3-shape.git"
   },
   "scripts": {
-    "pretest": "rm -rf build && mkdir build && rollup --banner \"$(preamble)\" -f umd -g d3-path:d3 -n d3 -o build/d3-shape.js -- index.js",
+    "pretest": "rollup -c",
     "test": "tape 'test/**/*-test.js' && eslint index.js src",
-    "prepublish": "npm run test && uglifyjs --preamble \"$(preamble)\" build/d3-shape.js -c -m -o build/d3-shape.min.js",
-    "postpublish": "git push && git push --tags && cd ../d3.github.com && git pull && cp ../d3-shape/build/d3-shape.js d3-shape.v1.js && cp ../d3-shape/build/d3-shape.min.js d3-shape.v1.min.js && git add d3-shape.v1.js d3-shape.v1.min.js && git commit -m \"d3-shape ${npm_package_version}\" && git push && cd - && zip -j build/d3-shape.zip -- LICENSE README.md build/d3-shape.js build/d3-shape.min.js"
+    "prepublishOnly": "rm -rf dist && yarn test",
+    "postpublish": "git push && git push --tags && cd ../d3.github.com && git pull && cp ../${npm_package_name}/dist/${npm_package_name}.js ${npm_package_name}.v1.js && cp ../${npm_package_name}/dist/${npm_package_name}.min.js ${npm_package_name}.v1.min.js && git add ${npm_package_name}.v1.js ${npm_package_name}.v1.min.js && git commit -m \"${npm_package_name} ${npm_package_version}\" && git push && cd - && zip -j dist/${npm_package_name}.zip -- LICENSE README.md dist/${npm_package_name}.js dist/${npm_package_name}.min.js"
   },
   "dependencies": {
     "d3-path": "1"
   },
   "devDependencies": {
     "d3-polygon": "1",
-    "eslint": "3",
-    "package-preamble": "0.1",
-    "rollup": "0.41",
-    "tape": "4",
-    "uglify-js": "^2.8.11"
+    "eslint": "5",
+    "rollup": "0.64",
+    "rollup-plugin-terser": "1",
+    "tape": "4"
   }
 }
