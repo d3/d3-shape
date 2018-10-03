@@ -7,7 +7,7 @@ export {default as lineRadial, default as radialLine} from "./lineRadial"; // No
 export {default as pointRadial} from "./pointRadial";
 export {linkHorizontal, linkVertical, linkRadial} from "./link/index";
 
-export {default as symbol, symbols} from "./symbol";
+export {default as symbol, symbols} from "./symbols";
 export {default as symbolCircle} from "./symbol/circle";
 export {default as symbolCross} from "./symbol/cross";
 export {default as symbolDiamond} from "./symbol/diamond";
