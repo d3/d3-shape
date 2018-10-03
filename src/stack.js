@@ -1,7 +1,7 @@
-import {slice} from "./array";
-import constant from "./constant";
-import offsetNone from "./offset/none";
-import orderNone from "./order/none";
+import {slice} from "./array.js";
+import constant from "./constant.js";
+import offsetNone from "./offset/none.js";
+import orderNone from "./order/none.js";
 
 function stackValue(d, key) {
   return d[key];

@@ -1,5 +1,5 @@
-import curveRadial, {curveRadialLinear} from "./curve/radial";
-import line from "./line";
+import curveRadial, {curveRadialLinear} from "./curve/radial.js";
+import line from "./line.js";
 
 export function lineRadial(l) {
   var c = l.curve;

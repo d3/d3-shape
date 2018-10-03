@@ -1,5 +1,5 @@
-import none from "./none";
-import {sum} from "./ascending";
+import none from "./none.js";
+import {sum} from "./ascending.js";
 
 export default function(series) {
   var n = series.length,

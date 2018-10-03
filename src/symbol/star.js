@@ -1,4 +1,4 @@
-import {pi, tau} from "../math";
+import {pi, tau} from "../math.js";
 
 var ka = 0.89081309152928522810,
     kr = Math.sin(pi / 10) / Math.sin(7 * pi / 10),

@@ -1,6 +1,6 @@
-import {CardinalClosed} from "./cardinalClosed";
-import noop from "../noop";
-import {point} from "./catmullRom";
+import {CardinalClosed} from "./cardinalClosed.js";
+import noop from "../noop.js";
+import {point} from "./catmullRom.js";
 
 function CatmullRomClosed(context, alpha) {
   this._context = context;

@@ -1,5 +1,5 @@
-import curveRadial, {curveRadialLinear} from "./curve/radial";
-import area from "./area";
+import curveRadial, {curveRadialLinear} from "./curve/radial.js";
+import area from "./area.js";
 import {lineRadial} from "./lineRadial"
 
 export default function() {

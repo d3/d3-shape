@@ -1,5 +1,5 @@
-import {epsilon} from "../math";
-import {Cardinal} from "./cardinal";
+import {epsilon} from "../math.js";
+import {Cardinal} from "./cardinal.js";
 
 export function point(that, x, y) {
   var x1 = that._x1,

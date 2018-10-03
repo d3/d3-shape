@@ -1,5 +1,5 @@
-import {CardinalOpen} from "./cardinalOpen";
-import {point} from "./catmullRom";
+import {CardinalOpen} from "./cardinalOpen.js";
+import {point} from "./catmullRom.js";
 
 function CatmullRomOpen(context, alpha) {
   this._context = context;

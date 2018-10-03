@@ -1,4 +1,4 @@
-import none from "./none";
+import none from "./none.js";
 
 export default function(series, order) {
   if (!((n = series.length) > 0)) return;
