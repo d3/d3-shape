@@ -19,7 +19,7 @@
   "main": "dist/d3-shape.js",
   "unpkg": "dist/d3-shape.min.js",
   "jsdelivr": "dist/d3-shape.min.js",
-  "module": "src/index.js",
+  "module": "dist/d3-shape.esm.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/d3/d3-shape.git"
@@ -34,9 +34,12 @@
     "d3-path": "1"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
     "d3-polygon": "1",
     "eslint": "5",
     "rollup": "0.64",
+    "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-terser": "1",
     "tape": "4"
   }

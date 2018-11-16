@@ -1,4 +1,5 @@
-import {terser} from "rollup-plugin-terser";
+import { terser } from "rollup-plugin-terser";
+import babel from "rollup-plugin-babel";
 import * as meta from "./package.json";
 
 const config = {
@@ -13,24 +14,44 @@ const config = {
     banner: `// ${meta.homepage} v${meta.version} Copyright ${(new Date).getFullYear()} ${meta.author.name}`,
     globals: Object.assign({}, ...Object.keys(meta.dependencies || {}).filter(key => /^d3-/.test(key)).map(key => ({[key]: "d3"})))
   },
-  plugins: []
+  plugins: [
+    babel({
+      exclude: "node_modules/**" // only transpile our source code
+    })
+  ]
 };
 
-export default [
-  config,
-  {
-    ...config,
-    output: {
-      ...config.output,
-      file: `dist/${meta.name}.min.js`
-    },
-    plugins: [
-      ...config.plugins,
-      terser({
-        output: {
-          preamble: config.output.banner
-        }
-      })
-    ]
-  }
-];
+const minConfig = {
+  ...config,
+  output: {
+    ...config.output,
+    file: `dist/${meta.name}.min.js`
+  },
+  plugins: [
+    ...config.plugins,
+    terser({
+      output: {
+        preamble: config.output.banner
+      }
+    })
+  ]
+};
+
+const esmConfig = {
+  ...config,
+  output: {
+    ...config.output,
+    format: "esm",
+    file: `dist/${meta.name}.esm.js`
+  },
+  plugins: [
+    ...config.plugins,
+    terser({
+      output: {
+        preamble: config.output.banner
+      }
+    })
+  ]
+};
+
+export default [config, minConfig, esmConfig];
