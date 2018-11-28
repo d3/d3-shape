@@ -25,9 +25,13 @@
     "url": "https://github.com/d3/d3-shape.git"
   },
   "scripts": {
-    "pretest": "rollup -c",
-    "test": "tape 'test/**/*-test.js' && eslint src",
-    "prepublishOnly": "rm -rf dist && yarn test",
+    "lint": "eslint src",
+    "lint:ci": "yarn run lint -f junit -o test-results/lint.xml",
+    "pretape": "rollup -c",
+    "tape": "tape test/**/*-test.js",
+    "tape:ci": "yarn run tape | tap-junit -o test-results -n tape.xml",
+    "test": "yarn run tape && yarn run lint",
+    "prepublishOnly": "rimraf dist && yarn test",
     "postpublish": "git push && git push --tags && cd ../d3.github.com && git pull && cp ../${npm_package_name}/dist/${npm_package_name}.js ${npm_package_name}.v${npm_package_version%%.*}.js && cp ../${npm_package_name}/dist/${npm_package_name}.min.js ${npm_package_name}.v${npm_package_version%%.*}.min.js && git add ${npm_package_name}.v${npm_package_version%%.*}.js ${npm_package_name}.v${npm_package_version%%.*}.min.js && git commit -m \"${npm_package_name} ${npm_package_version}\" && git push && cd - && zip -j dist/${npm_package_name}.zip -- LICENSE README.md dist/${npm_package_name}.js dist/${npm_package_name}.min.js"
   },
   "dependencies": {
@@ -36,8 +40,10 @@
   "devDependencies": {
     "d3-polygon": "1",
     "eslint": "5",
+    "rimraf": "2",
     "rollup": "0.64",
     "rollup-plugin-terser": "1",
+    "tap-junit": "2",
     "tape": "4"
   }
 }

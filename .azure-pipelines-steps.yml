@@ -1,0 +1,28 @@
+# Build steps common to all platforms
+
+steps:
+- script: |
+    yarn install
+  displayName: 'Install dependencies'
+
+- script: |
+    yarn run tape:ci
+  displayName: 'Run tests'
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFiles: test-results/tape.xml
+    testRunTitle: 'Test ($(Agent.JobName))'
+  condition: succeededOrFailed()
+  displayName: 'Publish test results'
+
+- script: |
+    yarn run lint:ci
+  displayName: 'Run lint'
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFiles: test-results/lint.xml
+    testRunTitle: 'Lint ($(Agent.JobName))'
+  condition: succeededOrFailed()
+  displayName: 'Publish lint results'
