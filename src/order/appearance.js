@@ -1,12 +1,12 @@
 import none from "./none";
 
 export default function(series) {
-  var starts = series.map(start);
-  return none(series).sort(function(a, b) { return starts[a] - starts[b]; });
+  var peaks = series.map(peak);
+  return none(series).sort(function(a, b) { return peaks[a] - peaks[b]; });
 }
 
-function start(series) {
-  var i = -1, n = series.length;
-  while (++i < n && !+series[i][1]);
-  return i;
+function peak(series) {
+  var i = -1, j = 0, n = series.length, vi, vj = -Infinity;
+  while (++i < n) if ((vi = +series[i][1]) > vj) vj = vi, j = i;
+  return j;
 }
