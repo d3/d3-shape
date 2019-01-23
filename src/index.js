@@ -38,6 +38,7 @@ export {default as stackOffsetDiverging} from "./offset/diverging";
 export {default as stackOffsetNone} from "./offset/none";
 export {default as stackOffsetSilhouette} from "./offset/silhouette";
 export {default as stackOffsetWiggle} from "./offset/wiggle";
+export {default as stackOrderAppearance} from "./order/appearance";
 export {default as stackOrderAscending} from "./order/ascending";
 export {default as stackOrderDescending} from "./order/descending";
 export {default as stackOrderInsideOut} from "./order/insideOut";

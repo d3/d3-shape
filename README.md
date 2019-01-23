@@ -1101,6 +1101,10 @@ function offsetNone(series, order) {
 
 Stack orders are typically not used directly, but are instead passed to [*stack*.order](#stack_order).
 
+<a name="stackOrderAppearance" href="#stackOrderAppearance">#</a> d3.<b>stackOrderAppearance</b>(<i>series</i>) [<>](https://github.com/d3/d3-shape/blob/master/src/order/appearance.js "Source")
+
+Returns a series order such that the earliest series (according to the first non-zero value) is at the bottom.
+
 <a name="stackOrderAscending" href="#stackOrderAscending">#</a> d3.<b>stackOrderAscending</b>(<i>series</i>) [<>](https://github.com/d3/d3-shape/blob/master/src/order/ascending.js "Source")
 
 Returns a series order such that the smallest series (according to the sum of values) is at the bottom.
