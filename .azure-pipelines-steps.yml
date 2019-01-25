@@ -1,28 +1,23 @@
-# Build steps common to all platforms
+#
+# Azure Pipelines build steps common to all platforms.
+#
 
 steps:
-- script: |
-    yarn install
-  displayName: 'Install dependencies'
+- task: NodeTool@0
+  inputs:
+    versionSpec: 10.x
+  displayName: Use Node.js 10
 
-- script: |
-    yarn run tape:ci
-  displayName: 'Run tests'
+- script: yarn install
+  displayName: Install dependencies
+
+- script: yarn run tape:ci
+  displayName: Run tests
 
 - task: PublishTestResults@2
   inputs:
+    testResultsFormat: JUnit
     testResultsFiles: test-results/tape.xml
-    testRunTitle: 'Test ($(Agent.JobName))'
+    testRunTitle: Tests ($(Agent.OS))
   condition: succeededOrFailed()
-  displayName: 'Publish test results'
-
-- script: |
-    yarn run lint:ci
-  displayName: 'Run lint'
-
-- task: PublishTestResults@2
-  inputs:
-    testResultsFiles: test-results/lint.xml
-    testRunTitle: 'Lint ($(Agent.JobName))'
-  condition: succeededOrFailed()
-  displayName: 'Publish lint results'
+  displayName: Publish test results

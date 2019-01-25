@@ -1,14 +1,35 @@
-# Azure Pipelines configuration. Builds and tests on Linux and Windows.
+#
+# Azure Pipelines configuration. Builds and tests d3-shape on Linux, macOS, and Windows.
+#
+# See .azure-pipelines-steps.yml for the detailed steps.
+#
 
 jobs:
-- job: 'Linux'
+- job: Linux
   pool:
     vmImage: ubuntu-16.04
   steps:
-  - template: '.azure-pipelines-steps.yml'
+  - template: .azure-pipelines-steps.yml
 
-- job: 'Windows'
+  - script: yarn run lint:ci
+    displayName: Run lint
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: JUnit
+      testResultsFiles: test-results/lint.xml
+      testRunTitle: Lint
+    condition: succeededOrFailed()
+    displayName: Publish lint results
+
+- job: macOS
+  pool:
+    vmImage: macOS-10.13
+  steps:
+  - template: .azure-pipelines-steps.yml
+
+- job: Windows
   pool:
     vmImage: vs2017-win2016
   steps:
-  - template: '.azure-pipelines-steps.yml'
+  - template: .azure-pipelines-steps.yml
