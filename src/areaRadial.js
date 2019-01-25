@@ -8,7 +8,7 @@ export default function() {
       x0 = a.lineX0,
       x1 = a.lineX1,
       y0 = a.lineY0,
-      y1 = a.lineY1;
+      y1 = a.lineY1;;
 
   a.angle = a.x, delete a.x;
   a.startAngle = a.x0, delete a.x0;
