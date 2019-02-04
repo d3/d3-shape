@@ -152,7 +152,7 @@ export default function() {
             oc;
 
         // Restrict the corner radius according to the sector angle.
-        if (da <= tau - epsilon && (oc = intersect(x01, y01, x00, y00, x11, y11, x10, y10))) {
+        if (da < pi && (oc = intersect(x01, y01, x00, y00, x11, y11, x10, y10))) {
           var ax = x01 - oc[0],
               ay = y01 - oc[1],
               bx = x11 - oc[0],
