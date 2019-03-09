@@ -913,7 +913,7 @@ Generates a symbol for the given *arguments*. The *arguments* are arbitrary; the
 
 <a name="symbol_type" href="#symbol_type">#</a> <i>symbol</i>.<b>type</b>([<i>type</i>]) [<>](https://github.com/d3/d3-shape/blob/master/src/symbol.js#L33 "Source")
 
-If *type* is specified, sets the symbol type to the specified function or symbol type and returns this line generator. If *type* is not specified, returns the current symbol type accessor, which defaults to:
+If *type* is specified, sets the symbol type to the specified function or symbol type and returns this line generator. When the *type* is a function it will receive the arguments passed into the symbol generator; if used with a selection then the function is evaluated for each selected element, in order, being passed the current datum (d), the current index (i), and the current group (nodes). If *type* is not specified, returns the current symbol type accessor, which defaults to:
 
 ```js
 function type() {
@@ -925,7 +925,7 @@ See [symbols](#symbols) for the set of built-in symbol types. To implement a cus
 
 <a name="symbol_size" href="#symbol_size">#</a> <i>symbol</i>.<b>size</b>([<i>size</i>]) [<>](https://github.com/d3/d3-shape/blob/master/src/symbol.js#L37 "Source")
 
-If *size* is specified, sets the size to the specified function or number and returns this symbol generator. If *size* is not specified, returns the current size accessor, which defaults to:
+If *size* is specified, sets the size to the specified function or number and returns this symbol generator. When the *size* is a function it will receive the arguments passed into the symbol generator; if used with a selection then the function is evaluated for each selected element, in order, being passed the current datum (d), the current index (i), and the current group (nodes). If *size* is not specified, returns the current size accessor, which defaults to:
 
 ```js
 function size() {
