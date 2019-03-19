@@ -16,6 +16,17 @@ tape("stackOffsetDiverging(series, order) applies a zero baseline, ignoring exis
   test.end();
 });
 
+tape.only("stackOffsetDiverging(series, order) handles a single series", function(test) {
+  var series = [
+    [[1, 2], [2, 4], [3, 4]]
+  ];
+  shape.stackOffsetDiverging(series, shape.stackOrderNone(series));
+  test.deepEqual(series, [
+    [[0, 1], [0, 2], [0, 1]]
+  ]);
+  test.end();
+});
+
 tape("stackOffsetDiverging(series, order) treats NaN as zero", function(test) {
   var series = [
     [[0, 1], [0,   2], [0, 1]],
