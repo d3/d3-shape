@@ -1,5 +1,5 @@
-import noop from "../noop";
-import {point} from "./cardinal";
+import noop from "../noop.js";
+import {point} from "./cardinal.js";
 
 export function CardinalClosed(context, tension) {
   this._context = context;

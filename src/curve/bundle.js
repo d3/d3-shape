@@ -1,4 +1,4 @@
-import {Basis} from "./basis";
+import {Basis} from "./basis.js";
 
 function Bundle(context, beta) {
   this._basis = new Basis(context);

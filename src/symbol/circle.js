@@ -1,4 +1,4 @@
-import {pi, tau} from "../math";
+import {pi, tau} from "../math.js";
 
 export default {
   draw: function(context, size) {

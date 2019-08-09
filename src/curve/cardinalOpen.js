@@ -1,4 +1,4 @@
-import {point} from "./cardinal";
+import {point} from "./cardinal.js";
 
 export function CardinalOpen(context, tension) {
   this._context = context;

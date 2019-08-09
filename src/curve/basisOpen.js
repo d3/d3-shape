@@ -1,4 +1,4 @@
-import {point} from "./basis";
+import {point} from "./basis.js";
 
 function BasisOpen(context) {
   this._context = context;

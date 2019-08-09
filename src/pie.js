@@ -1,7 +1,7 @@
-import constant from "./constant";
-import descending from "./descending";
-import identity from "./identity";
-import {tau} from "./math";
+import constant from "./constant.js";
+import descending from "./descending.js";
+import identity from "./identity.js";
+import {tau} from "./math.js";
 
 export default function() {
   var value = identity,

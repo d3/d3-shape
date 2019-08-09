@@ -1,8 +1,8 @@
 import {path} from "d3-path";
-import {slice} from "../array";
-import constant from "../constant";
-import {x as pointX, y as pointY} from "../point";
-import pointRadial from "../pointRadial";
+import {slice} from "../array.js";
+import constant from "../constant.js";
+import {x as pointX, y as pointY} from "../point.js";
+import pointRadial from "../pointRadial.js";
 
 function linkSource(d) {
   return d.source;

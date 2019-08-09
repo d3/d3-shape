@@ -1,7 +1,7 @@
 import {path} from "d3-path";
-import constant from "./constant";
-import curveLinear from "./curve/linear";
-import {x as pointX, y as pointY} from "./point";
+import constant from "./constant.js";
+import curveLinear from "./curve/linear.js";
+import {x as pointX, y as pointY} from "./point.js";
 
 export default function() {
   var x = pointX,

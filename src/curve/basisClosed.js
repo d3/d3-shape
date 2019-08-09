@@ -1,5 +1,5 @@
-import noop from "../noop";
-import {point} from "./basis";
+import noop from "../noop.js";
+import {point} from "./basis.js";
 
 function BasisClosed(context) {
   this._context = context;

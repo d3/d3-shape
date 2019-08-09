@@ -1,6 +1,6 @@
 import {path} from "d3-path";
-import constant from "./constant";
-import {abs, acos, asin, atan2, cos, epsilon, halfPi, max, min, pi, sin, sqrt, tau} from "./math";
+import constant from "./constant.js";
+import {abs, acos, asin, atan2, cos, epsilon, halfPi, max, min, pi, sin, sqrt, tau} from "./math.js";
 
 function arcInnerRadius(d) {
   return d.innerRadius;

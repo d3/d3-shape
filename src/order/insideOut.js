@@ -1,5 +1,5 @@
-import appearance from "./appearance";
-import {sum} from "./ascending";
+import appearance from "./appearance.js";
+import {sum} from "./ascending.js";
 
 export default function(series) {
   var n = series.length,
