@@ -24,6 +24,10 @@
     "type": "git",
     "url": "https://github.com/d3/d3-shape.git"
   },
+  "files": [
+    "dist/**/*.js",
+    "src/**/*.js"
+  ],
   "scripts": {
     "pretest": "rollup -c",
     "test": "tape 'test/**/*-test.js' && eslint src",
