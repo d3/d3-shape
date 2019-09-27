@@ -37,6 +37,7 @@
   "dependencies": {
     "d3-path": "1"
   },
+  "sideEffects": false,
   "devDependencies": {
     "d3-polygon": "1",
     "eslint": "6",
