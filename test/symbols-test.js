@@ -6,6 +6,7 @@ tape("symbols is the array of symbol types", function(test) {
     shape.symbolCircle,
     shape.symbolCross,
     shape.symbolDiamond,
+    shape.symbolEcks,
     shape.symbolSquare,
     shape.symbolStar,
     shape.symbolTriangle,

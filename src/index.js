@@ -11,6 +11,7 @@ export {default as symbol, symbols} from "./symbol.js";
 export {default as symbolCircle} from "./symbol/circle.js";
 export {default as symbolCross} from "./symbol/cross.js";
 export {default as symbolDiamond} from "./symbol/diamond.js";
+export {default as symbolEcks} from "./symbol/ecks.js";
 export {default as symbolSquare} from "./symbol/square.js";
 export {default as symbolStar} from "./symbol/star.js";
 export {default as symbolTriangle} from "./symbol/triangle.js";

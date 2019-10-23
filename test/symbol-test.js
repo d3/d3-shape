@@ -84,6 +84,20 @@ tape("symbol.type(symbolDiamond) generates the expected path", function(test) {
   test.end();
 });
 
+tape("symbol.type(symbolEcks) generates a polygon with the specified size", function (test) {
+  var p = polygonContext(), s = shape.symbol().type(shape.symbolEcks).context(p);
+  s.size(1)(); test.inDelta(p.area(), 1);
+  s.size(240)(); test.inDelta(p.area(), 240);
+  test.end();
+});
+
+tape("symbol.type(symbolEcks) generates the expected path", function (test) {
+  var s = shape.symbol().type(shape.symbolEcks).size(function(d) { return d; });
+  test.pathEqual(s(0), "M0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0Z");
+  test.pathEqual(s(10), "M0,-1L1,-2L2,-1L1,0L2,1L1,2L0,1L-1,2L-2,1L-1,0L-2,-1L-1,-2Z");
+  test.end();
+});
+
 tape("symbol.type(symbolStar) generates a polygon with the specified size", function(test) {
   var p = polygonContext(), s = shape.symbol().type(shape.symbolStar).context(p);
   s.size(1)(); test.inDelta(p.area(), 1);
