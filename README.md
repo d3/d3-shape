@@ -1134,7 +1134,7 @@ Applies a zero baseline and normalizes the values for each point such that the t
 
 <a name="stackOffsetDiverging" href="#stackOffsetDiverging">#</a> d3.<b>stackOffsetDiverging</b>(<i>series</i>, <i>order</i>) · [Source](https://github.com/d3/d3-shape/blob/master/src/offset/diverging.js)
 
-Positive values are stacked above zero, while negative values are [stacked below zero](https://bl.ocks.org/mbostock/b5935342c6d21928111928401e2c8608).
+Positive values are stacked above zero, negative values are [stacked below zero](https://bl.ocks.org/mbostock/b5935342c6d21928111928401e2c8608), and zero values are stacked at zero.
 
 <a name="stackOffsetNone" href="#stackOffsetNone">#</a> d3.<b>stackOffsetNone</b>(<i>series</i>, <i>order</i>) · [Source](https://github.com/d3/d3-shape/blob/master/src/offset/none.js)
 
