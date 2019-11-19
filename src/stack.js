@@ -29,7 +29,7 @@ export default function() {
       }
     }
 
-    for (i = 0, oz = order(sz); i < n; ++i) {
+    for (i = 0, oz = Array.from(order(sz)); i < n; ++i) {
       sz[oz[i]].index = i;
     }
 
