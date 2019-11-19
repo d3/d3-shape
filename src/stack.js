@@ -21,12 +21,12 @@ export default function() {
   function stack(data) {
     var kz = keys.apply(this, arguments),
         sz = kz.map(stackSeries),
-        i, n = sz.length, m = -1,
+        i, n = sz.length, j = -1,
         oz;
 
     for (const d of data) {
-      for (i = 0, ++m; i < n; ++i) {
-        (sz[i][m] = [0, +value(d, kz[i], m, data)]).data = d;
+      for (i = 0, ++j; i < n; ++i) {
+        (sz[i][j] = [0, +value(d, kz[i], j, data)]).data = d;
       }
     }
 
