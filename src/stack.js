@@ -19,14 +19,13 @@ export default function() {
       value = stackValue;
 
   function stack(data) {
-    var kz = keys.apply(this, arguments),
-        sz = kz.map(stackSeries),
+    var sz = Array.from(keys.apply(this, arguments), stackSeries),
         i, n = sz.length, j = -1,
         oz;
 
     for (const d of data) {
       for (i = 0, ++j; i < n; ++i) {
-        (sz[i][j] = [0, +value(d, kz[i], j, data)]).data = d;
+        (sz[i][j] = [0, +value(d, sz[i].key, j, data)]).data = d;
       }
     }
 
