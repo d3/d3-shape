@@ -24,6 +24,16 @@ tape("pie(data) returns arcs in input order", function(test) {
   test.end();
 });
 
+tape("pie(data) accepts an iterable", function(test) {
+  var p = shape.pie();
+  test.deepEqual(p(new Set([1, 3, 2])), [
+    {data: 1, value: 1, index: 2, startAngle: 5.235987755982988, endAngle: 6.283185307179585, padAngle: 0},
+    {data: 3, value: 3, index: 0, startAngle: 0.000000000000000, endAngle: 3.141592653589793, padAngle: 0},
+    {data: 2, value: 2, index: 1, startAngle: 3.141592653589793, endAngle: 5.235987755982988, padAngle: 0}
+  ]);
+  test.end();
+});
+
 tape("pie(data) coerces the specified value to a number", function(test) {
   var p = shape.pie(), three = {valueOf: function() { return 3; }};
   test.deepEqual(p(["1", three, "2"]), [
