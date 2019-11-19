@@ -6,6 +6,12 @@ function stackValue(d, key) {
   return d[key];
 }
 
+function stackSeries(key) {
+  const series = [];
+  series.key = key;
+  return series;
+}
+
 export default function() {
   var keys = constant([]),
       order = orderNone,
@@ -14,18 +20,14 @@ export default function() {
 
   function stack(data) {
     var kz = keys.apply(this, arguments),
-        i,
-        m = data.length,
-        n = kz.length,
-        sz = new Array(n),
+        sz = kz.map(stackSeries),
+        i, n = sz.length, m = -1,
         oz;
 
-    for (i = 0; i < n; ++i) {
-      for (var ki = kz[i], si = sz[i] = new Array(m), j = 0, sij; j < m; ++j) {
-        si[j] = sij = [0, +value(data[j], ki, j, data)];
-        sij.data = data[j];
+    for (const d of data) {
+      for (i = 0, ++m; i < n; ++i) {
+        (sz[i][m] = [0, +value(d, kz[i], m, data)]).data = d;
       }
-      si.key = ki;
     }
 
     for (i = 0, oz = order(sz); i < n; ++i) {
