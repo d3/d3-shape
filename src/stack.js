@@ -1,4 +1,3 @@
-import {slice} from "./array.js";
 import constant from "./constant.js";
 import offsetNone from "./offset/none.js";
 import orderNone from "./order/none.js";
@@ -38,7 +37,7 @@ export default function() {
   }
 
   stack.keys = function(_) {
-    return arguments.length ? (keys = typeof _ === "function" ? _ : constant(slice.call(_)), stack) : keys;
+    return arguments.length ? (keys = typeof _ === "function" ? _ : constant(Array.from(_)), stack) : keys;
   };
 
   stack.value = function(_) {
@@ -46,7 +45,7 @@ export default function() {
   };
 
   stack.order = function(_) {
-    return arguments.length ? (order = _ == null ? orderNone : typeof _ === "function" ? _ : constant(slice.call(_)), stack) : order;
+    return arguments.length ? (order = _ == null ? orderNone : typeof _ === "function" ? _ : constant(Array.from(_)), stack) : order;
   };
 
   stack.offset = function(_) {
