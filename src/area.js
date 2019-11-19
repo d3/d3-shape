@@ -1,4 +1,5 @@
 import {path} from "d3-path";
+import array from "./array.js";
 import constant from "./constant.js";
 import curveLinear from "./curve/linear.js";
 import line from "./line.js";
@@ -18,7 +19,7 @@ export default function() {
     var i,
         j,
         k,
-        n = data.length,
+        n = (data = array(data)).length,
         d,
         defined0 = false,
         buffer,

@@ -1,3 +1,4 @@
+import array from "./array.js";
 import constant from "./constant.js";
 import offsetNone from "./offset/none.js";
 import orderNone from "./order/none.js";
@@ -29,7 +30,7 @@ export default function() {
       }
     }
 
-    for (i = 0, oz = Array.from(order(sz)); i < n; ++i) {
+    for (i = 0, oz = array(order(sz)); i < n; ++i) {
       sz[oz[i]].index = i;
     }
 
