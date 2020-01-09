@@ -1043,6 +1043,7 @@ The resulting array has one element per *series*. Each series has one point per 
   [[6720, 7120], [4000, 4400], [2240, 2640], [1440, 1840]], // dates
 ]
 ```
+Each point also has a property, `data`, which contains the original data object used to compute that point.
 
 Each series in then typically passed to an [area generator](#areas) to render an area chart, or used to construct rectangles for a bar chart.
 
