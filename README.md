@@ -52,6 +52,8 @@ var line = d3.line();
 * [Custom Symbol Types](#custom-symbol-types)
 * [Stacks](#stacks)
 
+Note: all the methods that accept arrays also accept iterables and convert them to arrays internally.
+
 ### Arcs
 
 [<img alt="Pie Chart" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/pie.png" width="295" height="295">](http://bl.ocks.org/mbostock/8878e7fd82034f1d63cf)[<img alt="Donut Chart" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/donut.png" width="295" height="295">](http://bl.ocks.org/mbostock/2394b23da1994fc202e1)
