@@ -495,8 +495,8 @@ var data = [
 ];
 
 var area = d3.area()
-    .x(function(d) { return x(d.date); })
-    .y1(function(d) { return y(d.value); })
+    .x(d => x(d.date))
+    .y1(d => y(d.value))
     .y0(y(0));
 ```
 
@@ -637,9 +637,7 @@ While [lines](#lines) are defined as a sequence of two-dimensional [*x*, *y*] po
 Curves are typically not constructed or used directly, instead being passed to [*line*.curve](#line_curve) and [*area*.curve](#area_curve). For example:
 
 ```js
-var line = d3.line()
-    .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.value); })
+var line = d3.line(d => d.date, d => d.value)
     .curve(d3.curveCatmullRom.alpha(0.5));
 ```
 
