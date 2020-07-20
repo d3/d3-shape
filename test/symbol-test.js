@@ -140,3 +140,11 @@ tape("symbol.type(symbolWye) generates the expected path", function(test) {
   test.pathEqual(s(10), "M0.853360,0.492688L0.853360,2.199408L-0.853360,2.199408L-0.853360,0.492688L-2.331423,-0.360672L-1.478063,-1.838735L0,-0.985375L1.478063,-1.838735L2.331423,-0.360672Z");
   test.end();
 });
+
+tape("symbol(type, size) is equivalent to symbol().type(type).size(size)", function(test) {
+  var s0 = shape.symbol().type(shape.symbolCross).size(16),
+      s1 = shape.symbol(shape.symbolCross, 16);
+  test.equal(s0(), s1()); 
+  test.end();
+});
+
