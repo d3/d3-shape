@@ -30,6 +30,7 @@ export {default as curveLinearClosed} from "./curve/linearClosed.js";
 export {default as curveLinear} from "./curve/linear.js";
 export {monotoneX as curveMonotoneX, monotoneY as curveMonotoneY} from "./curve/monotone.js";
 export {default as curveNatural} from "./curve/natural.js";
+export {default as curvePoints} from "./curve/points.js";
 export {default as curveStep, stepAfter as curveStepAfter, stepBefore as curveStepBefore} from "./curve/step.js";
 
 export {default as stack} from "./stack.js";

@@ -775,6 +775,12 @@ Produces a piecewise constant function (a [step function](https://en.wikipedia.o
 
 Produces a piecewise constant function (a [step function](https://en.wikipedia.org/wiki/Step_function)) consisting of alternating horizontal and vertical lines. The *y*-value changes before the *x*-value.
 
+<a name="curvePoints" href="#curvePoints">#</a> d3.<b>curvePoints</b>([<i>radius</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/curve/points.js), [Examples](https://observablehq.com/d/5c4650cfb7214d6c)
+
+[<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/points.png" width="888" height="120" alt="points">](https://observablehq.com/d/5c4650cfb7214d6c)
+
+Returns a curve that produces a circle of radius *radius* centered at coordinates ⟨*x*,*y*⟩ for each point. *radius* defaults to 0.5 if not specified.
+
 ### Custom Curves
 
 Curves are typically not used directly, instead being passed to [*line*.curve](#line_curve) and [*area*.curve](#area_curve). However, you can define your own curve implementation should none of the built-in curves satisfy your needs using the following interface. You can also use this low-level interface with a built-in curve type as an alternative to the line and area generators.
