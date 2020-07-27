@@ -904,9 +904,9 @@ Equivalent to [*link*.y](#link_y), except the accessor returns the radius: the d
 
 Symbols provide a categorical shape encoding as is commonly used in scatterplots. Symbols are always centered at ⟨0,0⟩; use a transform (see: [SVG](http://www.w3.org/TR/SVG/coords.html#TransformAttribute), [Canvas](http://www.w3.org/TR/2dcontext/#transformations)) to move the symbol to a different position.
 
-<a name="symbol" href="#symbol">#</a> d3.<b>symbol</b>() · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js)
+<a name="symbol" href="#symbol">#</a> d3.<b>symbol</b>([<i>type</i>][, <i>size</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js)
 
-Constructs a new symbol generator with the default settings.
+Constructs a new symbol generator of the specified [type](#symbol_type) and [size](#symbol_size). If not specified, *type* defaults to a circle, and *size* defaults to 64.
 
 <a name="_symbol" href="#_symbol">#</a> <i>symbol</i>(<i>arguments</i>…) · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js)
 

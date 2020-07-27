@@ -18,10 +18,10 @@ export var symbols = [
   wye
 ];
 
-export default function() {
-  var type = constant(circle),
-      size = constant(64),
-      context = null;
+export default function(type, size) {
+  var context = null;
+  type = typeof type === "function" ? type : constant(type || circle);
+  size = typeof size === "function" ? size : constant(size === undefined ? 64 : +size);
 
   function symbol() {
     var buffer;
