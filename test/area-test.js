@@ -16,6 +16,17 @@ tape("area() returns a default area shape", function(test) {
   test.end();
 });
 
+tape("area(x, y0, y1) sets x0, y0 and y1", function(test) {
+  var x = function() {}, y = function() {};
+  test.equal(shape.area(x).x0(), x);
+  test.equal(shape.area(x, y).y0(), y);
+  test.equal(shape.area(x, 0, y).y1(), y);
+  test.equal(shape.area(3, 2, 1).x0()("aa"), 3);
+  test.equal(shape.area(3, 2, 1).y0()("aa"), 2);
+  test.equal(shape.area(3, 2, 1).y1()("aa"), 1);
+  test.end();
+});
+
 tape("area.x(f)(data) passes d, i and data to the specified function f", function(test) {
   var data = ["a", "b"], actual = [];
   shape.area().x(function() { actual.push([].slice.call(arguments)); })(data);

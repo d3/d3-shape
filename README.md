@@ -351,9 +351,9 @@ The pad angle here means the angular separation between each adjacent arc. The t
 
 The line generator produces a [spline](https://en.wikipedia.org/wiki/Spline_\(mathematics\)) or [polyline](https://en.wikipedia.org/wiki/Polygonal_chain), as in a line chart. Lines also appear in many other visualization types, such as the links in [hierarchical edge bundling](https://observablehq.com/@d3/hierarchical-edge-bundling).
 
-<a name="line" href="#line">#</a> d3.<b>line</b>() · [Source](https://github.com/d3/d3-shape/blob/master/src/line.js), [Examples](https://observablehq.com/@d3/d3-line)
+<a name="line" href="#line">#</a> d3.<b>line</b>([<i>x</i>][, <i>y</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/line.js), [Examples](https://observablehq.com/@d3/d3-line)
 
-Constructs a new line generator with the default settings.
+Constructs a new line generator with the default settings. If *x* or *y* are specified, sets the corresponding accessors to the specified function or number and returns this line generator.
 
 <a name="_line" href="#_line">#</a> <i>line</i>(<i>data</i>) · [Source](https://github.com/d3/d3-shape/blob/master/src/line.js), [Examples](https://observablehq.com/@d3/d3-line)
 
@@ -459,9 +459,9 @@ Equivalent to [*line*.context](#line_context).
 
 The area generator produces an area, as in an area chart. An area is defined by two bounding [lines](#lines), either splines or polylines. Typically, the two lines share the same [*x*-values](#area_x) ([x0](#area_x0) = [x1](#area_x1)), differing only in *y*-value ([y0](#area_y0) and [y1](#area_y1)); most commonly, y0 is defined as a constant representing [zero](http://www.vox.com/2015/11/19/9758062/y-axis-zero-chart). The first line (the <i>topline</i>) is defined by x1 and y1 and is rendered first; the second line (the <i>baseline</i>) is defined by x0 and y0 and is rendered second, with the points in reverse order. With a [curveLinear](#curveLinear) [curve](#area_curve), this produces a clockwise polygon.
 
-<a name="area" href="#area">#</a> d3.<b>area</b>() · [Source](https://github.com/d3/d3-shape/blob/master/src/area.js)
+<a name="area" href="#area">#</a> d3.<b>area</b>([<i>x</i>][, <i>y0</i>][, <i>y1</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/area.js)
 
-Constructs a new area generator with the default settings.
+Constructs a new area generator with the default settings. If *x*, *y0* or *y1* are specified, sets the corresponding accessors to the specified function or number and returns this area generator.
 
 <a name="_area" href="#_area">#</a> <i>area</i>(<i>data</i>) · [Source](https://github.com/d3/d3-shape/blob/master/src/area.js)
 
@@ -495,8 +495,8 @@ var data = [
 ];
 
 var area = d3.area()
-    .x(function(d) { return x(d.date); })
-    .y1(function(d) { return y(d.value); })
+    .x(d => x(d.date))
+    .y1(d => y(d.value))
     .y0(y(0));
 ```
 
@@ -637,9 +637,7 @@ While [lines](#lines) are defined as a sequence of two-dimensional [*x*, *y*] po
 Curves are typically not constructed or used directly, instead being passed to [*line*.curve](#line_curve) and [*area*.curve](#area_curve). For example:
 
 ```js
-var line = d3.line()
-    .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.value); })
+var line = d3.line(d => d.date, d => d.value)
     .curve(d3.curveCatmullRom.alpha(0.5));
 ```
 
