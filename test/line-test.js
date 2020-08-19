@@ -14,6 +14,15 @@ tape("line() returns a default line shape", function(test) {
   test.end();
 });
 
+tape("line(x, y) sets x and y", function(test) {
+  var x = function() {}, y = function() {};
+  test.equal(shape.line(x).x(), x);
+  test.equal(shape.line(x, y).y(), y);
+  test.equal(shape.line(3, 2).x()("aa"), 3);
+  test.equal(shape.line(3, 2).y()("aa"), 2);
+  test.end();
+});
+
 tape("line.x(f)(data) passes d, i and data to the specified function f", function(test) {
   var data = ["a", "b"], actual = [];
   shape.line().x(function() { actual.push([].slice.call(arguments)); })(data);

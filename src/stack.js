@@ -1,10 +1,16 @@
-import {slice} from "./array.js";
+import array from "./array.js";
 import constant from "./constant.js";
 import offsetNone from "./offset/none.js";
 import orderNone from "./order/none.js";
 
 function stackValue(d, key) {
   return d[key];
+}
+
+function stackSeries(key) {
+  const series = [];
+  series.key = key;
+  return series;
 }
 
 export default function() {
@@ -14,22 +20,17 @@ export default function() {
       value = stackValue;
 
   function stack(data) {
-    var kz = keys.apply(this, arguments),
-        i,
-        m = data.length,
-        n = kz.length,
-        sz = new Array(n),
+    var sz = Array.from(keys.apply(this, arguments), stackSeries),
+        i, n = sz.length, j = -1,
         oz;
 
-    for (i = 0; i < n; ++i) {
-      for (var ki = kz[i], si = sz[i] = new Array(m), j = 0, sij; j < m; ++j) {
-        si[j] = sij = [0, +value(data[j], ki, j, data)];
-        sij.data = data[j];
+    for (const d of data) {
+      for (i = 0, ++j; i < n; ++i) {
+        (sz[i][j] = [0, +value(d, sz[i].key, j, data)]).data = d;
       }
-      si.key = ki;
     }
 
-    for (i = 0, oz = order(sz); i < n; ++i) {
+    for (i = 0, oz = array(order(sz)); i < n; ++i) {
       sz[oz[i]].index = i;
     }
 
@@ -38,7 +39,7 @@ export default function() {
   }
 
   stack.keys = function(_) {
-    return arguments.length ? (keys = typeof _ === "function" ? _ : constant(slice.call(_)), stack) : keys;
+    return arguments.length ? (keys = typeof _ === "function" ? _ : constant(Array.from(_)), stack) : keys;
   };
 
   stack.value = function(_) {
@@ -46,7 +47,7 @@ export default function() {
   };
 
   stack.order = function(_) {
-    return arguments.length ? (order = _ == null ? orderNone : typeof _ === "function" ? _ : constant(slice.call(_)), stack) : order;
+    return arguments.length ? (order = _ == null ? orderNone : typeof _ === "function" ? _ : constant(Array.from(_)), stack) : order;
   };
 
   stack.offset = function(_) {

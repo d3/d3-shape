@@ -26,11 +26,11 @@ For more, read [Introducing d3-shape](https://medium.com/@mbostock/introducing-d
 
 ## Installing
 
-If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release](https://github.com/d3/d3-shape/releases/latest). You can also load directly from [d3js.org](https://d3js.org), either as a [standalone library](https://d3js.org/d3-shape.v1.min.js) or as part of [D3](https://github.com/d3/d3). AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3` global is exported:
+If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release](https://github.com/d3/d3-shape/releases/latest). You can also load directly from [d3js.org](https://d3js.org), either as a [standalone library](https://d3js.org/d3-shape.v2.min.js) or as part of [D3](https://github.com/d3/d3). AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3` global is exported:
 
 ```html
-<script src="https://d3js.org/d3-path.v1.min.js"></script>
-<script src="https://d3js.org/d3-shape.v1.min.js"></script>
+<script src="https://d3js.org/d3-path.v2.min.js"></script>
+<script src="https://d3js.org/d3-shape.v2.min.js"></script>
 <script>
 
 var line = d3.line();
@@ -51,6 +51,8 @@ var line = d3.line();
 * [Symbols](#symbols)
 * [Custom Symbol Types](#custom-symbol-types)
 * [Stacks](#stacks)
+
+Note: all the methods that accept arrays also accept iterables and convert them to arrays internally.
 
 ### Arcs
 
@@ -349,9 +351,9 @@ The pad angle here means the angular separation between each adjacent arc. The t
 
 The line generator produces a [spline](https://en.wikipedia.org/wiki/Spline_\(mathematics\)) or [polyline](https://en.wikipedia.org/wiki/Polygonal_chain), as in a line chart. Lines also appear in many other visualization types, such as the links in [hierarchical edge bundling](https://observablehq.com/@d3/hierarchical-edge-bundling).
 
-<a name="line" href="#line">#</a> d3.<b>line</b>() · [Source](https://github.com/d3/d3-shape/blob/master/src/line.js), [Examples](https://observablehq.com/@d3/d3-line)
+<a name="line" href="#line">#</a> d3.<b>line</b>([<i>x</i>][, <i>y</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/line.js), [Examples](https://observablehq.com/@d3/d3-line)
 
-Constructs a new line generator with the default settings.
+Constructs a new line generator with the default settings. If *x* or *y* are specified, sets the corresponding accessors to the specified function or number and returns this line generator.
 
 <a name="_line" href="#_line">#</a> <i>line</i>(<i>data</i>) · [Source](https://github.com/d3/d3-shape/blob/master/src/line.js), [Examples](https://observablehq.com/@d3/d3-line)
 
@@ -457,9 +459,9 @@ Equivalent to [*line*.context](#line_context).
 
 The area generator produces an area, as in an area chart. An area is defined by two bounding [lines](#lines), either splines or polylines. Typically, the two lines share the same [*x*-values](#area_x) ([x0](#area_x0) = [x1](#area_x1)), differing only in *y*-value ([y0](#area_y0) and [y1](#area_y1)); most commonly, y0 is defined as a constant representing [zero](http://www.vox.com/2015/11/19/9758062/y-axis-zero-chart). The first line (the <i>topline</i>) is defined by x1 and y1 and is rendered first; the second line (the <i>baseline</i>) is defined by x0 and y0 and is rendered second, with the points in reverse order. With a [curveLinear](#curveLinear) [curve](#area_curve), this produces a clockwise polygon.
 
-<a name="area" href="#area">#</a> d3.<b>area</b>() · [Source](https://github.com/d3/d3-shape/blob/master/src/area.js)
+<a name="area" href="#area">#</a> d3.<b>area</b>([<i>x</i>][, <i>y0</i>][, <i>y1</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/area.js)
 
-Constructs a new area generator with the default settings.
+Constructs a new area generator with the default settings. If *x*, *y0* or *y1* are specified, sets the corresponding accessors to the specified function or number and returns this area generator.
 
 <a name="_area" href="#_area">#</a> <i>area</i>(<i>data</i>) · [Source](https://github.com/d3/d3-shape/blob/master/src/area.js)
 
@@ -493,8 +495,8 @@ var data = [
 ];
 
 var area = d3.area()
-    .x(function(d) { return x(d.date); })
-    .y1(function(d) { return y(d.value); })
+    .x(d => x(d.date))
+    .y1(d => y(d.value))
     .y0(y(0));
 ```
 
@@ -635,9 +637,7 @@ While [lines](#lines) are defined as a sequence of two-dimensional [*x*, *y*] po
 Curves are typically not constructed or used directly, instead being passed to [*line*.curve](#line_curve) and [*area*.curve](#area_curve). For example:
 
 ```js
-var line = d3.line()
-    .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.value); })
+var line = d3.line(d => d.date, d => d.value)
     .curve(d3.curveCatmullRom.alpha(0.5));
 ```
 
@@ -902,15 +902,15 @@ Equivalent to [*link*.y](#link_y), except the accessor returns the radius: the d
 
 Symbols provide a categorical shape encoding as is commonly used in scatterplots. Symbols are always centered at ⟨0,0⟩; use a transform (see: [SVG](http://www.w3.org/TR/SVG/coords.html#TransformAttribute), [Canvas](http://www.w3.org/TR/2dcontext/#transformations)) to move the symbol to a different position.
 
-<a name="symbol" href="#symbol">#</a> d3.<b>symbol</b>() · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js)
+<a name="symbol" href="#symbol">#</a> d3.<b>symbol</b>([<i>type</i>][, <i>size</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
 
-Constructs a new symbol generator with the default settings.
+Constructs a new symbol generator of the specified [type](#symbol_type) and [size](#symbol_size). If not specified, *type* defaults to a circle, and *size* defaults to 64.
 
-<a name="_symbol" href="#_symbol">#</a> <i>symbol</i>(<i>arguments</i>…) · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js)
+<a name="_symbol" href="#_symbol">#</a> <i>symbol</i>(<i>arguments</i>…) · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
 
 Generates a symbol for the given *arguments*. The *arguments* are arbitrary; they are simply propagated to the symbol generator’s accessor functions along with the `this` object. For example, with the default settings, no arguments are needed to produce a circle with area 64 square pixels. If the symbol generator has a [context](#symbol_context), then the symbol is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls and this function returns void. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string is returned.
 
-<a name="symbol_type" href="#symbol_type">#</a> <i>symbol</i>.<b>type</b>([<i>type</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js)
+<a name="symbol_type" href="#symbol_type">#</a> <i>symbol</i>.<b>type</b>([<i>type</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
 
 If *type* is specified, sets the symbol type to the specified function or symbol type and returns this symbol generator. If *type* is a function, the symbol generator’s arguments and *this* are passed through. (See [*selection*.attr](https://github.com/d3/d3-selection/blob/master/README.md#selection_attr) if you are using d3-selection.) If *type* is not specified, returns the current symbol type accessor, which defaults to:
 
@@ -922,7 +922,7 @@ function type() {
 
 See [symbols](#symbols) for the set of built-in symbol types. To implement a custom symbol type, pass an object that implements [*symbolType*.draw](#symbolType_draw).
 
-<a name="symbol_size" href="#symbol_size">#</a> <i>symbol</i>.<b>size</b>([<i>size</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js)
+<a name="symbol_size" href="#symbol_size">#</a> <i>symbol</i>.<b>size</b>([<i>size</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
 
 If *size* is specified, sets the size to the specified function or number and returns this symbol generator. If *size* is a function, the symbol generator’s arguments and *this* are passed through. (See [*selection*.attr](https://github.com/d3/d3-selection/blob/master/README.md#selection_attr) if you are using d3-selection.) If *size* is not specified, returns the current size accessor, which defaults to:
 
@@ -938,39 +938,39 @@ Specifying the size as a function is useful for constructing a scatterplot with 
 
 If *context* is specified, sets the context and returns this symbol generator. If *context* is not specified, returns the current context, which defaults to null. If the context is not null, then the [generated symbol](#_symbol) is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated symbol is returned.
 
-<a name="symbols" href="#symbols">#</a> d3.<b>symbols</b>
+<a name="symbols" href="#symbols">#</a> d3.<b>symbols</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
 
 An array containing the set of all built-in symbol types: [circle](#symbolCircle), [cross](#symbolCross), [diamond](#symbolDiamond), [square](#symbolSquare), [star](#symbolStar), [triangle](#symbolTriangle), and [wye](#symbolWye). Useful for constructing the range of an [ordinal scale](https://github.com/d3/d3-scale#ordinal-scales) should you wish to use a shape encoding for categorical data.
 
-<a name="symbolCircle" href="#symbolCircle">#</a> d3.<b>symbolCircle</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/circle.js)
+<a name="symbolCircle" href="#symbolCircle">#</a> d3.<b>symbolCircle</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/circle.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
 
 The circle symbol type.
 
-<a name="symbolCross" href="#symbolCross">#</a> d3.<b>symbolCross</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/cross.js)
+<a name="symbolCross" href="#symbolCross">#</a> d3.<b>symbolCross</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/cross.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
 
 The Greek cross symbol type, with arms of equal length.
 
-<a name="symbolDiamond" href="#symbolDiamond">#</a> d3.<b>symbolDiamond</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/diamond.js)
+<a name="symbolDiamond" href="#symbolDiamond">#</a> d3.<b>symbolDiamond</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/diamond.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
 
 The rhombus symbol type.
 
-<a name="symbolSquare" href="#symbolSquare">#</a> d3.<b>symbolSquare</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/square.js)
+<a name="symbolSquare" href="#symbolSquare">#</a> d3.<b>symbolSquare</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/square.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
 
 The square symbol type.
 
-<a name="symbolStar" href="#symbolStar">#</a> d3.<b>symbolStar</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/star.js)
+<a name="symbolStar" href="#symbolStar">#</a> d3.<b>symbolStar</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/star.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
 
 The pentagonal star (pentagram) symbol type.
 
-<a name="symbolTriangle" href="#symbolTriangle">#</a> d3.<b>symbolTriangle</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/triangle.js)
+<a name="symbolTriangle" href="#symbolTriangle">#</a> d3.<b>symbolTriangle</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/triangle.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
 
 The up-pointing triangle symbol type.
 
-<a name="symbolWye" href="#symbolWye">#</a> d3.<b>symbolWye</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/wye.js)
+<a name="symbolWye" href="#symbolWye">#</a> d3.<b>symbolWye</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/wye.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
 
 The Y-shape symbol type.
 
-<a name="pointRadial" href="#pointRadial">#</a> d3.<b>pointRadial</b>(<i>angle</i>, <i>radius</i>) · [Source](https://github.com/d3/d3-shape/blob/master/src/pointRadial.js)
+<a name="pointRadial" href="#pointRadial">#</a> d3.<b>pointRadial</b>(<i>angle</i>, <i>radius</i>) · [Source](https://github.com/d3/d3-shape/blob/master/src/pointRadial.js), [Examples](https://observablehq.com/@d3/radial-area-chart)
 
 Returns the point [<i>x</i>, <i>y</i>] for the given *angle* in radians, with 0 at -*y* (12 o’clock) and positive angles proceeding clockwise, and the given *radius*.
 

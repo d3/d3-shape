@@ -1,24 +1,26 @@
 import {path} from "d3-path";
+import array from "./array.js";
 import constant from "./constant.js";
 import curveLinear from "./curve/linear.js";
 import line from "./line.js";
 import {x as pointX, y as pointY} from "./point.js";
 
-export default function() {
-  var x0 = pointX,
-      x1 = null,
-      y0 = constant(0),
-      y1 = pointY,
+export default function(x0, y0, y1) {
+  var x1 = null,
       defined = constant(true),
       context = null,
       curve = curveLinear,
       output = null;
 
+  x0 = typeof x0 === "function" ? x0 : (x0 === undefined) ? pointX : constant(+x0);
+  y0 = typeof y0 === "function" ? y0 : (y0 === undefined) ? constant(0) : constant(+y0);
+  y1 = typeof y1 === "function" ? y1 : (y1 === undefined) ? pointY : constant(+y1);
+
   function area(data) {
     var i,
         j,
         k,
-        n = data.length,
+        n = (data = array(data)).length,
         d,
         defined0 = false,
         buffer,

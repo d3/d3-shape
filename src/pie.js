@@ -1,3 +1,4 @@
+import array from "./array.js";
 import constant from "./constant.js";
 import descending from "./descending.js";
 import identity from "./identity.js";
@@ -13,7 +14,7 @@ export default function() {
 
   function pie(data) {
     var i,
-        n = data.length,
+        n = (data = array(data)).length,
         j,
         k,
         sum = 0,
