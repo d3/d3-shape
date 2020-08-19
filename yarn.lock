@@ -169,15 +169,15 @@ cross-spawn@^6.0.5:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
-d3-path@>=2.0.0-rc.1:
-  version "2.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/d3-path/-/d3-path-2.0.0-rc.1.tgz#367192c0a1a83de31703b64726d772dba56d1cd5"
-  integrity sha512-sT5X1hMlP3s59ZZyY/qlAvIkZCpNcynrHaVc9cqMARs5w++4IjI1RwcPUt5zpkfflGvFN/tOPq+smk0Eljsyjw==
+"d3-path@1 - 2":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/d3-path/-/d3-path-2.0.0.tgz#55d86ac131a0548adae241eebfb56b4582dd09d8"
+  integrity sha512-ZwZQxKhBnv9yHaiWd6ZU4x5BtCQ7pXszEV9CU6kRgwIQVQGLMv1oiL4M+MK/n79sYzsj+gcgpPQSctJUsLN7fA==
 
-d3-polygon@>=2.0.0-rc.1:
-  version "2.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/d3-polygon/-/d3-polygon-2.0.0-rc.1.tgz#2807d6e4c17714b528d7832c7854330ad50b0e68"
-  integrity sha512-5KLWKOU5NTPBMqDeYsXm9LUYkYDv7WMPgIhlW/hi5oSK6k0CDIimW6cBme12ruv1MNk60nZngdAbCRlGg/61FA==
+"d3-polygon@1 - 2":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/d3-polygon/-/d3-polygon-2.0.0.tgz#13608ef042fbec625ba1598327564f03c0396d8e"
+  integrity sha512-MsexrCK38cTGermELs0cO1d79DcTsQRN7IWMJKczD/2kBjzNXxLUWP33qRF6VDpiLV/4EI4r6Gs0DAWQkE8pSQ==
 
 debug@^4.0.1:
   version "4.1.1"
