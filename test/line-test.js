@@ -14,7 +14,7 @@ tape("line() returns a default line shape", function(test) {
   test.end();
 });
 
-tape.only("line(x, y) sets x and y", function(test) {
+tape("line(x, y) sets x and y", function(test) {
   var x = function() {}, y = function() {};
   test.equal(shape.line(x).x(), x);
   test.equal(shape.line(x, y).y(), y);
