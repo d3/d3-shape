@@ -28,16 +28,16 @@ tape("trail(x, y, size) sets x, y and size", function(test){
 });
 
 tape("trail.x(f)(data) passes d, i, and data to the specified function f", function(test){
-    var data = ["a", "b"], actual = [];
+    var data = [[1, 2, 3], [4, 5, 6]], actual = [];
     shape.trail().x(function() { actual.push([].slice.call(arguments)); })(data);
-    test.deepEqual(actual, [['a', 0, data], ['b', 1, data], ['a', 0, data], ['b', 1, data], ['b', 1, data], ['a', 0, data], ['a', 0, data], ['b', 1, data]]);
+    test.deepEqual(actual, [[[1, 2, 3], 0, data], [[4, 5, 6], 1, data], [[1, 2, 3], 0, data], [[4, 5, 6], 1, data], [[4, 5, 6], 1, data], [[1, 2, 3], 0, data], [[1, 2, 3], 0, data], [[4, 5, 6], 1, data]]);
     test.end();
 });
 
 tape("trail.y(f)(data) passes d, i and data to the specified function f", function(test) {
-    var data = ["a", "b"], actual = [];
+    var data = [[1, 2, 3], [4, 5, 6]], actual = [];
     shape.trail().y(function() { actual.push([].slice.call(arguments)); })(data);
-    test.deepEqual(actual, [['a', 0, data], ['b', 1, data], ['a', 0, data], ['b', 1, data], ['b', 1, data], ['a', 0, data], ['a', 0, data], ['b', 1, data]]);
+    test.deepEqual(actual, [[[1, 2, 3], 0, data], [[4, 5, 6], 1, data], [[1, 2, 3], 0, data], [[4, 5, 6], 1, data], [[4, 5, 6], 1, data], [[1, 2, 3], 0, data], [[1, 2, 3], 0, data], [[4, 5, 6], 1, data]]);
     test.end();
 });
 
@@ -45,7 +45,7 @@ tape("trail.y(f)(data) passes d, i and data to the specified function f", functi
 tape("trail.size(f)(data) passes d, i and data to the specified function f", function(test) {
     var data = ["a", "b"], actual = [];
     shape.trail().size(function() { actual.push([].slice.call(arguments)); })(data);
-    test.deepEqual(actual, [['a', 0, data], ['b', 1, data], ['a', 0, data], ['b', 1, data], ['b', 1, data], ['a', 0, data], ['a', 0, data], ['b', 1, data]]);
+    test.deepEqual(actual, [['a', 0, data], ['b', 1, data], ['a', 0, data], ['b', 1, data]]);
     test.end();
 });
 

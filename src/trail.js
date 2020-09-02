@@ -128,30 +128,37 @@ export default function(x, y, size){
 
     function trail(data){ 
         var i,
-            n = (data = array(data)).length, 
+            n = data.length, 
             d,
+            def,
+            s,
             defined0 = false,
             defined1 = false,
             buffer;
 
         //make global optimization for radius when r1 + r2 > lxy
         for(i = 0; i < n; i++){
-            if(!(i < n && defined(d = data[i], i, data)) === defined1){
+            def = defined(d = data[i], i, data) && (s = +size(d, i, data));
+            if(!(i < n && def) === defined1){
                 if (defined1 = !defined1) ready2 = 0;
             }
             if(defined1) {
-                scaleRatio(+x(d, i, data), +y(d, i, data), +size(d, i, data));
+                scaleRatio(+x(d, i, data), +y(d, i, data), s);
             }
         }
 
         if(context == null) context = buffer = path();
 
         var start,
-        j,
-        d1;
+            j,
+            d1,
+            def1,
+            s1,
+            tag = false;
 
         for(i = 0; i < n; i++){
-            if(!(i < n && defined(d = data[i], i, data)) === defined0){
+            def = defined(d = data[i], i, data) && (s = +size(d, i, data));
+            if(!(i < n && def) === defined0){
                 if(defined0 = !defined0){
                     ready = 0;
                     start = i;
@@ -159,17 +166,26 @@ export default function(x, y, size){
             }
             if(defined0){
                 j = i + 1;
-                if(j < n && defined(d1 = data[j], j, data)){
-                    segment(+x(d, i, data), +y(d, i, data), +size(d, i, data)*scaleRatio_min, +x(d1, j, data), +y(d1, j, data), +size(d1, j, data)*scaleRatio_min);
+                if(j < n){
+                    def1 = defined(d1 = data[j], j, data) && (s1 = +size(d1, j, data));
+                    if(def1){
+                        segment(+x(d, i, data), +y(d, i, data), s*scaleRatio_min, +x(d1, j, data), +y(d1, j, data), s1*scaleRatio_min);
+                    }
+                    else{
+                        tag = true;
+                    }
                 }
                 else{
+                    tag = true;
+                }
+                if(tag){
                     j = i - 1;
                     if(j < start){
                     var tx = +x(d, i, data),
                         ty = +y(d, i, data),
                         ts = +size(d, i, data);
                     
-                    context.moveTo(tx, ty - ts*scaleRatio_min / 2);
+                    context.moveTo(tx + ts*scaleRatio_min / 2, ty);
                     context.arc(tx, ty, ts*scaleRatio_min / 2, 0, tau, 0);
                     context.closePath();
                     }
@@ -186,6 +202,7 @@ export default function(x, y, size){
 
                         context.closePath();
                     }
+                    tag = false;
                 }
             }
         }

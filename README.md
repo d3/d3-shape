@@ -511,7 +511,7 @@ When a trail is [generated](#_trail), the y accessor will be invoked for each [d
 
 <a name="trail_size" href="#trail_size">#</a> <i>trail</i>.<b>size</b>([<i>size</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/trail.js)
 
-The *size* describes the width in pixels of the trail at the given data point. If *size* is specified, sets the size accessor to the specified function or number and returns this trail generator. If *size* is not specified, returns the current size accessor, which defaults to:
+The *size* describes the width in pixels of the trail at the given data point, which should be greater than 0. If *size* is specified, sets the size accessor to the specified function or number and returns this trail generator. If *size* is not specified, returns the current size accessor, which defaults to:
 
 ```js
 function size(d) {
