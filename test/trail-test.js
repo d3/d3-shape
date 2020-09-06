@@ -30,14 +30,14 @@ tape("trail(x, y, size) sets x, y and size", function(test){
 tape("trail.x(f)(data) passes d, i, and data to the specified function f", function(test){
     var data = [[1, 2, 3], [4, 5, 6]], actual = [];
     shape.trail().x(function() { actual.push([].slice.call(arguments)); })(data);
-    test.deepEqual(actual, [[[1, 2, 3], 0, data], [[4, 5, 6], 1, data], [[1, 2, 3], 0, data], [[4, 5, 6], 1, data], [[4, 5, 6], 1, data], [[1, 2, 3], 0, data], [[1, 2, 3], 0, data], [[4, 5, 6], 1, data]]);
+    test.deepEqual(actual, [[[1, 2, 3], 0, data], [[4, 5, 6], 1, data]]);
     test.end();
 });
 
 tape("trail.y(f)(data) passes d, i and data to the specified function f", function(test) {
     var data = [[1, 2, 3], [4, 5, 6]], actual = [];
     shape.trail().y(function() { actual.push([].slice.call(arguments)); })(data);
-    test.deepEqual(actual, [[[1, 2, 3], 0, data], [[4, 5, 6], 1, data], [[1, 2, 3], 0, data], [[4, 5, 6], 1, data], [[4, 5, 6], 1, data], [[1, 2, 3], 0, data], [[1, 2, 3], 0, data], [[4, 5, 6], 1, data]]);
+    test.deepEqual(actual, [[[1, 2, 3], 0, data], [[4, 5, 6], 1, data]]);
     test.end();
 });
 
@@ -45,14 +45,14 @@ tape("trail.y(f)(data) passes d, i and data to the specified function f", functi
 tape("trail.size(f)(data) passes d, i and data to the specified function f", function(test) {
     var data = ["a", "b"], actual = [];
     shape.trail().size(function() { actual.push([].slice.call(arguments)); })(data);
-    test.deepEqual(actual, [['a', 0, data], ['b', 1, data], ['a', 0, data], ['b', 1, data]]);
+    test.deepEqual(actual, [['a', 0, data], ['b', 1, data]]);
     test.end();
 });
 
 tape("trail.defined(f)(data) passes d, i and data to the specified function f", function(test){
     var data = ["a", "b"], actual = [];
     shape.trail().defined(function() { actual.push([].slice.call(arguments)); })(data);
-    test.deepEqual(actual, [["a", 0, data], ["b", 1, data], ["a", 0, data], ["b", 1, data]]);
+    test.deepEqual(actual, [["a", 0, data], ["b", 1, data]]);
     test.end();
 });
 
@@ -89,5 +89,11 @@ tape("trail.size(x)(data) observes the specified function", function(test){
 tape("trail.size(x)(data) observes the specified constant", function(test){
     var t = shape.trail().size(20);
     test.pathEqual(t([{0: 10, 1: 10}, {0: 50, 1: 50}, {0: 90, 1: 10}]), "M17.071068,2.928932L50,35.857864L82.928932,2.928932A10,10,0,1,1,97.071068,17.071068L57.071068,57.071068A10,10,0,0,1,42.928932,57.071068L2.928932,17.071068A10,10,0,1,1,17.071068,2.928932Z");
+    test.end();
+});
+
+tape("test about coincident points", function(test){
+    var t = shape.trail();
+    test.pathEqual(t([[0, 0, 10], [0, 0, 20]]), "M5,0A5,5,0,1,1,-5,0A5,5,0,1,1,5,0ZM10,0A10,10,0,1,1,-10,0A10,10,0,1,1,10,0Z");
     test.end();
 });

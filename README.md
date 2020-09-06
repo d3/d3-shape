@@ -460,7 +460,7 @@ Equivalent to [*line*.context](#line_context).
 
 Trail marks are similar to line marks, but can have variable widths determined by backing data. Trail marks are useful if one wishes to draw lines that change size to reflect the underlying data.
 
-<a name="trail" href="#trail">#</a> d3.<b>trail</b>([<i>x</x>][, <i>y</i>][, <i>size</i>])· [Source](https://github.com/d3/d3-shape/blob/master/src/trail.js)
+<a name="trail" href="#trail">#</a> d3.<b>trail</b>([<i>x</x>][, <i>y</i>][, <i>size</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/trail.js)
 
 Constructs a new trail generator with default settings. If *x*, *y* or *size* are specified, sets the corresponding accessors to the specified function or number and returns this trail generator.
 
@@ -492,9 +492,9 @@ var data = [
 ];
 
 var trail = d3.trail()
-    .x(function(d) { return x(d.u*10); })
-    .y(function(d) { return y(d.v*10); })
-    .size(function(d) { return size(d.size); });
+    .x(d => x(d.u))
+    .y(d => y(d.v))
+    .size(d => size(d.size));
 ```
 
 <a name="trail_y" href="#trail_y">#</a> <i>trail</i>.<b>y</b>([<i>y</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/trail.js)
