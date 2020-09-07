@@ -9,9 +9,10 @@ export default function(x, y, size) {
       ready,
       ready2,
       scaleRatio_min = 1,
-      ct1,
+      ct1, ct2,
       px1, py1, pr1,
-      arp = [];
+      arp = [],
+      p;
 
   x = typeof x === "function" ? x : (x === undefined) ? pointX : constant(x);
   y = typeof y === "function" ? y : (y === undefined) ? pointY : constant(y);
@@ -22,12 +23,12 @@ export default function(x, y, size) {
   }
 
   function isIntersect(x1, y1, x2, y2, x3, y3, x4, y4) {
-    // rapid repulsion
+    // rapid repulsion.
     if (max(x3, x4) < min(x1, x2) || max(y3, y4) < min(y1, y2) || max(x1, x2) < min(x3, x4) || max(y1, y2) < min(y3, y4)) {
       return false;
     }
 
-    // straddle experiment
+    // straddle experiment.
     if (cross(x1 - x4, y1 - y4, x3 - x4, y3 - y4) * cross(x2 - x4, y2 - y4, x3 - x4, y3 - y4) > 0 ||
        cross(x3 - x2, y3 - y2, x1 - x2, y1 - y2) * cross(x4 - x2, y4 - y2, x1 - x2, y1 - y2) > 0) {
       return false;
@@ -46,7 +47,7 @@ export default function(x, y, size) {
         y: y2
       };
     }
-    else{
+    else {
       t = d1 / (d1 + d2);
       return {
         x: x1 + (x2 - x1) * t,
@@ -58,10 +59,10 @@ export default function(x, y, size) {
   function commonTangent(x1, y1, w1, x2, y2, w2) {
     var r1 = w1 / 2,
         r2 = w2 / 2,
-        alpha, // the smallest angle in right-angled trapezoid
+        alpha, // the smallest angle in right-angled trapezoid.
         alpha_x,
         alpha_y,
-        beta, // the slope of line segment
+        beta, // the slope of line segment.
         cos_x,
         sin_y;
 
@@ -82,7 +83,7 @@ export default function(x, y, size) {
         angle: alpha + beta - pi
       };
     }
-    else{
+    else {
       cos_x = cos(beta - alpha);
       sin_y = sin(beta - alpha);
 
@@ -97,19 +98,19 @@ export default function(x, y, size) {
   }
 
   function segment(x1, y1, w1, x2, y2, w2) {
-    var ct2 = commonTangent(x1, y1, w1, x2, y2, w2);
+    ct2 = commonTangent(x1, y1, w1, x2, y2, w2);
 
     if (ready) {
-      if(isIntersect(ct1.sg1_x, ct1.sg1_y, ct1.sg2_x, ct1.sg2_y, ct2.sg1_x, ct2.sg1_y, ct2.sg2_x, ct2.sg2_y)) {
-        var p = intersectPoint(ct1.sg1_x, ct1.sg1_y, ct1.sg2_x, ct1.sg2_y, ct2.sg1_x, ct2.sg1_y, ct2.sg2_x, ct2.sg2_y);    
+      if (isIntersect(ct1.sg1_x, ct1.sg1_y, ct1.sg2_x, ct1.sg2_y, ct2.sg1_x, ct2.sg1_y, ct2.sg2_x, ct2.sg2_y)) {
+        p = intersectPoint(ct1.sg1_x, ct1.sg1_y, ct1.sg2_x, ct1.sg2_y, ct2.sg1_x, ct2.sg1_y, ct2.sg2_x, ct2.sg2_y);
         context.lineTo(p.x, p.y);
       }
-      else{
+      else {
         context.lineTo(ct1.sg2_x, ct1.sg2_y);
         context.arc(x1, y1, w1 / 2, ct1.angle, ct2.angle, 0);
       }
     }
-    else{
+    else {
       ready = 1;
       context.moveTo(ct2.sg1_x, ct2.sg1_y);
     }
@@ -130,11 +131,11 @@ export default function(x, y, size) {
         }
         arp[i] = false;
       }
-      else{
-        arp[i] = true; // when p1.x == p2.x and p1.y == p2.y
+      else {
+        arp[i] = true; // if p1 is too close to p2.
       }
     }
-    else{
+    else {
       ready2 = 1;
       arp[i] = false;
     }
@@ -143,7 +144,7 @@ export default function(x, y, size) {
     pr1 = pr2;
   }
 
-  function trail(data) { 
+  function trail(data) {
     var i,
         n = data.length,
         d,
@@ -151,12 +152,12 @@ export default function(x, y, size) {
         defined0 = false,
         defined1 = false,
         buffer,
-        arx = [], // arrays of x(), y(), size(), defined()
+        arx = [], // arrays of x(), y(), size(), defined().
         ary = [],
         ars = [],
         ard = [];
 
-    // make global optimization for radius when r1 + r2 > lxy
+    // make global optimization for radius when r1 + r2 > lxy and mark the points whose positions are coincided.
     for (i = 0; i < n; i++) {
       def = (ard[i] = defined(d = data[i], i, data)) && (ars[i] = +size(d, i, data));
       if (!(i < n && def) === defined1) {
@@ -191,27 +192,27 @@ export default function(x, y, size) {
             if (arp[j]) {
               tag = true;
             }
-            else{
+            else {
               segment(arx[i], ary[i], ars[i] * scaleRatio_min, arx[j], ary[j], ars[j] * scaleRatio_min);
             }
           }
-          else{
+          else {
             tag = true;
           }
         }
-        else{
+        else {
           tag = true;
         }
         if (tag) {
           j = i - 1;
           if (j < start) {
-            // draw a circle
+            // draw a circle.
             context.moveTo(arx[i] + ars[i] * scaleRatio_min / 2, ary[i]);
             context.arc(arx[i], ary[i], ars[i] * scaleRatio_min / 2, 0, tau, 0);
             context.closePath();
           }
-          else{
-            while(j >= start) {
+          else {
+            while (j >= start) {
               d1 = data[j];
               segment(arx[j + 1], ary[j + 1], ars[j + 1] * scaleRatio_min, arx[j], ary[j], ars[j] * scaleRatio_min);
               d = d1;
@@ -220,7 +221,6 @@ export default function(x, y, size) {
             j += 1;
             d1 = data[j + 1];
             segment(arx[j], ary[j], ars[j] * scaleRatio_min, arx[j + 1], ary[j + 1], ars[j + 1] * scaleRatio_min);
-
             context.closePath();
           }
           tag = false;
