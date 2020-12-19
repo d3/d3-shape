@@ -28,9 +28,9 @@ export default function(x, y, size) {
       return false;
     }
 
-    // straddle experiment.
+    // straddle.
     if (cross(x1 - x4, y1 - y4, x3 - x4, y3 - y4) * cross(x2 - x4, y2 - y4, x3 - x4, y3 - y4) > 0 ||
-       cross(x3 - x2, y3 - y2, x1 - x2, y1 - y2) * cross(x4 - x2, y4 - y2, x1 - x2, y1 - y2) > 0) {
+        cross(x3 - x2, y3 - y2, x1 - x2, y1 - y2) * cross(x4 - x2, y4 - y2, x1 - x2, y1 - y2) > 0) {
       return false;
     }
     return true;
@@ -46,8 +46,7 @@ export default function(x, y, size) {
         x: x2,
         y: y2
       };
-    }
-    else {
+    } else {
       t = d1 / (d1 + d2);
       return {
         x: x1 + (x2 - x1) * t,
@@ -83,18 +82,17 @@ export default function(x, y, size) {
         angle: alpha + beta - pi
       };
     }
-    else {
-      cos_x = cos(beta - alpha);
-      sin_y = sin(beta - alpha);
+    
+    cos_x = cos(beta - alpha);
+    sin_y = sin(beta - alpha);
 
-      return {
-        sg1_x: x1 + r1 * cos_x,
-        sg1_y: y1 + r1 * sin_y,
-        sg2_x: x2 + r2 * cos_x,
-        sg2_y: y2 + r2 * sin_y,
-        angle: beta - alpha
-      };
-    }
+    return {
+      sg1_x: x1 + r1 * cos_x,
+      sg1_y: y1 + r1 * sin_y,
+      sg2_x: x2 + r2 * cos_x,
+      sg2_y: y2 + r2 * sin_y,
+      angle: beta - alpha
+    };
   }
 
   function segment(x1, y1, w1, x2, y2, w2) {
@@ -104,13 +102,11 @@ export default function(x, y, size) {
       if (isIntersect(ct1.sg1_x, ct1.sg1_y, ct1.sg2_x, ct1.sg2_y, ct2.sg1_x, ct2.sg1_y, ct2.sg2_x, ct2.sg2_y)) {
         p = intersectPoint(ct1.sg1_x, ct1.sg1_y, ct1.sg2_x, ct1.sg2_y, ct2.sg1_x, ct2.sg1_y, ct2.sg2_x, ct2.sg2_y);
         context.lineTo(p.x, p.y);
-      }
-      else {
+      } else {
         context.lineTo(ct1.sg2_x, ct1.sg2_y);
         context.arc(x1, y1, w1 / 2, ct1.angle, ct2.angle, 0);
       }
-    }
-    else {
+    } else {
       ready = 1;
       context.moveTo(ct2.sg1_x, ct2.sg1_y);
     }
@@ -130,12 +126,10 @@ export default function(x, y, size) {
           }
         }
         arp[i] = false;
-      }
-      else {
+      } else {
         arp[i] = true; // if p1 is too close to p2.
       }
-    }
-    else {
+    } else {
       ready2 = 1;
       arp[i] = false;
     }
@@ -156,6 +150,14 @@ export default function(x, y, size) {
         ary = [],
         ars = [],
         ard = [];
+    
+    if (context == null) context = buffer = path();
+
+    var start,
+        j,
+        d1,
+        def1,
+        tag = false;
 
     // make global optimization for radius when r1 + r2 > lxy and mark the points whose positions are coincided.
     for (i = 0; i < n; i++) {
@@ -167,14 +169,6 @@ export default function(x, y, size) {
         scaleRatio(arx[i] = +x(d, i, data), ary[i] = +y(d, i, data), ars[i], i);
       }
     }
-
-    if (context == null) context = buffer = path();
-
-    var start,
-        j,
-        d1,
-        def1,
-        tag = false;
 
     for (i = 0; i < n; i++) {
       def = ard[i] && ars[i];
@@ -191,16 +185,13 @@ export default function(x, y, size) {
           if (def1) {
             if (arp[j]) {
               tag = true;
-            }
-            else {
+            } else {
               segment(arx[i], ary[i], ars[i] * scaleRatio_min, arx[j], ary[j], ars[j] * scaleRatio_min);
             }
-          }
-          else {
+          } else {
             tag = true;
           }
-        }
-        else {
+        } else {
           tag = true;
         }
         if (tag) {
@@ -210,8 +201,7 @@ export default function(x, y, size) {
             context.moveTo(arx[i] + ars[i] * scaleRatio_min / 2, ary[i]);
             context.arc(arx[i], ary[i], ars[i] * scaleRatio_min / 2, 0, tau, 0);
             context.closePath();
-          }
-          else {
+          } else {
             while (j >= start) {
               d1 = data[j];
               segment(arx[j + 1], ary[j + 1], ars[j + 1] * scaleRatio_min, arx[j], ary[j], ars[j] * scaleRatio_min);

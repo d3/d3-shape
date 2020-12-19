@@ -481,7 +481,7 @@ function x(d) {
 When a trail is [generated](#_trail), the x accessor will be invoked for each [defined](#trail_defined) element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default x accessor assumes that the input data are three-element arrays of numbers. If your data are in a different format, or if you wish to transform the data before rendering, then you should specify a custom accessor. For example:
 
 ```js
-var data = [
+const data = [
   {u: 1, v: 8, size: 40},
   {u: 10, v: 35, size: 12},
   {u: 19, v: 22, size: 30},
@@ -491,7 +491,7 @@ var data = [
   …
 ];
 
-var trail = d3.trail()
+const trail = d3.trail()
     .x(d => x(d.u))
     .y(d => y(d.v))
     .size(d => size(d.size));
