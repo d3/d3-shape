@@ -6,8 +6,8 @@ As with other aspects of D3, these shapes are driven by data: each shape generat
 
 ```js
 const line = d3.line()
-    .x((d) => x(d.date))
-    .y((d) => y(d.value));
+    .x(d => x(d.date))
+    .y(d => y(d.value));
 ```
 
 This line generator can then be used to compute the `d` attribute of an SVG path element:
@@ -263,14 +263,14 @@ const data = [
 ];
 
 const arcs = d3.pie()
-    .value((d) => d.number)
+    .value(d => d.number)
     (data);
 ```
 
 This is similar to [mapping](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) your data to values before invoking the pie generator:
 
 ```js
-const arcs = d3.pie()(data.map((d) => d.number));
+const arcs = d3.pie()(data.map(d => d.number));
 ```
 
 The benefit of an accessor is that the input data remains associated with the returned objects, thereby making it easier to access other fields of the data, for example to set the color or to add text labels.
@@ -383,8 +383,8 @@ const data = [
 ];
 
 const line = d3.line()
-    .x((d) => x(d.date))
-    .y((d) => y(d.value));
+    .x(d => x(d.date))
+    .y(d => y(d.value));
 ```
 
 <a name="line_y" href="#line_y">#</a> <i>line</i>.<b>y</b>([<i>y</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/line.js), [Examples](https://observablehq.com/@d3/d3-line)
@@ -809,8 +809,8 @@ Returns a new [link generator](#_link) with vertical tangents. For example, to v
 
 ```js
 const link = d3.linkVertical()
-    .x((d) => d.x)
-    .y((d) => d.y);
+    .x(d => d.x)
+    .y(d => d.y);
 ```
 
 <a name="linkHorizontal" href="#linkHorizontal">#</a> d3.<b>linkHorizontal</b>() · [Source](https://github.com/d3/d3-shape/blob/master/src/link/index.js)
@@ -819,8 +819,8 @@ Returns a new [link generator](#_link) with horizontal tangents. For example, to
 
 ```js
 const link = d3.linkHorizontal()
-    .x((d) => d.y)
-    .y((d) => d.x);
+    .x(d => d.y)
+    .y(d => d.x);
 ```
 
 <a href="#_link" name="_link">#</a> <i>link</i>(<i>arguments…</i>) · [Source](https://github.com/d3/d3-shape/blob/master/src/link/index.js)
@@ -884,8 +884,8 @@ Returns a new [link generator](#_link) with radial tangents. For example, to vis
 
 ```js
 const link = d3.linkRadial()
-    .angle((d) => d.x)
-    .radius((d) => d.y);
+    .angle(d => d.x)
+    .radius(d => d.y);
 ```
 
 <a name="linkRadial_angle" href="#linkRadial_angle">#</a> <i>linkRadial</i>.<b>angle</b>([<i>angle</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/link/index.js)
