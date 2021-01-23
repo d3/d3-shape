@@ -5,9 +5,9 @@ Visualizations typically consist of discrete graphical marks, such as [symbols](
 As with other aspects of D3, these shapes are driven by data: each shape generator exposes accessors that control how the input data are mapped to a visual representation. For example, you might define a line generator for a time series by [scaling](https://github.com/d3/d3-scale) fields of your data to fit the chart:
 
 ```js
-var line = d3.line()
-    .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.value); });
+const line = d3.line()
+    .x(d => x(d.date))
+    .y(d => y(d.value));
 ```
 
 This line generator can then be used to compute the `d` attribute of an SVG path element:
@@ -33,7 +33,7 @@ If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release]
 <script src="https://d3js.org/d3-shape.v2.min.js"></script>
 <script>
 
-var line = d3.line();
+const line = d3.line();
 
 </script>
 ```
@@ -71,7 +71,7 @@ Constructs a new arc generator with the default settings.
 Generates an arc for the given *arguments*. The *arguments* are arbitrary; they are simply propagated to the arc generator’s accessor functions along with the `this` object. For example, with the default settings, an object with radii and angles is expected:
 
 ```js
-var arc = d3.arc();
+const arc = d3.arc();
 
 arc({
   innerRadius: 0,
@@ -84,7 +84,7 @@ arc({
 If the radii and angles are instead defined as constants, you can generate an arc without any arguments:
 
 ```js
-var arc = d3.arc()
+const arc = d3.arc()
     .innerRadius(0)
     .outerRadius(100)
     .startAngle(0)
@@ -219,8 +219,8 @@ This representation is designed to work with the arc generator’s default [star
 Given a small dataset of numbers, here is how to compute the arc angles to render this data as a pie chart:
 
 ```js
-var data = [1, 1, 2, 3, 5, 8, 13, 21];
-var arcs = d3.pie()(data);
+const data = [1, 1, 2, 3, 5, 8, 13, 21];
+const arcs = d3.pie()(data);
 ```
 
 The first pair of parens, `pie()`, [constructs](#pie) a default pie generator. The second, `pie()(data)`, [invokes](#_pie) this generator on the dataset, returning an array of objects:
@@ -253,7 +253,7 @@ function value(d) {
 When a pie is [generated](#_pie), the value accessor will be invoked for each element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default value accessor assumes that the input data are numbers, or that they are coercible to numbers using [valueOf](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf). If your data are not simply numbers, then you should specify an accessor that returns the corresponding numeric value for a given datum. For example:
 
 ```js
-var data = [
+const data = [
   {"number":  4, "name": "Locke"},
   {"number":  8, "name": "Reyes"},
   {"number": 15, "name": "Ford"},
@@ -262,15 +262,15 @@ var data = [
   {"number": 42, "name": "Kwon"}
 ];
 
-var arcs = d3.pie()
-    .value(function(d) { return d.number; })
+const arcs = d3.pie()
+    .value(d => d.number)
     (data);
 ```
 
 This is similar to [mapping](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) your data to values before invoking the pie generator:
 
 ```js
-var arcs = d3.pie()(data.map(function(d) { return d.number; }));
+const arcs = d3.pie()(data.map(d => d.number));
 ```
 
 The benefit of an accessor is that the input data remains associated with the returned objects, thereby making it easier to access other fields of the data, for example to set the color or to add text labels.
@@ -282,7 +282,7 @@ If *compare* is specified, sets the data comparator to the specified function an
 The *compare* function takes two arguments *a* and *b*, each elements from the input data array. If the arc for *a* should be before the arc for *b*, then the comparator must return a number less than zero; if the arc for *a* should be after the arc for *b*, then the comparator must return a number greater than zero; returning zero means that the relative order of *a* and *b* is unspecified. For example, to sort arcs by their associated name:
 
 ```js
-pie.sort(function(a, b) { return a.name.localeCompare(b.name); });
+pie.sort((a, b) => a.name.localeCompare(b.name));
 ```
 
 Sorting does not affect the order of the [generated arc array](#_pie) which is always in the same order as the input data array; it merely affects the computed angles of each arc. The first arc starts at the [start angle](#pie_startAngle) and the last arc ends at the [end angle](#pie_endAngle).
@@ -302,7 +302,7 @@ If both the data comparator and the value comparator are null, then arcs are pos
 The value comparator is similar to the [data comparator](#pie_sort), except the two arguments *a* and *b* are values derived from the input data array using the [value accessor](#pie_value), not the data elements. If the arc for *a* should be before the arc for *b*, then the comparator must return a number less than zero; if the arc for *a* should be after the arc for *b*, then the comparator must return a number greater than zero; returning zero means that the relative order of *a* and *b* is unspecified. For example, to sort arcs by ascending value:
 
 ```js
-pie.sortValues(function(a, b) { return a - b; });
+pie.sortValues((a, b) => a - b);
 ```
 
 Sorting does not affect the order of the [generated arc array](#_pie) which is always in the same order as the input data array; it merely affects the computed angles of each arc. The first arc starts at the [start angle](#pie_startAngle) and the last arc ends at the [end angle](#pie_endAngle).
@@ -372,7 +372,7 @@ function x(d) {
 When a line is [generated](#_line), the x accessor will be invoked for each [defined](#line_defined) element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default x accessor assumes that the input data are two-element arrays of numbers. If your data are in a different format, or if you wish to transform the data before rendering, then you should specify a custom accessor. For example, if `x` is a [time scale](https://github.com/d3/d3-scale#time-scales) and `y` is a [linear scale](https://github.com/d3/d3-scale#linear-scales):
 
 ```js
-var data = [
+const data = [
   {date: new Date(2007, 3, 24), value: 93.24},
   {date: new Date(2007, 3, 25), value: 95.35},
   {date: new Date(2007, 3, 26), value: 98.84},
@@ -382,9 +382,9 @@ var data = [
   …
 ];
 
-var line = d3.line()
-    .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.value); });
+const line = d3.line()
+    .x(d => x(d.date))
+    .y(d => y(d.value));
 ```
 
 <a name="line_y" href="#line_y">#</a> <i>line</i>.<b>y</b>([<i>y</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/line.js), [Examples](https://observablehq.com/@d3/d3-line)
@@ -484,7 +484,7 @@ function x(d) {
 When an area is [generated](#_area), the x0 accessor will be invoked for each [defined](#area_defined) element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default x0 accessor assumes that the input data are two-element arrays of numbers. If your data are in a different format, or if you wish to transform the data before rendering, then you should specify a custom accessor. For example, if `x` is a [time scale](https://github.com/d3/d3-scale#time-scales) and `y` is a [linear scale](https://github.com/d3/d3-scale#linear-scales):
 
 ```js
-var data = [
+const data = [
   {date: new Date(2007, 3, 24), value: 93.24},
   {date: new Date(2007, 3, 25), value: 95.35},
   {date: new Date(2007, 3, 26), value: 98.84},
@@ -494,7 +494,7 @@ var data = [
   …
 ];
 
-var area = d3.area()
+const area = d3.area()
     .x(d => x(d.date))
     .y1(d => y(d.value))
     .y0(y(0));
@@ -637,7 +637,7 @@ While [lines](#lines) are defined as a sequence of two-dimensional [*x*, *y*] po
 Curves are typically not constructed or used directly, instead being passed to [*line*.curve](#line_curve) and [*area*.curve](#area_curve). For example:
 
 ```js
-var line = d3.line(d => d.date, d => d.value)
+const line = d3.line(d => d.date, d => d.value)
     .curve(d3.curveCatmullRom.alpha(0.5));
 ```
 
@@ -670,7 +670,7 @@ Produces a straightened cubic [basis spline](https://en.wikipedia.org/wiki/B-spl
 Returns a bundle curve with the specified *beta* in the range [0, 1], representing the bundle strength. If *beta* equals zero, a straight line between the first and last point is produced; if *beta* equals one, a standard [basis](#basis) spline is produced. For example:
 
 ```js
-var line = d3.line().curve(d3.curveBundle.beta(0.5));
+const line = d3.line().curve(d3.curveBundle.beta(0.5));
 ```
 
 <a name="curveCardinal" href="#curveCardinal">#</a> d3.<b>curveCardinal</b>(<i>context</i>) · [Source](https://github.com/d3/d3-shape/blob/master/src/curve/cardinal.js)
@@ -696,7 +696,7 @@ Produces a cubic [cardinal spline](https://en.wikipedia.org/wiki/Cubic_Hermite_s
 Returns a cardinal curve with the specified *tension* in the range [0, 1]. The *tension* determines the length of the tangents: a *tension* of one yields all zero tangents, equivalent to [curveLinear](#curveLinear); a *tension* of zero produces a uniform [Catmull–Rom](#curveCatmullRom) spline. For example:
 
 ```js
-var line = d3.line().curve(d3.curveCardinal.tension(0.5));
+const line = d3.line().curve(d3.curveCardinal.tension(0.5));
 ```
 
 <a name="curveCatmullRom" href="#curveCatmullRom">#</a> d3.<b>curveCatmullRom</b>(<i>context</i>) · [Source](https://github.com/d3/d3-shape/blob/master/src/curve/catmullRom.js)
@@ -722,7 +722,7 @@ Produces a cubic Catmull–Rom spline using the specified control points and the
 Returns a cubic Catmull–Rom curve with the specified *alpha* in the range [0, 1]. If *alpha* is zero, produces a uniform spline, equivalent to [curveCardinal](#curveCardinal) with a tension of zero; if *alpha* is one, produces a chordal spline; if *alpha* is 0.5, produces a [centripetal spline](https://en.wikipedia.org/wiki/Centripetal_Catmull–Rom_spline). Centripetal splines are recommended to avoid self-intersections and overshoot. For example:
 
 ```js
-var line = d3.line().curve(d3.curveCatmullRom.alpha(0.5));
+const line = d3.line().curve(d3.curveCatmullRom.alpha(0.5));
 ```
 
 <a name="curveLinear" href="#curveLinear">#</a> d3.<b>curveLinear</b>(<i>context</i>) · [Source](https://github.com/d3/d3-shape/blob/master/src/curve/linear.js)
@@ -808,9 +808,9 @@ The **link** shape generates a smooth cubic Bézier curve from a source point to
 Returns a new [link generator](#_link) with vertical tangents. For example, to visualize [links](https://github.com/d3/d3-hierarchy/blob/master/README.md#node_links) in a [tree diagram](https://github.com/d3/d3-hierarchy/blob/master/README.md#tree) rooted on the top edge of the display, you might say:
 
 ```js
-var link = d3.linkVertical()
-    .x(function(d) { return d.x; })
-    .y(function(d) { return d.y; });
+const link = d3.linkVertical()
+    .x(d => d.x)
+    .y(d => d.y);
 ```
 
 <a name="linkHorizontal" href="#linkHorizontal">#</a> d3.<b>linkHorizontal</b>() · [Source](https://github.com/d3/d3-shape/blob/master/src/link/index.js)
@@ -818,9 +818,9 @@ var link = d3.linkVertical()
 Returns a new [link generator](#_link) with horizontal tangents. For example, to visualize [links](https://github.com/d3/d3-hierarchy/blob/master/README.md#node_links) in a [tree diagram](https://github.com/d3/d3-hierarchy/blob/master/README.md#tree) rooted on the left edge of the display, you might say:
 
 ```js
-var link = d3.linkHorizontal()
-    .x(function(d) { return d.y; })
-    .y(function(d) { return d.x; });
+const link = d3.linkHorizontal()
+    .x(d => d.y)
+    .y(d => d.x);
 ```
 
 <a href="#_link" name="_link">#</a> <i>link</i>(<i>arguments…</i>) · [Source](https://github.com/d3/d3-shape/blob/master/src/link/index.js)
@@ -883,9 +883,9 @@ If *context* is specified, sets the context and returns this link generator. If 
 Returns a new [link generator](#_link) with radial tangents. For example, to visualize [links](https://github.com/d3/d3-hierarchy/blob/master/README.md#node_links) in a [tree diagram](https://github.com/d3/d3-hierarchy/blob/master/README.md#tree) rooted in the center of the display, you might say:
 
 ```js
-var link = d3.linkRadial()
-    .angle(function(d) { return d.x; })
-    .radius(function(d) { return d.y; });
+const link = d3.linkRadial()
+    .angle(d => d.x)
+    .radius(d => d.y);
 ```
 
 <a name="linkRadial_angle" href="#linkRadial_angle">#</a> <i>linkRadial</i>.<b>angle</b>([<i>angle</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/link/index.js)
@@ -1014,7 +1014,7 @@ Month   | Apples | Bananas | Cherries | Dates
 This might be represented in JavaScript as an array of objects:
 
 ```js
-var data = [
+const data = [
   {month: new Date(2015, 0, 1), apples: 3840, bananas: 1920, cherries: 960, dates: 400},
   {month: new Date(2015, 1, 1), apples: 1600, bananas: 1440, cherries: 960, dates: 400},
   {month: new Date(2015, 2, 1), apples:  640, bananas:  960, cherries: 640, dates: 400},
@@ -1025,12 +1025,12 @@ var data = [
 To produce a stack for this data:
 
 ```js
-var stack = d3.stack()
+const stack = d3.stack()
     .keys(["apples", "bananas", "cherries", "dates"])
     .order(d3.stackOrderNone)
     .offset(d3.stackOffsetNone);
 
-var series = stack(data);
+const series = stack(data);
 ```
 
 The resulting array has one element per *series*. Each series has one point per month, and each point has a lower and upper value defining the baseline and topline:
@@ -1070,7 +1070,8 @@ If *order* is a function, it is passed the generated series array and must retur
 
 ```js
 function orderNone(series) {
-  var n = series.length, o = new Array(n);
+  let n = series.length;
+  const o = new Array(n);
   while (--n >= 0) o[n] = n;
   return o;
 }
@@ -1087,9 +1088,9 @@ The offset function is passed the generated series array and the order index arr
 ```js
 function offsetNone(series, order) {
   if (!((n = series.length) > 1)) return;
-  for (var i = 1, s0, s1 = series[order[0]], n, m = s1.length; i < n; ++i) {
+  for (let i = 1, s0, s1 = series[order[0]], n, m = s1.length; i < n; ++i) {
     s0 = s1, s1 = series[order[i]];
-    for (var j = 0; j < m; ++j) {
+    for (let j = 0; j < m; ++j) {
       s1[j][1] += s1[j][0] = s0[j][1];
     }
   }
