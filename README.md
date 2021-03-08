@@ -659,6 +659,18 @@ Produces a closed cubic [basis spline](https://en.wikipedia.org/wiki/B-spline) u
 
 Produces a cubic [basis spline](https://en.wikipedia.org/wiki/B-spline) using the specified control points. Unlike [basis](#basis), the first and last points are not repeated, and thus the curve typically does not intersect these points.
 
+<a name="curveBumpX" href="#curveBumpX">#</a> d3.<b>curveBumpX</b>(<i>context</i>) · [Source](https://github.com/d3/d3-shape/blob/master/src/curve/bump.js)
+
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/bumpX.png" width="888" height="240" alt="bumpX">
+
+Produces a Bézier curve between each pair of points, with horizontal tangents at each point.
+
+<a name="curveBumpY" href="#curveBumpY">#</a> d3.<b>curveBumpY</b>(<i>context</i>) · [Source](https://github.com/d3/d3-shape/blob/master/src/curve/bump.js)
+
+<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/bumpY.png" width="888" height="240" alt="bumpY">
+
+Produces a Bézier curve between each pair of points, with vertical tangents at each point.
+
 <a name="curveBundle" href="#curveBundle">#</a> d3.<b>curveBundle</b>(<i>context</i>) · [Source](https://github.com/d3/d3-shape/blob/master/src/curve/bundle.js)
 
 <img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/bundle.png" width="888" height="240" alt="bundle">

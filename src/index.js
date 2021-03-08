@@ -19,6 +19,7 @@ export {default as symbolWye} from "./symbol/wye.js";
 export {default as curveBasisClosed} from "./curve/basisClosed.js";
 export {default as curveBasisOpen} from "./curve/basisOpen.js";
 export {default as curveBasis} from "./curve/basis.js";
+export {bumpX as curveBumpX, bumpY as curveBumpY} from "./curve/bump.js";
 export {default as curveBundle} from "./curve/bundle.js";
 export {default as curveCardinalClosed} from "./curve/cardinalClosed.js";
 export {default as curveCardinalOpen} from "./curve/cardinalOpen.js";
