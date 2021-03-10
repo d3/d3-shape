@@ -27,10 +27,8 @@ class Bump {
       }
       case 1: this._point = 2; // proceed
       default: {
-        if (this.dir === "x")
-          this._context.bezierCurveTo(this._x0 = (this._x0 + x) / 2, this._y0, this._x0, y, x, y);
-        else
-          this._context.bezierCurveTo(this._x0, this._y0 = (this._y0 + y) / 2, x, this._y0, x, y);
+        if (this.dir === "x") this._context.bezierCurveTo(this._x0 = (this._x0 + x) / 2, this._y0, this._x0, y, x, y);
+        else this._context.bezierCurveTo(this._x0, this._y0 = (this._y0 + y) / 2, x, this._y0, x, y);
         break;
       }
     }
