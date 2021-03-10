@@ -178,7 +178,7 @@ tape("pie().startAngle(θ₀).endAngle(θ₁).padAngle(δ)(data) restricts the p
   test.deepEqual(shape.pie().startAngle(0).endAngle(-Math.PI).padAngle(Infinity)([1, 2, 3]), [
     {data: 1, value: 1, index: 2, startAngle: -2.0943951023931953, endAngle: -3.1415926535897930, padAngle: 1.0471975511965976},
     {data: 2, value: 2, index: 1, startAngle: -1.0471975511965976, endAngle: -2.0943951023931953, padAngle: 1.0471975511965976},
-    {data: 3, value: 3, index: 0, startAngle: -0.0000000000000000, endAngle: -1.0471975511965976, padAngle: 1.0471975511965976}
+    {data: 3, value: 3, index: 0, startAngle:  0.0000000000000000, endAngle: -1.0471975511965976, padAngle: 1.0471975511965976}
   ]);
   test.end();
 });
