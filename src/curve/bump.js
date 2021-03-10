@@ -1,7 +1,7 @@
 class Bump {
-  constructor(context, dir) {
+  constructor(context, x) {
     this._context = context;
-    this.dir = dir;
+    this._x = x;
   }
   areaStart() {
     this._line = 0;
@@ -27,7 +27,7 @@ class Bump {
       }
       case 1: this._point = 2; // proceed
       default: {
-        if (this.dir === "x") this._context.bezierCurveTo(this._x0 = (this._x0 + x) / 2, this._y0, this._x0, y, x, y);
+        if (this._x) this._context.bezierCurveTo(this._x0 = (this._x0 + x) / 2, this._y0, this._x0, y, x, y);
         else this._context.bezierCurveTo(this._x0, this._y0 = (this._y0 + y) / 2, x, this._y0, x, y);
         break;
       }
@@ -37,9 +37,9 @@ class Bump {
 }
 
 export function bumpX(context) {
-  return new Bump(context, "x");
+  return new Bump(context, true);
 }
 
 export function bumpY(context) {
-  return new Bump(context, "y");
+  return new Bump(context, false);
 }
