@@ -890,6 +890,10 @@ function y(d) {
 
 If *context* is specified, sets the context and returns this link generator. If *context* is not specified, returns the current context, which defaults to null. If the context is not null, then the [generated link](#_link) is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated link is returned. See also [d3-path](https://github.com/d3/d3-path).
 
+<a name="link_curve" href="#link_curve">#</a> <i>link</i>.<b>curve</b>([<i>curve</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/link/index.js)
+
+If *curve* is specified, sets the curve and returns this link generator. If *curve* is not specified, returns the current curve, which defaults to [curveBumpX](#curveBumpX) for horizontal links, [curveBumpY](#curveBumpY) for vertical links.
+
 <a name="linkRadial" href="#linkRadial">#</a> d3.<b>linkRadial</b>() · [Source](https://github.com/d3/d3-shape/blob/master/src/link/index.js)
 
 Returns a new [link generator](#_link) with radial tangents. For example, to visualize [links](https://github.com/d3/d3-hierarchy/blob/master/README.md#node_links) in a [tree diagram](https://github.com/d3/d3-hierarchy/blob/master/README.md#tree) rooted in the center of the display, you might say:
