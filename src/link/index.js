@@ -3,6 +3,7 @@ import {slice} from "../array.js";
 import constant from "../constant.js";
 import {x as pointX, y as pointY} from "../point.js";
 import pointRadial from "../pointRadial.js";
+import {bumpX as curveBumpX, bumpY as curveBumpY} from "../curve/bump.js";
 
 function linkSource(d) {
   return d.source;
@@ -21,8 +22,11 @@ function link(curve) {
 
   function link() {
     var buffer, argv = slice.call(arguments), s = source.apply(this, argv), t = target.apply(this, argv);
-    if (!context) context = buffer = path();
-    curve(context, +x.apply(this, (argv[0] = s, argv)), +y.apply(this, argv), +x.apply(this, (argv[0] = t, argv)), +y.apply(this, argv));
+    if (!context) context = curve(buffer = path());
+    context.lineStart();
+    context.point(+x.apply(this, (argv[0] = s, argv)), +y.apply(this, argv));
+    context.point(+x.apply(this, (argv[0] = t, argv)), +y.apply(this, argv));
+    context.lineEnd();
     if (buffer) return context = null, buffer + "" || null;
   }
 
@@ -45,40 +49,53 @@ function link(curve) {
   link.context = function(_) {
     return arguments.length ? ((context = _ == null ? null : _), link) : context;
   };
+  
+  link.curve = function(_) {
+    return arguments.length ? (curve = _, link) : curve;
+  };
 
   return link;
 }
 
-function curveHorizontal(context, x0, y0, x1, y1) {
-  context.moveTo(x0, y0);
-  context.bezierCurveTo(x0 = (x0 + x1) / 2, y0, x0, y1, x1, y1);
+class CurveRadial {
+  constructor(context) {
+    this._context = context;
+  }
+  lineStart() {
+    this._point = 0;
+  }
+  lineEnd() {}
+  point(x, y) {
+    x = +x, y = +y;
+    if (this._point++ === 0) {
+      this._x0 = x, this._y0 = y;
+    } else {
+      const p0 = pointRadial(this._x0, this._y0);
+      const p1 = pointRadial(this._x0, this._y0 = (this._y0 + y) / 2);
+      const p2 = pointRadial(x, this._y0);
+      const p3 = pointRadial(x, y);
+      this._context.moveTo(...p0);
+      this._context.bezierCurveTo(...p1, ...p2, ...p3);
+    }
+  }
 }
 
-function curveVertical(context, x0, y0, x1, y1) {
-  context.moveTo(x0, y0);
-  context.bezierCurveTo(x0, y0 = (y0 + y1) / 2, x1, y0, x1, y1);
-}
-
-function curveRadial(context, x0, y0, x1, y1) {
-  var p0 = pointRadial(x0, y0),
-      p1 = pointRadial(x0, y0 = (y0 + y1) / 2),
-      p2 = pointRadial(x1, y0),
-      p3 = pointRadial(x1, y1);
-  context.moveTo(p0[0], p0[1]);
-  context.bezierCurveTo(p1[0], p1[1], p2[0], p2[1], p3[0], p3[1]);
+function curveRadial(context) {
+  return new CurveRadial(context);
 }
 
 export function linkHorizontal() {
-  return link(curveHorizontal);
+  return link(curveBumpX);
 }
 
 export function linkVertical() {
-  return link(curveVertical);
+  return link(curveBumpY);
 }
 
 export function linkRadial() {
   var l = link(curveRadial);
   l.angle = l.x, delete l.x;
   l.radius = l.y, delete l.y;
+  delete l.curve;
   return l;
 }
