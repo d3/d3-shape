@@ -1,6 +1,6 @@
-import {path} from "d3-path";
 import {slice} from "../array.js";
 import constant from "../constant.js";
+import line from "../line.js";
 import {x as pointX, y as pointY} from "../point.js";
 import pointRadial from "../pointRadial.js";
 import {bumpX as curveBumpX, bumpY as curveBumpY} from "../curve/bump.js";
@@ -17,17 +17,19 @@ function link(curve) {
   var source = linkSource,
       target = linkTarget,
       x = pointX,
-      y = pointY,
-      context = null;
-
+      y = pointY;
+  
+  const l = line().curve(curve);
+  
   function link() {
-    var buffer, argv = slice.call(arguments), s = source.apply(this, argv), t = target.apply(this, argv);
-    if (!context) context = curve(buffer = path());
-    context.lineStart();
-    context.point(+x.apply(this, (argv[0] = s, argv)), +y.apply(this, argv));
-    context.point(+x.apply(this, (argv[0] = t, argv)), +y.apply(this, argv));
-    context.lineEnd();
-    if (buffer) return context = null, buffer + "" || null;
+    const argv = slice.call(arguments);
+    const s = source.apply(this, argv);
+    const t = target.apply(this, argv);
+    const sx = +x.apply(this, (argv[0] = s, argv));
+    const sy = +y.apply(this, argv);
+    const tx = +x.apply(this, (argv[0] = t, argv));
+    const ty = +y.apply(this, argv);
+    return l([[sx, sy], [tx, ty]]);
   }
 
   link.source = function(_) {
@@ -47,11 +49,11 @@ function link(curve) {
   };
 
   link.context = function(_) {
-    return arguments.length ? ((context = _ == null ? null : _), link) : context;
+    return arguments.length ? (l.context(_ == null ? null : _), link) : l.context();
   };
   
   link.curve = function(_) {
-    return arguments.length ? (curve = _, link) : curve;
+    return arguments.length ? (l.curve(_), link) : l.curve();
   };
 
   return link;
