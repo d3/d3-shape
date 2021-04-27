@@ -26,18 +26,27 @@ For more, read [Introducing d3-shape](https://medium.com/@mbostock/introducing-d
 
 ## Installing
 
-If you use NPM, `npm install d3-shape`. Otherwise, download the [latest release](https://github.com/d3/d3-shape/releases/latest). You can also load directly from [d3js.org](https://d3js.org), either as a [standalone library](https://d3js.org/d3-shape.v2.min.js) or as part of [D3](https://github.com/d3/d3). AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3` global is exported:
+If you use npm, `npm install d3-shape`. You can also download the [latest release on GitHub](https://github.com/d3/d3-shape/releases/latest). For vanilla HTML in modern browsers, import d3-shape from Skypack:
 
 ```html
-<script src="https://d3js.org/d3-path.v2.min.js"></script>
-<script src="https://d3js.org/d3-shape.v2.min.js"></script>
-<script>
+<script type="module">
+import {line} from "https://cdn.skypack.dev/d3-shape@3";
 
-const line = d3.line();
-
+const l = line();
 </script>
 ```
 
+For legacy environments, you can load d3-shape’s UMD bundle from an npm-based CDN such as jsDelivr; a `d3` global is exported:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/d3-path@3"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-shape@3"></script>
+<script>
+
+const l = d3.line();
+
+</script>
+```
 
 ## API Reference
 

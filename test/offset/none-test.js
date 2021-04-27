@@ -1,49 +1,46 @@
-var tape = require("tape"),
-    shape = require("../../");
+import assert from "assert";
+import * as d3 from "../../src/index.js";
 
-tape("stackOffsetNone(series, order) stacks upon the first layer’s existing positions", function(test) {
-  var series = [
+it("stackOffsetNone(series, order) stacks upon the first layer’s existing positions", () => {
+  const series = [
     [[1, 2], [2, 4], [3, 4]],
     [[0, 3], [0, 4], [0, 2]],
     [[0, 5], [0, 2], [0, 4]]
   ];
-  shape.stackOffsetNone(series, shape.stackOrderNone(series));
-  test.deepEqual(series, [
+  d3.stackOffsetNone(series, d3.stackOrderNone(series));
+  assert.deepStrictEqual(series, [
     [[1,  2], [2,  4], [3,  4]],
     [[2,  5], [4,  8], [4,  6]],
     [[5, 10], [8, 10], [6, 10]]
   ]);
-  test.end();
 });
 
-tape("stackOffsetNone(series, order) treats NaN as zero", function(test) {
-  var series = [
+it("stackOffsetNone(series, order) treats NaN as zero", () => {
+  const series = [
     [[0, 1], [0,   2], [0, 1]],
     [[0, 3], [0, NaN], [0, 2]],
     [[0, 5], [0,   2], [0, 4]]
   ];
-  shape.stackOffsetNone(series, shape.stackOrderNone(series));
-  test.ok(isNaN(series[1][1][1]));
-  series[1][1][1] = "NaN"; // can’t test.equal NaN
-  test.deepEqual(series, [
+  d3.stackOffsetNone(series, d3.stackOrderNone(series));
+  assert(isNaN(series[1][1][1]));
+  series[1][1][1] = "NaN"; // can’t assert.strictEqual NaN
+  assert.deepStrictEqual(series, [
     [[0, 1], [0,     2], [0, 1]],
     [[1, 4], [2, "NaN"], [1, 3]],
     [[4, 9], [2,     4], [3, 7]]
   ]);
-  test.end();
 });
 
-tape("stackOffsetNone(series, order) observes the specified order", function(test) {
-  var series = [
+it("stackOffsetNone(series, order) observes the specified order", () => {
+  const series = [
     [[0, 1], [0, 2], [0, 1]],
     [[0, 3], [0, 4], [0, 2]],
     [[0, 5], [0, 2], [0, 4]]
   ];
-  shape.stackOffsetNone(series, shape.stackOrderReverse(series));
-  test.deepEqual(series, [
+  d3.stackOffsetNone(series, d3.stackOrderReverse(series));
+  assert.deepStrictEqual(series, [
     [[8, 9], [6, 8], [6, 7]],
     [[5, 8], [2, 6], [4, 6]],
     [[0, 5], [0, 2], [0, 4]]
   ]);
-  test.end();
 });

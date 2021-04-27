@@ -1,15 +1,14 @@
-var tape = require("tape"),
-    shape = require("../");
+import assert from "assert";
+import * as d3 from "../src/index.js";
 
-tape("symbols is the array of symbol types", function(test) {
-  test.deepEqual(shape.symbols, [
-    shape.symbolCircle,
-    shape.symbolCross,
-    shape.symbolDiamond,
-    shape.symbolSquare,
-    shape.symbolStar,
-    shape.symbolTriangle,
-    shape.symbolWye
+it("symbols is the array of symbol types", () => {
+  assert.deepStrictEqual(d3.symbols, [
+    d3.symbolCircle,
+    d3.symbolCross,
+    d3.symbolDiamond,
+    d3.symbolSquare,
+    d3.symbolStar,
+    d3.symbolTriangle,
+    d3.symbolWye
   ]);
-  test.end();
 });

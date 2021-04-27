@@ -1,20 +1,18 @@
-var tape = require("tape"),
-    shape = require("../../");
+import assert from "assert";
+import * as d3 from "../../src/index.js";
 
-tape("stackOrderAscending(series) returns an order by sum", function(test) {
-  test.deepEqual(shape.stackOrderAscending([
+it("stackOrderAscending(series) returns an order by sum", () => {
+  assert.deepStrictEqual(d3.stackOrderAscending([
     [[0, 1], [0, 2], [0, 3]],
     [[0, 2], [0, 3], [0, 4]],
     [[0, 0], [0, 1], [0, 2]]
   ]), [2, 0, 1]);
-  test.end();
 });
 
-tape("stackOrderAscending(series) treats NaN values as zero", function(test) {
-  test.deepEqual(shape.stackOrderAscending([
+it("stackOrderAscending(series) treats NaN values as zero", () => {
+  assert.deepStrictEqual(d3.stackOrderAscending([
     [[0, 1], [0, 2], [0, NaN], [0, 3]],
     [[0, 2], [0, 3], [0, NaN], [0, 4]],
     [[0, 0], [0, 1], [0, NaN], [0, 2]]
   ]), [2, 0, 1]);
-  test.end();
 });

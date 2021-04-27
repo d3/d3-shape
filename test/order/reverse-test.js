@@ -1,7 +1,6 @@
-var tape = require("tape"),
-    shape = require("../../");
+import assert from "assert";
+import * as d3 from "../../src/index.js";
 
-tape("stackOrderReverse(series) returns [series.length - 1, series.length - 2, … 0]", function(test) {
-  test.deepEqual(shape.stackOrderReverse(new Array(4)), [3, 2, 1, 0]);
-  test.end();
+it("stackOrderReverse(series) returns [series.length - 1, series.length - 2, … 0]", () => {
+  assert.deepStrictEqual(d3.stackOrderReverse(new Array(4)), [3, 2, 1, 0]);
 });
