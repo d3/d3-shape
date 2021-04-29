@@ -4,12 +4,12 @@
     "sourceType": "module",
     "ecmaVersion": 8
   },
+  "env": {
+    "es6": true,
+    "mocha": true
+  },
   "rules": {
     "no-cond-assign": 0,
-    "no-fallthrough": 0,
-    "no-undef": 0
-  },
-  "env": {
-    "mocha": true
+    "no-fallthrough": 0
   }
 }
