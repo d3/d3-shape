@@ -1,9 +1,9 @@
 import assert from "assert";
-import * as d3 from "../../src/index.js";
+import {area, line, curveCatmullRom} from "../../src/index.js";
 import {assertPathEqual} from "../asserts.js";
 
 it("line.curve(curveCatmullRom)(data) generates the expected path", () => {
-  const l = d3.line().curve(d3.curveCatmullRom);
+  const l = line().curve(curveCatmullRom);
   assert.strictEqual(l([]), null);
   assertPathEqual(l([[0, 1]]), "M0,1Z");
   assertPathEqual(l([[0, 1], [1, 3]]), "M0,1L1,3");
@@ -12,7 +12,7 @@ it("line.curve(curveCatmullRom)(data) generates the expected path", () => {
 });
 
 it("line.curve(curveCatmullRom.alpha(1))(data) generates the expected path", () => {
-  const l = d3.line().curve(d3.curveCatmullRom.alpha(1));
+  const l = line().curve(curveCatmullRom.alpha(1));
   assert.strictEqual(l([]), null);
   assertPathEqual(l([[0, 1]]), "M0,1Z");
   assertPathEqual(l([[0, 1], [1, 3]]), "M0,1L1,3");
@@ -21,17 +21,17 @@ it("line.curve(curveCatmullRom.alpha(1))(data) generates the expected path", () 
 });
 
 it("line.curve(curveCatmullRom) uses a default alpha of 0.5 (centripetal)", () => {
-  const l = d3.line().curve(d3.curveCatmullRom.alpha(0.5));
-  assert.strictEqual(d3.line().curve(d3.curveCatmullRom)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  const l = line().curve(curveCatmullRom.alpha(0.5));
+  assert.strictEqual(line().curve(curveCatmullRom)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
 });
 
 it("line.curve(curveCatmullRom.alpha(alpha)) coerces the specified alpha to a number", () => {
-  const l = d3.line().curve(d3.curveCatmullRom.alpha("0.5"));
-  assert.strictEqual(d3.line().curve(d3.curveCatmullRom.alpha(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  const l = line().curve(curveCatmullRom.alpha("0.5"));
+  assert.strictEqual(line().curve(curveCatmullRom.alpha(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
 });
 
 it("area.curve(curveCatmullRom.alpha(0))(data) generates the expected path", () => {
-  const a = d3.area().curve(d3.curveCatmullRom.alpha(0));
+  const a = area().curve(curveCatmullRom.alpha(0));
   assert.strictEqual(a([]), null);
   assertPathEqual(a([[0, 1]]), "M0,1L0,0Z");
   assertPathEqual(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");
@@ -40,11 +40,11 @@ it("area.curve(curveCatmullRom.alpha(0))(data) generates the expected path", () 
 });
 
 it("area.curve(curveCatmullRom) uses a default alpha of 0.5 (centripetal)", () => {
-  const a = d3.area().curve(d3.curveCatmullRom.alpha(0.5));
-  assert.strictEqual(d3.area().curve(d3.curveCatmullRom)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  const a = area().curve(curveCatmullRom.alpha(0.5));
+  assert.strictEqual(area().curve(curveCatmullRom)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
 });
 
 it("area.curve(curveCatmullRom.alpha(alpha)) coerces the specified alpha to a number", () => {
-  const a = d3.area().curve(d3.curveCatmullRom.alpha("0.5"));
-  assert.strictEqual(d3.area().curve(d3.curveCatmullRom.alpha(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  const a = area().curve(curveCatmullRom.alpha("0.5"));
+  assert.strictEqual(area().curve(curveCatmullRom.alpha(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
 });

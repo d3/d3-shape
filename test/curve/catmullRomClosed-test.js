@@ -1,9 +1,9 @@
 import assert from "assert";
-import * as d3 from "../../src/index.js";
+import {area, line, curveCatmullRomClosed} from "../../src/index.js";
 import {assertPathEqual} from "../asserts.js";
 
 it("line.curve(curveCatmullRomClosed)(data) generates the expected path", () => {
-  const l = d3.line().curve(d3.curveCatmullRomClosed);
+  const l = line().curve(curveCatmullRomClosed);
   assert.strictEqual(l([]), null);
   assertPathEqual(l([[0, 1]]), "M0,1Z");
   assertPathEqual(l([[0, 1], [1, 3]]), "M1,3L0,1Z");
@@ -12,7 +12,7 @@ it("line.curve(curveCatmullRomClosed)(data) generates the expected path", () => 
 });
 
 it("line.curve(curveCatmullRomClosed.alpha(0))(data) generates the expected path", () => {
-  const l = d3.line().curve(d3.curveCatmullRomClosed.alpha(0));
+  const l = line().curve(curveCatmullRomClosed.alpha(0));
   assert.strictEqual(l([]), null);
   assertPathEqual(l([[0, 1]]), "M0,1Z");
   assertPathEqual(l([[0, 1], [1, 3]]), "M1,3L0,1Z");
@@ -21,7 +21,7 @@ it("line.curve(curveCatmullRomClosed.alpha(0))(data) generates the expected path
 });
 
 it("line.curve(curveCatmullRomClosed.alpha(1))(data) generates the expected path", () => {
-  const l = d3.line().curve(d3.curveCatmullRomClosed.alpha(1));
+  const l = line().curve(curveCatmullRomClosed.alpha(1));
   assert.strictEqual(l([]), null);
   assertPathEqual(l([[0, 1]]), "M0,1Z");
   assertPathEqual(l([[0, 1], [1, 3]]), "M1,3L0,1Z");
@@ -30,16 +30,16 @@ it("line.curve(curveCatmullRomClosed.alpha(1))(data) generates the expected path
 });
 
 it("line.curve(curveCatmullRomClosed) uses a default alpha of 0.5 (centripetal)", () => {
-  const l = d3.line().curve(d3.curveCatmullRomClosed.alpha(0.5));
-  assert.strictEqual(d3.line().curve(d3.curveCatmullRomClosed)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  const l = line().curve(curveCatmullRomClosed.alpha(0.5));
+  assert.strictEqual(line().curve(curveCatmullRomClosed)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
 });
 
 it("line.curve(curveCatmullRomClosed.alpha(alpha)) coerces the specified alpha to a number", () => {
-  const l = d3.line().curve(d3.curveCatmullRomClosed.alpha("0.5"));
-  assert.strictEqual(d3.line().curve(d3.curveCatmullRomClosed.alpha(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  const l = line().curve(curveCatmullRomClosed.alpha("0.5"));
+  assert.strictEqual(line().curve(curveCatmullRomClosed.alpha(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
 });
 
 it("area.curve(curveCatmullRomClosed.alpha(alpha)) coerces the specified alpha to a number", () => {
-  const a = d3.area().curve(d3.curveCatmullRomClosed.alpha("0.5"));
-  assert.strictEqual(d3.area().curve(d3.curveCatmullRomClosed.alpha(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  const a = area().curve(curveCatmullRomClosed.alpha("0.5"));
+  assert.strictEqual(area().curve(curveCatmullRomClosed.alpha(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
 });

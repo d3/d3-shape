@@ -1,5 +1,5 @@
 import assert from "assert";
-import * as d3 from "../../src/index.js";
+import {stackOffsetDiverging, stackOrderNone, stackOrderReverse} from "../../src/index.js";
 
 it("stackOffsetDiverging(series, order) applies a zero baseline, ignoring existing offsets", () => {
   const series = [
@@ -7,7 +7,7 @@ it("stackOffsetDiverging(series, order) applies a zero baseline, ignoring existi
     [[0, 3], [0, 4], [0, 2]],
     [[0, 5], [0, 2], [0, 4]]
   ];
-  d3.stackOffsetDiverging(series, d3.stackOrderNone(series));
+  stackOffsetDiverging(series, stackOrderNone(series));
   assert.deepStrictEqual(series, [
     [[0, 1], [0, 2], [0, 1]],
     [[1, 4], [2, 6], [1, 3]],
@@ -19,7 +19,7 @@ it("stackOffsetDiverging(series, order) handles a single series", () => {
   const series = [
     [[1, 2], [2, 4], [3, 4]]
   ];
-  d3.stackOffsetDiverging(series, d3.stackOrderNone(series));
+  stackOffsetDiverging(series, stackOrderNone(series));
   assert.deepStrictEqual(series, [
     [[0, 1], [0, 2], [0, 1]]
   ]);
@@ -31,7 +31,7 @@ it("stackOffsetDiverging(series, order) treats NaN as zero", () => {
     [[0, 3], [0, NaN], [0, 2]],
     [[0, 5], [0,   2], [0, 4]]
   ];
-  d3.stackOffsetDiverging(series, d3.stackOrderNone(series));
+  stackOffsetDiverging(series, stackOrderNone(series));
   assert(isNaN(series[1][1][1]));
   series[1][1][1] = "NaN"; // can’t assert.strictEqual NaN
   assert.deepStrictEqual(series, [
@@ -47,7 +47,7 @@ it("stackOffsetDiverging(series, order) observes the specified order", () => {
     [[0, 3], [0, 4], [0, 2]],
     [[0, 5], [0, 2], [0, 4]]
   ];
-  d3.stackOffsetDiverging(series, d3.stackOrderReverse(series));
+  stackOffsetDiverging(series, stackOrderReverse(series));
   assert.deepStrictEqual(series, [
     [[8, 9], [6, 8], [6, 7]],
     [[5, 8], [2, 6], [4, 6]],
@@ -61,7 +61,7 @@ it("stackOffsetDiverging(series, order) puts negative values below zero, in orde
     [[0, -3], [0, -4], [0, -2]],
     [[0, -5], [0, -2], [0,  4]]
   ];
-  d3.stackOffsetDiverging(series, d3.stackOrderNone(series));
+  stackOffsetDiverging(series, stackOrderNone(series));
   assert.deepStrictEqual(series, [
     [[ 0,  1], [-2,  0], [-1,  0]],
     [[-3,  0], [-6, -2], [-3, -1]],
@@ -75,7 +75,7 @@ it("stackOffsetDiverging(series, order) puts zero values at zero, in order", () 
     [[0, 3], [0, 0], [0, 0]],
     [[0, 5], [0, 2], [0, 4]]
   ];
-  d3.stackOffsetDiverging(series, d3.stackOrderNone(series));
+  stackOffsetDiverging(series, stackOrderNone(series));
   assert.deepStrictEqual(series, [
     [[0, 1], [0, 2], [-1, 0]],
     [[1, 4], [0, 0], [0, 0]],

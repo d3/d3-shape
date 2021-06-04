@@ -1,8 +1,8 @@
 import assert from "assert";
-import * as d3 from "../../src/index.js";
+import {stackOrderInsideOut} from "../../src/index.js";
 
 it("stackOrderInsideOut(series) returns an order by appearance", () => {
-  assert.deepStrictEqual(d3.stackOrderInsideOut([
+  assert.deepStrictEqual(stackOrderInsideOut([
     [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 1]],
     [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 2], [0, 0]],
     [[0, 0], [0, 0], [0, 0], [0, 0], [0, 3], [0, 0], [0, 0]],
@@ -14,7 +14,7 @@ it("stackOrderInsideOut(series) returns an order by appearance", () => {
 });
 
 it("stackOrderInsideOut(series) treats NaN values as zero", () => {
-  assert.deepStrictEqual(d3.stackOrderInsideOut([
+  assert.deepStrictEqual(stackOrderInsideOut([
     [[0, 0], [0, NaN], [0, 0], [0, 0], [0, 0], [0, 0], [0, 1]],
     [[0, 0], [0, 0], [0, NaN], [0, 0], [0, 0], [0, 2], [0, 0]],
     [[0, 0], [0, 0], [0, 0], [0, 0], [0, 3], [0, 0], [0, 0]],

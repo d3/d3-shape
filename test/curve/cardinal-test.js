@@ -1,9 +1,9 @@
 import assert from "assert";
-import * as d3 from "../../src/index.js";
+import {area, line, curveCardinal} from "../../src/index.js";
 import {assertPathEqual} from "../asserts.js";
 
 it("line.curve(curveCardinal)(data) generates the expected path", () => {
-  const l = d3.line().curve(d3.curveCardinal);
+  const l = line().curve(curveCardinal);
   assert.strictEqual(l([]), null);
   assertPathEqual(l([[0, 1]]), "M0,1Z");
   assertPathEqual(l([[0, 1], [1, 3]]), "M0,1L1,3");
@@ -12,21 +12,21 @@ it("line.curve(curveCardinal)(data) generates the expected path", () => {
 });
 
 it("line.curve(curveCardinal) uses a default tension of zero", () => {
-  const l = d3.line().curve(d3.curveCardinal.tension(0));
-  assert.strictEqual(d3.line().curve(d3.curveCardinal)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  const l = line().curve(curveCardinal.tension(0));
+  assert.strictEqual(line().curve(curveCardinal)([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
 });
 
 it("line.curve(curveCardinal.tension(tension)) uses the specified tension", () => {
-  assertPathEqual(d3.line().curve(d3.curveCardinal.tension(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), "M0,1C0,1,0.833333,3,1,3C1.166667,3,1.833333,1,2,1C2.166667,1,3,3,3,3");
+  assertPathEqual(line().curve(curveCardinal.tension(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), "M0,1C0,1,0.833333,3,1,3C1.166667,3,1.833333,1,2,1C2.166667,1,3,3,3,3");
 });
 
 it("line.curve(curveCardinal.tension(tension)) coerces the specified tension to a number", () => {
-  const l = d3.line().curve(d3.curveCardinal.tension("0.5"));
-  assert.strictEqual(d3.line().curve(d3.curveCardinal.tension(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  const l = line().curve(curveCardinal.tension("0.5"));
+  assert.strictEqual(line().curve(curveCardinal.tension(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), l([[0, 1], [1, 3], [2, 1], [3, 3]]));
 });
 
 it("area.curve(curveCardinal)(data) generates the expected path", () => {
-  const a = d3.area().curve(d3.curveCardinal);
+  const a = area().curve(curveCardinal);
   assert.strictEqual(a([]), null);
   assertPathEqual(a([[0, 1]]), "M0,1L0,0Z");
   assertPathEqual(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");
@@ -35,15 +35,15 @@ it("area.curve(curveCardinal)(data) generates the expected path", () => {
 });
 
 it("area.curve(curveCardinal) uses a default tension of zero", () => {
-  const a = d3.area().curve(d3.curveCardinal.tension(0));
-  assert.strictEqual(d3.area().curve(d3.curveCardinal)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  const a = area().curve(curveCardinal.tension(0));
+  assert.strictEqual(area().curve(curveCardinal)([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
 });
 
 it("area.curve(curveCardinal.tension(tension)) uses the specified tension", () => {
-  assertPathEqual(d3.area().curve(d3.curveCardinal.tension(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), "M0,1C0,1,0.833333,3,1,3C1.166667,3,1.833333,1,2,1C2.166667,1,3,3,3,3L3,0C3,0,2.166667,0,2,0C1.833333,0,1.166667,0,1,0C0.833333,0,0,0,0,0Z");
+  assertPathEqual(area().curve(curveCardinal.tension(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), "M0,1C0,1,0.833333,3,1,3C1.166667,3,1.833333,1,2,1C2.166667,1,3,3,3,3L3,0C3,0,2.166667,0,2,0C1.833333,0,1.166667,0,1,0C0.833333,0,0,0,0,0Z");
 });
 
 it("area.curve(curveCardinal.tension(tension)) coerces the specified tension to a number", () => {
-  const a = d3.area().curve(d3.curveCardinal.tension("0.5"));
-  assert.strictEqual(d3.area().curve(d3.curveCardinal.tension(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
+  const a = area().curve(curveCardinal.tension("0.5"));
+  assert.strictEqual(area().curve(curveCardinal.tension(0.5))([[0, 1], [1, 3], [2, 1], [3, 3]]), a([[0, 1], [1, 3], [2, 1], [3, 3]]));
 });

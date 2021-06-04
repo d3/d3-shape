@@ -1,5 +1,5 @@
 import assert from "assert";
-import * as d3 from "../../src/index.js";
+import {stackOffsetWiggle, stackOrderNone, stackOrderReverse} from "../../src/index.js";
 
 it("stackOffsetWiggle(series, order) minimizes weighted wiggle", () => {
   const series = [
@@ -7,7 +7,7 @@ it("stackOffsetWiggle(series, order) minimizes weighted wiggle", () => {
     [[0, 3], [0, 4], [0, 2]],
     [[0, 5], [0, 2], [0, 4]]
   ];
-  d3.stackOffsetWiggle(series, d3.stackOrderNone(series));
+  stackOffsetWiggle(series, stackOrderNone(series));
   assert.deepStrictEqual(series.map(roundSeries), [
     [[0, 1], [-1, 1], [0.7857143, 1.7857143]],
     [[1, 4], [ 1, 5], [1.7857143, 3.7857143]],
@@ -22,7 +22,7 @@ it("stackOffsetWiggle(series, order) treats NaN as zero", () => {
     [[0,   3], [0,   4], [0,   2]],
     [[0,   5], [0,   2], [0,   4]]
   ];
-  d3.stackOffsetWiggle(series, d3.stackOrderNone(series));
+  stackOffsetWiggle(series, stackOrderNone(series));
   assert(isNaN(series[1][0][1]));
   assert(isNaN(series[1][0][2]));
   assert(isNaN(series[1][0][3]));
@@ -41,7 +41,7 @@ it("stackOffsetWiggle(series, order) observes the specified order", () => {
     [[0, 3], [0, 4], [0, 2]],
     [[0, 5], [0, 2], [0, 4]]
   ];
-  d3.stackOffsetWiggle(series, d3.stackOrderReverse(series));
+  stackOffsetWiggle(series, stackOrderReverse(series));
   assert.deepStrictEqual(series.map(roundSeries), [
     [[8, 9], [8, 10], [7.21428571, 8.21428571]],
     [[5, 8], [4,  8], [5.21428571, 7.21428571]],

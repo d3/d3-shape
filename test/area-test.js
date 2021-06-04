@@ -1,74 +1,74 @@
 import assert from "assert";
-import * as d3 from "../src/index.js";
+import {area, curveCardinal, curveLinear} from "../src/index.js";
 import {assertPathEqual} from "./asserts.js";
 
 it("area() returns a default area shape", () => {
-  const a = d3.area();
+  const a = area();
   assert.strictEqual(a.x0()([42, 34]), 42);
   assert.strictEqual(a.x1(), null);
   assert.strictEqual(a.y0()([42, 34]), 0);
   assert.strictEqual(a.y1()([42, 34]), 34);
   assert.strictEqual(a.defined()([42, 34]), true);
-  assert.strictEqual(a.curve(), d3.curveLinear);
+  assert.strictEqual(a.curve(), curveLinear);
   assert.strictEqual(a.context(), null);
   assertPathEqual(a([[0, 1], [2, 3], [4, 5]]), "M0,1L2,3L4,5L4,0L2,0L0,0Z");
 });
 
 it("area(x, y0, y1) sets x0, y0 and y1", () => {
   const x = function() {}, y = function() {};
-  assert.strictEqual(d3.area(x).x0(), x);
-  assert.strictEqual(d3.area(x, y).y0(), y);
-  assert.strictEqual(d3.area(x, 0, y).y1(), y);
-  assert.strictEqual(d3.area(3, 2, 1).x0()("aa"), 3);
-  assert.strictEqual(d3.area(3, 2, 1).y0()("aa"), 2);
-  assert.strictEqual(d3.area(3, 2, 1).y1()("aa"), 1);
+  assert.strictEqual(area(x).x0(), x);
+  assert.strictEqual(area(x, y).y0(), y);
+  assert.strictEqual(area(x, 0, y).y1(), y);
+  assert.strictEqual(area(3, 2, 1).x0()("aa"), 3);
+  assert.strictEqual(area(3, 2, 1).y0()("aa"), 2);
+  assert.strictEqual(area(3, 2, 1).y1()("aa"), 1);
 });
 
 it("area.x(f)(data) passes d, i and data to the specified function f", () => {
   const data = ["a", "b"], actual = [];
-  d3.area().x(function() { actual.push([].slice.call(arguments)); })(data);
+  area().x(function() { actual.push([].slice.call(arguments)); })(data);
   assert.deepStrictEqual(actual, [["a", 0, data], ["b", 1, data]]);
 });
 
 it("area.x0(f)(data) passes d, i and data to the specified function f", () => {
   const data = ["a", "b"], actual = [];
-  d3.area().x0(function() { actual.push([].slice.call(arguments)); })(data);
+  area().x0(function() { actual.push([].slice.call(arguments)); })(data);
   assert.deepStrictEqual(actual, [["a", 0, data], ["b", 1, data]]);
 });
 
 it("area.x1(f)(data) passes d, i and data to the specified function f", () => {
   const data = ["a", "b"], actual = [];
-  d3.area().x1(function() { actual.push([].slice.call(arguments)); })(data);
+  area().x1(function() { actual.push([].slice.call(arguments)); })(data);
   assert.deepStrictEqual(actual, [["a", 0, data], ["b", 1, data]]);
 });
 
 it("area.y(f)(data) passes d, i and data to the specified function f", () => {
   const data = ["a", "b"], actual = [];
-  d3.area().y(function() { actual.push([].slice.call(arguments)); })(data);
+  area().y(function() { actual.push([].slice.call(arguments)); })(data);
   assert.deepStrictEqual(actual, [["a", 0, data], ["b", 1, data]]);
 });
 
 it("area.y0(f)(data) passes d, i and data to the specified function f", () => {
   const data = ["a", "b"], actual = [];
-  d3.area().y0(function() { actual.push([].slice.call(arguments)); })(data);
+  area().y0(function() { actual.push([].slice.call(arguments)); })(data);
   assert.deepStrictEqual(actual, [["a", 0, data], ["b", 1, data]]);
 });
 
 it("area.y1(f)(data) passes d, i and data to the specified function f", () => {
   const data = ["a", "b"], actual = [];
-  d3.area().y1(function() { actual.push([].slice.call(arguments)); })(data);
+  area().y1(function() { actual.push([].slice.call(arguments)); })(data);
   assert.deepStrictEqual(actual, [["a", 0, data], ["b", 1, data]]);
 });
 
 it("area.defined(f)(data) passes d, i and data to the specified function f", () => {
   const data = ["a", "b"], actual = [];
-  d3.area().defined(function() { actual.push([].slice.call(arguments)); })(data);
+  area().defined(function() { actual.push([].slice.call(arguments)); })(data);
   assert.deepStrictEqual(actual, [["a", 0, data], ["b", 1, data]]);
 });
 
 it("area.x(x)(data) observes the specified function", () => {
-  const x = function(d) { return d.x; },
-      a = d3.area().x(x);
+  const x = function(d) { return d.x; };
+  const a = area().x(x);
   assert.strictEqual(a.x(), x);
   assert.strictEqual(a.x0(), x);
   assert.strictEqual(a.x1(), null);
@@ -76,8 +76,8 @@ it("area.x(x)(data) observes the specified function", () => {
 });
 
 it("area.x(x)(data) observes the specified constant", () => {
-  const x = 0,
-      a = d3.area().x(x);
+  const x = 0;
+  const a = area().x(x);
   assert.strictEqual(a.x()(), 0);
   assert.strictEqual(a.x0()(), 0);
   assert.strictEqual(a.x1(), null);
@@ -85,8 +85,8 @@ it("area.x(x)(data) observes the specified constant", () => {
 });
 
 it("area.y(y)(data) observes the specified function", () => {
-  const y = function(d) { return d.y; },
-      a = d3.area().y(y);
+  const y = function(d) { return d.y; };
+  const a = area().y(y);
   assert.strictEqual(a.y(), y);
   assert.strictEqual(a.y0(), y);
   assert.strictEqual(a.y1(), null);
@@ -94,7 +94,7 @@ it("area.y(y)(data) observes the specified function", () => {
 });
 
 it("area.y(y)(data) observes the specified constant", () => {
-  const a = d3.area().y(0);
+  const a = area().y(0);
   assert.strictEqual(a.y()(), 0);
   assert.strictEqual(a.y0()(), 0);
   assert.strictEqual(a.y1(), null);
@@ -102,12 +102,12 @@ it("area.y(y)(data) observes the specified constant", () => {
 });
 
 it("area.curve(curve) sets the curve method", () => {
-  const a = d3.area().curve(d3.curveCardinal);
+  const a = area().curve(curveCardinal);
   assertPathEqual(a([[0, 1], [1, 3], [2, 1], [3, 3]]), "M0,1C0,1,0.666667,3,1,3C1.333333,3,1.666667,1,2,1C2.333333,1,3,3,3,3L3,0C3,0,2.333333,0,2,0C1.666667,0,1.333333,0,1,0C0.666667,0,0,0,0,0Z");
 });
 
 it("area.curve(curveCardinal.tension(tension)) sets the cardinal spline tension", () => {
-  const a = d3.area().curve(d3.curveCardinal.tension(0.1));
+  const a = area().curve(curveCardinal.tension(0.1));
   assert.strictEqual(a([]), null);
   assertPathEqual(a([[0, 1]]), "M0,1L0,0Z");
   assertPathEqual(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");
@@ -116,7 +116,7 @@ it("area.curve(curveCardinal.tension(tension)) sets the cardinal spline tension"
 });
 
 it("area.curve(curveCardinal.tension(tension)) coerces the specified tension to a number", () => {
-  const a = d3.area().curve(d3.curveCardinal.tension("0.1"));
+  const a = area().curve(curveCardinal.tension("0.1"));
   assert.strictEqual(a([]), null);
   assertPathEqual(a([[0, 1]]), "M0,1L0,0Z");
   assertPathEqual(a([[0, 1], [1, 3]]), "M0,1L1,3L1,0L0,0Z");
@@ -125,14 +125,14 @@ it("area.curve(curveCardinal.tension(tension)) coerces the specified tension to 
 });
 
 it("area.lineX0() returns a line derived from the area", () => {
-  const defined = function() { return true; },
-      curve = d3.curveCardinal,
-      context = {},
-      x0 = function() {},
-      x1 = function() {},
-      y = function() {},
-      a = d3.area().defined(defined).curve(curve).context(context).y(y).x0(x0).x1(x1),
-      l = a.lineX0();
+  const defined = function() { return true; };
+  const curve = curveCardinal;
+  const context = {};
+  const x0 = function() {};
+  const x1 = function() {};
+  const y = function() {};
+  const a = area().defined(defined).curve(curve).context(context).y(y).x0(x0).x1(x1);
+  const l = a.lineX0();
   assert.strictEqual(l.defined(), defined);
   assert.strictEqual(l.curve(), curve);
   assert.strictEqual(l.context(), context);
@@ -141,14 +141,14 @@ it("area.lineX0() returns a line derived from the area", () => {
 });
 
 it("area.lineX1() returns a line derived from the area", () => {
-  const defined = function() { return true; },
-      curve = d3.curveCardinal,
-      context = {},
-      x0 = function() {},
-      x1 = function() {},
-      y = function() {},
-      a = d3.area().defined(defined).curve(curve).context(context).y(y).x0(x0).x1(x1),
-      l = a.lineX1();
+  const defined = function() { return true; };
+  const curve = curveCardinal;
+  const context = {};
+  const x0 = function() {};
+  const x1 = function() {};
+  const y = function() {};
+  const a = area().defined(defined).curve(curve).context(context).y(y).x0(x0).x1(x1);
+  const l = a.lineX1();
   assert.strictEqual(l.defined(), defined);
   assert.strictEqual(l.curve(), curve);
   assert.strictEqual(l.context(), context);
@@ -157,14 +157,14 @@ it("area.lineX1() returns a line derived from the area", () => {
 });
 
 it("area.lineY0() returns a line derived from the area", () => {
-  const defined = function() { return true; },
-      curve = d3.curveCardinal,
-      context = {},
-      x = function() {},
-      y0 = function() {},
-      y1 = function() {},
-      a = d3.area().defined(defined).curve(curve).context(context).x(x).y0(y0).y1(y1),
-      l = a.lineY0();
+  const defined = function() { return true; };
+  const curve = curveCardinal;
+  const context = {};
+  const x = function() {};
+  const y0 = function() {};
+  const y1 = function() {};
+  const a = area().defined(defined).curve(curve).context(context).x(x).y0(y0).y1(y1);
+  const l = a.lineY0();
   assert.strictEqual(l.defined(), defined);
   assert.strictEqual(l.curve(), curve);
   assert.strictEqual(l.context(), context);
@@ -173,14 +173,14 @@ it("area.lineY0() returns a line derived from the area", () => {
 });
 
 it("area.lineY1() returns a line derived from the area", () => {
-  const defined = function() { return true; },
-      curve = d3.curveCardinal,
-      context = {},
-      x = function() {},
-      y0 = function() {},
-      y1 = function() {},
-      a = d3.area().defined(defined).curve(curve).context(context).x(x).y0(y0).y1(y1),
-      l = a.lineY1();
+  const defined = function() { return true; };
+  const curve = curveCardinal;
+  const context = {};
+  const x = function() {};
+  const y0 = function() {};
+  const y1 = function() {};
+  const a = area().defined(defined).curve(curve).context(context).x(x).y0(y0).y1(y1);
+  const l = a.lineY1();
   assert.strictEqual(l.defined(), defined);
   assert.strictEqual(l.curve(), curve);
   assert.strictEqual(l.context(), context);

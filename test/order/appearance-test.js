@@ -1,8 +1,8 @@
 import assert from "assert";
-import * as d3 from "../../src/index.js";
+import {stackOrderAppearance} from "../../src/index.js";
 
 it("stackOrderAppearance(series) returns an order by appearance", () => {
-  assert.deepStrictEqual(d3.stackOrderAppearance([
+  assert.deepStrictEqual(stackOrderAppearance([
     [[0, 0], [0, 0], [0, 1]],
     [[0, 3], [0, 2], [0, 0]],
     [[0, 0], [0, 4], [0, 0]]
@@ -10,7 +10,7 @@ it("stackOrderAppearance(series) returns an order by appearance", () => {
 });
 
 it("stackOrderAppearance(series) treats NaN values as zero", () => {
-  assert.deepStrictEqual(d3.stackOrderAppearance([
+  assert.deepStrictEqual(stackOrderAppearance([
     [[0, NaN], [0, NaN], [0, 1]],
     [[0, 3], [0, 2], [0, NaN]],
     [[0, NaN], [0, 4], [0, NaN]]

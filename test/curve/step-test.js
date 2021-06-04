@@ -1,9 +1,9 @@
 import assert from "assert";
-import * as d3 from "../../src/index.js";
+import {area, line, curveStep} from "../../src/index.js";
 import {assertPathEqual} from "../asserts.js";
 
 it("line.curve(curveStep)(data) generates the expected path", () => {
-  const l = d3.line().curve(d3.curveStep);
+  const l = line().curve(curveStep);
   assert.strictEqual(l([]), null);
   assertPathEqual(l([[0, 1]]), "M0,1Z");
   assertPathEqual(l([[0, 1], [2, 3]]), "M0,1L1,1L1,3L2,3");
@@ -11,7 +11,7 @@ it("line.curve(curveStep)(data) generates the expected path", () => {
 });
 
 it("area.curve(curveStep)(data) generates the expected path", () => {
-  const a = d3.area().curve(d3.curveStep);
+  const a = area().curve(curveStep);
   assert.strictEqual(a([]), null);
   assertPathEqual(a([[0, 1]]), "M0,1L0,0Z");
   assertPathEqual(a([[0, 1], [2, 3]]), "M0,1L1,1L1,3L2,3L2,0L1,0L1,0L0,0Z");

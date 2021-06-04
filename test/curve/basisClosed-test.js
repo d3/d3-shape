@@ -1,9 +1,9 @@
 import assert from "assert";
-import * as d3 from "../../src/index.js";
+import {line, curveBasisClosed} from "../../src/index.js";
 import {assertPathEqual} from "../asserts.js";
 
 it("line.curve(curveBasisClosed)(data) generates the expected path", () => {
-  const l = d3.line().curve(d3.curveBasisClosed);
+  const l = line().curve(curveBasisClosed);
   assert.strictEqual(l([]), null);
   assertPathEqual(l([[0, 0]]), "M0,0Z");
   assertPathEqual(l([[0, 0], [0, 10]]), "M0,6.666667L0,3.333333Z");
