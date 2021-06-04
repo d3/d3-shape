@@ -30,9 +30,11 @@ If you use npm, `npm install d3-shape`. You can also download the [latest releas
 
 ```html
 <script type="module">
+
 import {line} from "https://cdn.skypack.dev/d3-shape@3";
 
 const l = line();
+
 </script>
 ```
 
