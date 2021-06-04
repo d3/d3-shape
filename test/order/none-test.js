@@ -1,7 +1,6 @@
-var tape = require("tape"),
-    shape = require("../../");
+import assert from "assert";
+import {stackOrderNone} from "../../src/index.js";
 
-tape("stackOrderNone(series) returns [0, 1, … series.length - 1]", function(test) {
-  test.deepEqual(shape.stackOrderNone(new Array(4)), [0, 1, 2, 3]);
-  test.end();
+it("stackOrderNone(series) returns [0, 1, … series.length - 1]", () => {
+  assert.deepStrictEqual(stackOrderNone(new Array(4)), [0, 1, 2, 3]);
 });

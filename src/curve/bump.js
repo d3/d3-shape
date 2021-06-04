@@ -25,7 +25,7 @@ class Bump {
         else this._context.moveTo(x, y);
         break;
       }
-      case 1: this._point = 2; // proceed
+      case 1: this._point = 2; // falls through
       default: {
         if (this._x) this._context.bezierCurveTo(this._x0 = (this._x0 + x) / 2, this._y0, this._x0, y, x, y);
         else this._context.bezierCurveTo(this._x0, this._y0 = (this._y0 + y) / 2, x, this._y0, x, y);

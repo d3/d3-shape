@@ -5,9 +5,7 @@
     "ecmaVersion": 8
   },
   "env": {
-    "es6": true
-  },
-  "rules": {
-    "no-cond-assign": 0
+    "es6": true,
+    "mocha": true
   }
 }

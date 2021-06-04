@@ -1,8 +1,8 @@
-var tape = require("tape"),
-    shape = require("../../");
+import assert from "assert";
+import {stackOrderInsideOut} from "../../src/index.js";
 
-tape("stackOrderInsideOut(series) returns an order by appearance", function(test) {
-  test.deepEqual(shape.stackOrderInsideOut([
+it("stackOrderInsideOut(series) returns an order by appearance", () => {
+  assert.deepStrictEqual(stackOrderInsideOut([
     [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 1]],
     [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 2], [0, 0]],
     [[0, 0], [0, 0], [0, 0], [0, 0], [0, 3], [0, 0], [0, 0]],
@@ -11,11 +11,10 @@ tape("stackOrderInsideOut(series) returns an order by appearance", function(test
     [[0, 0], [0, 6], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]],
     [[0, 7], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
   ]), [2, 3, 6, 5, 4, 1, 0]);
-  test.end();
 });
 
-tape("stackOrderInsideOut(series) treats NaN values as zero", function(test) {
-  test.deepEqual(shape.stackOrderInsideOut([
+it("stackOrderInsideOut(series) treats NaN values as zero", () => {
+  assert.deepStrictEqual(stackOrderInsideOut([
     [[0, 0], [0, NaN], [0, 0], [0, 0], [0, 0], [0, 0], [0, 1]],
     [[0, 0], [0, 0], [0, NaN], [0, 0], [0, 0], [0, 2], [0, 0]],
     [[0, 0], [0, 0], [0, 0], [0, 0], [0, 3], [0, 0], [0, 0]],
@@ -24,5 +23,4 @@ tape("stackOrderInsideOut(series) treats NaN values as zero", function(test) {
     [[0, NaN], [0, 6], [0, 0], [0, NaN], [0, 0], [0, 0], [0, 0]],
     [[0, 7], [0, NaN], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
   ]), [2, 3, 6, 5, 4, 1, 0]);
-  test.end();
 });

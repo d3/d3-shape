@@ -1,55 +1,52 @@
-var tape = require("tape"),
-    shape = require("../../");
+import assert from "assert";
+import {stackOffsetWiggle, stackOrderNone, stackOrderReverse} from "../../src/index.js";
 
-tape("stackOffsetWiggle(series, order) minimizes weighted wiggle", function(test) {
-  var series = [
+it("stackOffsetWiggle(series, order) minimizes weighted wiggle", () => {
+  const series = [
     [[0, 1], [0, 2], [0, 1]],
     [[0, 3], [0, 4], [0, 2]],
     [[0, 5], [0, 2], [0, 4]]
   ];
-  shape.stackOffsetWiggle(series, shape.stackOrderNone(series));
-  test.deepEqual(series.map(roundSeries), [
+  stackOffsetWiggle(series, stackOrderNone(series));
+  assert.deepStrictEqual(series.map(roundSeries), [
     [[0, 1], [-1, 1], [0.7857143, 1.7857143]],
     [[1, 4], [ 1, 5], [1.7857143, 3.7857143]],
     [[4, 9], [ 5, 7], [3.7857143, 7.7857143]]
   ].map(roundSeries));
-  test.end();
 });
 
-tape("stackOffsetWiggle(series, order) treats NaN as zero", function(test) {
-  var series = [
+it("stackOffsetWiggle(series, order) treats NaN as zero", () => {
+  const series = [
     [[0,   1], [0,   2], [0,   1]],
     [[0, NaN], [0, NaN], [0, NaN]],
     [[0,   3], [0,   4], [0,   2]],
     [[0,   5], [0,   2], [0,   4]]
   ];
-  shape.stackOffsetWiggle(series, shape.stackOrderNone(series));
-  test.ok(isNaN(series[1][0][1]));
-  test.ok(isNaN(series[1][0][2]));
-  test.ok(isNaN(series[1][0][3]));
-  series[1][0][1] = series[1][1][1] = series[1][2][1] = "NaN"; // can’t test.equal NaN
-  test.deepEqual(series.map(roundSeries), [
+  stackOffsetWiggle(series, stackOrderNone(series));
+  assert(isNaN(series[1][0][1]));
+  assert(isNaN(series[1][0][2]));
+  assert(isNaN(series[1][0][3]));
+  series[1][0][1] = series[1][1][1] = series[1][2][1] = "NaN"; // can’t assert.strictEqual NaN
+  assert.deepStrictEqual(series.map(roundSeries), [
     [[0,     1], [-1,     1], [0.7857143, 1.7857143]],
     [[1, "NaN"], [ 1, "NaN"], [1.7857143,     "NaN"]],
     [[1,     4], [ 1,     5], [1.7857143, 3.7857143]],
     [[4,     9], [ 5,     7], [3.7857143, 7.7857143]]
   ].map(roundSeries));
-  test.end();
 });
 
-tape("stackOffsetWiggle(series, order) observes the specified order", function(test) {
-  var series = [
+it("stackOffsetWiggle(series, order) observes the specified order", () => {
+  const series = [
     [[0, 1], [0, 2], [0, 1]],
     [[0, 3], [0, 4], [0, 2]],
     [[0, 5], [0, 2], [0, 4]]
   ];
-  shape.stackOffsetWiggle(series, shape.stackOrderReverse(series));
-  test.deepEqual(series.map(roundSeries), [
+  stackOffsetWiggle(series, stackOrderReverse(series));
+  assert.deepStrictEqual(series.map(roundSeries), [
     [[8, 9], [8, 10], [7.21428571, 8.21428571]],
     [[5, 8], [4,  8], [5.21428571, 7.21428571]],
     [[0, 5], [2,  4], [1.21428571, 5.21428571]]
   ].map(roundSeries));
-  test.end();
 });
 
 function roundSeries(series) {
