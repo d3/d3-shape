@@ -1,6 +1,6 @@
 {
   "name": "d3-shape",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Graphical primitives for visualization, such as lines and areas.",
   "homepage": "https://d3js.org/d3-shape/",
   "repository": {
