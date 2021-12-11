@@ -93,6 +93,11 @@ it("arc().innerRadius(0).outerRadius(0) renders a point", () => {
   assertPathEqual(a.startAngle(0).endAngle(0)(), "M0,0Z");
 });
 
+it("a negative angle span proceeds anticlockwise", () => {
+  const a = arc().innerRadius(0).outerRadius(100);
+  assertPathEqual(a.startAngle(0).endAngle(-Math.PI/2)(), "M0,-100A100,100,0,0,0,-100,0L0,0Z");
+});
+
 it("arc().innerRadius(0).outerRadius(r).startAngle(θ₀).endAngle(θ₁) renders a clockwise circle if r > 0 and θ₁ - θ₀ ≥ τ", () => {
   const a = arc().innerRadius(0).outerRadius(100);
   assertPathEqual(a.startAngle(0).endAngle(2 * Math.PI)(), "M0,-100A100,100,0,1,1,0,100A100,100,0,1,1,0,-100Z");
