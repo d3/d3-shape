@@ -7,7 +7,7 @@ export {default as lineRadial, default as radialLine} from "./lineRadial.js"; //
 export {default as pointRadial} from "./pointRadial.js";
 export {linkHorizontal, linkVertical, linkRadial} from "./link/index.js";
 
-export {default as symbol, symbols} from "./symbol.js";
+export {default as symbol, symbolsStroke, symbolsFill, symbolsFill as symbols} from "./symbol.js";
 export {default as symbolCircle} from "./symbol/circle.js";
 export {default as symbolCross} from "./symbol/cross.js";
 export {default as symbolDiamond} from "./symbol/diamond.js";

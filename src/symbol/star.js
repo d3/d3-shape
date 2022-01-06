@@ -1,21 +1,21 @@
-import {pi, tau} from "../math.js";
+import {sin, cos, sqrt, pi, tau} from "../math.js";
 
-var ka = 0.89081309152928522810,
-    kr = Math.sin(pi / 10) / Math.sin(7 * pi / 10),
-    kx = Math.sin(tau / 10) * kr,
-    ky = -Math.cos(tau / 10) * kr;
+const ka = 0.89081309152928522810;
+const kr = sin(pi / 10) / sin(7 * pi / 10);
+const kx = sin(tau / 10) * kr;
+const ky = -cos(tau / 10) * kr;
 
 export default {
-  draw: function(context, size) {
-    var r = Math.sqrt(size * ka),
-        x = kx * r,
-        y = ky * r;
+  draw(context, size) {
+    const r = sqrt(size * ka);
+    const x = kx * r;
+    const y = ky * r;
     context.moveTo(0, -r);
     context.lineTo(x, y);
-    for (var i = 1; i < 5; ++i) {
-      var a = tau * i / 5,
-          c = Math.cos(a),
-          s = Math.sin(a);
+    for (let i = 1; i < 5; ++i) {
+      const a = tau * i / 5;
+      const c = cos(a);
+      const s = sin(a);
       context.lineTo(s * r, -c * r);
       context.lineTo(c * x - s * y, s * x + c * y);
     }
