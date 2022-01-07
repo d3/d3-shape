@@ -1,3 +1,4 @@
+/* eslint-disable no-loss-of-precision */
 import assert from "assert";
 import {pie} from "../src/index.js";
 
