@@ -929,11 +929,11 @@ Symbols provide a categorical shape encoding as is commonly used in scatterplots
 
 Constructs a new symbol generator of the specified [type](#symbol_type) and [size](#symbol_size). If not specified, *type* defaults to a circle, and *size* defaults to 64.
 
-<a name="_symbol" href="#_symbol">#</a> <i>symbol</i>(<i>arguments</i>…) · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
+<a name="_symbol" href="#_symbol">#</a> <i>symbol</i>(<i>arguments</i>…) · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js)
 
 Generates a symbol for the given *arguments*. The *arguments* are arbitrary; they are simply propagated to the symbol generator’s accessor functions along with the `this` object. For example, with the default settings, no arguments are needed to produce a circle with area 64 square pixels. If the symbol generator has a [context](#symbol_context), then the symbol is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls and this function returns void. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string is returned.
 
-<a name="symbol_type" href="#symbol_type">#</a> <i>symbol</i>.<b>type</b>([<i>type</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
+<a name="symbol_type" href="#symbol_type">#</a> <i>symbol</i>.<b>type</b>([<i>type</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js)
 
 If *type* is specified, sets the symbol type to the specified function or symbol type and returns this symbol generator. If *type* is a function, the symbol generator’s arguments and *this* are passed through. (See [*selection*.attr](https://github.com/d3/d3-selection/blob/master/README.md#selection_attr) if you are using d3-selection.) If *type* is not specified, returns the current symbol type accessor, which defaults to:
 
@@ -943,9 +943,9 @@ function type() {
 }
 ```
 
-See [symbols](#symbols) for the set of built-in symbol types. To implement a custom symbol type, pass an object that implements [*symbolType*.draw](#symbolType_draw).
+See [symbolsFill](#symbolsFill) and [symbolsStroke](#symbolsStroke) for built-in symbol types. To implement a custom symbol type, pass an object that implements [*symbolType*.draw](#symbolType_draw).
 
-<a name="symbol_size" href="#symbol_size">#</a> <i>symbol</i>.<b>size</b>([<i>size</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
+<a name="symbol_size" href="#symbol_size">#</a> <i>symbol</i>.<b>size</b>([<i>size</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js)
 
 If *size* is specified, sets the size to the specified function or number and returns this symbol generator. If *size* is a function, the symbol generator’s arguments and *this* are passed through. (See [*selection*.attr](https://github.com/d3/d3-selection/blob/master/README.md#selection_attr) if you are using d3-selection.) If *size* is not specified, returns the current size accessor, which defaults to:
 
@@ -961,37 +961,65 @@ Specifying the size as a function is useful for constructing a scatterplot with 
 
 If *context* is specified, sets the context and returns this symbol generator. If *context* is not specified, returns the current context, which defaults to null. If the context is not null, then the [generated symbol](#_symbol) is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated symbol is returned.
 
-<a name="symbols" href="#symbols">#</a> d3.<b>symbols</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
+<a name="symbolsFill" href="#symbolsFill">#</a> d3.<b>symbolsFill</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js)
 
-An array containing the set of all built-in symbol types: [circle](#symbolCircle), [cross](#symbolCross), [diamond](#symbolDiamond), [square](#symbolSquare), [star](#symbolStar), [triangle](#symbolTriangle), and [wye](#symbolWye). Useful for constructing the range of an [ordinal scale](https://github.com/d3/d3-scale#ordinal-scales) should you wish to use a shape encoding for categorical data.
+An array containing a set symbol types designed for filling: [circle](#symbolCircle), [cross](#symbolCross), [diamond](#symbolDiamond), [square](#symbolSquare), [star](#symbolStar), [triangle](#symbolTriangle), and [wye](#symbolWye). Useful for constructing the range of an [ordinal scale](https://github.com/d3/d3-scale#ordinal-scales) should you wish to use a shape encoding for categorical data.
 
-<a name="symbolCircle" href="#symbolCircle">#</a> d3.<b>symbolCircle</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/circle.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
+<a name="symbolsStroke" href="#symbolsStroke">#</a> d3.<b>symbolsStroke</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js)
 
-The circle symbol type.
+An array containing a set symbol types designed for stroking: [circle](#symbolCircle), [plus](#symbolPlus), [x](#symbolX), [triangle2](#symbolTriangle2), [asterisk](#symbolAsterisk), [square2](#symbolSquare2), and [diamond2](#symbolDiamond2). Useful for constructing the range of an [ordinal scale](https://github.com/d3/d3-scale#ordinal-scales) should you wish to use a shape encoding for categorical data.
 
-<a name="symbolCross" href="#symbolCross">#</a> d3.<b>symbolCross</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/cross.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
+<a name="symbolAsterisk" href="#symbolAsterisk">#</a> d3.<b>symbolAsterisk</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/asterisk.js)
 
-The Greek cross symbol type, with arms of equal length.
+The asterisk symbol type; intended for stroking.
 
-<a name="symbolDiamond" href="#symbolDiamond">#</a> d3.<b>symbolDiamond</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/diamond.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
+<a name="symbolCircle" href="#symbolCircle">#</a> d3.<b>symbolCircle</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/circle.js)
 
-The rhombus symbol type.
+The circle symbol type; intended for either filling or stroking.
 
-<a name="symbolSquare" href="#symbolSquare">#</a> d3.<b>symbolSquare</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/square.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
+<a name="symbolCross" href="#symbolCross">#</a> d3.<b>symbolCross</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/cross.js)
 
-The square symbol type.
+The Greek cross symbol type, with arms of equal length; intended for filling.
 
-<a name="symbolStar" href="#symbolStar">#</a> d3.<b>symbolStar</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/star.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
+<a name="symbolDiamond" href="#symbolDiamond">#</a> d3.<b>symbolDiamond</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/diamond.js)
 
-The pentagonal star (pentagram) symbol type.
+The rhombus symbol type; intended for filling.
 
-<a name="symbolTriangle" href="#symbolTriangle">#</a> d3.<b>symbolTriangle</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/triangle.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
+<a name="symbolDiamond2" href="#symbolDiamond2">#</a> d3.<b>symbolDiamond2</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/diamond.js)
 
-The up-pointing triangle symbol type.
+The rotated square symbol type; intended for stroking.
 
-<a name="symbolWye" href="#symbolWye">#</a> d3.<b>symbolWye</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/wye.js), [Examples](https://observablehq.com/@d3/fitted-symbols)
+<a name="symbolPlus" href="#symbolPlus">#</a> d3.<b>symbolPlus</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/plus.js)
 
-The Y-shape symbol type.
+The plus symbol type; intended for stroking.
+
+<a name="symbolSquare" href="#symbolSquare">#</a> d3.<b>symbolSquare</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/square.js)
+
+The square symbol type; intended for filling.
+
+<a name="symbolSquare2" href="#symbolSquare2">#</a> d3.<b>symbolSquare2</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/square2.js)
+
+The square2 symbol type; intended for stroking.
+
+<a name="symbolStar" href="#symbolStar">#</a> d3.<b>symbolStar</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/star.js)
+
+The pentagonal star (pentagram) symbol type; intended for filling.
+
+<a name="symbolTriangle" href="#symbolTriangle">#</a> d3.<b>symbolTriangle</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/triangle.js)
+
+The up-pointing triangle symbol type; intended for filling.
+
+<a name="symbolTriangle2" href="#symbolTriangle2">#</a> d3.<b>symbolTriangle2</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/triangle2.js)
+
+The up-pointing triangle symbol type; intended for stroking.
+
+<a name="symbolWye" href="#symbolWye">#</a> d3.<b>symbolWye</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/wye.js)
+
+The Y-shape symbol type; intended for filling.
+
+<a name="symbolX" href="#symbolX">#</a> d3.<b>symbolX</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol/x.js)
+
+The X-shape symbol type; intended for stroking.
 
 <a name="pointRadial" href="#pointRadial">#</a> d3.<b>pointRadial</b>(<i>angle</i>, <i>radius</i>) · [Source](https://github.com/d3/d3-shape/blob/master/src/pointRadial.js), [Examples](https://observablehq.com/@d3/radial-area-chart)
 
