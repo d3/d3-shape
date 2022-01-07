@@ -11,5 +11,5 @@ export default {
     context.lineTo(u, t);
     context.lineTo(-u, t);
     context.closePath();
-  },
+  }
 };
