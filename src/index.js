@@ -5,7 +5,7 @@ export {default as pie} from "./pie.js";
 export {default as areaRadial, default as radialArea} from "./areaRadial.js"; // Note: radialArea is deprecated!
 export {default as lineRadial, default as radialLine} from "./lineRadial.js"; // Note: radialLine is deprecated!
 export {default as pointRadial} from "./pointRadial.js";
-export {linkHorizontal, linkVertical, linkRadial} from "./link/index.js";
+export {link, linkHorizontal, linkVertical, linkRadial} from "./link.js";
 
 export {default as symbol, symbolsStroke, symbolsFill, symbolsFill as symbols} from "./symbol.js";
 export {default as symbolAsterisk} from "./symbol/asterisk.js";

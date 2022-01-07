@@ -1,3 +1,5 @@
+import pointRadial from "../pointRadial.js";
+
 class Bump {
   constructor(context, x) {
     this._context = context;
@@ -36,10 +38,37 @@ class Bump {
   }
 }
 
+class BumpRadial {
+  constructor(context) {
+    this._context = context;
+  }
+  lineStart() {
+    this._point = 0;
+  }
+  lineEnd() {}
+  point(x, y) {
+    x = +x, y = +y;
+    if (this._point++ === 0) {
+      this._x0 = x, this._y0 = y;
+    } else {
+      const p0 = pointRadial(this._x0, this._y0);
+      const p1 = pointRadial(this._x0, this._y0 = (this._y0 + y) / 2);
+      const p2 = pointRadial(x, this._y0);
+      const p3 = pointRadial(x, y);
+      this._context.moveTo(...p0);
+      this._context.bezierCurveTo(...p1, ...p2, ...p3);
+    }
+  }
+}
+
 export function bumpX(context) {
   return new Bump(context, true);
 }
 
 export function bumpY(context) {
   return new Bump(context, false);
+}
+
+export function bumpRadial(context) {
+  return new BumpRadial(context);
 }
