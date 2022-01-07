@@ -1,4 +1,5 @@
 import assert from "assert";
+import {path} from "d3-path";
 import {link, linkHorizontal, linkVertical} from "../src/index.js";
 import {curveLinear, curveBumpX, curveBumpY} from "../src/index.js";
 import {assertPathEqual} from "./asserts.js";
@@ -11,6 +12,42 @@ it("link(curve) returns a default link with the given curve", () => {
   assert.strictEqual(l.y()([42, 34]), 34);
   assert.strictEqual(l.context(), null);
   assertPathEqual(l({source: [0, 1], target: [2, 3]}), "M0,1L2,3");
+});
+
+it("link.source(source) sets source", () => {
+  const l = link(curveLinear);
+  const x = d => d.x;
+  assert.strictEqual(l.source(x), l);
+  assert.strictEqual(l.source(), x);
+  assertPathEqual(l({x: [0, 1], target: [2, 3]}), "M0,1L2,3");
+});
+
+it("link.target(target) sets target", () => {
+  const l = link(curveLinear);
+  const x = d => d.x;
+  assert.strictEqual(l.target(x), l);
+  assert.strictEqual(l.target(), x);
+  assertPathEqual(l({source: [0, 1], x: [2, 3]}), "M0,1L2,3");
+});
+
+it("link.source(f)(..args) passes arguments to the specified function f", () => {
+  const source = {name: "source"};
+  const target = {name: "target"};
+  const data = {source, target};
+  const extra = {name: "extra"};
+  const actual = [];
+  link(curveLinear).source(function(d) { actual.push([].slice.call(arguments)); return d; })(data, extra);
+  assert.deepStrictEqual(actual, [[data, extra]]);
+});
+
+it("link.target(f)(..args) passes source and arguments to the specified function f", () => {
+  const source = {name: "source"};
+  const target = {name: "target"};
+  const data = {source, target};
+  const extra = {name: "extra"};
+  const actual = [];
+  link(curveLinear).target(function(d) { actual.push([].slice.call(arguments)); return d; })(data, extra);
+  assert.deepStrictEqual(actual, [[data, extra]]);
 });
 
 it("link.x(x) sets x", () => {
@@ -67,4 +104,11 @@ it("linkVertical() is an alias for link(curveBumpY)", () => {
   assert.strictEqual(l.y(), l2.y());
   assert.strictEqual(l.context(), l2.context());
   assertPathEqual(l({source: [0, 1], target: [2, 3]}), l2({source: [0, 1], target: [2, 3]}));
+});
+
+it("link.context(context) sets the context", () => {
+  const p = path();
+  const l = link(curveLinear).context(p);
+  assert.strictEqual(l({source: [0, 1], target: [2, 3]}), undefined);
+  assertPathEqual(p, "M0,1L2,3");
 });
