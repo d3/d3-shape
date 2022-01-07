@@ -1,8 +1,8 @@
 import {path} from "d3-path";
-import {slice} from "../array.js";
-import constant from "../constant.js";
-import {x as pointX, y as pointY} from "../point.js";
-import {bumpX, bumpY, bumpRadial} from "../curve/bump.js";
+import {slice} from "./array.js";
+import constant from "./constant.js";
+import {x as pointX, y as pointY} from "./point.js";
+import {bumpX, bumpY, bumpRadial} from "./curve/bump.js";
 
 function linkSource(d) {
   return d.source;
