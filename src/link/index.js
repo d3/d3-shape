@@ -1,9 +1,8 @@
+import {path} from "d3-path";
 import {slice} from "../array.js";
 import constant from "../constant.js";
-import line from "../line.js";
 import {x as pointX, y as pointY} from "../point.js";
-import pointRadial from "../pointRadial.js";
-import {bumpX as curveBumpX, bumpY as curveBumpY} from "../curve/bump.js";
+import {bumpX, bumpY, bumpRadial} from "../curve/bump.js";
 
 function linkSource(d) {
   return d.source;
@@ -13,23 +12,25 @@ function linkTarget(d) {
   return d.target;
 }
 
-function link(curve) {
-  var source = linkSource,
-      target = linkTarget,
-      x = pointX,
-      y = pointY;
-  
-  const l = line().curve(curve);
-  
+export function link(curve) {
+  let source = linkSource;
+  let target = linkTarget;
+  let x = pointX;
+  let y = pointY;
+  let context = null;
+  let output = null;
+
   function link() {
+    let buffer;
     const argv = slice.call(arguments);
     const s = source.apply(this, argv);
     const t = target.apply(this, argv);
-    const sx = +x.apply(this, (argv[0] = s, argv));
-    const sy = +y.apply(this, argv);
-    const tx = +x.apply(this, (argv[0] = t, argv));
-    const ty = +y.apply(this, argv);
-    return l([[sx, sy], [tx, ty]]);
+    if (context == null) output = curve(buffer = path());
+    output.lineStart();
+    argv[0] = s, output.point(+x.apply(this, argv), +y.apply(this, argv));
+    argv[0] = t, output.point(+x.apply(this, argv), +y.apply(this, argv));
+    output.lineEnd();
+    if (buffer) return output = null, buffer + "" || null;
   }
 
   link.source = function(_) {
@@ -49,55 +50,23 @@ function link(curve) {
   };
 
   link.context = function(_) {
-    return arguments.length ? (l.context(_ == null ? null : _), link) : l.context();
-  };
-  
-  link.curve = function(_) {
-    return arguments.length ? (l.curve(_), link) : l.curve();
+    return arguments.length ? (_ == null ? context = output = null : output = curve(context = _), link) : context;
   };
 
   return link;
 }
 
-class CurveRadial {
-  constructor(context) {
-    this._context = context;
-  }
-  lineStart() {
-    this._point = 0;
-  }
-  lineEnd() {}
-  point(x, y) {
-    x = +x, y = +y;
-    if (this._point++ === 0) {
-      this._x0 = x, this._y0 = y;
-    } else {
-      const p0 = pointRadial(this._x0, this._y0);
-      const p1 = pointRadial(this._x0, this._y0 = (this._y0 + y) / 2);
-      const p2 = pointRadial(x, this._y0);
-      const p3 = pointRadial(x, y);
-      this._context.moveTo(...p0);
-      this._context.bezierCurveTo(...p1, ...p2, ...p3);
-    }
-  }
-}
-
-function curveRadial(context) {
-  return new CurveRadial(context);
-}
-
 export function linkHorizontal() {
-  return link(curveBumpX);
+  return link(bumpX);
 }
 
 export function linkVertical() {
-  return link(curveBumpY);
+  return link(bumpY);
 }
 
 export function linkRadial() {
-  var l = link(curveRadial);
+  const l = link(bumpRadial);
   l.angle = l.x, delete l.x;
   l.radius = l.y, delete l.y;
-  delete l.curve;
   return l;
 }
