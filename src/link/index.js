@@ -13,23 +13,21 @@ function linkTarget(d) {
   return d.target;
 }
 
-function link(curve) {
+export function link(curve) {
   var source = linkSource,
       target = linkTarget,
       x = pointX,
-      y = pointY;
-  
-  const l = line().curve(curve);
-  
+      y = pointY,
+      l = line().curve(curve);
+
   function link() {
     const argv = slice.call(arguments);
     const s = source.apply(this, argv);
     const t = target.apply(this, argv);
-    const sx = +x.apply(this, (argv[0] = s, argv));
-    const sy = +y.apply(this, argv);
-    const tx = +x.apply(this, (argv[0] = t, argv));
-    const ty = +y.apply(this, argv);
-    return l([[sx, sy], [tx, ty]]);
+    return l([
+      (argv[0] = s, [+x.apply(this, argv), +y.apply(this, argv)]),
+      (argv[0] = t, [+x.apply(this, argv), +y.apply(this, argv)])
+    ]);
   }
 
   link.source = function(_) {
@@ -49,14 +47,25 @@ function link(curve) {
   };
 
   link.context = function(_) {
-    return arguments.length ? (l.context(_ == null ? null : _), link) : l.context();
-  };
-  
-  link.curve = function(_) {
-    return arguments.length ? (l.curve(_), link) : l.curve();
+    return arguments.length ? (l.context(_), link) : l.context();
   };
 
   return link;
+}
+
+export function linkHorizontal() {
+  return link(curveBumpX);
+}
+
+export function linkVertical() {
+  return link(curveBumpY);
+}
+
+export function linkRadial() {
+  var l = link(curveRadial);
+  l.angle = l.x, delete l.x;
+  l.radius = l.y, delete l.y;
+  return l;
 }
 
 class CurveRadial {
@@ -84,20 +93,4 @@ class CurveRadial {
 
 function curveRadial(context) {
   return new CurveRadial(context);
-}
-
-export function linkHorizontal() {
-  return link(curveBumpX);
-}
-
-export function linkVertical() {
-  return link(curveBumpY);
-}
-
-export function linkRadial() {
-  var l = link(curveRadial);
-  l.angle = l.x, delete l.x;
-  l.radius = l.y, delete l.y;
-  delete l.curve;
-  return l;
 }
