@@ -1,7 +1,9 @@
+import {sqrt} from "../math.js";
+
 export default {
-  draw: function(context, size) {
-    var w = Math.sqrt(size),
-        x = -w / 2;
+  draw(context, size) {
+    const w = sqrt(size);
+    const x = -w / 2;
     context.rect(x, x, w, w);
   }
 };

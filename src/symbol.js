@@ -1,14 +1,21 @@
 import {path} from "d3-path";
+import constant from "./constant.js";
+import asterisk from "./symbol/asterisk.js";
 import circle from "./symbol/circle.js";
 import cross from "./symbol/cross.js";
 import diamond from "./symbol/diamond.js";
-import star from "./symbol/star.js";
+import diamond2 from "./symbol/diamond2.js";
+import plus from "./symbol/plus.js";
 import square from "./symbol/square.js";
+import square2 from "./symbol/square2.js";
+import star from "./symbol/star.js";
 import triangle from "./symbol/triangle.js";
+import triangle2 from "./symbol/triangle2.js";
 import wye from "./symbol/wye.js";
-import constant from "./constant.js";
+import x from "./symbol/x.js";
 
-export var symbols = [
+// These symbols are designed to be filled.
+export const symbolsFill = [
   circle,
   cross,
   diamond,
@@ -18,13 +25,25 @@ export var symbols = [
   wye
 ];
 
-export default function(type, size) {
-  var context = null;
+// These symbols are designed to be stroked (with a width of 1.5px and round caps).
+export const symbolsStroke = [
+  circle,
+  plus,
+  x,
+  triangle2,
+  asterisk,
+  square2,
+  diamond2
+];
+
+export default function Symbol(type, size) {
+  let context = null;
+
   type = typeof type === "function" ? type : constant(type || circle);
   size = typeof size === "function" ? size : constant(size === undefined ? 64 : +size);
 
   function symbol() {
-    var buffer;
+    let buffer;
     if (!context) context = buffer = path();
     type.apply(this, arguments).draw(context, +size.apply(this, arguments));
     if (buffer) return context = null, buffer + "" || null;

@@ -1,17 +1,16 @@
-var c = -0.5,
-    s = Math.sqrt(3) / 2,
-    k = 1 / Math.sqrt(12),
-    a = (k / 2 + 1) * 3;
+import {sqrt} from "../math.js";
+
+const c = -0.5;
+const s = sqrt(3) / 2;
+const k = 1 / sqrt(12);
+const a = (k / 2 + 1) * 3;
 
 export default {
-  draw: function(context, size) {
-    var r = Math.sqrt(size / a),
-        x0 = r / 2,
-        y0 = r * k,
-        x1 = x0,
-        y1 = r * k + r,
-        x2 = -x1,
-        y2 = y1;
+  draw(context, size) {
+    const r = sqrt(size / a);
+    const x0 = r / 2, y0 = r * k;
+    const x1 = x0, y1 = r * k + r;
+    const x2 = -x1, y2 = y1;
     context.moveTo(x0, y0);
     context.lineTo(x1, y1);
     context.lineTo(x2, y2);

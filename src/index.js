@@ -7,14 +7,20 @@ export {default as lineRadial, default as radialLine} from "./lineRadial.js"; //
 export {default as pointRadial} from "./pointRadial.js";
 export {linkHorizontal, linkVertical, linkRadial} from "./link/index.js";
 
-export {default as symbol, symbols} from "./symbol.js";
+export {default as symbol, symbolsStroke, symbolsFill, symbolsFill as symbols} from "./symbol.js";
+export {default as symbolAsterisk} from "./symbol/asterisk.js";
 export {default as symbolCircle} from "./symbol/circle.js";
 export {default as symbolCross} from "./symbol/cross.js";
 export {default as symbolDiamond} from "./symbol/diamond.js";
+export {default as symbolDiamond2} from "./symbol/diamond2.js";
+export {default as symbolPlus} from "./symbol/plus.js";
 export {default as symbolSquare} from "./symbol/square.js";
+export {default as symbolSquare2} from "./symbol/square2.js";
 export {default as symbolStar} from "./symbol/star.js";
 export {default as symbolTriangle} from "./symbol/triangle.js";
+export {default as symbolTriangle2} from "./symbol/triangle2.js";
 export {default as symbolWye} from "./symbol/wye.js";
+export {default as symbolX} from "./symbol/x.js";
 
 export {default as curveBasisClosed} from "./curve/basisClosed.js";
 export {default as curveBasisOpen} from "./curve/basisOpen.js";
