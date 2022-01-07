@@ -10,7 +10,7 @@ import square from "./symbol/square.js";
 import square2 from "./symbol/square2.js";
 import star from "./symbol/star.js";
 import triangle from "./symbol/triangle.js";
-import triangle2 from "./symbol/triangle.js";
+import triangle2 from "./symbol/triangle2.js";
 import wye from "./symbol/wye.js";
 import x from "./symbol/x.js";
 

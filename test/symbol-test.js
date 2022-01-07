@@ -1,5 +1,5 @@
 import assert from "assert";
-import {symbol, symbolCircle, symbolCross, symbolDiamond, symbolSquare, symbolStar, symbolTriangle, symbolWye} from "../src/index.js";
+import {symbol, symbolAsterisk, symbolCircle, symbolCross, symbolDiamond, symbolDiamond2, symbolPlus, symbolSquare, symbolSquare2, symbolStar, symbolTriangle, symbolTriangle2, symbolWye, symbolX} from "../src/index.js";
 import {assertInDelta, assertPathEqual} from "./asserts.js";
 import {polygonContext} from "./polygonContext.js";
 
@@ -44,6 +44,12 @@ it("symbol.size(size) observes the specified size constant", () => {
   assertPathEqual(s.size(4 * Math.PI)(), "M2,0A2,2,0,1,1,-2,0A2,2,0,1,1,2,0");
 });
 
+it("symbol.type(symbolAsterisk) generates the expected path", () => {
+  const s = symbol().type(symbolAsterisk).size(function(d) { return d; });
+  assertPathEqual(s(0), "M0,0L0,0M0,0L0,0M0,0L0,0");
+  assertPathEqual(s(20), "M0,2.705108L0,-2.705108M-2.342692,-1.352554L2.342692,1.352554M-2.342692,1.352554L2.342692,-1.352554");
+});
+
 it("symbol.type(symbolCircle) generates the expected path", () => {
   const s = symbol().type(symbolCircle).size(function(d) { return d; });
   assertPathEqual(s(0), "M0,0");
@@ -74,6 +80,18 @@ it("symbol.type(symbolDiamond) generates the expected path", () => {
   assertPathEqual(s(10), "M0,-2.942831L1.699044,0L0,2.942831L-1.699044,0Z");
 });
 
+it("symbol.type(symbolDiamond2) generates the expected path", () => {
+  const s = symbol().type(symbolDiamond2).size(function(d) { return d; });
+  assertPathEqual(s(0), "M0,0L0,0L0,0L0,0Z");
+  assertPathEqual(s(20), "M0,-2.800675L2.800675,0L0,2.800675L-2.800675,0Z");
+});
+
+it("symbol.type(symbolPlus) generates the expected path", () => {
+  const s = symbol().type(symbolPlus).size(function(d) { return d; });
+  assertPathEqual(s(0), "M0,0L0,0M0,0L0,0");
+  assertPathEqual(s(20), "M-3.714814,0L3.714814,0M0,3.714814L0,-3.714814");
+});
+
 it("symbol.type(symbolStar) generates a polygon with the specified size", () => {
   const p = polygonContext(), s = symbol().type(symbolStar).context(p);
   s.size(1)(); assertInDelta(p.area(), 1);
@@ -99,6 +117,12 @@ it("symbol.type(symbolSquare) generates the expected path", () => {
   assertPathEqual(s(16), "M-2,-2h4v4h-4Z");
 });
 
+it("symbol.type(symbolSquare2) generates the expected path", () => {
+  const s = symbol().type(symbolSquare2).size(function(d) { return d; });
+  assertPathEqual(s(0), "M0,0L0,0L0,0L0,0Z");
+  assertPathEqual(s(20), "M1.981603,1.981603L1.981603,-1.981603L-1.981603,-1.981603L-1.981603,1.981603Z");
+});
+
 it("symbol.type(symbolTriangle) generates a polygon with the specified size", () => {
   const p = polygonContext(), s = symbol().type(symbolTriangle).context(p);
   s.size(1)(); assertInDelta(p.area(), 1);
@@ -111,6 +135,12 @@ it("symbol.type(symbolTriangle) generates the expected path", () => {
   assertPathEqual(s(10), "M0,-2.774528L2.402811,1.387264L-2.402811,1.387264Z");
 });
 
+it("symbol.type(symbolTriangle2) generates the expected path", () => {
+  const s = symbol().type(symbolTriangle2).size(function(d) { return d; });
+  assertPathEqual(s(0), "M0,0L0,0L0,0Z");
+  assertPathEqual(s(20), "M0,-3.051786L2.642924,1.525893L-2.642924,1.525893Z");
+});
+
 it("symbol.type(symbolWye) generates a polygon with the specified size", () => {
   const p = polygonContext(), s = symbol().type(symbolWye).context(p);
   s.size(1)(); assertInDelta(p.area(), 1);
@@ -121,6 +151,12 @@ it("symbol.type(symbolWye) generates the expected path", () => {
   const s = symbol().type(symbolWye).size(function(d) { return d; });
   assertPathEqual(s(0), "M0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0Z");
   assertPathEqual(s(10), "M0.853360,0.492688L0.853360,2.199408L-0.853360,2.199408L-0.853360,0.492688L-2.331423,-0.360672L-1.478063,-1.838735L0,-0.985375L1.478063,-1.838735L2.331423,-0.360672Z");
+});
+
+it("symbol.type(symbolX) generates the expected path", () => {
+  const s = symbol().type(symbolX).size(function(d) { return d; });
+  assertPathEqual(s(0), "M0,0L0,0M0,0L0,0");
+  assertPathEqual(s(20), "M-2.647561,-2.647561L2.647561,2.647561M-2.647561,2.647561L2.647561,-2.647561");
 });
 
 it("symbol(type, size) is equivalent to symbol().type(type).size(size)", () => {
