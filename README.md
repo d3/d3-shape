@@ -826,7 +826,7 @@ Indicates a new point in the current line segment with the given *x*- and *y*-va
 
 The **link** shape generates a smooth cubic Bézier curve from a source point to a target point. The tangents of the curve at the start and end are either [vertical](#linkVertical), [horizontal](#linkHorizontal) or [radial](#linkRadial).
 
-<a name="link" href="#link">#</a> d3.<b>link</b>(<i>curve<i>) · [Source](https://github.com/d3/d3-shape/blob/main/src/link.js)
+<a name="link" href="#link">#</a> d3.<b>link</b>(<i>curve</i>) · [Source](https://github.com/d3/d3-shape/blob/main/src/link.js)
 
 Returns a new [link generator](#_link) using the specified <i>curve</i>. For example, to visualize [links](https://github.com/d3/d3-hierarchy/blob/master/README.md#node_links) in a [tree diagram](https://github.com/d3/d3-hierarchy/blob/master/README.md#tree) rooted on the top edge of the display, you might say:
 
