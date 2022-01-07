@@ -963,7 +963,7 @@ If *context* is specified, sets the context and returns this symbol generator. I
 
 <a name="symbolsFill" href="#symbolsFill">#</a> d3.<b>symbolsFill</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js)
 
-An array containing a set symbol types designed for filling: [circle](#symbolCircle), [cross](#symbolCross), [diamond](#symbolDiamond), [square](#symbolSquare), [star](#symbolStar), [triangle](#symbolTriangle), and [wye](#symbolWye). Useful for constructing the range of an [ordinal scale](https://github.com/d3/d3-scale#ordinal-scales) should you wish to use a shape encoding for categorical data.
+An array containing a set of symbol types designed for filling: [circle](#symbolCircle), [cross](#symbolCross), [diamond](#symbolDiamond), [square](#symbolSquare), [star](#symbolStar), [triangle](#symbolTriangle), and [wye](#symbolWye). Useful for constructing the range of an [ordinal scale](https://github.com/d3/d3-scale#ordinal-scales) should you wish to use a shape encoding for categorical data.
 
 <a name="symbolsStroke" href="#symbolsStroke">#</a> d3.<b>symbolsStroke</b> · [Source](https://github.com/d3/d3-shape/blob/master/src/symbol.js)
 
