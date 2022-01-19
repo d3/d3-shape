@@ -1,5 +1,5 @@
 import assert from "assert";
-import {symbol, symbolAsterisk, symbolCircle, symbolCross, symbolDiamond, symbolDiamond2, symbolPlus, symbolSquare, symbolSquare2, symbolStar, symbolTriangle, symbolTriangle2, symbolWye, symbolX} from "../src/index.js";
+import {symbol, symbolAsterisk, symbolCircle, symbolCross, symbolDiamond, symbolDiamond2, symbolPlus, symbolSquare, symbolSquare2, symbolStar, symbolTriangle, symbolTriangle2, symbolWye, symbolTimes} from "../src/index.js";
 import {assertInDelta, assertPathEqual} from "./asserts.js";
 import {polygonContext} from "./polygonContext.js";
 
@@ -153,8 +153,8 @@ it("symbol.type(symbolWye) generates the expected path", () => {
   assertPathEqual(s(10), "M0.853360,0.492688L0.853360,2.199408L-0.853360,2.199408L-0.853360,0.492688L-2.331423,-0.360672L-1.478063,-1.838735L0,-0.985375L1.478063,-1.838735L2.331423,-0.360672Z");
 });
 
-it("symbol.type(symbolX) generates the expected path", () => {
-  const s = symbol().type(symbolX).size(function(d) { return d; });
+it("symbol.type(symbolTimes) generates the expected path", () => {
+  const s = symbol().type(symbolTimes).size(function(d) { return d; });
   assertPathEqual(s(0), "M0,0L0,0M0,0L0,0");
   assertPathEqual(s(20), "M-2.647561,-2.647561L2.647561,2.647561M-2.647561,2.647561L2.647561,-2.647561");
 });

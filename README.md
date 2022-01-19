@@ -973,7 +973,7 @@ An array containing a set of symbol types designed for filling: [circle](#symbol
 
 <a name="symbolsStroke" href="#symbolsStroke">#</a> d3.<b>symbolsStroke</b> · [Source](https://github.com/d3/d3-shape/blob/main/src/symbol.js)
 
-An array containing a set of symbol types designed for stroking: [circle](#symbolCircle), [plus](#symbolPlus), [x](#symbolX), [triangle2](#symbolTriangle2), [asterisk](#symbolAsterisk), [square2](#symbolSquare2), and [diamond2](#symbolDiamond2). Useful for constructing the range of an [ordinal scale](https://github.com/d3/d3-scale#ordinal-scales) should you wish to use a shape encoding for categorical data.
+An array containing a set of symbol types designed for stroking: [circle](#symbolCircle), [plus](#symbolPlus), [times](#symbolTimes), [triangle2](#symbolTriangle2), [asterisk](#symbolAsterisk), [square2](#symbolSquare2), and [diamond2](#symbolDiamond2). Useful for constructing the range of an [ordinal scale](https://github.com/d3/d3-scale#ordinal-scales) should you wish to use a shape encoding for categorical data.
 
 <a name="symbolAsterisk" href="#symbolAsterisk">#</a> d3.<b>symbolAsterisk</b> · [Source](https://github.com/d3/d3-shape/blob/main/src/symbol/asterisk.js)
 
@@ -1023,7 +1023,7 @@ The up-pointing triangle symbol type; intended for stroking.
 
 The Y-shape symbol type; intended for filling.
 
-<a name="symbolX" href="#symbolX">#</a> d3.<b>symbolX</b> · [Source](https://github.com/d3/d3-shape/blob/main/src/symbol/x.js)
+<a name="symbolTimes" href="#symbolTimes">#</a> d3.<b>symbolTimes</b> · [Source](https://github.com/d3/d3-shape/blob/main/src/symbol/times.js)
 
 The X-shape symbol type; intended for stroking.
 
