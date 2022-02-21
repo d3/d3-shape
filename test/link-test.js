@@ -1,6 +1,6 @@
 import assert from "assert";
 import {path} from "d3-path";
-import {link, linkHorizontal, linkVertical} from "../src/index.js";
+import {link, linkHorizontal, linkVertical, linkRadial} from "../src/index.js";
 import {curveLinear, curveBumpX, curveBumpY} from "../src/index.js";
 import {assertPathEqual} from "./asserts.js";
 
@@ -111,4 +111,14 @@ it("link.context(context) sets the context", () => {
   const l = link(curveLinear).context(p);
   assert.strictEqual(l({source: [0, 1], target: [2, 3]}), undefined);
   assertPathEqual(p, "M0,1L2,3");
+});
+
+it("linkRadial() works as expected", () => {
+  const l = linkRadial(), l2 = link();
+  assert.strictEqual(l.source(), l2.source());
+  assert.strictEqual(l.target(), l2.target());
+  assert.strictEqual(l.angle(), l2.x());
+  assert.strictEqual(l.radius(), l2.y());
+  assert.strictEqual(l.context(), l2.context());
+  assertPathEqual(l({source: [0, 1], target: [Math.PI/2, 3]}), "M0,-1C0,-2,2,0,3,0");
 });
