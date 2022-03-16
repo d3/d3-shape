@@ -154,6 +154,20 @@ If the corner radius is greater than zero, the corners of the arc are rounded us
 
 The corner radius may not be larger than ([outerRadius](#arc_outerRadius) - [innerRadius](#arc_innerRadius)) / 2. In addition, for arcs whose angular span is less than π, the corner radius may be reduced as two adjacent rounded corners intersect. This is occurs more often with the inner corners. See the [arc corners animation](http://bl.ocks.org/mbostock/b7671cb38efdfa5da3af) for illustration.
 
+Individual corners can be rounded by passing in an array of numbers length 1-4 instead of a single number.
+
+- Array length 4: first value applies to top-left corner, second value applies to top-right corner, third value applies to bottom-right corner, and fourth value applies to bottom-left corner
+
+- Array length 3: first value applies to top-left corner, second value applies to top-right and bottom-left corners, and third value applies to bottom-right corner
+
+- Array length 2: first value applies to top-left and bottom-right corners, and the second value applies to top-right and bottom-left corners
+
+- Array length 1 or single number: the value applies to all four corners, which are rounded equally
+
+(This assumes that the arc is being drawn clockwise i.e. end angle > start angle otherwise the order will be flipped, top right corner -> top left corner and bottom right corner -> bottom left corner)
+
+<img alt="Selected Corner Radius Rounding" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/selected-corner-radius-rounding.png" width="1150" height="154">
+
 <a name="arc_startAngle" href="#arc_startAngle">#</a> <i>arc</i>.<b>startAngle</b>([<i>angle</i>]) · [Source](https://github.com/d3/d3-shape/blob/main/src/arc.js)
 
 If *angle* is specified, sets the start angle to the specified function or number and returns this arc generator. If *angle* is not specified, returns the current start angle accessor, which defaults to:
