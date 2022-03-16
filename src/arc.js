@@ -132,15 +132,7 @@ export default function() {
           rc11,
           rci = cornerRadius.apply(this, arguments);
 
-      if (typeof(rci) === "number") {
-        rci =  min(mwrc, +rci)
-        rc = [rci, rci, rci, rci];
-        rc00 = rc[2];
-        rc01 = rc[3];
-        rc10 = rc[0];
-        rc11 = rc[1];
-      }
-      else if (typeof(rci) === 'object') {
+      if (Array.isArray(rci)) {
         for (var i = 0; i < rci.length; i++) rci[i] = min(mwrc, +rci[i]);
         if (rci.length === 1) rc = [rci[0], rci[0], rci[0], rci[0]];
         else if (rci.length === 2) rc = [rci[0], rci[1], rci[0], rci[1]];
@@ -151,7 +143,14 @@ export default function() {
         rc10 = rc[0];
         rc11 = rc[1];
       }
-          
+      else {
+        rci =  min(mwrc, +rci)
+        rc = [rci, rci, rci, rci];
+        rc00 = rc[2];
+        rc01 = rc[3];
+        rc10 = rc[0];
+        rc11 = rc[1];
+      }   
 
       // Apply padding? Note that since r1 ≥ r0, da1 ≥ da0.
       if (rp > epsilon) {
@@ -169,7 +168,7 @@ export default function() {
           y10 = r0 * sin(a10);
 
       // Apply rounded corners?
-      if (rc && max(rc[0], rc[1], rc[2], rc[3]) > epsilon) {
+      if (max(rc[0], rc[1], rc[2], rc[3]) > epsilon) {
         var x11 = r1 * cos(a11),
             y11 = r1 * sin(a11),
             x00 = r0 * cos(a00),
@@ -263,7 +262,7 @@ export default function() {
   };
 
   arc.cornerRadius = function(_) {
-    return arguments.length ? (cornerRadius = typeof _ === "function" ? _ : constant(+_), arc) : cornerRadius;
+    return arguments.length ? (cornerRadius = typeof _ === "function" ? _ : constant(_), arc) : cornerRadius;
   };
 
   arc.padRadius = function(_) {
