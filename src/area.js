@@ -8,6 +8,7 @@ import {x as pointX, y as pointY} from "./point.js";
 export default function(x0, y0, y1) {
   var x1 = null,
       defined = constant(true),
+      sampling = constant(true),
       context = null,
       curve = curveLinear,
       output = null;
@@ -39,13 +40,13 @@ export default function(x0, y0, y1) {
           output.lineEnd();
           output.lineStart();
           for (k = i - 1; k >= j; --k) {
-            output.point(x0z[k], y0z[k]);
+            if (!isNaN(x0z[k]) && !isNaN(y0z[k])) output.point(x0z[k], y0z[k]);
           }
           output.lineEnd();
           output.areaEnd();
         }
       }
-      if (defined0) {
+      if (defined0 && sampling(d = data[i], i, data)) {
         x0z[i] = +x0(d, i, data), y0z[i] = +y0(d, i, data);
         output.point(x1 ? +x1(d, i, data) : x0z[i], y1 ? +y1(d, i, data) : y0z[i]);
       }
@@ -97,6 +98,10 @@ export default function(x0, y0, y1) {
 
   area.defined = function(_) {
     return arguments.length ? (defined = typeof _ === "function" ? _ : constant(!!_), area) : defined;
+  };
+
+  area.sampling = function(_) {
+    return arguments.length ? (sampling = typeof _ === "function" ? _ : constant(!!_), area) : sampling;
   };
 
   area.curve = function(_) {
