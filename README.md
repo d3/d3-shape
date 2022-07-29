@@ -1061,21 +1061,21 @@ The series are determined by the [keys accessor](#stack_keys); each series *i* i
 
 For example, consider the following table representing monthly sales of fruits:
 
-Month   | Apples | Bananas | Cherries | Dates
---------|--------|---------|----------|-------
- 1/2015 |   3840 |    1920 |      960 |   400
- 2/2015 |   1600 |    1440 |      960 |   400
- 3/2015 |    640 |     960 |      640 |   400
- 4/2015 |    320 |     480 |      640 |   400
+Month   | Apples | Bananas | Cherries | Durians
+--------|--------|---------|----------|---------
+ 1/2015 |   3840 |    1920 |      960 |     400
+ 2/2015 |   1600 |    1440 |      960 |     400
+ 3/2015 |    640 |     960 |      640 |     400
+ 4/2015 |    320 |     480 |      640 |     400
 
 This might be represented in JavaScript as an array of objects:
 
 ```js
 const data = [
-  {month: new Date(2015, 0, 1), apples: 3840, bananas: 1920, cherries: 960, dates: 400},
-  {month: new Date(2015, 1, 1), apples: 1600, bananas: 1440, cherries: 960, dates: 400},
-  {month: new Date(2015, 2, 1), apples:  640, bananas:  960, cherries: 640, dates: 400},
-  {month: new Date(2015, 3, 1), apples:  320, bananas:  480, cherries: 640, dates: 400}
+  {month: new Date(2015, 0, 1), apples: 3840, bananas: 1920, cherries: 960, durians: 400},
+  {month: new Date(2015, 1, 1), apples: 1600, bananas: 1440, cherries: 960, durians: 400},
+  {month: new Date(2015, 2, 1), apples:  640, bananas:  960, cherries: 640, durians: 400},
+  {month: new Date(2015, 3, 1), apples:  320, bananas:  480, cherries: 640, durians: 400}
 ];
 ```
 
@@ -1083,7 +1083,7 @@ To produce a stack for this data:
 
 ```js
 const stack = d3.stack()
-    .keys(["apples", "bananas", "cherries", "dates"])
+    .keys(["apples", "bananas", "cherries", "durians"])
     .order(d3.stackOrderNone)
     .offset(d3.stackOffsetNone);
 
@@ -1097,7 +1097,7 @@ The resulting array has one element per *series*. Each series has one point per 
   [[   0, 3840], [   0, 1600], [   0,  640], [   0,  320]], // apples
   [[3840, 5760], [1600, 3040], [ 640, 1600], [ 320,  800]], // bananas
   [[5760, 6720], [3040, 4000], [1600, 2240], [ 800, 1440]], // cherries
-  [[6720, 7120], [4000, 4400], [2240, 2640], [1440, 1840]], // dates
+  [[6720, 7120], [4000, 4400], [2240, 2640], [1440, 1840]], // durians
 ]
 ```
 
