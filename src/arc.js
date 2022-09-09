@@ -83,6 +83,9 @@ export default function() {
       endAngle = arcEndAngle,
       padAngle = arcPadAngle,
       context = null;
+      //selected corners - [start or end] - the defalut is true(1)
+      selectedCorner_s = constant(1),
+      selectedCorner_e = constant(1);
 
   function arc() {
     var buffer,
@@ -126,7 +129,9 @@ export default function() {
           rc0 = rc,
           rc1 = rc,
           t0,
-          t1;
+          t1,
+          sc_s = +selectedCorner_s.apply(this, arguments),
+          sc_e = +selectedCorner_e.apply(this, arguments);
 
       // Apply padding? Note that since r1 ≥ r0, da1 ≥ da0.
       if (rp > epsilon) {
@@ -168,20 +173,35 @@ export default function() {
       if (!(da1 > epsilon)) context.moveTo(x01, y01);
 
       // Does the sector’s outer ring have rounded corners?
-      else if (rc1 > epsilon) {
-        t0 = cornerTangents(x00, y00, x01, y01, r1, rc1, cw);
-        t1 = cornerTangents(x11, y11, x10, y10, r1, rc1, cw);
+      else if(rc1 > epsilon){
+        if(sc_s && sc_e){
+          t0 = cornerTangents(x00, y00, x01, y01, r1, rc1, cw);
+          t1 = cornerTangents(x11, y11, x10, y10, r1, rc1, cw);
 
-        context.moveTo(t0.cx + t0.x01, t0.cy + t0.y01);
-
-        // Have the corners merged?
-        if (rc1 < rc) context.arc(t0.cx, t0.cy, rc1, atan2(t0.y01, t0.x01), atan2(t1.y01, t1.x01), !cw);
-
-        // Otherwise, draw the two corners and the ring.
-        else {
+          context.moveTo(t0.cx + t0.x01, t0.cy + t0.y01);
+          
+          // Have the corners merged?
+          if (rc1 < rc) context.arc(t0.cx, t0.cy, rc1, atan2(t0.y01, t0.x01), atan2(t1.y01, t1.x01), !cw);
+          else {
+            context.arc(t0.cx, t0.cy, rc1, atan2(t0.y01, t0.x01), atan2(t0.y11, t0.x11), !cw);
+            context.arc(0, 0, r1, atan2(t0.cy + t0.y11, t0.cx + t0.x11), atan2(t1.cy + t1.y11, t1.cx + t1.x11), !cw);
+            context.arc(t1.cx, t1.cy, rc1, atan2(t1.y11, t1.x11), atan2(t1.y01, t1.x01), !cw);
+          }
+        }
+        else if(sc_s && !sc_e){
+          t0 = cornerTangents(x00, y00, x01, y01, r1, rc1, cw);
+        
           context.arc(t0.cx, t0.cy, rc1, atan2(t0.y01, t0.x01), atan2(t0.y11, t0.x11), !cw);
-          context.arc(0, 0, r1, atan2(t0.cy + t0.y11, t0.cx + t0.x11), atan2(t1.cy + t1.y11, t1.cx + t1.x11), !cw);
+          context.arc(0, 0, r1, atan2(t0.cy + t0.y11, t0.cx + t0.x11), a11, !cw);
+        }
+        else if(!sc_s && sc_e){
+          t1 = cornerTangents(x11, y11, x10, y10, r1, rc1, cw);
+
+          context.arc(0, 0, r1, a01, atan2(t1.cy + t1.y11, t1.cx + t1.x11), !cw);
           context.arc(t1.cx, t1.cy, rc1, atan2(t1.y11, t1.x11), atan2(t1.y01, t1.x01), !cw);
+        }
+        else{
+          context.arc(0, 0, r1, a01, a11, !cw);
         }
       }
 
@@ -193,20 +213,37 @@ export default function() {
       if (!(r0 > epsilon) || !(da0 > epsilon)) context.lineTo(x10, y10);
 
       // Does the sector’s inner ring (or point) have rounded corners?
-      else if (rc0 > epsilon) {
-        t0 = cornerTangents(x10, y10, x11, y11, r0, -rc0, cw);
-        t1 = cornerTangents(x01, y01, x00, y00, r0, -rc0, cw);
+      else if(rc0 > epsilon){
+        if(sc_s && sc_e){
+          t0 = cornerTangents(x10, y10, x11, y11, r0, -rc0, cw);
+          t1 = cornerTangents(x01, y01, x00, y00, r0, -rc0, cw);
+  
+          context.lineTo(t0.cx + t0.x01, t0.cy + t0.y01);
+  
+          // Have the corners merged?
+          if (rc0 < rc) context.arc(t0.cx, t0.cy, rc0, atan2(t0.y01, t0.x01), atan2(t1.y01, t1.x01), !cw);
+  
+          // Otherwise, draw the two corners and the ring.
+          else {
+            context.arc(t0.cx, t0.cy, rc0, atan2(t0.y01, t0.x01), atan2(t0.y11, t0.x11), !cw);
+            context.arc(0, 0, r0, atan2(t0.cy + t0.y11, t0.cx + t0.x11), atan2(t1.cy + t1.y11, t1.cx + t1.x11), cw);
+            context.arc(t1.cx, t1.cy, rc0, atan2(t1.y11, t1.x11), atan2(t1.y01, t1.x01), !cw);
+          }
+        }
+        else if(sc_s && !sc_e){
+          t1 = cornerTangents(x01, y01, x00, y00, r0, -rc0, cw);
 
-        context.lineTo(t0.cx + t0.x01, t0.cy + t0.y01);
-
-        // Have the corners merged?
-        if (rc0 < rc) context.arc(t0.cx, t0.cy, rc0, atan2(t0.y01, t0.x01), atan2(t1.y01, t1.x01), !cw);
-
-        // Otherwise, draw the two corners and the ring.
-        else {
-          context.arc(t0.cx, t0.cy, rc0, atan2(t0.y01, t0.x01), atan2(t0.y11, t0.x11), !cw);
-          context.arc(0, 0, r0, atan2(t0.cy + t0.y11, t0.cx + t0.x11), atan2(t1.cy + t1.y11, t1.cx + t1.x11), cw);
+          context.arc(0, 0, r0, a10, atan2(t1.cy + t1.y11, t1.cx + t1.x11), cw);
           context.arc(t1.cx, t1.cy, rc0, atan2(t1.y11, t1.x11), atan2(t1.y01, t1.x01), !cw);
+        }
+        else if(!sc_s && sc_e){
+          t0 = cornerTangents(x10, y10, x11, y11, r0, -rc0, cw);
+
+          context.arc(t0.cx, t0.cy, rc0, atan2(t0.y01, t0.x01), atan2(t0.y11, t0.x11), !cw);
+          context.arc(0, 0, r0, atan2(t0.cy + t0.y11, t0.cx + t0.x11), a00, cw);
+        }
+        else{
+          context.arc(0, 0, r0, a10, a00, cw);
         }
       }
 
@@ -255,6 +292,14 @@ export default function() {
 
   arc.context = function(_) {
     return arguments.length ? ((context = _ == null ? null : _), arc) : context;
+  };
+
+  arc.selectedCorner_s = function(_) {
+    return arguments.length ? (selectedCorner_s = typeof _ === "function" ? _ : constant(+_), arc) : selectedCorner_s;
+  };
+
+  arc.selectedCorner_e = function(_) {
+    return arguments.length ? (selectedCorner_e = typeof _ === "function" ? _ : constant(+_), arc) : selectedCorner_e;
   };
 
   return arc;
