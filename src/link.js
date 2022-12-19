@@ -1,7 +1,7 @@
-import {path} from "d3-path";
 import {slice} from "./array.js";
 import constant from "./constant.js";
 import {bumpX, bumpY, bumpRadial} from "./curve/bump.js";
+import {withPath} from "./path.js";
 import {x as pointX, y as pointY} from "./point.js";
 
 function linkSource(d) {
@@ -13,12 +13,13 @@ function linkTarget(d) {
 }
 
 export function link(curve) {
-  let source = linkSource;
-  let target = linkTarget;
-  let x = pointX;
-  let y = pointY;
-  let context = null;
-  let output = null;
+  let source = linkSource,
+      target = linkTarget,
+      x = pointX,
+      y = pointY,
+      context = null,
+      output = null,
+      path = withPath(link);
 
   function link() {
     let buffer;

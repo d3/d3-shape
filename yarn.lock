@@ -248,10 +248,9 @@ cross-spawn@^7.0.2:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
-"d3-path@1 - 3":
+"d3-path@github:d3/d3-path#164a15d40b330a4ea6946981835b8d6bba27143f":
   version "3.0.1"
-  resolved "https://registry.yarnpkg.com/d3-path/-/d3-path-3.0.1.tgz#f09dec0aaffd770b7995f1a399152bf93052321e"
-  integrity sha512-gq6gZom9AFZby0YLduxT1qmrp4xpBA1YZr19OI717WIdKE2OM5ETq5qrHLb301IgxhLwcuxvGZVLeeWc/k1I6w==
+  resolved "https://codeload.github.com/d3/d3-path/tar.gz/164a15d40b330a4ea6946981835b8d6bba27143f"
 
 "d3-polygon@1 - 3":
   version "3.0.1"

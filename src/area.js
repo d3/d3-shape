@@ -1,8 +1,8 @@
-import {path} from "d3-path";
 import array from "./array.js";
 import constant from "./constant.js";
 import curveLinear from "./curve/linear.js";
 import line from "./line.js";
+import {withPath} from "./path.js";
 import {x as pointX, y as pointY} from "./point.js";
 
 export default function(x0, y0, y1) {
@@ -10,7 +10,8 @@ export default function(x0, y0, y1) {
       defined = constant(true),
       context = null,
       curve = curveLinear,
-      output = null;
+      output = null,
+      path = withPath(area);
 
   x0 = typeof x0 === "function" ? x0 : (x0 === undefined) ? pointX : constant(+x0);
   y0 = typeof y0 === "function" ? y0 : (y0 === undefined) ? constant(0) : constant(+y0);

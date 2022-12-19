@@ -1,5 +1,5 @@
 import assert from "assert";
-import {path} from "d3-path";
+import {pathRound} from "d3-path";
 import {link, linkHorizontal, linkVertical} from "../src/index.js";
 import {curveLinear, curveBumpX, curveBumpY} from "../src/index.js";
 import {assertPathEqual} from "./asserts.js";
@@ -107,8 +107,8 @@ it("linkVertical() is an alias for link(curveBumpY)", () => {
 });
 
 it("link.context(context) sets the context", () => {
-  const p = path();
+  const p = pathRound(6);
   const l = link(curveLinear).context(p);
-  assert.strictEqual(l({source: [0, 1], target: [2, 3]}), undefined);
-  assertPathEqual(p, "M0,1L2,3");
+  assert.strictEqual(l({source: [0, Math.E], target: [Math.PI, 3]}), undefined);
+  assert.strictEqual(p + "", "M0,2.718282L3.141593,3");
 });

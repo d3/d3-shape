@@ -1,5 +1,5 @@
-import {path} from "d3-path";
 import constant from "./constant.js";
+import {withPath} from "./path.js";
 import asterisk from "./symbol/asterisk.js";
 import circle from "./symbol/circle.js";
 import cross from "./symbol/cross.js";
@@ -37,7 +37,8 @@ export const symbolsStroke = [
 ];
 
 export default function Symbol(type, size) {
-  let context = null;
+  let context = null,
+      path = withPath(symbol);
 
   type = typeof type === "function" ? type : constant(type || circle);
   size = typeof size === "function" ? size : constant(size === undefined ? 64 : +size);

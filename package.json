@@ -35,7 +35,7 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "d3-path": "1 - 3"
+    "d3-path": "github:d3/d3-path#164a15d40b330a4ea6946981835b8d6bba27143f"
   },
   "devDependencies": {
     "d3-polygon": "1 - 3",

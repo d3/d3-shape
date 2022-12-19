@@ -1,14 +1,15 @@
-import {path} from "d3-path";
 import array from "./array.js";
 import constant from "./constant.js";
 import curveLinear from "./curve/linear.js";
+import {withPath} from "./path.js";
 import {x as pointX, y as pointY} from "./point.js";
 
 export default function(x, y) {
   var defined = constant(true),
       context = null,
       curve = curveLinear,
-      output = null;
+      output = null,
+      path = withPath(line);
 
   x = typeof x === "function" ? x : (x === undefined) ? pointX : constant(x);
   y = typeof y === "function" ? y : (y === undefined) ? pointY : constant(y);
