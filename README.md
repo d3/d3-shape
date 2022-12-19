@@ -65,6 +65,8 @@ const l = d3.line();
 
 Note: all the methods that accept arrays also accept iterables and convert them to arrays internally.
 
+All the shapes described below expose a _shape_.digits([*digits*]) method. If *digits* is specified as a non-negative number, this method sets the precision (fractional digits) of the returned svg path, and returns the shape. If *digits* is not specified, it returns the precision, which defaults to 3.
+
 ### Arcs
 
 [<img alt="Pie Chart" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/pie.png" width="295" height="295">](http://bl.ocks.org/mbostock/8878e7fd82034f1d63cf)[<img alt="Donut Chart" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/donut.png" width="295" height="295">](http://bl.ocks.org/mbostock/2394b23da1994fc202e1)
