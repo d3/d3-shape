@@ -65,8 +65,6 @@ const l = d3.line();
 
 Note: all the methods that accept arrays also accept iterables and convert them to arrays internally.
 
-All the shapes described below expose a _shape_.digits([*digits*]) method. If *digits* is specified as a non-negative number, this method sets the precision (fractional digits) of the returned svg path, and returns the shape. If *digits* is not specified, it returns the precision, which defaults to 3.
-
 ### Arcs
 
 [<img alt="Pie Chart" src="./img/pie.png" width="295" height="295">](https://observablehq.com/@d3/pie-chart)[<img alt="Donut Chart" src="./img/donut.png" width="295" height="295">](https://observablehq.com/@d3/donut-chart)
@@ -207,6 +205,10 @@ If *radius* is specified, sets the pad radius to the specified function or numbe
 <a name="arc_context" href="#arc_context">#</a> <i>arc</i>.<b>context</b>([<i>context</i>]) · [Source](https://github.com/d3/d3-shape/blob/main/src/arc.js)
 
 If *context* is specified, sets the context and returns this arc generator. If *context* is not specified, returns the current context, which defaults to null. If the context is not null, then the [generated arc](#_arc) is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated arc is returned.
+
+<a name="arc_digits" href="#arc_digits">#</a> <i>arc</i>.<b>digits</b>([<i>digits</i>]) · [Source](https://github.com/d3/d3-shape/blob/main/src/arc.js)
+
+If *digits* is specified, sets the maximum number of digits after the decimal separator and returns this arc generator. If *digits* is not specified, returns the current maximum fraction digits, which defaults to 3. This option only applies when the associated [*context*](#arc_context) is null, as when this arc generator is used to produce [path data](http://www.w3.org/TR/SVG/paths.html#PathData).
 
 ### Pies
 
@@ -436,6 +438,10 @@ If *curve* is specified, sets the [curve factory](#curves) and returns this line
 
 If *context* is specified, sets the context and returns this line generator. If *context* is not specified, returns the current context, which defaults to null. If the context is not null, then the [generated line](#_line) is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated line is returned.
 
+<a name="line_digits" href="#line_digits">#</a> <i>line</i>.<b>digits</b>([<i>digits</i>]) · [Source](https://github.com/d3/d3-shape/blob/main/src/line.js)
+
+If *digits* is specified, sets the maximum number of digits after the decimal separator and returns this line generator. If *digits* is not specified, returns the current maximum fraction digits, which defaults to 3. This option only applies when the associated [*context*](#line_context) is null, as when this line generator is used to produce [path data](http://www.w3.org/TR/SVG/paths.html#PathData).
+
 <a name="lineRadial" href="#lineRadial">#</a> d3.<b>lineRadial</b>() · [Source](https://github.com/d3/d3-shape/blob/main/src/lineRadial.js), [Examples](https://observablehq.com/@d3/d3-lineradial)
 
 <img alt="Radial Line" width="250" height="250" src="./img/line-radial.png">
@@ -570,6 +576,10 @@ If *curve* is specified, sets the [curve factory](#curves) and returns this area
 <a name="area_context" href="#area_context">#</a> <i>area</i>.<b>context</b>([<i>context</i>]) · [Source](https://github.com/d3/d3-shape/blob/main/src/area.js)
 
 If *context* is specified, sets the context and returns this area generator. If *context* is not specified, returns the current context, which defaults to null. If the context is not null, then the [generated area](#_area) is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated area is returned.
+
+<a name="area_digits" href="#area_digits">#</a> <i>area</i>.<b>digits</b>([<i>digits</i>]) · [Source](https://github.com/d3/d3-shape/blob/main/src/area.js)
+
+If *digits* is specified, sets the maximum number of digits after the decimal separator and returns this area generator. If *digits* is not specified, returns the current maximum fraction digits, which defaults to 3. This option only applies when the associated [*context*](#area_context) is null, as when this area generator is used to produce [path data](http://www.w3.org/TR/SVG/paths.html#PathData).
 
 <a name="area_lineX0" href="#area_lineX0">#</a> <i>area</i>.<b>lineX0</b>() · [Source](https://github.com/d3/d3-shape/blob/main/src/area.js)
 <br><a name="area_lineY0" href="#area_lineY0">#</a> <i>area</i>.<b>lineY0</b>() · [Source](https://github.com/d3/d3-shape/blob/main/src/area.js)
@@ -909,6 +919,10 @@ function y(d) {
 
 If *context* is specified, sets the context and returns this link generator. If *context* is not specified, returns the current context, which defaults to null. If the context is not null, then the [generated link](#_link) is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated link is returned. See also [d3-path](https://github.com/d3/d3-path).
 
+<a name="link_digits" href="#link_digits">#</a> <i>link</i>.<b>digits</b>([<i>digits</i>]) · [Source](https://github.com/d3/d3-shape/blob/main/src/link.js)
+
+If *digits* is specified, sets the maximum number of digits after the decimal separator and returns this link generator. If *digits* is not specified, returns the current maximum fraction digits, which defaults to 3. This option only applies when the associated [*context*](#link_context) is null, as when this link generator is used to produce [path data](http://www.w3.org/TR/SVG/paths.html#PathData).
+
 <a name="linkRadial" href="#linkRadial">#</a> d3.<b>linkRadial</b>() · [Source](https://github.com/d3/d3-shape/blob/main/src/link.js)
 
 Returns a new [link generator](#_link) with radial tangents. For example, to visualize [links](https://github.com/d3/d3-hierarchy/blob/master/README.md#node_links) in a [tree diagram](https://github.com/d3/d3-hierarchy/blob/master/README.md#tree) rooted in the center of the display, you might say:
@@ -966,6 +980,10 @@ Specifying the size as a function is useful for constructing a scatterplot with 
 <a name="symbol_context" href="#symbol_context">#</a> <i>symbol</i>.<b>context</b>([<i>context</i>]) · [Source](https://github.com/d3/d3-shape/blob/main/src/symbol.js)
 
 If *context* is specified, sets the context and returns this symbol generator. If *context* is not specified, returns the current context, which defaults to null. If the context is not null, then the [generated symbol](#_symbol) is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated symbol is returned.
+
+<a name="symbol_digits" href="#symbol_digits">#</a> <i>symbol</i>.<b>digits</b>([<i>digits</i>]) · [Source](https://github.com/d3/d3-shape/blob/main/src/symbol.js)
+
+If *digits* is specified, sets the maximum number of digits after the decimal separator and returns this symbol generator. If *digits* is not specified, returns the current maximum fraction digits, which defaults to 3. This option only applies when the associated [*context*](#symbol_context) is null, as when this symbol generator is used to produce [path data](http://www.w3.org/TR/SVG/paths.html#PathData).
 
 <a name="symbolsFill" href="#symbolsFill">#</a> d3.<b>symbolsFill</b> · [Source](https://github.com/d3/d3-shape/blob/main/src/symbol.js)
 
