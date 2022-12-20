@@ -12,7 +12,7 @@ import star from "./symbol/star.js";
 import triangle from "./symbol/triangle.js";
 import triangle2 from "./symbol/triangle2.js";
 import wye from "./symbol/wye.js";
-import x from "./symbol/x.js";
+import times from "./symbol/times.js";
 
 // These symbols are designed to be filled.
 export const symbolsFill = [
@@ -29,7 +29,7 @@ export const symbolsFill = [
 export const symbolsStroke = [
   circle,
   plus,
-  x,
+  times,
   triangle2,
   asterisk,
   square2,
