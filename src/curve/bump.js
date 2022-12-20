@@ -48,8 +48,8 @@ class BumpRadial {
   lineEnd() {}
   point(x, y) {
     x = +x, y = +y;
-    if (this._point++ === 0) {
-      this._x0 = x, this._y0 = y;
+    if (this._point === 0) {
+      this._point = 1;
     } else {
       const p0 = pointRadial(this._x0, this._y0);
       const p1 = pointRadial(this._x0, this._y0 = (this._y0 + y) / 2);
@@ -58,6 +58,7 @@ class BumpRadial {
       this._context.moveTo(...p0);
       this._context.bezierCurveTo(...p1, ...p2, ...p3);
     }
+    this._x0 = x, this._y0 = y;
   }
 }
 
