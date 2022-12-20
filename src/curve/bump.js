@@ -58,8 +58,7 @@ class BumpRadial {
       this._context.moveTo(...p0);
       this._context.bezierCurveTo(...p1, ...p2, ...p3);
     }
-    this._x0 = x;
-    this._y0 = y;
+    this._x0 = x, this._y0 = y;
   }
 }
 
