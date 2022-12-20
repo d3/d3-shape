@@ -360,3 +360,8 @@ it("arc().innerRadius(r₀).outerRadius(r₁).startAngle(θ₀).endAngle(θ₁).
   const a = arc().innerRadius(10).outerRadius(100).startAngle(0).endAngle(Math.PI / 2).padAngle(0.2).cornerRadius(10);
   assertPathEqual(a(), "M9.669396,-88.145811A10,10,0,0,1,21.849183,-97.583878A100,100,0,0,1,97.583878,-21.849183A10,10,0,0,1,88.145811,-9.669396L7.071068,-7.071068Z");
 });
+
+it("arc() handles a very small arc with rounded corners", () => {
+  const a = arc().innerRadius(15).outerRadius(24).padAngle(0).startAngle(1.2 - 1e-8).endAngle(1.2).cornerRadius(4);
+  assertPathEqual(a(), "M22.369,-8.697L13.981,-5.435Z");
+});
