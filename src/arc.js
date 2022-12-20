@@ -1,6 +1,6 @@
-import {path} from "d3-path";
 import constant from "./constant.js";
 import {abs, acos, asin, atan2, cos, epsilon, halfPi, max, min, pi, sin, sqrt, tau} from "./math.js";
+import {withPath} from "./path.js";
 
 function arcInnerRadius(d) {
   return d.innerRadius;
@@ -82,7 +82,8 @@ export default function() {
       startAngle = arcStartAngle,
       endAngle = arcEndAngle,
       padAngle = arcPadAngle,
-      context = null;
+      context = null,
+      path = withPath(arc);
 
   function arc() {
     var buffer,

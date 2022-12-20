@@ -1,5 +1,5 @@
-import {path} from "d3-path";
 import constant from "./constant.js";
+import {withPath} from "./path.js";
 import asterisk from "./symbol/asterisk.js";
 import circle from "./symbol/circle.js";
 import cross from "./symbol/cross.js";
@@ -12,7 +12,7 @@ import star from "./symbol/star.js";
 import triangle from "./symbol/triangle.js";
 import triangle2 from "./symbol/triangle2.js";
 import wye from "./symbol/wye.js";
-import x from "./symbol/x.js";
+import times from "./symbol/times.js";
 
 // These symbols are designed to be filled.
 export const symbolsFill = [
@@ -29,7 +29,7 @@ export const symbolsFill = [
 export const symbolsStroke = [
   circle,
   plus,
-  x,
+  times,
   triangle2,
   asterisk,
   square2,
@@ -37,7 +37,8 @@ export const symbolsStroke = [
 ];
 
 export default function Symbol(type, size) {
-  let context = null;
+  let context = null,
+      path = withPath(symbol);
 
   type = typeof type === "function" ? type : constant(type || circle);
   size = typeof size === "function" ? size : constant(size === undefined ? 64 : +size);

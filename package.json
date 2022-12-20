@@ -35,18 +35,18 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "d3-path": "1 - 3"
+    "d3-path": "^3.1.0"
   },
   "devDependencies": {
     "d3-polygon": "1 - 3",
     "eslint": "8",
-    "mocha": "9",
-    "rollup": "2",
+    "mocha": "10",
+    "rollup": "3",
     "rollup-plugin-terser": "7"
   },
   "scripts": {
     "test": "mocha 'test/**/*-test.js' && eslint src test",
-    "prepublishOnly": "rm -rf dist && yarn test && rollup -c",
+    "prepublishOnly": "rm -rf dist && rollup -c",
     "postpublish": "git push && git push --tags && cd ../d3.github.com && git pull && cp ../${npm_package_name}/dist/${npm_package_name}.js ${npm_package_name}.v${npm_package_version%%.*}.js && cp ../${npm_package_name}/dist/${npm_package_name}.min.js ${npm_package_name}.v${npm_package_version%%.*}.min.js && git add ${npm_package_name}.v${npm_package_version%%.*}.js ${npm_package_name}.v${npm_package_version%%.*}.min.js && git commit -m \"${npm_package_name} ${npm_package_version}\" && git push && cd -"
   },
   "engines": {

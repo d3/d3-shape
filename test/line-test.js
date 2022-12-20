@@ -63,3 +63,21 @@ it("line.curve(curve) sets the curve method", () => {
   assert.strictEqual(l([]), null);
   assertPathEqual(l([[0, 1], [2, 3]]), "M0,1L2,3Z");
 });
+
+it("line.digits(digits) sets the maximum fractional digits", () => {
+  const points = [[0, Math.PI], [Math.E, 4]];
+  const l = line();
+  assert.strictEqual(l.digits(), 3);
+  assert.strictEqual(l(points), "M0,3.142L2.718,4");
+  assert.strictEqual(l.digits(6), l);
+  assert.strictEqual(l.digits(), 6);
+  assert.strictEqual(l(points), "M0,3.141593L2.718282,4");
+  assert.strictEqual(line()(points), "M0,3.142L2.718,4");
+  assert.strictEqual(l.digits(null), l);
+  assert.strictEqual(l.digits(), null);
+  assert.strictEqual(l(points), "M0,3.141592653589793L2.718281828459045,4");
+  assert.strictEqual(line()(points), "M0,3.142L2.718,4");
+  assert.strictEqual(l.digits(3), l);
+  assert.strictEqual(l.digits(), 3);
+  assert.strictEqual(l(points), "M0,3.142L2.718,4");
+});

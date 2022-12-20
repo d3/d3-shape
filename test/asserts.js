@@ -11,7 +11,7 @@ function normalizePath(path) {
 }
 
 function formatNumber(s) {
-  return Math.abs((s = +s) - Math.round(s)) < 1e-6 ? Math.round(s) : s.toFixed(6);
+  return Math.abs((s = +s) - Math.round(s)) < 1e-6 ? Math.round(s) : s.toFixed(3);
 }
 
 export function assertInDelta(actual, expected, delta) {

@@ -20,7 +20,7 @@ export {default as symbolStar} from "./symbol/star.js";
 export {default as symbolTriangle} from "./symbol/triangle.js";
 export {default as symbolTriangle2} from "./symbol/triangle2.js";
 export {default as symbolWye} from "./symbol/wye.js";
-export {default as symbolX} from "./symbol/x.js";
+export {default as symbolTimes, default as symbolX} from "./symbol/times.js";
 
 export {default as curveBasisClosed} from "./curve/basisClosed.js";
 export {default as curveBasisOpen} from "./curve/basisOpen.js";
