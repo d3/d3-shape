@@ -1,6 +1,7 @@
 export {default as arc} from "./arc.js";
 export {default as area} from "./area.js";
 export {default as line} from "./line.js";
+export {default as trail} from "./trail.js";
 export {default as pie} from "./pie.js";
 export {default as areaRadial, default as radialArea} from "./areaRadial.js"; // Note: radialArea is deprecated!
 export {default as lineRadial, default as radialLine} from "./lineRadial.js"; // Note: radialLine is deprecated!

@@ -55,6 +55,7 @@ const l = d3.line();
 * [Arcs](#arcs)
 * [Pies](#pies)
 * [Lines](#lines)
+* [Trails](#trails)
 * [Areas](#areas)
 * [Curves](#curves)
 * [Custom Curves](#custom-curves)
@@ -471,6 +472,93 @@ Equivalent to [*line*.curve](#line_curve). Note that [curveMonotoneX](#curveMono
 <a name="lineRadial_context" href="#lineRadial_context">#</a> <i>lineRadial</i>.<b>context</b>([<i>context</i>])
 
 Equivalent to [*line*.context](#line_context).
+
+### Trails
+
+[<img width="295" height="160" alt="Trail Chart" src="https://raw.githubusercontent.com/d3/d3-shape/master/img/trail.png">]
+
+Trail marks are similar to line marks, but can have variable widths determined by backing data. Trail marks are useful if one wishes to draw lines that change size to reflect the underlying data.
+
+<a name="trail" href="#trail">#</a> d3.<b>trail</b>([<i>x</x>][, <i>y</i>][, <i>size</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/trail.js)
+
+Constructs a new trail generator with default settings. If *x*, *y* or *size* are specified, sets the corresponding accessors to the specified function or number and returns this trail generator.
+
+<a name="_trail" href="#_trail">#</a> <i>trail</i>(<i>data</i>) · [Source](https://github.com/d3/d3-shape/blob/master/src/trail.js)
+
+Generates a trail for the given array of *data*. If the trail generator has a [context](#trail_context), then the trail is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls and this function returns void. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string is returned.
+
+<a name="trail_x" href="#trail_x">#</a> <i>trail</i>.<b>x</b>([<i>x</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/trail.js)
+
+If *x* is specified, sets the x accessor to the specified function or number and returns this trail generator. If *x* is not specified, returns the current x accessor, which defaults to:
+
+```js
+function x(d) {
+  return d[0];
+}
+```
+
+When a trail is [generated](#_trail), the x accessor will be invoked for each [defined](#trail_defined) element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default x accessor assumes that the input data are three-element arrays of numbers. If your data are in a different format, or if you wish to transform the data before rendering, then you should specify a custom accessor. For example:
+
+```js
+const data = [
+  {u: 1, v: 8, size: 40},
+  {u: 10, v: 35, size: 12},
+  {u: 19, v: 22, size: 30},
+  {u: 28, v: 14, size: 16},
+  {u: 37, v: 16, size: 24},
+  {u: 46, v: 28, size: 6},
+  …
+];
+
+const trail = d3.trail()
+    .x(d => x(d.u))
+    .y(d => y(d.v))
+    .size(d => size(d.size));
+```
+
+<a name="trail_y" href="#trail_y">#</a> <i>trail</i>.<b>y</b>([<i>y</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/trail.js)
+
+If *y* is specified, sets the y accessor to the specified function or number and returns this trail generator. If *y* is not specified, returns the current y accessor, which defaults to:
+
+```js
+function y(d) {
+  return d[1];
+}
+```
+
+When a trail is [generated](#_trail), the y accessor will be invoked for each [defined](#trail_defined) element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default y accessor assumes that the input data are three-element arrays of numbers. See [*trail*.x](#trail_x) for more information.
+
+<a name="trail_size" href="#trail_size">#</a> <i>trail</i>.<b>size</b>([<i>size</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/trail.js)
+
+The *size* describes the width in pixels of the trail at the given data point, which should be greater than 0. If *size* is specified, sets the size accessor to the specified function or number and returns this trail generator. If *size* is not specified, returns the current size accessor, which defaults to:
+
+```js
+function size(d) {
+  return d[2];
+}
+```
+
+When a trail is [generated](#_trail), the size accessor will be invoked for each [defined](#trail_defined) element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default size accessor assumes that the input data are three-element arrays of numbers. See [*trail*.x](#trail_x) for more information.
+
+<a name="trail_defined" href="#trail_defined">#</a> <i>trail</i>.<b>defined</b>([<i>defined</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/trail.js)
+
+If *defined* is specified, sets the defined accessor to the specified function or boolean and returns this trail generator. If *defined* is not specified, returns the current defined accessor, which defaults to:
+
+```js
+function defined() {
+  return true;
+}
+```
+
+The default accessor thus assumes that the input data is always defined. When a trail is [generated](#_trail), the defined accessor will be invoked for each element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. If the given element is defined (*i.e.*, if the defined accessor returns a truthy value for this element), the [x](#trail_x), [y](#trail_y) and [size](#trail_size) accessors will subsequently be evaluated and the point will be added to the current trail segment. Otherwise, the element will be skipped, the current trail segment will be ended, and a new trail segment will be generated for the next defined point. As a result, the generated trail may have several discrete segments. For example:
+
+[<img src="https://raw.githubusercontent.com/d3/d3-shape/master/img/trail-defined.png" width="295" height="160" alt="Trail with Missing Data">]
+
+Note that if a trail segment consists of only a single point, it may appear as a circle, which is different from [*line*.defined](#line_defined).
+
+<a name="trail_context" href="#trail_context">#</a> <i>trail</i>.<b>context</b>([<i>context</i>]) · [Source](https://github.com/d3/d3-shape/blob/master/src/trail.js)
+
+If *context* is specified, sets the context and returns this trail generator. If *context* is not specified, returns the current context, which defaults to null. If the context is not null, then the [generated trail](#_trail) is rendered to this context as a sequence of [path method](http://www.w3.org/TR/2dcontext/#canvaspathmethods) calls. Otherwise, a [path data](http://www.w3.org/TR/SVG/paths.html#PathData) string representing the generated trail is returned.
 
 ### Areas
 
