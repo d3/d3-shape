@@ -30,8 +30,11 @@
   "jsdelivr": "dist/d3-shape.min.js",
   "unpkg": "dist/d3-shape.min.js",
   "exports": {
-    "umd": "./dist/d3-shape.min.js",
-    "default": "./src/index.js"
+     "./package.json": "./package.json",
+     ".":{
+       "require": "./dist/d3-shape.min.js",
+       "import": "./src/index.js"
+     }
   },
   "sideEffects": false,
   "dependencies": {
