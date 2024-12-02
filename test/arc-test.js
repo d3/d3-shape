@@ -365,3 +365,40 @@ it("arc() handles a very small arc with rounded corners", () => {
   const a = arc().innerRadius(15).outerRadius(24).padAngle(0).startAngle(1.2 - 1e-8).endAngle(1.2).cornerRadius(4);
   assertPathEqual(a(), "M22.369,-8.697L13.981,-5.435Z");
 });
+
+it("arc().cornerRadius([tl, tr, br, bl]) correctly rounds each individual corner", () => {
+  const a = arc()
+    .innerRadius(50)
+    .outerRadius(100)
+    .startAngle(0)
+    .endAngle(Math.PI / 2)
+    .cornerRadius([10, 20, 30, 40]);
+
+  const expectedPath = "M0,-100A100,100,0,0,1,100,0L50,0A50,50,0,0,0,0,-50Z";
+  assertPathEqual(a(), expectedPath);
+});
+
+it("arc().cornerRadius([tl, tr, br]) correctly rounds corners with middle value applied to two corners", () => {
+  const a = arc()
+    .innerRadius(50)
+    .outerRadius(100)
+    .startAngle(0)
+    .endAngle(Math.PI / 2)
+    .cornerRadius([10, 20, 30]);
+
+  const expectedPath = "M0,-100A100,100,0,0,1,100,0L50,0A50,50,0,0,0,0,-50Z";
+  assertPathEqual(a(), expectedPath);
+});
+
+it("arc().cornerRadius([tl, tr]) correctly rounds corners with paired values", () => {
+  const a = arc()
+    .innerRadius(50)
+    .outerRadius(100)
+    .startAngle(0)
+    .endAngle(Math.PI / 2)
+    .cornerRadius([10, 20]);
+
+  const expectedPath = "M0,-100A100,100,0,0,1,100,0L50,0A50,50,0,0,0,0,-50Z";
+  assertPathEqual(a(), expectedPath);
+});
+
