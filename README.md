@@ -7,6 +7,6 @@ This module provides a variety of shape generators for your convenience. As with
 ## Resources
 
 - [Documentation](https://d3js.org/d3-shape)
-- [Examples](https://observablehq.com/collection/@d3/d3-shape)
+- [Examples](https://observablehq.com/@d3/-/collection/d3-shape)
 - [Releases](https://github.com/d3/d3-shape/releases)
 - [Getting help](https://d3js.org/community)
