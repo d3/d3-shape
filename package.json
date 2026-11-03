@@ -38,14 +38,14 @@
     "d3-path": "^3.1.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.5",
+    "@eslint/js": "^10.0.1",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^1.0.2",
     "d3-polygon": "^3.0.1",
-    "eslint": "^9.39.5",
+    "eslint": "^10.14.0",
     "globals": "^17.14.0",
     "rollup": "^4.67.4",
-    "vitest": "^4.1.12"
+    "vitest": "^5.1.0"
   },
   "scripts": {
     "test": "vitest",
