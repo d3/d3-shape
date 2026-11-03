@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {stackOrderNone} from "../../src/index.js";
+import {stackOrderNone} from "d3-shape";
 
 it("stackOrderNone(series) returns [0, 1, … series.length - 1]", () => {
   assert.deepStrictEqual(stackOrderNone(new Array(4)), [0, 1, 2, 3]);

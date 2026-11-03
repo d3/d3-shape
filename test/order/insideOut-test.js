@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {stackOrderInsideOut} from "../../src/index.js";
+import {stackOrderInsideOut} from "d3-shape";
 
 it("stackOrderInsideOut(series) returns an order by appearance", () => {
   assert.deepStrictEqual(stackOrderInsideOut([

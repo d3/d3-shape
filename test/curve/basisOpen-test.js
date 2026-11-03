@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {area, line, curveBasisOpen} from "../../src/index.js";
+import {area, line, curveBasisOpen} from "d3-shape";
 import {assertPathEqual} from "../asserts.js";
 
 it("line.curve(curveBasisOpen)(data) generates the expected path", () => {

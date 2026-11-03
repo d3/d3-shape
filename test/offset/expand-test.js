@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {stackOffsetExpand, stackOrderNone, stackOrderReverse} from "../../src/index.js";
+import {stackOffsetExpand, stackOrderNone, stackOrderReverse} from "d3-shape";
 
 it("stackOffsetExpand(series, order) expands to fill [0, 1]", () => {
   const series = [

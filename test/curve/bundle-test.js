@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {line, curveBundle} from "../../src/index.js";
+import {line, curveBundle} from "d3-shape";
 import {assertPathEqual} from "../asserts.js";
 
 it("line.curve(curveBundle) uses a default beta of 0.85", () => {

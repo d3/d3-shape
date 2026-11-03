@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {area, line, curveCardinalClosed} from "../../src/index.js";
+import {area, line, curveCardinalClosed} from "d3-shape";
 import {assertPathEqual} from "../asserts.js";
 
 it("line.curve(curveCardinalClosed)(data) generates the expected path", () => {

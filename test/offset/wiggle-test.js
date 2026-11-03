@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {stackOffsetWiggle, stackOrderNone, stackOrderReverse} from "../../src/index.js";
+import {stackOffsetWiggle, stackOrderNone, stackOrderReverse} from "d3-shape";
 
 it("stackOffsetWiggle(series, order) minimizes weighted wiggle", () => {
   const series = [

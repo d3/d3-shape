@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {stackOrderAscending} from "../../src/index.js";
+import {stackOrderAscending} from "d3-shape";
 
 it("stackOrderAscending(series) returns an order by sum", () => {
   assert.deepStrictEqual(stackOrderAscending([
