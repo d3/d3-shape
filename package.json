@@ -49,7 +49,7 @@
   },
   "scripts": {
     "test": "vitest",
-    "lint": "eslint src test",
+    "lint": "eslint",
     "prepublishOnly": "rm -rf dist && rollup -c"
   },
   "engines": {

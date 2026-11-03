@@ -3,8 +3,10 @@ import globals from "globals";
 import {defineConfig} from "eslint/config";
 
 export default defineConfig([
-  {files: ["**/*.{js,ts,jsx,tsx}"], plugins: {js}, extends: ["js/recommended"]},
-  {files: ["**/*.{js,ts,jsx,tsx}"], languageOptions: {globals: globals.browser}},
+  {ignores: ["dist/"]},
+  {files: ["**/*.{js,ts}"], plugins: {js}, extends: ["js/recommended"]},
+  {files: ["**/*.{js,ts}"], languageOptions: {globals: globals.node}},
   {languageOptions: {ecmaVersion: 2019, sourceType: "module"}},
-  {rules: {"no-cond-assign": 0}}
+  {rules: {"no-cond-assign": 0}},
+  {files: ["rollup.config.js"], languageOptions: {ecmaVersion: 2026}}
 ]);
