@@ -1,5 +1,6 @@
-import assert from "assert";
-import {stackOffsetDiverging, stackOrderNone, stackOrderReverse} from "../../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {stackOffsetDiverging, stackOrderNone, stackOrderReverse} from "d3-shape";
 
 it("stackOffsetDiverging(series, order) applies a zero baseline, ignoring existing offsets", () => {
   const series = [

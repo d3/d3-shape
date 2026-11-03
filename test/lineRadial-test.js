@@ -1,5 +1,6 @@
-import assert from "assert";
-import {curveLinear, lineRadial} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {curveLinear, lineRadial} from "d3-shape";
 import {assertPathEqual} from "./asserts.js";
 
 it("lineRadial() returns a default radial line shape", () => {

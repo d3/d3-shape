@@ -1,5 +1,6 @@
-import assert from "assert";
-import {stackOffsetSilhouette, stackOrderNone, stackOrderReverse} from "../../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {stackOffsetSilhouette, stackOrderNone, stackOrderReverse} from "d3-shape";
 
 it("stackOffsetSilhouette(series, order) centers the stack around zero", () => {
   const series = [

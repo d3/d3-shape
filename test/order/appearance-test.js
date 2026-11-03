@@ -1,5 +1,6 @@
-import assert from "assert";
-import {stackOrderAppearance} from "../../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {stackOrderAppearance} from "d3-shape";
 
 it("stackOrderAppearance(series) returns an order by appearance", () => {
   assert.deepStrictEqual(stackOrderAppearance([

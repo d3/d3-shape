@@ -1,5 +1,6 @@
-import assert from "assert";
-import {area, line, curveBumpX} from "../../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {area, line, curveBumpX} from "d3-shape";
 import {assertPathEqual} from "../asserts.js";
 
 it("line.curve(curveBumpX)(data) generates the expected path", () => {

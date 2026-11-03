@@ -1,5 +1,6 @@
-import assert from "assert";
-import {stack, stackOffsetExpand, stackOffsetNone, stackOrderNone, stackOrderReverse} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {stack, stackOffsetExpand, stackOffsetNone, stackOrderNone, stackOrderReverse} from "d3-shape";
 
 it("stack() has the expected defaults", () => {
   const s = stack();

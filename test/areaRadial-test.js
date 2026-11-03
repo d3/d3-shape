@@ -1,5 +1,6 @@
-import assert from "assert";
-import {areaRadial, curveCardinal, curveLinear} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {areaRadial, curveCardinal, curveLinear} from "d3-shape";
 import {assertPathEqual} from "./asserts.js";
 
 it("areaRadial() returns a default radial area shape", () => {

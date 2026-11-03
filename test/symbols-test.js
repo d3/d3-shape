@@ -1,5 +1,6 @@
-import assert from "assert";
-import {symbols, symbolsFill, symbolsStroke, symbolCircle, symbolCross, symbolDiamond, symbolSquare, symbolStar, symbolTriangle, symbolWye, symbolPlus, symbolTimes, symbolTriangle2, symbolAsterisk, symbolSquare2, symbolDiamond2} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {symbols, symbolsFill, symbolsStroke, symbolCircle, symbolCross, symbolDiamond, symbolSquare, symbolStar, symbolTriangle, symbolWye, symbolPlus, symbolTimes, symbolTriangle2, symbolAsterisk, symbolSquare2, symbolDiamond2} from "d3-shape";
 
 it("symbols is a deprecated alias for symbolsFill", () => {
   assert.strictEqual(symbols, symbolsFill);

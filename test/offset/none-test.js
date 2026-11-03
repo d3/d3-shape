@@ -1,5 +1,6 @@
-import assert from "assert";
-import {stackOffsetNone, stackOrderNone, stackOrderReverse} from "../../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {stackOffsetNone, stackOrderNone, stackOrderReverse} from "d3-shape";
 
 it("stackOffsetNone(series, order) stacks upon the first layer’s existing positions", () => {
   const series = [
