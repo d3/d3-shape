@@ -1,7 +1,8 @@
+import {test} from "vitest";
 import assert from "assert";
 import {stackOrderInsideOut} from "../../src/index.js";
 
-it("stackOrderInsideOut(series) returns an order by appearance", () => {
+test("stackOrderInsideOut(series) returns an order by appearance", () => {
   assert.deepStrictEqual(stackOrderInsideOut([
     [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 1]],
     [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 2], [0, 0]],
@@ -13,7 +14,7 @@ it("stackOrderInsideOut(series) returns an order by appearance", () => {
   ]), [2, 3, 6, 5, 4, 1, 0]);
 });
 
-it("stackOrderInsideOut(series) treats NaN values as zero", () => {
+test("stackOrderInsideOut(series) treats NaN values as zero", () => {
   assert.deepStrictEqual(stackOrderInsideOut([
     [[0, 0], [0, NaN], [0, 0], [0, 0], [0, 0], [0, 0], [0, 1]],
     [[0, 0], [0, 0], [0, NaN], [0, 0], [0, 0], [0, 2], [0, 0]],

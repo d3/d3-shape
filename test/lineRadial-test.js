@@ -1,8 +1,9 @@
+import {test} from "vitest";
 import assert from "assert";
 import {curveLinear, lineRadial} from "../src/index.js";
 import {assertPathEqual} from "./asserts.js";
 
-it("lineRadial() returns a default radial line shape", () => {
+test("lineRadial() returns a default radial line shape", () => {
   const l = lineRadial();
   assert.strictEqual(l.angle()([42, 34]), 42);
   assert.strictEqual(l.radius()([42, 34]), 34);

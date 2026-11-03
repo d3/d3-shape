@@ -38,15 +38,18 @@
     "d3-path": "^3.1.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^1.0.2",
     "d3-polygon": "^3.0.1",
-    "eslint": "^8.57.1",
-    "mocha": "^10.8.2",
-    "rollup": "^4.67.4"
+    "eslint": "^9.39.5",
+    "globals": "^17.14.0",
+    "rollup": "^4.67.4",
+    "vitest": "^4.1.12"
   },
   "scripts": {
-    "test": "mocha 'test/**/*-test.js' && eslint src test",
+    "test": "vitest",
+    "lint": "eslint src test",
     "prepublishOnly": "rm -rf dist && rollup -c"
   },
   "engines": {

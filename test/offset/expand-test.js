@@ -1,7 +1,8 @@
+import {test} from "vitest";
 import assert from "assert";
 import {stackOffsetExpand, stackOrderNone, stackOrderReverse} from "../../src/index.js";
 
-it("stackOffsetExpand(series, order) expands to fill [0, 1]", () => {
+test("stackOffsetExpand(series, order) expands to fill [0, 1]", () => {
   const series = [
     [[0, 1], [0, 2], [0, 1]],
     [[0, 3], [0, 4], [0, 2]],
@@ -15,7 +16,7 @@ it("stackOffsetExpand(series, order) expands to fill [0, 1]", () => {
   ]);
 });
 
-it("stackOffsetExpand(series, order) treats NaN as zero", () => {
+test("stackOffsetExpand(series, order) treats NaN as zero", () => {
   const series = [
     [[0, 1], [0,   2], [0, 1]],
     [[0, 3], [0, NaN], [0, 2]],
@@ -31,7 +32,7 @@ it("stackOffsetExpand(series, order) treats NaN as zero", () => {
   ]);
 });
 
-it("stackOffsetExpand(series, order) observes the specified order", () => {
+test("stackOffsetExpand(series, order) observes the specified order", () => {
   const series = [
     [[0, 1], [0, 2], [0, 1]],
     [[0, 3], [0, 4], [0, 2]],

@@ -1,7 +1,8 @@
+import {test} from "vitest";
 import assert from "assert";
 import {stackOffsetNone, stackOrderNone, stackOrderReverse} from "../../src/index.js";
 
-it("stackOffsetNone(series, order) stacks upon the first layer’s existing positions", () => {
+test("stackOffsetNone(series, order) stacks upon the first layer’s existing positions", () => {
   const series = [
     [[1, 2], [2, 4], [3, 4]],
     [[0, 3], [0, 4], [0, 2]],
@@ -15,7 +16,7 @@ it("stackOffsetNone(series, order) stacks upon the first layer’s existing posi
   ]);
 });
 
-it("stackOffsetNone(series, order) treats NaN as zero", () => {
+test("stackOffsetNone(series, order) treats NaN as zero", () => {
   const series = [
     [[0, 1], [0,   2], [0, 1]],
     [[0, 3], [0, NaN], [0, 2]],
@@ -31,7 +32,7 @@ it("stackOffsetNone(series, order) treats NaN as zero", () => {
   ]);
 });
 
-it("stackOffsetNone(series, order) observes the specified order", () => {
+test("stackOffsetNone(series, order) observes the specified order", () => {
   const series = [
     [[0, 1], [0, 2], [0, 1]],
     [[0, 3], [0, 4], [0, 2]],

@@ -1,7 +1,8 @@
+import {test} from "vitest";
 import assert from "assert";
 import {stackOffsetDiverging, stackOrderNone, stackOrderReverse} from "../../src/index.js";
 
-it("stackOffsetDiverging(series, order) applies a zero baseline, ignoring existing offsets", () => {
+test("stackOffsetDiverging(series, order) applies a zero baseline, ignoring existing offsets", () => {
   const series = [
     [[1, 2], [2, 4], [3, 4]],
     [[0, 3], [0, 4], [0, 2]],
@@ -15,7 +16,7 @@ it("stackOffsetDiverging(series, order) applies a zero baseline, ignoring existi
   ]);
 });
 
-it("stackOffsetDiverging(series, order) handles a single series", () => {
+test("stackOffsetDiverging(series, order) handles a single series", () => {
   const series = [
     [[1, 2], [2, 4], [3, 4]]
   ];
@@ -25,7 +26,7 @@ it("stackOffsetDiverging(series, order) handles a single series", () => {
   ]);
 });
 
-it("stackOffsetDiverging(series, order) treats NaN as zero", () => {
+test("stackOffsetDiverging(series, order) treats NaN as zero", () => {
   const series = [
     [[0, 1], [0,   2], [0, 1]],
     [[0, 3], [0, NaN], [0, 2]],
@@ -41,7 +42,7 @@ it("stackOffsetDiverging(series, order) treats NaN as zero", () => {
   ]);
 });
 
-it("stackOffsetDiverging(series, order) observes the specified order", () => {
+test("stackOffsetDiverging(series, order) observes the specified order", () => {
   const series = [
     [[0, 1], [0, 2], [0, 1]],
     [[0, 3], [0, 4], [0, 2]],
@@ -55,7 +56,7 @@ it("stackOffsetDiverging(series, order) observes the specified order", () => {
   ]);
 });
 
-it("stackOffsetDiverging(series, order) puts negative values below zero, in order", () => {
+test("stackOffsetDiverging(series, order) puts negative values below zero, in order", () => {
   const series = [
     [[0,  1], [0, -2], [0, -1]],
     [[0, -3], [0, -4], [0, -2]],
@@ -69,7 +70,7 @@ it("stackOffsetDiverging(series, order) puts negative values below zero, in orde
   ]);
 });
 
-it("stackOffsetDiverging(series, order) puts zero values at zero, in order", () => {
+test("stackOffsetDiverging(series, order) puts zero values at zero, in order", () => {
   const series = [
     [[0, 1], [0, 2], [0, -1]],
     [[0, 3], [0, 0], [0, 0]],

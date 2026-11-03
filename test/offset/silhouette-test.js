@@ -1,7 +1,8 @@
+import {test} from "vitest";
 import assert from "assert";
 import {stackOffsetSilhouette, stackOrderNone, stackOrderReverse} from "../../src/index.js";
 
-it("stackOffsetSilhouette(series, order) centers the stack around zero", () => {
+test("stackOffsetSilhouette(series, order) centers the stack around zero", () => {
   const series = [
     [[0, 1], [0, 2], [0, 1]],
     [[0, 3], [0, 4], [0, 2]],
@@ -15,7 +16,7 @@ it("stackOffsetSilhouette(series, order) centers the stack around zero", () => {
   ]);
 });
 
-it("stackOffsetSilhouette(series, order) treats NaN as zero", () => {
+test("stackOffsetSilhouette(series, order) treats NaN as zero", () => {
   const series = [
     [[0, 1], [0,   2], [0, 1]],
     [[0, 3], [0, NaN], [0, 2]],
@@ -31,7 +32,7 @@ it("stackOffsetSilhouette(series, order) treats NaN as zero", () => {
   ]);
 });
 
-it("stackOffsetSilhouette(series, order) observes the specified order", () => {
+test("stackOffsetSilhouette(series, order) observes the specified order", () => {
   const series = [
     [[0, 1], [0, 2], [0, 1]],
     [[0, 3], [0, 4], [0, 2]],

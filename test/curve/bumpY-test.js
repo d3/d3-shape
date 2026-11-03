@@ -1,8 +1,9 @@
+import {test} from "vitest";
 import assert from "assert";
 import {area, line, curveBumpY} from "../../src/index.js";
 import {assertPathEqual} from "../asserts.js";
 
-it("line.curve(curveBumpY)(data) generates the expected path", () => {
+test("line.curve(curveBumpY)(data) generates the expected path", () => {
   const l = line().curve(curveBumpY);
   assert.strictEqual(l([]), null);
   assertPathEqual(l([[0, 1]]), "M0,1Z");
@@ -10,7 +11,7 @@ it("line.curve(curveBumpY)(data) generates the expected path", () => {
   assertPathEqual(l([[0, 1], [1, 3], [2, 1]]), "M0,1C0,2,1,2,1,3C1,2,2,2,2,1");
 });
 
-it("area.curve(curveBumpY)(data) generates the expected path", () => {
+test("area.curve(curveBumpY)(data) generates the expected path", () => {
   const a = area().curve(curveBumpY);
   assert.strictEqual(a([]), null);
   assertPathEqual(a([[0, 1]]), "M0,1L0,0Z");
