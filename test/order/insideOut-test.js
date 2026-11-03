@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {stackOrderInsideOut} from "../../src/index.js";
 
 it("stackOrderInsideOut(series) returns an order by appearance", () => {

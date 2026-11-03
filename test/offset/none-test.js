@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {stackOffsetNone, stackOrderNone, stackOrderReverse} from "../../src/index.js";
 
 it("stackOffsetNone(series, order) stacks upon the first layer’s existing positions", () => {

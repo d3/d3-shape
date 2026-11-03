@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {area, line, curveStepBefore} from "../../src/index.js";
 import {assertPathEqual} from "../asserts.js";
 

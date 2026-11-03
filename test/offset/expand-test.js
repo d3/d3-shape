@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {stackOffsetExpand, stackOrderNone, stackOrderReverse} from "../../src/index.js";
 
 it("stackOffsetExpand(series, order) expands to fill [0, 1]", () => {

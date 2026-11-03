@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {stack, stackOffsetExpand, stackOffsetNone, stackOrderNone, stackOrderReverse} from "../src/index.js";
 
 it("stack() has the expected defaults", () => {

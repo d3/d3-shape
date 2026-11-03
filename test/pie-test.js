@@ -1,6 +1,6 @@
-import {it} from "vitest";
 /* eslint-disable no-loss-of-precision */
-import assert from "assert";
+import assert from "node:assert";
+import {it} from "vitest";
 import {pie} from "../src/index.js";
 
 it("pie() returns a default pie shape", () => {

@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {stackOrderNone} from "../../src/index.js";
 
 it("stackOrderNone(series) returns [0, 1, … series.length - 1]", () => {

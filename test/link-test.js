@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {pathRound} from "d3-path";
 import {link, linkHorizontal, linkVertical, linkRadial} from "../src/index.js";
 import {curveLinear, curveBumpX, curveBumpY} from "../src/index.js";

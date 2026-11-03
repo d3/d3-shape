@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {stackOrderAscending} from "../../src/index.js";
 
 it("stackOrderAscending(series) returns an order by sum", () => {

@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {stackOrderAppearance} from "../../src/index.js";
 
 it("stackOrderAppearance(series) returns an order by appearance", () => {

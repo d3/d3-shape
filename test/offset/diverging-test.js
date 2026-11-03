@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {stackOffsetDiverging, stackOrderNone, stackOrderReverse} from "../../src/index.js";
 
 it("stackOffsetDiverging(series, order) applies a zero baseline, ignoring existing offsets", () => {

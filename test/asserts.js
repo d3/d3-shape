@@ -1,4 +1,4 @@
-import assert from "assert";
+import assert from "node:assert";
 
 export function assertPathEqual(actual, expected) {
   assert.strictEqual(normalizePath(actual + ""), normalizePath(expected + ""));
