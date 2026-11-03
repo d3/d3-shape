@@ -366,3 +366,8 @@ it("arc() handles a very small arc with rounded corners", () => {
   const a = arc().innerRadius(15).outerRadius(24).padAngle(0).startAngle(1.2 - 1e-8).endAngle(1.2).cornerRadius(4);
   assertPathEqual(a(), "M22.369,-8.697L13.981,-5.435Z");
 });
+
+it("arc() edge case with endAngle close to tau", () => {
+  const a = arc().innerRadius(55).outerRadius(75).startAngle(0).endAngle(6.283179980513967);
+  assertPathEqual(a(), "M0,-75A75,75,0,0,1,0,75A75,75,0,0,1,0,-75L0,-55A55,55,0,0,0,0,55A55,55,0,0,0,0,-55Z");
+});
