@@ -1,7 +1,7 @@
 /* eslint-disable no-loss-of-precision */
 import assert from "node:assert";
 import {it} from "vitest";
-import {pie} from "../src/index.js";
+import {pie} from "d3-shape";
 
 it("pie() returns a default pie shape", () => {
   const p = pie();

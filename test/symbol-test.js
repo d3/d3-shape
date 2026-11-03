@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {symbol, symbolAsterisk, symbolCircle, symbolCross, symbolDiamond, symbolDiamond2, symbolPlus, symbolSquare, symbolSquare2, symbolStar, symbolTriangle, symbolTriangle2, symbolWye, symbolTimes} from "../src/index.js";
+import {symbol, symbolAsterisk, symbolCircle, symbolCross, symbolDiamond, symbolDiamond2, symbolPlus, symbolSquare, symbolSquare2, symbolStar, symbolTriangle, symbolTriangle2, symbolWye, symbolTimes} from "d3-shape";
 import {assertInDelta, assertPathEqual} from "./asserts.js";
 import {polygonContext} from "./polygonContext.js";
 
