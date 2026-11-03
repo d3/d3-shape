@@ -1,8 +1,8 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {stackOffsetWiggle, stackOrderNone, stackOrderReverse} from "../../src/index.js";
 
-test("stackOffsetWiggle(series, order) minimizes weighted wiggle", () => {
+it("stackOffsetWiggle(series, order) minimizes weighted wiggle", () => {
   const series = [
     [[0, 1], [0, 2], [0, 1]],
     [[0, 3], [0, 4], [0, 2]],
@@ -16,7 +16,7 @@ test("stackOffsetWiggle(series, order) minimizes weighted wiggle", () => {
   ].map(roundSeries));
 });
 
-test("stackOffsetWiggle(series, order) treats NaN as zero", () => {
+it("stackOffsetWiggle(series, order) treats NaN as zero", () => {
   const series = [
     [[0,   1], [0,   2], [0,   1]],
     [[0, NaN], [0, NaN], [0, NaN]],
@@ -36,7 +36,7 @@ test("stackOffsetWiggle(series, order) treats NaN as zero", () => {
   ].map(roundSeries));
 });
 
-test("stackOffsetWiggle(series, order) observes the specified order", () => {
+it("stackOffsetWiggle(series, order) observes the specified order", () => {
   const series = [
     [[0, 1], [0, 2], [0, 1]],
     [[0, 3], [0, 4], [0, 2]],

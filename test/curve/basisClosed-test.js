@@ -1,9 +1,9 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {line, curveBasisClosed} from "../../src/index.js";
 import {assertPathEqual} from "../asserts.js";
 
-test("line.curve(curveBasisClosed)(data) generates the expected path", () => {
+it("line.curve(curveBasisClosed)(data) generates the expected path", () => {
   const l = line().curve(curveBasisClosed);
   assert.strictEqual(l([]), null);
   assertPathEqual(l([[0, 0]]), "M0,0Z");

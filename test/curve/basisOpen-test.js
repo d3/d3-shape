@@ -1,9 +1,9 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {area, line, curveBasisOpen} from "../../src/index.js";
 import {assertPathEqual} from "../asserts.js";
 
-test("line.curve(curveBasisOpen)(data) generates the expected path", () => {
+it("line.curve(curveBasisOpen)(data) generates the expected path", () => {
   const l = line().curve(curveBasisOpen);
   assert.strictEqual(l([]), null);
   assert.strictEqual(l([[0, 0]]), null);
@@ -13,7 +13,7 @@ test("line.curve(curveBasisOpen)(data) generates the expected path", () => {
   assertPathEqual(l([[0, 0], [0, 10], [10, 10], [10, 0], [0, 0]]), "M1.666667,8.333333C3.333333,10,6.666667,10,8.333333,8.333333C10,6.666667,10,3.333333,8.333333,1.666667");
 });
 
-test("area.curve(curveBasisOpen)(data) generates the expected path", () => {
+it("area.curve(curveBasisOpen)(data) generates the expected path", () => {
   const a = area().curve(curveBasisOpen);
   assert.strictEqual(a([]), null);
   assert.strictEqual(a([[0, 1]]), null);

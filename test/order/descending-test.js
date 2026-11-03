@@ -1,8 +1,8 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {stackOrderDescending} from "../../src/index.js";
 
-test("stackOrderDescending(series) returns an order by sum", () => {
+it("stackOrderDescending(series) returns an order by sum", () => {
   assert.deepStrictEqual(stackOrderDescending([
     [[0, 1], [0, 2], [0, 3]],
     [[0, 2], [0, 3], [0, 4]],
@@ -10,7 +10,7 @@ test("stackOrderDescending(series) returns an order by sum", () => {
   ]), [1, 0, 2]);
 });
 
-test("stackOrderDescending(series) treats NaN values as zero", () => {
+it("stackOrderDescending(series) treats NaN values as zero", () => {
   assert.deepStrictEqual(stackOrderDescending([
     [[0, 1], [0, 2], [0, 3], [0, NaN]],
     [[0, 2], [0, 3], [0, 4], [0, NaN]],
